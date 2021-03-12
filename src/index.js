@@ -8,7 +8,7 @@ app.get('/profile',(req,res)=>{
     res.send('welcome to my profile')
 })
 app.get('/profile/:name',(req,res)=>{
-    res.send('welcome to my profile whit name of '+req.params.name)
+    res.send('welcome to my profile whit name of user  '+req.params.name)
 })
 app.listen(port,()=>{
 console.log(`server is up and running at: http://127.0.0.1:${port}` )
