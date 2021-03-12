@@ -37,9 +37,7 @@ input,button{
     -webkit-transition: 0.3s;
     -moz-transition: 0.3s;
 }
-.main-div input:focus{
-    border: 1px solid #777;
-}
+
 .main-div button:hover, .loggodin-div button:hover{
     background: #fff;
     color: blue;
