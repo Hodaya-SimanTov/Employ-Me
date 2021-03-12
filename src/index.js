@@ -4,8 +4,8 @@ const app = exspress()
 app.get('/',(req,res)=>{
     res.sendFile(__dirname+'/login.html')
 })
-app.get('/profile',(req,res)=>{
-    res.send('welcome to my profile')
+app.get('/homepage',(req,res)=>{
+    res.sendFile(__dirname+'/homepage.html')
 })
 app.get('/profile/:name',(req,res)=>{
     res.send('welcome to my profile whit name of user  '+req.params.name)
