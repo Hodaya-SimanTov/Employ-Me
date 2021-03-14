@@ -29,11 +29,12 @@ The system runs on a Windows operating system and is built with Visual Studio Co
  * java script
  * css
  * html
- The system uses Heroku for cloud services and firebaseDB.
+ * The system uses Heroku for cloud services and firebaseDB.
 
 ## Setup
 Clone this repo to your desktop and run npm install: 
  `npm init`
+
 Then you need to install nodemon, use:
  `npm install nodemon -save`
 
