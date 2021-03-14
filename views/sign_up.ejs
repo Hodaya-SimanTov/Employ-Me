@@ -10,10 +10,9 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     </haed>
     <body>
-
         <div class="model">
         <div class="container">
-        <form class="model-content animate" action="/" method="get" onsubmit="checkDetails()">
+        <form class="model-content animate" action="/" method="get">
             <div class="imgcontainer">
             <img src="/css/images/user_img.png" class="avatar" />
             </div>
@@ -28,13 +27,11 @@
             <input type="email" id="email" placeholder="Name@example.com" required/>
             <br />
             <lable>Password</lable>
-            <input type="password" id="password" placeholder="Password" required/>
+            <input type="password" id="password" placeholder="Password"  required/>
             <br />
             <label>Re-Password</label>
-            <input type="password" id="rePassword" placeholder="Re-password" required/>
-            <button type="submit" class="registerbtn btn-outline-info">Sign Up</button>
-            
-            
+            <input type="password" id="rePassword" placeholder="Re-password"  required/>
+            <button type="submit" class="registerbtn btn-outline-info" onclick="signup()">Sign Up</button>
             <div class="login">
             <p> Alreade have account? <a href="/login"> Login</a></p>
         </div>
@@ -42,6 +39,29 @@
         </div>
     </div>
     <script src="sign_up.js"></script>
+    <script type="text/javascript">
+    function signup(){ 
+    var name=document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    var pass=document.getElementById("password").value;
+    var rePass=document.getElementById("rePassword").value;
+    if(!/^[a-zA-Z]+$/.test(name))
+        alert('Name is invalid');
+    else
+        if (pass.length <6)
+            alert('Password is invalid,\npassword must contain at least 6 characters');
+        else 
+             if(rePass==""){
+                alert('Please confirm the password');
+            }
+            else{
+                if(rePass!=pass){
+                    alert("Invalid password verification");
+                }
+            }
+}
+</script>
+   
     </body>
     
 </html>
