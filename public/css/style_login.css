@@ -1,7 +1,14 @@
-  body{
+body{
       font-family: Arial, Helvetica, sans-serif;
+      background-color:white;
+      margin: auto;
+      background-image: url('images/team.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
 
  }
+ 
  input[type=text],input[type=password]{
      width: 100%;
      padding: 12px 20 px;
@@ -34,7 +41,7 @@ img.avatar{
     border-radius: 20%;
 }
 .modal{
-    background-color: black;
+    background-color: white;
     overflow: auto;
     padding-top: 60px;
     width: 100%;
@@ -43,6 +50,7 @@ img.avatar{
     left: 0%;
     z-index: 1;
     position: fixed;
+    opacity: 0.9;
 }
 .modal-content{
     background-color: white;
@@ -58,55 +66,3 @@ span.psw{
     float: right;
     padding-top: 16px;
 }
-    
-/* body{
-    background: #fff;
-    padding: 0px;
-    margin: 0px;
-    font-family: 'Nunito',sans-serif; 
-    font-size: 16px;
-}
-.loginbtn:hover{
-    opacity: 1;
-} */
-/* input,button{
-    font-family: 'Nunito',sans-serif; 
-    font-weight: 700;
-} */
-/* .main-div,.loggodin-div{
-    width: 20%;
-    margin: 0px auto;
-    margin-top: 150px ;
-    padding: 20px;
-}
-.main-div input{
-   display: block; 
-   border: 1px solid #ccc;
-   border-radius: 5px;
-   background: #fff;
-   padding: 15px;
-   outline:  none;
-   width: 100%;
-   margin-bottom: 20px;
-} */
-/* .main-div button, .loggodin-div button{
-    background: blue;
-    color: #fff;
-    border: 1px solid blue;
-    border-radius: 5px;
-    padding: 15px;
-    display: block;
-    width: 118%;
-    transition: 0.3s;
-    -webkit-transition: 0.3s;
-    -moz-transition: 0.3s;
-} */
-/* .main-div input:focus{
-    border: 1px solid #777;
-} */
-/* .main-div button:hover, .loggodin-div button:hover{
-    background: #fff;
-    color: blue;
-    border: 1px solid blue;
-    cursor: pointer;
-} */
