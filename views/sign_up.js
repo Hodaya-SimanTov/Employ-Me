@@ -3,12 +3,12 @@
 //     return true;
 // }
 
-exports.checkName={
-    function (a,b){
-    //var name=document.getElementById("name").value;
-       return a+b;
-    }
-}
+// exports.checkName={
+//     function (a,b){
+//     //var name=document.getElementById("name").value;
+//        return a+b;
+//     }
+// }
 
 
 
@@ -26,28 +26,23 @@ exports.checkName={
 //     // } 
 // }
 
-// function checkPassword(pass) {
-//     //pass=document.getElementById("pass").value;
-//     if(pass==""){
-//         alert("Please enter a password");
-//         return false;
-//     }
-//     return true;
-// }
+function checkPassword() {
+    pass=document.getElementById("password").value;
+    if(pass.length<6){
+        alert("A valid password contains at least 6 characters");
+        return false;
+    }
+    return true;
+}
 
 function checkRePass(){
     pass=document.getElementById("password").value;
     rePass=document.getElementById("rePassword").value;
-    if(rePass==""){
-        alert("Please confirm the password");
+    if(rePass!=pass){
+        alert("Invalid password verification");
+        return false;
     }
-    else{
-        if(rePass!=pass){
-            alert("Invalid password verification");
-           
-        }
-    }
-   
+    return true;   
 }    
     
 
