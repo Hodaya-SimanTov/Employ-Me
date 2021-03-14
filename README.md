@@ -24,27 +24,28 @@ The system runs on a Windows operating system and is built with Visual Studio Co
  * CHAI and MOCHA - For tests
  * bootstrap 4.6.0 - For style
  * nodemon 2.0.7 - To track changes in the code and restart the server after each change
+ * circleCi - For the Continues integration process
+ * ESlint
  * java script
  * css
  * html
-
- * heroku , firebaseDB, circleCi (For the Continues integration process), eslint
+ The system uses Heroku for cloud services and firebaseDB.
 
 ## Setup
 Clone this repo to your desktop and run npm install: 
  `npm init`
+Then you need to install nodemon, use:
+ `npm install nodemon -save`
 
 In order to run the tests use:
  `npm run test`
 
 In order to run the lint use:
  `npm run lint`
- `eslint src/*.js --color`
-
+ 
 In order to activate and run the server use:
  `npm run dev`
-
-
+ 
  ## Team
  * Hodaya Siman Tov
  * Kineret Levi
@@ -53,9 +54,3 @@ In order to activate and run the server use:
  * Reut Pahima
  * Rachel Levi
  
-
-
-
-
-
-
