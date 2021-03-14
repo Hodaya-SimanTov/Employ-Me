@@ -40,7 +40,7 @@
         background: #fff01b
     }
     body{
-        background: url(images/team.jpg) no-repeat;
+    background: url(images/team.jpg) no-repeat;
     background-size: cover;
     height:calc(100vh-80px);
     }

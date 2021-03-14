@@ -2,7 +2,7 @@ var expect = require('chai').expect
 
 describe('Array', () => {
     describe('#sort', () => {
-        it('should sorting array by name', () => {
+         it('should sorting array by name', () => {
             var names = ['Daniel', 'Bob', 'vicrtor', 'Alice']
             expect(names.sort()).to.be.eql(['Alice', 'Bob', 'Daniel', 'vicrtor'])
         })
