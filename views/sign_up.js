@@ -35,21 +35,20 @@ exports.checkName={
 //     return true;
 // }
 
-// function checkRePass(pass,rePass){
-//     //pass=document.getElementById("pass").value;
-//     //rePass=document.getElementById("rePass").value;
-//     if(rePass==""){
-//         alert("Please confirm the password");
-//         return false;
-//     }
-//     else{
-//         if(rePass!=pass){
-//             alert("Invalid password verification");
-//             return false;
-//         }
-//     }
-//     return true;
-// }    
+function checkRePass(){
+    pass=document.getElementById("password").value;
+    rePass=document.getElementById("rePassword").value;
+    if(rePass==""){
+        alert("Please confirm the password");
+    }
+    else{
+        if(rePass!=pass){
+            alert("Invalid password verification");
+           
+        }
+    }
+   
+}    
     
 
 // //module.exports=checkName();
