@@ -9,7 +9,7 @@ body{
 
  }
  
- input[type=text],input[type=password]{
+ input[type=email],input[type=password]{
      width: 100%;
      padding: 12px 20 px;
      margin: 8px 0;
