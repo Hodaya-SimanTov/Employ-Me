@@ -1,20 +1,56 @@
 <!doctype html>
 <html>
-<head>
- <title>login</title>
- <link rel="stylesheet" type="text/css" href="/css/style_login.css"/>
+  <head>  
+    <title>login</title>
+    <link rel="stylesheet" type="text/css" href="/css/style_login.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="main-div">
-    <h3>Firebase login example</h3>
+  <div class="modal">
+  <form class="modal-content animate">
+    <div class="imgconteiner">
+    <img src="images/user_img.png" class="avatar">
+  </div>
+  <div class="container">
+    <label>User Name</label>
+    <input type="text" placeholder="User name">
+    <br>
+    <label>Password</label>
+    <input type="password" placeholder="Password">
+    <br>
+    <input type="checkbox">Remember me
+    <button>Log-in</button>
+    <label>
+      <p>Forgot <a href="#">Password</a></p>
+    </label>
+    <label>
+      <p>No account?<a href="/signup">Sign-Up</a></p>
+    </label>
+  </div>
+
+  </form>
+<!-- <div class="main-div">
+    <h2>LOG-IN</h2>
     <input type="email" placeholder="Email..."/>
     <input type="password" placeholder="Password..."/>
+<<<<<<< Updated upstream
     <button onclick="login()">log in Acount</button> 
 </div>
 <div class="loggodin-div">
+=======
+    <button type="button" class="loginbtn btn-outline-info">Log-in</button>
+     -->
+    <!-- <button onclick="login()">log in Acount</button>  -->
+<!-- </div> -->
+<!-- <div class="loggodin-div">
+>>>>>>> Stashed changes
   <h3>Welcome User</h3>
   <p>Welcome to Firebase web login Example. Youre currently logged in.</p>
   <button>Logout</button>
+</div> -->
 </div>
 <script src="login.js">
 </script>
