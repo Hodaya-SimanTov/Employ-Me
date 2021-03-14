@@ -9,14 +9,6 @@ body{
 
  }
  
- input[type=text],input[type=password]{
-     width: 100%;
-     padding: 12px 20 px;
-     margin: 8px 0;
-     display: inline-block;
-     border: 1px solid #ccc;
-     box-sizing: border-box;
- }
  button{
      background-color: turquoise;
      color: white;
@@ -40,6 +32,40 @@ img.avatar{
     width: 20%;
     border-radius: 20%;
 }
+
+.container{
+    padding: 16px;
+
+}
+input[type=email], input[type=password]{
+    width: 100%;
+    height: 5px;
+    padding: 15px;
+    margin: 2px 0 12px 0;
+    display: inline-block;
+    border: none;
+    outline: none;
+    background: whitesmoke;
+}
+input[type=email]:focus,input[type=password]:focus{
+    background-color: #ddd;
+    outline: none;
+}
+.registerbtn{
+    padding: 6px 15px;
+    margin: 8px;
+    cursor: pointer;
+    width:100%;
+    opacity: 0.9;
+    
+
+}
+.registerbtn:hover{
+    opacity: 1;
+}
+a{
+    color: blue;
+}
 .modal{
     background-color: white;
     overflow: auto;
@@ -58,10 +84,7 @@ img.avatar{
     border: 1px solid #888;
     width: 80%;
 }
-.container{
-    padding: 16px;
 
-}
 span.psw{
     float: right;
     padding-top: 16px;

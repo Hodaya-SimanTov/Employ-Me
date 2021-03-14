@@ -12,7 +12,7 @@
     <body>
         <div class="model">
         <div class="container">
-        <form class="model-content animate" action="/" method="get">
+        <form class="model-content animate" action="/" method="get" >
             <div class="imgcontainer">
             <img src="/css/images/user_img.png" class="avatar" />
             </div>
@@ -31,7 +31,7 @@
             <br />
             <label>Re-Password</label>
             <input type='password' id='rePassword' placeholder="Re-password"  required/>
-            <button type='submit' class='registerbtn btn-outline-info'>Sign Up</button>
+            <button type='submit' class='registerbtn btn-outline-info' onclick="signup()">Sign Up</button>
 
             <div class='login'>
             <p> Alreade have account? <a href="/login"> Login</a></p>
@@ -39,11 +39,9 @@
         </form>
         </div>
     </div>
-    <script src='sign_up.js'></script>
     <script type='text/javascript'>
     function signup(){ 
     var name=document.getElementById("name").value;
-    var email = document.getElementById("email").value;
     var pass=document.getElementById("password").value;
     var rePass=document.getElementById("rePassword").value;
     if(!/^[a-zA-Z]+$/.test(name))

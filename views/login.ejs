@@ -7,19 +7,21 @@
 </head>
 <body>
   <div class="modal">
-  <form class="modal-content animate">
+  <div class="container">
+    <form class="modal-content animate" action="/" method="get">
     <div class="imgconteiner">
     <img src="/css/images/user_img.png" class="avatar"/>
     </div>
   <div class="container">
-    <label>User Name</label>
-    <input type="text" placeholder="Username">
+    <label>Mail Address</label>
+    <br>
+    <input type="email" id="email" placeholder="Name@example.com" required/>
     <br>
     <label>Password</label>
-    <input type="password" placeholder="Password">
+    <input type="password" id="password" placeholder="Password" required/>
     <br>
     <input type="checkbox">Remember me
-    <button>Log-in</button>
+    <button type='submit' class='login btn' onclick="login()">Log-in</button>
     <label>
       <p>Forgot <a href="#">Password</a></p>
     </label>
@@ -31,6 +33,12 @@
   </form>
 
 </div>
-
+<script type='text/javascript'>
+  function login(){ 
+  var pass=document.getElementById("password").value;
+  if (pass.length <6)
+    alert('Password is invalid,\npassword must contain at least 6 characters');      
+  }
+</script>
 </body>
 </html>
