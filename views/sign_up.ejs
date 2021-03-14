@@ -13,7 +13,7 @@
 
         <div class="model">
         <div class="container">
-        <form class="model-content animate">
+        <form class="model-content animate" action="/" method="get" onsubmit="checkDetails()">
             <div class="imgcontainer">
             <img src="images/user_img.png" class="avatar" />
             </div>
@@ -22,17 +22,17 @@
             <p> Please fill this form to create an account</p>
             <hr>
             <lable>Name</lable>
-            <input type="text" placeholder="Name" />
+            <input type="text" id="name" placeholder="Name" required/>
             <br />
             <label>Email</label>
-            <input type="email" placeholder="Name@example.com" />
+            <input type="email" id="email" placeholder="Name@example.com" required/>
             <br />
             <lable>Password</lable>
-            <input type="password" placeholder="Password" />
+            <input type="password" id="password" placeholder="Password" required/>
             <br />
             <label>Re-Password</label>
-            <input type="password" placeholder="Re-password" />
-            <button type="button" class="registerbtn btn-outline-info">Sign Up</button>
+            <input type="password" id="rePassword" placeholder="Re-password" required/>
+            <button type="submit" class="registerbtn btn-outline-info">Sign Up</button>
             
             
             <div class="login">
@@ -41,6 +41,7 @@
         </form>
         </div>
     </div>
+    <script src="sign_up.js"></script>
     </body>
     
 </html>
