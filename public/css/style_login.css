@@ -9,17 +9,7 @@ body{
 
  }
  
-<<<<<<< HEAD
-=======
- input[type=email],input[type=password]{
-     width: 100%;
-     padding: 12px 20 px;
-     margin: 8px 0;
-     display: inline-block;
-     border: 1px solid #ccc;
-     box-sizing: border-box;
- }
->>>>>>> 75edbc653d7018991e5cb4e1b1b3a30697d38862
+
  button{
      background-color: turquoise;
      color: white;
