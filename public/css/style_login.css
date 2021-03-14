@@ -8,35 +8,12 @@ body{
       background-size: cover;
 
  }
- 
-
- button{
-     background-color: turquoise;
-     color: white;
-     padding: 14px 20px;
-     margin: 8px 0;
-     border: inherit;
-     cursor: pointer;
-     width: 100%;
- }
- button:hover{
-     opacity: 0.8;
-
- }
-.imgcontainer{
-    text-align: center;
-    margin: 12px 0 8px  0;
-    position: relative;
-
+ *{
+    box-sizing: border-box;
 }
-img.avatar{
-    width: 20%;
-    border-radius: 20%;
-}
-
-.container{
-    padding: 16px;
-
+.container {
+    padding: 5px;
+    background-color: white;
 }
 input[type=email], input[type=password]{
     width: 100%;
@@ -52,21 +29,40 @@ input[type=email]:focus,input[type=password]:focus{
     background-color: #ddd;
     outline: none;
 }
-.registerbtn{
-    padding: 6px 15px;
+
+ .loginbtn{
+    background-color: turquoise;
+    color: white;
+    padding: 14px 20px;
     margin: 8px;
+    border: inherit;
     cursor: pointer;
     width:100%;
     opacity: 0.9;
-    
-
 }
-.registerbtn:hover{
-    opacity: 1;
+.loginbtn:hover{
+    opacity: 0.8;
 }
 a{
     color: blue;
 }
+.imgcontainer{
+    text-align: center;
+    margin: 12px 0 8px  0;
+    position: relative;
+
+}
+img.avatar{
+    width: 20%;
+    border-radius: 20%;
+}
+
+.container{
+    padding: 16px;
+
+}
+
+
 .modal{
     background-color: white;
     overflow: auto;
