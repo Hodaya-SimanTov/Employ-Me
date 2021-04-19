@@ -1,21 +1,34 @@
 const express = require('express')
-var appController=require('./controllers/appController')
-const port = process.env.PORT || 4000
 const app = express()
-app.set('view engine','ejs')
-app.use(express.static('public'))
+const dotenv=require('dotenv')
+dotenv.config()
+const bodyParser=require('body-parser')
+const mongoose=require('mongoose')
+const router=require('./route/api')
 
-app.get('homepage',function(req,res){
-res.render(__dirname+'/homepage.html')
-});
-//app controller 
-appController(app)
+app.use(bodyParser.json());
 
+const connectionParams={
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true
+}
 
-app.get('/profile/:name',(req,res)=>{
-    res.send('welcome to my profile whit name of user  '+req.params.name)
+mongoose.connect(process.env.CONNECT_DB, {connectionParams})
+    .then(()=>{
+        console.log("connected");
+
+    }).catch((err) =>{
+        console.log(`error connecting ${err}`);
 })
+
+app.use('/',router)
+
+const port = process.env.PORT 
+app.use(express.static('public'))
+app.set('view engine','ejs')
+
 app.listen(port,()=>{
-console.log(`server is up and running at: http://127.0.0.1:${port}` )
+    console.log(`server is up and running at: http://127.0.0.1:${port}` )
 })
 
