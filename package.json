@@ -10,7 +10,7 @@
     "dev": "nodemon src/app.js",
     "test": "mocha tests/*.spec.js --color",
     "lint": "eslint src/*.js --color",
-    "start": "node src/app.js"
+    "start": "nodemon src/app.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
     "ejs": "^3.1.6",
     "express": "^4.17.1",
     "mongoose": "^5.12.5",
+    "nodemailer": "^6.5.0",
     "nodemod": "^2.7.2"
   },
   "devDependencies": {

@@ -4,9 +4,12 @@ const dotenv=require('dotenv')
 dotenv.config()
 const bodyParser=require('body-parser')
 const mongoose=require('mongoose')
-const router=require('./route/api')
+const apiEmployer=require('./route/apiEmployer')
+const apiContractorWorker=require('./route/apiContractorWorker')
+const apiCompanyWorker=require('./route/apiCompanyWorker')
 
 app.use(bodyParser.json());
+
 
 const connectionParams={
     useNewUrlParser: true,
@@ -22,7 +25,9 @@ mongoose.connect(process.env.CONNECT_DB, {connectionParams})
         console.log(`error connecting ${err}`);
 })
 
-app.use('/',router)
+app.use('/employer',apiEmployer)
+app.use('/contractorWorker',apiContractorWorker)
+app.use('/companyWorker',apiCompanyWorker)
 
 const port = process.env.PORT 
 app.use(express.static('public'))

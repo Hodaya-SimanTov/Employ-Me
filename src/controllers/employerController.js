@@ -12,4 +12,7 @@ const addEmployer=(req,res)=>{
 }
 
 
+
+
+
 module.exports={addEmployer}
