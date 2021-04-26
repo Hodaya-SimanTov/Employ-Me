@@ -4,7 +4,10 @@ const employer=require('../controllers/employerController')
 router.post('/addEmployer',(employer.addEmployer))
 
 router.get('/signUp',(req,res)=>{
-    res.render('../views/signUpEmployer')
+    res.render('../views/employerSignUp1')
+});
+router.get('/homePage',(req,res)=>{
+    res.render('../views/employerHomePage')
 });
 
 module.exports=router
