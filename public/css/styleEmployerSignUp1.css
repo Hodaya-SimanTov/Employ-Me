@@ -3,9 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins',sans-serif;
-
-   
+    font-family: 'Poppins',sans-serif;  
 }
 body{
     display: flex;
@@ -13,9 +11,7 @@ body{
     justify-content: left;
     align-items: left;
     padding: 10px;
-    background-image: url('images/empsignup.PNG');
-    
-    
+    background-image: url('images/empsignup.PNG');   
 }
 .container{
     max-width: 700px;
