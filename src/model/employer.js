@@ -1,36 +1,59 @@
+const Joi = require('joi');
 const mongoose=require('mongoose')
-
-const EmployerSchema=mongoose.Schema({
+const Employer=mongoose.model('Employer',new mongoose.Schema({
     firstName:{
         type:String,
-        require:true,
-        trim:true
+        required:true,
+        trim:true,
+        minlength: 3,
+        maxlength: 50
     },
     lastName:{
         type:String,
-        require:true
+        required:true,
+        trim:true,
+        minlength: 3,
+        maxlength: 50
     },
     phone:{
         type:String,
-        require:true
+        required:true,
+        length: 10
     },
-    mail:{
+    email:{
         type:String,
-        require:true
+        required:true,
+        minlength: 5,
+        maxlength: 100,
+        unique: true
     },
     companyName:{
         type:String,
-        require:true
+        required:true
     },
     password:{
         type:String,
-        require:true,
-        minlength:6
+        required:true,
+        minlength:6,
+        maxlength: 128
     },
     rule:{
         type:String,
         default:0
     } 
-})
+}));
+function validateEmployer(employer) {
+    const schema =Joi.object( {
+        firstName: Joi.string().min(3).max(50).trim().required(),
+        lastName: Joi.string().min(3).max(50).trim().required(),
+        phone: Joi.string().length(10).required(),
+        email: Joi.string().min(5).max(100).required().email(),
+        companyName: Joi.string().required(),
+        password: Joi.string().min(6).max(128).required(),
+        rule: Joi.string().default(0)
+    });
+    return  schema.validate(employer);
+}
+exports.Employer = Employer;
+exports.validate = validateEmployer;
 
-module.exports=mongoose.model('Employer',EmployerSchema)
