@@ -27,6 +27,9 @@ mongoose.connect(process.env.CONNECT_DB, {connectionParams})
         console.log(`error connecting ${err}`);
 })
 
+app.use(express.json());
+app.use(express.static('public'))
+app.set('view engine','ejs')
 
 app.use('/employer',apiEmployer)
 app.use('/contractorWorker',apiContractorWorker)
@@ -36,9 +39,7 @@ app.use('/companyWorker',apiCompanyWorker)
 // app.use('/api/authEmployer', authEmployer);
 
 
-app.use(express.json());
-app.use(express.static('public'))
-app.set('view engine','ejs')
+
 
 const port = process.env.PORT 
 app.listen(port,()=>{

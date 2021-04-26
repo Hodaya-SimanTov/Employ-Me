@@ -8,6 +8,9 @@ module.exports = function(app){
     app.get('/signup',(req,res)=>{
         res.render('sign_up')
     });
+    app.get('/employersignup',(req,res)=>{
+        res.render('employerSignUp')
+    });
     
 } 
     
