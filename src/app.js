@@ -1,9 +1,9 @@
-const port = process.env.PORT 
 const express = require('express')
 const app = express()
 const dotenv=require('dotenv')
 dotenv.config()
-//const bodyParser=require('body-parser')
+const bodyParser=require('body-parser')
+
 const mongoose=require('mongoose')
 
 const apiEmployer=require('./route/apiEmployer')
@@ -12,8 +12,8 @@ const apiCompanyWorker=require('./route/apiCompanyWorker')
 
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
-const authEmployer = require('./route/authEmployer');
-
+//const authEmployer = require('./route/authEmployer');
+app.use(bodyParser.json());
 const connectionParams={
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -35,12 +35,12 @@ app.use('/companyWorker',apiCompanyWorker)
 
 // app.use('/api/authEmployer', authEmployer);
 
-//app.use(bodyParser.json());
+
 app.use(express.json());
 app.use(express.static('public'))
 app.set('view engine','ejs')
 
-
+const port = process.env.PORT 
 app.listen(port,()=>{
     console.log(`server is up and running at: http://127.0.0.1:${port}` )
 })
