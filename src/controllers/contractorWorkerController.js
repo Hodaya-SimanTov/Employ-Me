@@ -1,5 +1,5 @@
 const ContractorWorker=require('../model/contractorWorker')
-const nodeMailer=require('nodemailer')
+const nodemailer=require('nodemailer')
 
 
 function sendmail(email, name) {
@@ -9,7 +9,7 @@ function sendmail(email, name) {
         service: 'gmail',
         auth: {
             user: 'ravitlevi999@gmail.com',
-            pass: '12345'
+            pass: 'ravit99clark'
         }
     });
 
@@ -17,12 +17,12 @@ function sendmail(email, name) {
         from: 'ravitlevi999@gmail.com',
         to: email,
         subject: 'wellcom',
-        text: `hello ${name}`
+        text: `Hello ${name},\nThank you for joining our site, we will do everything to find you a suitable job!!`
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
-            console.log("error!!!");
+            console.log(`error :: ${error}`);
         } else {
             console.log('Email sent: ' + info.response);
         }
@@ -35,7 +35,7 @@ function sendmail(email, name) {
 const addContractorWorker=(req,res)=>{
     const newContractorWorker=new ContractorWorker(req.body)
     newContractorWorker.save().then(contractorWorker =>{
-        //sendmail(contractorWorker.mail,contractorWorker.firstName)//שולח מייל בהרשמה
+        sendmail(contractorWorker.mail,contractorWorker.firstName)//שולח מייל בהרשמה
         res.send("success to add")
 
     }).catch(err=>{
