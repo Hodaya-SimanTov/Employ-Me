@@ -11,14 +11,3 @@
 //   firebase.initializeApp(firebaseConfig);
 //   firebase.analytics();
 
-function signup(){ 
-  var fname=document.getElementById("fisrtName").value;
-  var lname=document.getElementById("lastName").value;
-  var pass=document.getElementById("password").value;
-  var rePass=document.getElementById("rePassword").value;
-
-  console.log(fname);
-
-}
-
-module.exports={signup};

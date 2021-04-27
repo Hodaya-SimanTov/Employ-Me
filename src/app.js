@@ -1,6 +1,7 @@
  
 const express = require('express')
 const app = express()
+const path=require('path');
 const dotenv=require('dotenv')
 dotenv.config({path:'.env'})
 const bodyParser=require('body-parser')
@@ -9,7 +10,7 @@ const mongoose=require('mongoose')
 const apiEmployer=require('./route/apiEmployer')
 const apiContractorWorker=require('./route/apiContractorWorker')
 const apiCompanyWorker=require('./route/apiCompanyWorker')
-const path=require('path');
+
 
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);

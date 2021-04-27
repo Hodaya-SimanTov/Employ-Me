@@ -1,10 +1,15 @@
 const router=require('express').Router()
-
 const employer=require('../controllers/employerController')
 
-
-//employer
 router.post('/addEmployer',(employer.addEmployer))
 
+router.get('/signUp',(req,res)=>{
+    res.render('../views/employerSignUp1')
+});
+router.get('/homePage',(req,res)=>{
+    res.render('../views/employerHomePage')
+});
+
 module.exports=router
+
 
