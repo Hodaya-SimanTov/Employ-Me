@@ -33,14 +33,18 @@ function sendmail(email, name) {
 
 
 const addContractorWorker=(req,res)=>{
+    console.log(req.body);
     const newContractorWorker=new ContractorWorker(req.body)
     newContractorWorker.save().then(contractorWorker =>{
-        sendmail(contractorWorker.mail,contractorWorker.firstName)//שולח מייל בהרשמה
-        res.send("success to add")
-
+        //sendmail(contractorWorker.mail,contractorWorker.firstName)//שולח מייל בהרשמה
+        //res.send("success to add")
+        //res.json({contractorWorker:contractorWorker})
+        console.log("add conrtactor");
+        res.redirect('/contractorWorker/contractorHomepage');
+        
     }).catch(err=>{
         console.log(`can not add this worker! ${err}`);
-    })
+    })   
 
 }
 

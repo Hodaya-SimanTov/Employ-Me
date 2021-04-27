@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+//const jwt = require('jsonwebtoken');
+//const bcrypt = require('bcrypt');
 const { Employer, validate } = require('../model/employer');
 const express = require('express');
 const router = express.Router();
@@ -34,7 +34,3 @@ const addEmployer=async (req, res) => {
 module.exports={addEmployer}
 
 
-
-
-
-module.exports={addEmployer}

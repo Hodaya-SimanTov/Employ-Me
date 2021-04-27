@@ -37,11 +37,7 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "mongoose": "^5.12.5",
-<<<<<<< Updated upstream
     "nodemailer": "^6.5.0",
-=======
-    "mongoose-intl-phone-number": "^1.1.1",
->>>>>>> Stashed changes
     "nodemod": "^2.7.2"
   },
   "devDependencies": {
