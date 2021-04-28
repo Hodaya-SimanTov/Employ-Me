@@ -9,6 +9,9 @@ router.get('/signUp',(req,res)=>{
 router.get('/homePage',(req,res)=>{
     res.render('../views/employerHomePage')
 });
+router.get('/editProfile',(req,res)=>{
+    res.render('../views/employerEditProfile')
+});
 
 module.exports=router
 

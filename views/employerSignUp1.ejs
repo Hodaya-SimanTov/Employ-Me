@@ -9,58 +9,49 @@
     <body>
         <div class="container">
             <div class="title">Employer-Registration</div>
-            <form action="#">
+            <form action="/employer/addEmployer" method="POST">
                 <div class="user-details">
                     <div class="input-box">
                         <span class="details">First Name*</span>
-                        <input type="text" placeholder="First name" required>
-
+                        <input type="text" placeholder="First name" name="firstName" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Last Name*</span>
-                        <input type="text" placeholder="Last name" required>
-
+                        <input type="text" placeholder="Last name" name="lastName" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Phone*</span>
-                        <input type="number" placeholder="Phone number" required>
-
+                        <input type="number" placeholder="Phone number" name="phone" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Email*</span>
-                        <input type="email" placeholder="example@example.com" required>
-
+                        <input type="email" placeholder="example@example.com" name="email" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Company*</span>
-                        <input type="text" placeholder="Company name" required>
-
+                        <input type="text" placeholder="Company name" name="companyName" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Password*</span>
-                        <input type="password" placeholder="Password" required>
-
+                        <input type="password" placeholder="Password" name="password" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Re-Password*</span>
                         <input type="password" placeholder="Password again" required>
-
                     </div>
                     <div class="input-box">
                         <span class="details">Role</span>
-                        <input type="text" placeholder="Role" required>
-
+                        <input type="text" placeholder="Role" name="role">
                     </div>
                 </div>
                 <lable>* Mandatory fields</lable>
                 <div class="button">
-                    <input type="submit" value="Register" onclick="signup()">
+                    <input type="submit" value="Register">
                 </div>
                 <div class='login'>
                     <p> Already have account? <a href="/login"> Login</a></p>
                 </div>
             </form>
-
         </div>
     </body>
     <script type='text/javascript'>
