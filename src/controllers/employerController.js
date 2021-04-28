@@ -26,7 +26,7 @@ const addEmployer=async (req, res) => {
         await employer.save();
         //const token = jwt.sign({ _id: employer._id }, config.get('PrivateKey'));
         //res.header('x-auth-token', token).send(_.pick(employer, ['_id','firstName','lastName','phone', 'email','companyName','role']));
-        res.send(_.pick(employer, ['_id','firstName','lastName','phone', 'email','companyName','role']));
+        //res.send(_.pick(employer, ['_id','firstName','lastName','phone', 'email','companyName','role']));
         res.redirect('/employer/homePage');
     }
     console.log('I am in add employer')
