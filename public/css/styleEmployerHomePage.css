@@ -35,8 +35,7 @@
 	font-family: 'Roboto', sans-serif;
 	transition: .4s;
 }
-.navbar ul li a.active,
-.navbar ul li a:hover{
+.navbar ul li a.active, .navbar ul li a:hover{
 	background: rgb(247, 250, 94);
 	border-radius: 2px;
 }

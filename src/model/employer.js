@@ -50,7 +50,7 @@ function validateEmployer(employer) {
         email: Joi.string().min(5).max(100).required().email(),
         companyName: Joi.string().required(),
         password: Joi.string().min(6).max(128).required(),
-        role: Joi.string().default(0)
+        //role: Joi.string().default(0)
     });
     return  schema.validate(employer);
 }

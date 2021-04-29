@@ -42,7 +42,7 @@
 }
 .wrapper .center{
 	position: absolute;
-	top: 35%;
+	top: 25%;
 	left: 40%;
 	transform: translate(-50%, -50%);
 	font-family: sans-serif;
@@ -59,23 +59,9 @@
 	color: rgb(38, 12, 85);
 	font-size: 15px;
 	font-weight: bold;
-	width: 895px;
+	width: 900px;
 	margin-top: 10px;
 	text-align: left;
-}
-.center h3{
-	color: rgb(38, 12, 85);
-	font-size: 15px;
-	font-weight: bold;
-	width: 895px;
 	margin-top: 10px;
-	text-align: left;
 }
-.center h4{
-	color: rgb(38, 12, 85);
-	font-size: 15px;
-	font-weight: bold;
-	width: 895px;
-	margin-top: 10px;
-	text-align: left;
-}
+
