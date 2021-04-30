@@ -11,8 +11,13 @@ const addCompanyWorker=(req,res)=>{
     }).catch(err=>{
         console.log(`can not add this worker! ${err}`);
     })
+}
+//Adding a company employee
+/*
+function companyWorker()
+{
 
 }
-
+*/
 
 module.exports={addCompanyWorker}
