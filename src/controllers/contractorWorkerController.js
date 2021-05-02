@@ -59,6 +59,17 @@ const loginUser=(req,res)=>{
 
 }
 
+
+const loginUser=(req,res)=>{
+    ContractorWorker.findOne({ mail: req.body.mail }).then(ContractorWorker=>{
+        console.log("in login");
+        const token=jwt.sign({mail: ContractorWorker.mail, password: ContractorWorker.password}, process.env.SECRET);
+        res.send(token);
+    }).catch(err=>{
+        console.log(err);
+    })
+}
+
 const getContractorWorkerById=(req,res)=>{
     ContractorWorker.findById(req.params.id).then(contractorWorker=>{
         res.cookie("mail",contractorWorker.mail)//שומר כשנכנסים שוב
