@@ -31,15 +31,14 @@ app.use(express.json());
 app.use(express.static('public'))
 app.set('view engine','ejs')
 
+//app.use(express.urlencoded({extended:false}))
+
 app.use('/employer',apiEmployer)
 app.use('/contractorWorker',apiContractorWorker)
 app.use('/companyWorker',apiCompanyWorker)
 
 
 // app.use('/api/authEmployer', authEmployer);
-
-
-
 
 const port = process.env.PORT 
 app.listen(port,()=>{
