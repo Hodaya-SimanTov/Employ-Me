@@ -36,14 +36,20 @@ mongoose.connect(process.env.CONNECT_DB, {connectionParams})
     }).catch((err) =>{
         console.log(`error connecting ${err}`);
 })
+app.get('/',(req,res)=>{
+    res.render('homePage1')
+});
 
-app.use(express.urlencoded({extended:false}))
+app.use(express.json());
+app.use(express.urlencoded({extend:false}));
 app.use(express.static('public'))
 app.use('/css', express.static(__dirname + 'public/css'))
 app.use('/js', express.static(__dirname + 'public/js'))
 app.use('/imgages', express.static(__dirname + 'public/imgages'))
 
 
+
+//app.use(express.urlencoded({extended:false}))
 
 app.use('/employer',apiEmployer)
 app.use('/contractorWorker',apiContractorWorker)

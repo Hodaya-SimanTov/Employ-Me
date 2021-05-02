@@ -2,65 +2,56 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="UTF-8">
-        <title>Sign Up As | Employer</title>
+        <title>SignUp As-Employer</title>
         <link rel="stylesheet" href="/css/styleEmployerSignUp1.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <div class="container">
             <div class="title">Employer-Registration</div>
-            <form action="#">
+            <form class="model-content animate" action="/employer/addEmployer" method="POST">
                 <div class="user-details">
                     <div class="input-box">
                         <span class="details">First Name*</span>
-                        <input type="text" placeholder="First name" required>
-
+                        <input type="text" placeholder="First name" name="firstName" id="firstName" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Last Name*</span>
-                        <input type="text" placeholder="Last name" required>
-
+                        <input type="text" placeholder="Last name" name="lastName" id="lastName" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Phone*</span>
-                        <input type="number" placeholder="Phone number" required>
-
+                        <input type="number" placeholder="Phone number" name="phone" id="phone" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Email*</span>
-                        <input type="email" placeholder="example@example.com" required>
-
+                        <input type="email" placeholder="example@example.com" name="email" id="email" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Company*</span>
-                        <input type="text" placeholder="Company name" required>
-
+                        <input type="text" placeholder="Company name" name="companyName" id="companyName" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Password*</span>
-                        <input type="password" placeholder="Password" required>
-
+                        <input type="password" placeholder="Password" name="password" id="password" required>
                     </div>
                     <div class="input-box">
                         <span class="details">Re-Password*</span>
                         <input type="password" placeholder="Password again" required>
-
                     </div>
                     <div class="input-box">
                         <span class="details">Role</span>
-                        <input type="text" placeholder="Role" required>
-
+                        <input type="text" placeholder="Role" name="role" id="role">
                     </div>
                 </div>
                 <lable>* Mandatory fields</lable>
                 <div class="button">
-                    <input type="submit" value="Register" onclick="signup()">
+                    <input type="submit" value="Register">
                 </div>
                 <div class='login'>
                     <p> Already have account? <a href="/login"> Login</a></p>
                 </div>
             </form>
-
         </div>
     </body>
     <script type='text/javascript'>
@@ -85,3 +76,89 @@
     }
     </script>   
 </html>
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Sign Up As | Employer</title>
+        <link rel="stylesheet" href="/css/styleEmployerSignUp1.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+            <div class="container">
+                <div class="title">Employer-Registration</div>
+                    <from class="model-content animate" action='/employer/addEmployer' method='POST' id='addEmployer'>
+                        <div class="user-details">
+                            <div class="input-box">
+                            <span class="details">First Name*</span>
+                            <input type="text" name="firstName" placeholder="First name" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Last Name*</span>
+                            <input type="text" name="lastName" placeholder="Last name" required>
+
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Phone*</span>
+                            <input type="number" name="phone" placeholder="Phone number" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Email*</span>
+                            <input type="email" name="email" placeholder="example@example.com" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Company*</span>
+                            <input type="text" name="companyName" placeholder="Company name" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Password*</span>
+                            <input type="password" name="password" placeholder="Password" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Re-Password*</span>
+                            <input type="password" placeholder="Password again" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Role</span>
+                            <input type="text" name="role" placeholder="Role">
+                        </div>
+                    </div>
+                    <lable>* Mandatory fields</lable>
+                    <div class="button">
+                        <button type='submit' class='registerbtn btn-outline-info'>Register</button>
+                    </div>
+                </form>
+                    <div class='login'>
+                        <p> Already have account? <a href="/login"> Login</a></p>
+                    </div>
+                
+            </div>
+    </body>
+    <! <script type='text/javascript'>
+        function signup(){ 
+        var name=document.getElementById("name").value;
+        var pass=document.getElementById("password").value;
+        var rePass=document.getElementById("rePassword").value;
+        if(!/^[a-zA-Z]+$/.test(name))
+            alert('Name is invalid');
+        else
+            if (pass.length <6)
+                alert('Password is invalid,\npassword must contain at least 6 characters');
+            else 
+                 if(rePass==""){
+                    alert('Please confirm the password');
+                }
+                else{
+                    if(rePass!=pass){
+                        alert("Invalid password verification");
+                    }
+                }
+    }
+    </script>    -->
+<!-- </html> --> 

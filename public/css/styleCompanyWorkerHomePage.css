@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:700&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+}
+.wrapper{
+    background: url('images/emlogo1.PNG') no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+.navbar{
+    height: 80px;
+    width: 100%;
+    background: rgb(255, 255, 255);
+}
+.logo{
+    width: 230px;
+    height: 73px;
+    padding: 5px 50px;
+}
+.navbar ul{
+    float: right;
+    margin-right: 20px;
+}
+.navbar ul li{
+    list-style: none;
+    margin: 0 8px;
+    display: inline-block;
+    line-height: 80px;
+}
+.navbar ul li a{
+    text-decoration: none;
+    color: rgb(40, 21, 94);
+    font-size: 17px;
+    font-family: 'Roboto', sans-serif;
+    transition: .4s;
+}
+.navbar ul li a.active,
+.navbar ul li a:hover{
+    background: rgb(247, 250, 94);
+    border-radius: 2px;
+}
+.wrapper .center{
+    position: absolute;
+    top: 35%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    font-family: sans-serif;
+    user-select: none;
+}
+.center h1{
+    color: rgb(38, 12, 85);
+    font-size: 35px;
+    font-weight: bold;
+    width: 900px;
+    text-align: center;
+}
+.center h2{
+    color: rgb(38, 12, 85);
+    font-size: 25px;
+    font-weight: bold;
+    width: 895px;
+    margin-top: 10px;
+    text-align: center;
+}

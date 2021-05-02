@@ -56,7 +56,6 @@ const getContractorWorkerById=(req,res)=>{
     }).catch(err=>{
         console.log(`can not get this worker! ${err}`);
     })
-    
 }
 
 const getContractorWorkerByMail=(req,res)=>{
@@ -67,7 +66,6 @@ const getContractorWorkerByMail=(req,res)=>{
     }).catch(err=>{
         console.log(`can not get this worker! ${err}`);
     })
-    
 }
 
 const getAllContractorWorkers=(req,res)=>{
