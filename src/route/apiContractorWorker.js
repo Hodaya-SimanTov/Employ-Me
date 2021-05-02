@@ -6,6 +6,9 @@ const contractorWorker=require('../controllers/contractorWorkerController')
 router.get('/contractorHomepage',(req,res)=>{
     res.render('contractorHomepage')        
 });
+router.get('/contractorProfile',(req,res)=>{
+    res.render('contractorProfile')        
+});
 router.get('/contractorSignUp',(req,res)=>{
     res.render('contractorSignUp')        
 });
