@@ -12,12 +12,15 @@ const addCompanyWorker=(req,res)=>{
         console.log(`can not add this worker! ${err}`);
     })
 }
-//Adding a company employee
+
 /*
-function companyWorker()
-{
+const deleteCompanyWorker=(req,res)=>{
+    CompanyWorker.deleteOne({mail: req.params.mail }).then(companyWorker=>{
+        res.send("success to dalete")
+    }).catch(err=>{
+        console.log(`can not delete this worker! ${err}`);
+    })
 
 }
 */
-
 module.exports={addCompanyWorker}
