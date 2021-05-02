@@ -12,6 +12,9 @@ router.get('/homePage',(req,res)=>{
 router.get('/editProfile',(req,res)=>{
     res.render('../views/employerEditProfile')
 });
+router.get('/search',(req,res)=>{
+    res.render('../views/employerSearch')
+});
 
 module.exports=router
 
