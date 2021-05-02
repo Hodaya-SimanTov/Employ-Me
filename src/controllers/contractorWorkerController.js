@@ -47,17 +47,17 @@ const addContractorWorker=(req,res)=>{
     })   
 }
 
-const loginUser=(req,res)=>{
-    ContractorWorker.findById(req.params.mail).then(contractorWorker=>{
-        console.log("in login");
-        const token=jwt.sign({mail: contractorWorker.mail, password: contractorWorker.password}, process.env.SECRET);
-        res.send(token);
-    }).catch(err=>{
-        console.log(err);
-    })
+// const loginUser=(req,res)=>{
+//     ContractorWorker.findById(req.params.mail).then(contractorWorker=>{
+//         console.log("in login");
+//         const token=jwt.sign({mail: contractorWorker.mail, password: contractorWorker.password}, process.env.SECRET);
+//         res.send(token);
+//     }).catch(err=>{
+//         console.log(err);
+//     })
 
 
-}
+// }
 
 
 const loginUser=(req,res)=>{
