@@ -2,13 +2,14 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="UTF-8">
-        <title>Sign Up As | Employer</title>
+        <title>SignUp As-Employer</title>
         <link rel="stylesheet" href="/css/styleEmployerSignUp1.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <div class="container">
             <div class="title">Employer-Registration</div>
+<<<<<<< HEAD
             <from class="model-content animate" action='/employer/addEmployer' method='POST' id='addEmployer'>
                 <div class="user-details">
                     <div class="input-box">
@@ -34,6 +35,33 @@
                     <div class="input-box">
                         <span class="details">Password*</span>
                         <input type="password" placeholder="Password" required>
+=======
+            <form class="model-content animate" action="/employer/addEmployer" method="POST">
+                <div class="user-details">
+                    <div class="input-box">
+                        <span class="details">First Name*</span>
+                        <input type="text" placeholder="First name" name="firstName" id="firstName" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Last Name*</span>
+                        <input type="text" placeholder="Last name" name="lastName" id="lastName" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Phone*</span>
+                        <input type="number" placeholder="Phone number" name="phone" id="phone" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Email*</span>
+                        <input type="email" placeholder="example@example.com" name="email" id="email" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Company*</span>
+                        <input type="text" placeholder="Company name" name="companyName" id="companyName" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Password*</span>
+                        <input type="password" placeholder="Password" name="password" id="password" required>
+>>>>>>> 43548e8269048aa769e0d17a3264fd28ad84694c
                     </div>
                     <div class="input-box">
                         <span class="details">Re-Password*</span>
@@ -41,12 +69,16 @@
                     </div>
                     <div class="input-box">
                         <span class="details">Role</span>
+<<<<<<< HEAD
                         <input type="text" placeholder="Role" required>
+=======
+                        <input type="text" placeholder="Role" name="role" id="role">
+>>>>>>> 43548e8269048aa769e0d17a3264fd28ad84694c
                     </div>
                 </div>
                 <lable>* Mandatory fields</lable>
                 <div class="button">
-                    <input type="submit" value="Register" onclick="signup()">
+                    <input type="submit" value="Register">
                 </div>
                 <div class='login'>
                     <p> Already have account? <a href="/login"> Login</a></p>

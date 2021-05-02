@@ -6,12 +6,11 @@
     font-family: 'Poppins',sans-serif;  
 }
 body{
-    display:flex;
+    display: flex;
     height: 100vh;
     justify-content: left;
     align-items: left;
     padding: 10px;
-      
 }
 .container{
     max-width: 600px;
@@ -44,8 +43,29 @@ body{
 }
 form .user-details .input-box{
     margin-bottom: 15px;
-    width: 45%; 
-    margin: 0  5px;
+    width: 45%;  
+    margin: 0 5px;
+}
+.user-details .button1{
+    margin-bottom: 15px;
+    width: 45%;  
+    margin: 0 5px;
+    padding-top: 27px;
+}
+.user-details .button1 input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    color: #fff;
+    border: none;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    background-color: #989a9b;   
+}
+.user-details .button1 input:hover{
+    background-color: #ebd264
 }
 .user-details .input-box .details{
     display: block;
@@ -58,7 +78,7 @@ form .user-details .input-box{
     outline: none;
     border-radius: 5px;
     border: 1px solid #ccc;
-    padding-left: 5px;
+    padding-left: 10px;
     font-size: 13px;
     border-bottom-width: 2px;
     transition: all 0.3s ease;
@@ -67,6 +87,7 @@ form .user-details .input-box{
 .user-details .input-box input:focus{
     border-color: #e6d171
 }
+
 form .button{
     height: 39px;
     margin: 39px 0;
@@ -86,4 +107,3 @@ form .button input{
 form .button input:hover{
     background: linear-gradient(-135deg, #71b7e6, #e6d171)
 }
-

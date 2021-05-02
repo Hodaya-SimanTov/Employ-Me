@@ -35,30 +35,33 @@
 	font-family: 'Roboto', sans-serif;
 	transition: .4s;
 }
-.navbar ul li a.active, .navbar ul li a:hover{
+.navbar ul li a.active,
+.navbar ul li a:hover{
 	background: rgb(247, 250, 94);
 	border-radius: 2px;
 }
 .wrapper .center{
 	position: absolute;
-	top: 35%;
-	left: 25%;
+	top: 25%;
+	left: 40%;
 	transform: translate(-50%, -50%);
 	font-family: sans-serif;
 	user-select: none;
 }
 .center h1{
 	color: rgb(38, 12, 85);
-	font-size: 35px;
+	font-size: 25px;
 	font-weight: bold;
 	width: 900px;
-	text-align: center;
+	text-align: left;
 }
 .center h2{
 	color: rgb(38, 12, 85);
-	font-size: 25px;
+	font-size: 15px;
 	font-weight: bold;
-	width: 895px;
+	width: 900px;
 	margin-top: 10px;
-	text-align: center;
+	text-align: left;
+	margin-top: 10px;
 }
+

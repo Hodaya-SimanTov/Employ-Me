@@ -37,7 +37,7 @@ const Employer=mongoose.model('Employer',new mongoose.Schema({
         minlength:6,
         maxlength: 128
     },
-    rule:{
+    role:{
         type:String,
         default:0
     } 
@@ -50,7 +50,7 @@ function validateEmployer(employer) {
         email: Joi.string().min(5).max(100).required().email(),
         companyName: Joi.string().required(),
         password: Joi.string().min(6).max(128).required(),
-        rule: Joi.string().default(0)
+        //role: Joi.string().default(0)
     });
     return  schema.validate(employer);
 }

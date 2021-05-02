@@ -26,8 +26,12 @@ mongoose.connect(process.env.CONNECT_DB, {connectionParams})
     }).catch((err) =>{
         console.log(`error connecting ${err}`);
 })
+app.get('/',(req,res)=>{
+    res.render('homePage1')
+});
 
 app.use(express.json());
+app.use(express.urlencoded({extend:false}));
 app.use(express.static('public'))
 app.set('view engine','ejs')
 

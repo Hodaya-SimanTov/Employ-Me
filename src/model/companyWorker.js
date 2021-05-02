@@ -10,10 +10,6 @@ const CompanyWorkerSchema=mongoose.Schema({
         type:String,
         require:true
     },
-    mail:{
-        type:String,
-        require:true
-    },
     phone:{
         type:String,
         require:true
