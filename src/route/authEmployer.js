@@ -5,7 +5,6 @@ const _ = require('lodash');
 const { Employer } = require('../model/employer');
 const express = require('express');
 const router = express.Router();
-//const config = require('config');
 
 router.post('/', async (req, res) => {
     // First Validate The HTTP Request

@@ -1,6 +1,6 @@
 const ContractorWorker=require('../model/contractorWorker')
 const nodemailer=require('nodemailer')
-
+const jwt = require('jsonwebtoken')
 
 function sendmail(email, name) {
     console.log(email)
@@ -33,15 +33,41 @@ function sendmail(email, name) {
 
 
 const addContractorWorker=(req,res)=>{
+    console.log(req.body);
     const newContractorWorker=new ContractorWorker(req.body)
     newContractorWorker.save().then(contractorWorker =>{
-        sendmail(contractorWorker.mail,contractorWorker.firstName)//שולח מייל בהרשמה
-        res.send("success to add")
-
+        //sendmail(contractorWorker.mail,contractorWorker.firstName)//שולח מייל בהרשמה
+        //res.send("success to add")
+        //res.json({contractorWorker:contractorWorker})
+        console.log("add conrtactor");
+        res.redirect('/contractorWorker/contractorHomepage');
+        
     }).catch(err=>{
         console.log(`can not add this worker! ${err}`);
+    })   
+}
+
+const loginUser=(req,res)=>{
+    ContractorWorker.findById(req.params.mail).then(contractorWorker=>{
+        console.log("in login");
+        const token=jwt.sign({mail: contractorWorker.mail, password: contractorWorker.password}, process.env.SECRET);
+        res.send(token);
+    }).catch(err=>{
+        console.log(err);
     })
 
+
+}
+
+
+const loginUser=(req,res)=>{
+    ContractorWorker.findOne({ mail: req.body.mail }).then(ContractorWorker=>{
+        console.log("in login");
+        const token=jwt.sign({mail: ContractorWorker.mail, password: ContractorWorker.password}, process.env.SECRET);
+        res.send(token);
+    }).catch(err=>{
+        console.log(err);
+    })
 }
 
 const getContractorWorkerById=(req,res)=>{
@@ -52,7 +78,6 @@ const getContractorWorkerById=(req,res)=>{
     }).catch(err=>{
         console.log(`can not get this worker! ${err}`);
     })
-    
 }
 
 const getContractorWorkerByMail=(req,res)=>{
@@ -63,7 +88,6 @@ const getContractorWorkerByMail=(req,res)=>{
     }).catch(err=>{
         console.log(`can not get this worker! ${err}`);
     })
-    
 }
 
 const getAllContractorWorkers=(req,res)=>{
@@ -109,4 +133,4 @@ const deleteContractorWorkerById=(req,res)=>{
 
 
 module.exports={addContractorWorker,getContractorWorkerById,updateContractorWorkerById,deleteContractorWorkerById
-    ,getAllContractorWorkers,getContractorWorkerByMail,updateContractorWorkerByMail}
+    ,getAllContractorWorkers,getContractorWorkerByMail,updateContractorWorkerByMail,loginUser}
