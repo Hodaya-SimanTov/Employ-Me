@@ -40,7 +40,8 @@
     "mongoose": "^5.12.7",
     "mongoose-intl-phone-number": "^1.1.1",
     "nodemailer": "^6.5.0",
-    "nodemod": "^2.7.2"
+    "nodemod": "^2.7.2",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "@types/chai": "^4.2.15",
