@@ -1,16 +1,9 @@
 const jwt = require('jsonwebtoken');
-<<<<<<< HEAD
 
 
 const bcrypt = require('bcrypt');
 const { Employer, validate,validateEditEmployer } = require('../model/employer');
 
-//const bcrypt = require('bcrypt');
-
-=======
-const bcrypt = require('bcrypt');
-const { Employer, validate,validateEditEmployer } = require('../model/employer');
->>>>>>> 8d2082756805233272c3e8024136cae32cff28f7
 const express = require('express');
 const router = express.Router();
 const _ = require('lodash');
@@ -71,13 +64,7 @@ const editProfile=async (req, res) => {
     let employer= await Employer.findOneAndUpdate({email: req.params.email}, req.body, {new: true });
     res.redirect('/employer/homePage');
 }
-<<<<<<< HEAD
-module.exports={addEmployer,getEmployerByEmail,editProfileDisplay,editProfile}
 
 
-module.exports={addEmployer}
 
-=======
 module.exports={addEmployer,getEmployerByEmail,editProfileDisplay,editProfile};
-
->>>>>>> 8d2082756805233272c3e8024136cae32cff28f7
