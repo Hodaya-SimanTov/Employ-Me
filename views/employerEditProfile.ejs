@@ -13,11 +13,7 @@
                 <div class="user-details">
                     <div class="input-box" data-error="Error message">
                         <span class="details">First Name</span>
-<<<<<<< HEAD
                         <input type="text" class="input" id="firstName" name="firstName"   value=<%=firstName%>>
-=======
-                        <kt="text" placeholder="First name">
->>>>>>> c19e33e0830956dfdc69d170b5255bc2c4fd2128
                     </div>
                     <div class="input-box" data-error="Error message" >
                         <span class="details">Last Name</span>
@@ -56,7 +52,6 @@
  
        document.querySelectorAll('.input-box[data-error] .input').forEach(inpEl=>{
            inpEl.addEventListener('input',()=>inpEl.parentElement.removeAttribute('data-error'));
-           console.log('I am this');
        });
        firstName.parentElement.removeAttribute('data-error');
        lastName.parentElement.removeAttribute('data-error');
@@ -69,6 +64,7 @@
             const phoneValue=phone.value.trim();
             const companyNameValue=companyName.value.trim();
             const roleValue=role.value.trim();
+        
             const flag=0;
             if(firstNameValue==""){
                 firstName.parentElement.setAttribute('data-error','First name can not be empty');
@@ -102,6 +98,9 @@
                 companyName.parentElement.setAttribute('data-error','Company name can not be empty');
                 flag=1;
             }
+            if(roleValue=="")  {
+                role.setAttribute("value","  ");
+            }   
             if(flag==0){
                 document.getElementById("form").submit();
             }
