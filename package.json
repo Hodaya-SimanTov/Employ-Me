@@ -27,11 +27,8 @@
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "config": "^3.3.6",
-<<<<<<< HEAD
     "data-parser": "^1.0.1",
-=======
     "date-and-time": "^1.0.0",
->>>>>>> c19e33e0830956dfdc69d170b5255bc2c4fd2128
     "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
