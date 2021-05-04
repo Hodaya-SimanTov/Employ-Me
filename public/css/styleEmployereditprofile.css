@@ -61,6 +61,7 @@ form .user-details .input-box{
     font-size: 13px;
     font-weight: 500;
     border-radius: 5px;
+    text-align: center;
     letter-spacing: 1px;
     background-color: #989a9b;   
 }
@@ -83,6 +84,22 @@ form .user-details .input-box{
     border-bottom-width: 2px;
     transition: all 0.3s ease;
 }
+.input-box.error input{
+    border-color: #c92432;
+}
+
+.user-details .input-box[data-error] .input{
+    border-color: #c92432;
+    color:#c92432;
+
+}
+.user-details .input-box[data-error]::after{
+    content: attr(data-error);
+    font-size: 0.80em;
+    color:#c92432;
+    display: block;
+    margin: 10px 0;
+}
 
 .user-details .input-box input:focus{
     border-color: #e6d171
@@ -102,8 +119,12 @@ form .button input{
     font-weight: 500;
     border-radius: 5px;
     letter-spacing: 1px;
+    text-align: center;
     background: linear-gradient(135deg, #71b7e6, #e6d171)
 }
 form .button input:hover{
     background: linear-gradient(-135deg, #71b7e6, #e6d171)
 }
+/* .input{
+    transition: background 0.2s, border 0.2s;
+} */
