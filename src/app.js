@@ -62,10 +62,7 @@ app.use('/companyWorker',apiCompanyWorker)
 // app.use('/api/authEmployer', authEmployer);
 
 const port = process.env.PORT
-app.listen(port,()=>{
-    var s=new Date("4/5/2020");
-    var d=Date.parse("March 21, 2012");
-    console.log(s);
+app.listen(port,()=>{    
     console.log(`\nserver is up and running at: http://127.0.0.1:${port}\n` )
 })
 
