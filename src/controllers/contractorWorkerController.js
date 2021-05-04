@@ -46,7 +46,6 @@ const addContractorWorker=(req,res)=>{
     })   
 }
 
-<<<<<<< HEAD
 // const loginUser=(req,res)=>{
 //     ContractorWorker.findById(req.params.mail).then(contractorWorker=>{
 //         console.log("in login");
@@ -58,7 +57,7 @@ const addContractorWorker=(req,res)=>{
 
 
 // }
-=======
+
 const addUnavailabilityArray=(contractor_id)=>{
     const newUnavailability=new Unavailability({contractorId:contractor_id})
     newUnavailability.save().then(unavailability =>{
@@ -120,7 +119,7 @@ const addDateToUnavailabilityarray=(idArray,startDate,endDate)=>{// בהנחה �
         }
     }
 }
->>>>>>> efe46320dd0566e2b672b04b68d37b4f5b9024f2
+
 
 
 //-פונקציה לחיפוש עובד בתאריך מסויים - רק התחלה

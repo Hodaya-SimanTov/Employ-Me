@@ -4,19 +4,20 @@
 	margin: 0;
 }
 .wrapper{
-	background: url('images/emlogo1.PNG') no-repeat;
+	/* background: url('images/pic.png') no-repeat; */
 	background-size: cover;
 	height: 100vh;
 }
 .navbar{
-	height: 80px;
+	height: 60px;
 	width: 100%;
-	background: rgb(255, 255, 255);
+	background: #fff;
 }
 .logo{
 	width: 230px;
-	height: 73px;
-	padding: 5px 50px;
+	height: 60px;
+	margin-left: 10px;
+	/* padding: 5px 50px; */
 }
 .navbar ul{
 	float: right;
@@ -37,31 +38,38 @@
 }
 .navbar ul li a.active,
 .navbar ul li a:hover{
-	background: rgb(247, 250, 94);
+	background: rgb(244, 247, 105);
 	border-radius: 2px;
 }
-.wrapper .center{
+.container{
+	background: url('images/homeBackground.PNG') no-repeat;
+	background-size: cover;
+	height: 100%;
+	opacity: 0.9;
+}
+/* .wrapper .center{
 	position: absolute;
 	top: 25%;
 	left: 40%;
 	transform: translate(-50%, -50%);
 	font-family: sans-serif;
 	user-select: none;
-}
-.center h1{
-	color: rgb(38, 12, 85);
-	font-size: 25px;
+	background: rgba(255, 255, 255, 0.808);
+	border-radius: 15px;
+} */
+/* .center h1{
+	color: rgb(37, 8, 167);
+	font-size: 35px;
 	font-weight: bold;
 	width: 900px;
 	text-align: left;
 }
 .center h2{
-	color: rgb(38, 12, 85);
-	font-size: 15px;
+	color: rgb(37, 8, 167);
+	font-size: 20px;
 	font-weight: bold;
 	width: 900px;
-	margin-top: 10px;
+	margin-top: 0px;
 	text-align: left;
-	margin-top: 10px;
-}
+} */
 
