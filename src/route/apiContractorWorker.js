@@ -18,8 +18,6 @@ router.get('/login',(req,res)=>{
 
 
 
-
-
 router.post('/addContractorWorker',contractorWorker.addContractorWorker);
 router.get('/getContractorWorkerById/:id',contractorWorker.getContractorWorkerById);
 router.get('/getContractorWorkerByMail/:mail',contractorWorker.getContractorWorkerByMail);
@@ -28,6 +26,9 @@ router.patch('/updateContractorWorkerById/:id',contractorWorker.updateContractor
 router.patch('/updateContractorWorkerMail/:mail',contractorWorker.updateContractorWorkerByMail);
 router.delete('/deleteContractorWorkerById/:id',contractorWorker.deleteContractorWorkerById);
 router.get('/loginUser/:mail',contractorWorker.loginUser);
+
+router.patch('/addUn/:id',contractorWorker.addUn)
+
 
 
 module.exports=router

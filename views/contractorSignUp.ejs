@@ -9,12 +9,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
         
-        <!-- The core Firebase JS SDK is always required and must be listed first
-        <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-auth.js"></script>
-        TODO: Add SDKs for Firebase products that you want to use
-                https://firebase.google.com/docs/web/setup#available-libraries 
-        <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-analytics.js"></script> --> 
     </haed>
     <body>
         <div class="model">
@@ -108,29 +102,29 @@
     </body>
 
     <script type='text/javascript'>
-    // function signup(){ 
-    //     var name=document.getElementById("firstName").value;
-    //     var pass=document.getElementById("password").value;
-    //     var rePass=document.getElementById("rePassword").value;
-    //     console.log(name);
-    //     if(!/^[a-zA-Z]+$/.test(name))
-    //         alert('Name is invalid');
-    //     else{
-    //         if (pass.length <6)
-    //             alert('Password is invalid,\npassword must contain at least 6 characters');
-    //         else {
-    //             if(rePass==""){
-    //                 alert('Please confirm the password');
-    //             }
-    //             else{
-    //                 if(rePass!=pass){
-    //                     alert("Invalid password verification");
-    //                 }
-    //             }
-    //         }
-    //     }
+    function signup(){ 
+        var name=document.getElementById("firstName").value;
+        var pass=document.getElementById("password").value;
+        var rePass=document.getElementById("rePassword").value;
+        console.log(name);
+        if(!/^[a-zA-Z]+$/.test(name))
+            alert('Name is invalid');
+        else{
+            if (pass.length <6)
+                alert('Password is invalid,\npassword must contain at least 6 characters');
+            else {
+                if(rePass==""){
+                    alert('Please confirm the password');
+                }
+                else{
+                    if(rePass!=pass){
+                        alert("Invalid password verification");
+                    }
+                }
+            }
+        }
 
-    // }            
+    }            
 </script>
   
 </html>
