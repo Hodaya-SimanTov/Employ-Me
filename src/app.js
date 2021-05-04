@@ -13,6 +13,7 @@ const apiCompanyWorker=require('./route/apiCompanyWorker')
 
 
 const Joi = require('joi');
+const { date } = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
 //const authEmployer = require('./route/authEmployer');
 
@@ -60,9 +61,8 @@ app.use('/companyWorker',apiCompanyWorker)
 
 // app.use('/api/authEmployer', authEmployer);
 
-
 const port = process.env.PORT
-app.listen(port,()=>{
+app.listen(port,()=>{    
     console.log(`\nserver is up and running at: http://127.0.0.1:${port}\n` )
 })
 

@@ -1,3 +1,4 @@
+const { Double } = require('bson')
 const mongoose=require('mongoose')
 
 const ContractorWorkerSchema=mongoose.Schema({
@@ -43,7 +44,7 @@ const ContractorWorkerSchema=mongoose.Schema({
         default:0
     },
     hourlyWage:{//שכר שעתי
-        type:String,
+        type:Number,
         require:false,
         default:0
     },
@@ -51,6 +52,10 @@ const ContractorWorkerSchema=mongoose.Schema({
         type:String,
         require:true,
         minlength:6
+    },
+    unavailability:{
+        type:mongoose.Types.ObjectId,
+        ref:"UnavailabilityContractor"
     }
 })
 
