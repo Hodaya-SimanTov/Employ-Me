@@ -19,18 +19,21 @@
                 </ul>
             </nav>
             <div class="container">
+                <div class="headline">Search contractors</div>
                 <form class=search>
                     <div class="clr"></div>
                     <div class=date>
-                        <lable>Select Employment Date*</lable>
+                        <lable class="title">Select Employment Date*</lable>
+                        <br>
                         <input type="date" name="Employment Date">
                     </div>
                     <br>
                     <div class=occupation>
                         <lable>Select Occupation Area*</lable>
+                        <br>
                         <select name="Occupation">
                             <option value="biotechnology">Biotechnology</option>
-                            <option value="Cleaning">Cleaning</option>
+                            <option value="cleaning">Cleaning</option>
                             <option value="customer service">Customer Service</option>
                             <option value="digital">Digital</option>
                             <option value="financial">Financial</option>
@@ -48,11 +51,10 @@
                             <option value="other">Other</option>
                         </select>
                     </div>
-                    <hr>
-                    <br>
                     <br>
                     <div class="serviceArea">
                         <lable>Select Service Area</lable>
+                        <br>
                         <select name="service">
                             <option value="north">North</option>
                             <option value="south">South</option>
@@ -64,6 +66,7 @@
                     <br>
                     <div class="jobScope">
                         <lable>Select Hour Job Scope</lable>
+                        <br>
                         <select name="scope">
                             <option value="threeToSix">3-6</option>
                             <option value="sixToEight">6-8</option>
@@ -73,6 +76,7 @@
                     </div>
                     <div class="experienceYears">
                         <lable>Select Years Of Experience</lable>
+                        <br>
                         <select name="experience">
                             <option value="oneToFive">1-5 Years</option>
                             <option value="fiveToTen">5-10 Years</option>
@@ -83,7 +87,100 @@
                     <div class="button">
                         <input type="submit" value="Search Contractors">
                     </div> 
+                    <br>
                 </form>
             </div>
     </body>
 </html>
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Employer-Search</title>
+        <link rel="stylesheet" href="/css/styleEmployerSignUp1.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <nav class="navbar">
+            <img class="logo" src="/css/images/logo.PNG">
+            <ul>
+                <li><a class="active" href="#">My Profile</a> </li>
+                <li><a href="#">Search</a> </li>
+                <li><a href="#">Info & Statistics</a> </li>
+                <li><a href="#">Confirm Employments</a> </li>
+                <li><a href="#">History</a> </li>
+                <li><a href="#">Favorites</a> </li>
+                <li><a href="#">Log Out</a> </li>
+            </ul>
+        </nav>>
+        <div class="container">
+            <div class="title">Search Contractors</div>
+            <form class="search" action="/employer/addEmployer" method="POST">
+                <div class="search-details">
+                    <div class=date>
+                        <lable>Select Employment Date*</lable>
+                        <input type="date" name="Employment Date">
+                    </div>
+                    <div class=searchFields>
+                        <lable>Select Occupation Area*</lable>
+                        <select name="Occupation">
+                            <option value="biotechnology">Biotechnology</option>
+                            <option value="cleaning">Cleaning</option>
+                            <option value="customer service">Customer Service</option>
+                            <option value="digital">Digital</option>
+                            <option value="financial">Financial</option>
+                            <option value="high tech">High Tech</option>
+                            <option value="human resources">Human Resources</option>
+                            <option value="insurance">Insurance</option>
+                            <option value="marketing">Marketing</option>
+                            <option value="offices">Offices</option>
+                            <option value="operation and logistics">Operation and Logistics</option>
+                            <option value="production workers">Prodection Workers</option>
+                            <option value="renovations">Renovations</option>
+                            <option value="sales">Sales</option>
+                            <option value="technical">Technical</option>
+                            <option value="waitresses">Waitresses</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="searchFields">
+                        <lable>Select Service Area</lable>
+                        <select name="service">
+                            <option value="north">North</option>
+                            <option value="south">South</option>
+                            <option value="jerusalen area">Jerusalem Area</option>
+                            <option value="dan area">Dan Area</option>
+                            <option value="galilee">Galilee</option>    
+                        </select>
+                    </div>
+                    <div class="searchFields">
+                        <lable>Select Hour Job Scope</lable>
+                        <select name="scope">
+                            <option value="threeToSix">3-6</option>
+                            <option value="sixToEight">6-8</option>
+                            <option value="eightToTen">8-10</option>
+                            <option value="tenToTwelve">10-12</option>   
+                        </select>
+                    </div>
+                    <div class="searchFields">
+                        <lable>Select Years Of Experience</lable>
+                        <select name="experience">
+                            <option value="oneToFive">1-5 Years</option>
+                            <option value="fiveToTen">5-10 Years</option>
+                            <option value="tenToFifteen">10-15 Years</option>
+                            <option value="overFifteen">Over 15 Years</option>   
+                        </select>
+                    </div>
+                </div>
+                <div class="button">
+                    <input type="submit" value="Search Contractors">
+                </div> 
+            </form>
+        </div>
+    </body>  
+</html>
+ -->
+
