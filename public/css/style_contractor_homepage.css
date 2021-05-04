@@ -12,6 +12,7 @@
         background:  #031152;
         height: 80px;
         width: 100%;
+        
     }
     label.logo{
         background: url(images/logo.PNG) no-repeat;
@@ -24,6 +25,7 @@
     nav ul{
         float: right;
         margin-right: 20px;
+        
     }
     nav ul li{
         display: inline-block;

@@ -1,19 +1,30 @@
+ 
 const express = require('express')
 const app = express()
+const path=require('path');
 const dotenv=require('dotenv')
-dotenv.config()
+dotenv.config({path:'.env'})
 const bodyParser=require('body-parser')
-
 const mongoose=require('mongoose')
 
 const apiEmployer=require('./route/apiEmployer')
 const apiContractorWorker=require('./route/apiContractorWorker')
 const apiCompanyWorker=require('./route/apiCompanyWorker')
 
+
 const Joi = require('joi');
+const { date } = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
 //const authEmployer = require('./route/authEmployer');
-app.use(bodyParser.json());
+
+//app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.json());
+app.use(express.static('public'))
+app.set('view engine','ejs')
+
+
+
 const connectionParams={
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -33,7 +44,13 @@ app.get('/',(req,res)=>{
 app.use(express.json());
 app.use(express.urlencoded({extend:false}));
 app.use(express.static('public'))
-app.set('view engine','ejs')
+app.use('/css', express.static(__dirname + 'public/css'))
+app.use('/js', express.static(__dirname + 'public/js'))
+app.use('/imgages', express.static(__dirname + 'public/imgages'))
+
+app.get('/',(req,res)=>{
+    res.render('contractorSignUp')        
+});
 
 //app.use(express.urlencoded({extended:false}))
 
@@ -44,8 +61,8 @@ app.use('/companyWorker',apiCompanyWorker)
 
 // app.use('/api/authEmployer', authEmployer);
 
-const port = process.env.PORT 
-app.listen(port,()=>{
-    console.log(`server is up and running at: http://127.0.0.1:${port}` )
+const port = process.env.PORT
+app.listen(port,()=>{    
+    console.log(`\nserver is up and running at: http://127.0.0.1:${port}\n` )
 })
 

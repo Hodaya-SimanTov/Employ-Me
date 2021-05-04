@@ -1,6 +1,7 @@
 const ContractorWorker=require('../model/contractorWorker')
+const Unavailability=require('../model/UnavailabilityContractor')
 const nodemailer=require('nodemailer')
-
+const jwt = require('jsonwebtoken')
 
 function sendmail(email, name) {
     console.log(email)
@@ -33,13 +34,124 @@ function sendmail(email, name) {
 
 
 const addContractorWorker=(req,res)=>{
+    console.log(req.body);
     const newContractorWorker=new ContractorWorker(req.body)
     newContractorWorker.save().then(contractorWorker =>{
-        sendmail(contractorWorker.mail,contractorWorker.firstName)//שולח מייל בהרשמה
-        res.send("success to add")
-
+        //sendmail(contractorWorker.mail,contractorWorker.firstName)//שולח מייל בהרשמה
+        console.log("add conrtactor");
+        addUnavailabilityArray(contractorWorker._id)//הוספת מערך חופשות ריק      
+        res.redirect('/contractorWorker/contractorHomepage');        
     }).catch(err=>{
         console.log(`can not add this worker! ${err}`);
+    })   
+}
+
+<<<<<<< HEAD
+// const loginUser=(req,res)=>{
+//     ContractorWorker.findById(req.params.mail).then(contractorWorker=>{
+//         console.log("in login");
+//         const token=jwt.sign({mail: contractorWorker.mail, password: contractorWorker.password}, process.env.SECRET);
+//         res.send(token);
+//     }).catch(err=>{
+//         console.log(err);
+//     })
+
+
+// }
+=======
+const addUnavailabilityArray=(contractor_id)=>{
+    const newUnavailability=new Unavailability({contractorId:contractor_id})
+    newUnavailability.save().then(unavailability =>{
+        console.log("add new unavailability object");    
+        ContractorWorker.findByIdAndUpdate(contractor_id, {unavailability:unavailability._id})
+        .then(()=>{ 
+            console.log("add unavailability array to contractor");
+        }).catch(err=>{
+            console.log(err);
+        })
+    }).catch(err=>{
+        console.log(`can not add this unavailability! ${err}`);
+    })   
+}
+
+//מקבלת תאריך בודד ומוסיפה אותו למערך שבאובייקט אי זמינות
+const addDateToArray=(idArray,year,month,day)=>{
+    const d=new Date(year,month,day);
+    Unavailability.findByIdAndUpdate(idArray, {$push:{'unavailabArray':d}})
+    .then(()=>{ 
+        console.log("add date to array contractor");
+    }).catch(err=>{
+        console.log(err);
+    })
+}
+
+const addUn=(req,res)=>{//פונקציה מפעילה את הכל- מקבלת בניתוב אידי של אי זמינות
+    addDateToUnavailabilityarray(req.params.id,req.body.start,req.body.end);   
+}
+
+
+//מקבל תאריך התחלה וסוף ומוסיף את כל הימים האלו למערך החופשות של העובד
+const addDateToUnavailabilityarray=(idArray,startDate,endDate)=>{// בהנחה שהתאריכים עוקבים
+    var m=[31,29,31,30,31,30,31,31,30,31,30,31];
+    var i; 
+    var s=new Date(startDate);
+    var e=new Date(endDate);   
+    var start=s.getDate();//מחזיר את היום 1-31
+    //console.log("s: "+start);
+    var end=e.getDate();
+    //console.log("e: "+end);
+    //console.log("month: "+e.getMonth() );   
+    //console.log("month: "+s.getMonth() ); 
+    if(s.getMonth()!=e.getMonth()){
+        
+        for(i=start+1;i<=m[s.getMonth()];i++){
+            addDateToArray(idArray,s.getFullYear(),s.getMonth(),i);
+            //console.log("if first for "+i);            
+        }
+        for(i=1;i<=end+1;i++){
+            addDateToArray(idArray,s.getFullYear(),e.getMonth(),i);
+            //console.log("if second for "+i); 
+        }
+    }
+    else{
+        for(i=start+1;i<=end+1;i++){
+            addDateToArray(idArray,s.getFullYear(),s.getMonth(),i);
+            //console.log("if 3 for "+i); 
+        }
+    }
+}
+>>>>>>> efe46320dd0566e2b672b04b68d37b4f5b9024f2
+
+
+//-פונקציה לחיפוש עובד בתאריך מסויים - רק התחלה
+// const findContractorInSpecDate=(req,res)=>{
+//     Unavailability.findOne({ unavailability: { $elemMatch: { $eq:req.body.date } } }).then(unavailability=>{  
+//         //לבדוק עם התאריך קיים במערך אם לא לקחת את האידי של העובד ולהחזיר אותו כי הוא פנוי
+//     }).catch(err=>{
+//         console.log(err);
+//     })
+// }
+
+// const loginUser=(req,res)=>{
+//     ContractorWorker.findById(req.params.mail).then(contractorWorker=>{
+//         console.log("in login");
+//         const token=jwt.sign({mail: contractorWorker.mail, password: contractorWorker.password}, process.env.SECRET);
+//         res.send(token);
+//     }).catch(err=>{
+//         console.log(err);
+//     })
+
+
+// }
+
+
+const loginUser=(req,res)=>{
+    ContractorWorker.findOne({ mail: req.body.mail }).then(ContractorWorker=>{
+        console.log("in login");
+        const token=jwt.sign({mail: ContractorWorker.mail, password: ContractorWorker.password}, process.env.SECRET);
+        res.send(token);
+    }).catch(err=>{
+        console.log(err);
     })
 }
 
@@ -106,4 +218,5 @@ const deleteContractorWorkerById=(req,res)=>{
 
 
 module.exports={addContractorWorker,getContractorWorkerById,updateContractorWorkerById,deleteContractorWorkerById
-    ,getAllContractorWorkers,getContractorWorkerByMail,updateContractorWorkerByMail}
+    ,getAllContractorWorkers,getContractorWorkerByMail,updateContractorWorkerByMail,loginUser,addDateToUnavailabilityarray,addUn};
+

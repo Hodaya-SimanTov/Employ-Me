@@ -1,3 +1,4 @@
+const { Double } = require('bson')
 const mongoose=require('mongoose')
 
 const ContractorWorkerSchema=mongoose.Schema({
@@ -10,12 +11,8 @@ const ContractorWorkerSchema=mongoose.Schema({
         type:String,
         require:true
     },
-    id:{
-        type:String,
-        require:true
-    },
     birthday:{
-        type:String,
+        type:Date,
         require:true
     },
     mail:{
@@ -28,28 +25,39 @@ const ContractorWorkerSchema=mongoose.Schema({
     },
     occupationArea:{//תחום עיסוק
         type:String,
-        require:true
+        require:false,
+        default:0
     },
     experienceField:{//ניסיון בתחום
         type:String,
-        require:true
+        require:false,
+        default:0
     },
     serviceArea:{//איזור שירות
         type:String,
-        require:true
+        require:false,
+        default:0
     },
     scopeWork:{//היקף משרה
         type:String,
-        require:true
+        require:false,
+        default:0
     },
     hourlyWage:{//שכר שעתי
-        type:String,
+        type:Number,
+        require:false,
+        default:0
     },
     password:{
         type:String,
         require:true,
         minlength:6
+    },
+    unavailability:{
+        type:mongoose.Types.ObjectId,
+        ref:"UnavailabilityContractor"
     }
 })
 
 module.exports=mongoose.model('ContractorWorker',ContractorWorkerSchema)
+

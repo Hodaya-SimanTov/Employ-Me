@@ -1,6 +1,8 @@
 const CompanyWorker=require('../model/companyWorker')
 const nodeMailer=require('nodemailer')
 const companyWorker = require('../model/companyWorker')
+const router = require("../route/apiEmployer");
+
 
 const addCompanyWorker=(req,res)=>{
     const newComapnyWorker=new companyWorker(req.body)
@@ -12,12 +14,15 @@ const addCompanyWorker=(req,res)=>{
         console.log(`can not add this worker! ${err}`);
     })
 }
-//Adding a company employee
+//חישוב שכר
+
 /*
-function companyWorker()
-{
-
+const deleteCompanyWorker=(req,res)=>{
+    CompanyWorker.deleteOne({mail: req.params.mail }).then(companyWorker=>{
+        res.send("success to dalete")
+    }).catch(err=>{
+        console.log(`can not delete this worker! ${err}`);
+    })
 }
-*/
-
+ */
 module.exports={addCompanyWorker}

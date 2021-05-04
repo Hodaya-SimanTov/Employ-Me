@@ -1,0 +1,130 @@
+<html>
+    <haed>
+        <title>
+            Sign Up
+        </title>
+        <link rel="stylesheet" href="/css/style_contractor_sign_up.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        
+    </haed>
+    <body>
+        <div class="model">
+        <div class="container">
+        <form class="model-content animate" action="/contractorWorker/addContractorWorker" method="POST" id="addContractorWorker" >
+            <div class="imgcontainer">
+            <img src="/css/images/user_img.png" class="avatar" />
+            </div>
+            <div class="container">
+            <h1>Sign up</h1>            
+            <hr>   
+            <p>Personal Information:</p>
+             <lable>Fisrt Name</lable>
+            <input type="text" id="firstName" placeholder="Name" name="firstName" required/>
+            <br />
+            <lable>Last Name</lable>
+            <input type="text" id="lastName" placeholder="LastName" name="lastName" required/>
+            <br />
+            <lable>Birthday</lable>
+            <input type="date" id="birthday" placeholder="Birthday" name="birthday" required/>
+            <br />
+            <label>Email</label>
+            <input type="email" id="mail" placeholder="Name@example.com" name="mail" required/>
+            <br />
+            <label>Phone</label>
+            <input type="phone" id="phone" placeholder="Phone" name="phone" required/>
+            <br />
+            <hr>
+            <p>Employment details:</p>
+            <label>Occupation Area</label>
+            <select id="occupationArea" name="occupationArea">
+              <option >Insurance</option>
+              <option >High-tech</option>
+              <option >Technical</option>
+              <option >Finance</option>
+              <option >Human resources</option>
+              <option >Offices</option>
+              <option >Marketing</option>
+              <option >Sales</option>
+              <option >Digital</option>
+              <option >Operations and logistics</option>
+              <option >Biotech</option>
+              <option >Waitresses</option>
+              <option >Cleaning</option>
+              <option >Production workers</option>
+              <option >Customer service</option>
+              <option >Renovations</option>
+              <option >Other</option>
+            </select>
+            <br />
+            <label>Experience Field</label>
+              <select id="experienceField" name="experienceField">
+              <option >1-5 years</option>
+              <option >5-10 years</option>
+              <option >10-15 years</option>
+              <option >Over 15 years</option>
+            </select>
+            <br />
+            <label>Service Area</label>
+            <select id="serviceArea" name="serviceArea">
+              <option >North</option>
+              <option >south</option>
+              <option >lowlands</option>
+              <option >Jerusalem and the surrounding area</option>
+              <option >Dan area</option>
+              <option >Galilee</option>
+            </select>
+            <br />
+            <label>Scope Work</label>
+              <select id="scopeWork" name="scopeWork">
+                <option >3-6</option>
+                <option >6-8</option>
+                <option >8-10</option>
+                <option >10-12</option>
+              </select>
+            <br />
+            <hr>
+            <p>Account details:</p>
+            <lable>Password</lable>
+            <input type="password" id="password" placeholder="Password" name=password required/>
+            <br />
+            <label>Re-Password</label>
+            <input type='password' id='rePassword' placeholder="Re-password"  required/>
+            <button type='submit' class='registerbtn btn-outline-info' onclick="signup()">Sign Up</button>
+        </div>
+        </form>
+        <div class='login'>
+        <p> Alreade have account? <a href="/contractorWorker/login"> Login</a></p>
+        </div>
+    </div>
+    </body>
+
+    <script type='text/javascript'>
+    function signup(){ 
+        var name=document.getElementById("firstName").value;
+        var pass=document.getElementById("password").value;
+        var rePass=document.getElementById("rePassword").value;
+        console.log(name);
+        if(!/^[a-zA-Z]+$/.test(name))
+            alert('Name is invalid');
+        else{
+            if (pass.length <6)
+                alert('Password is invalid,\npassword must contain at least 6 characters');
+            else {
+                if(rePass==""){
+                    alert('Please confirm the password');
+                }
+                else{
+                    if(rePass!=pass){
+                        alert("Invalid password verification");
+                    }
+                }
+            }
+        }
+
+    }            
+</script>
+  
+</html>
