@@ -1,5 +1,5 @@
 const ContractorWorker=require('../model/contractorWorker')
-const Unavailability=require('../model/UnavailabilityContractor')
+const Unavailability=require('../model/unavailabilityContractor')
 const nodemailer=require('nodemailer')
 const jwt = require('jsonwebtoken')
 var mongo=require('mongodb');
