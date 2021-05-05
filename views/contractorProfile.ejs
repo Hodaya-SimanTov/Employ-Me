@@ -1,13 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/style_contractorProfile.css">
-</head>
-<body>
-    <label class="logo">name</label>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Contractor-Profile</title>
+        <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+        <link rel="stylesheet" href="/css/styleContractorProfile.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="container">
+            <div class="title">Edit Your Profile</div>
+            <form action="#">
+                <div class="user-details">
+                    <div class="input-box">
+                        <span class="details">First Name</span>
+                        <input type="text" >
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Last Name</span>
+                        <input type="text" >
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Birthday</span>
+                        <input type="date" name="birthday">
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Mail</span>
+                        <input type="email"  name="mail" >
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Phone</span>
+                        <input type="number" >
+                    </div>
+                    <p>Employment details:</p>
+                    <label>Occupation Area</label>
+                    <select id="occupationArea" name="occupationArea">
+                        <option >Insurance</option>
+                        <option >High-tech</option>
+                        <option >Technical</option>
+                        <option >Finance</option>
+                        <option >Human resources</option>
+                        <option >Offices</option>
+                        <option >Marketing</option>
+                        <option >Sales</option>
+                        <option >Digital</option>
+                        <option >Operations and logistics</option>
+                        <option >Biotech</option>
+                        <option >Waitresses</option>
+                        <option >Cleaning</option>
+                        <option >Production workers</option>
+                        <option >Customer service</option>
+                        <option >Renovations</option>
+                        <option >Other</option>
+                    </select>
+                    <br />
+                    <label>Experience Field</label>
+                    <select id="experienceField" name="experienceField">
+                        <option >1-5 years</option>
+                        <option >5-10 years</option>
+                        <option >10-15 years</option>
+                        <option >Over 15 years</option>
+                    </select>
+                    <br />
+                    <label>Service Area</label>
+                    <select id="serviceArea" name="serviceArea">
+                        <option >North</option>
+                        <option >south</option>
+                        <option >lowlands</option>
+                        <option >Jerusalem and the surrounding area</option>
+                        <option >Dan area</option>
+                        <option >Galilee</option>
+                    </select>
+                    <br />
+                    <label>Scope Work</label>
+                    <select id="scopeWork" name="scopeWork">
+                        <option >3-6</option>
+                        <option >6-8</option>
+                        <option >8-10</option>
+                        <option >10-12</option>
+                    </select>
+                    <div class="input-box">
+                        <span class="details">My hourly wage</span>
+                        <input type="text" readonly/>
+                    </div>
+                    <p>Vacation dates:</p>
+                    <div class="input-box">
+                        <span class="details">Start Vacation</span>
+                        <input type="date"  placeholder="vacation" name="vacation">
+                        <span class="details">End Vacation</span>
+                        <input type="date"  placeholder="vacation" name="vacation">
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Explanation</span>
+                        <input type="text" >
+                    </div>
+                    <br />
+                    <div class="button0">
+                        <input type="submit" value="Save Unavailability">
+                    </div> 
+                    <br />
+                    <div class="button1">
+                        <input type="submit" value="Reset Password">
+                    </div>
+                    <br /> 
+                    <div class="button2">
+                        <input type="submit" value="Save">
+                    </div>
+                </div> 
+            </form>
+        </div>
+    </body>  
 </html>
+
+
