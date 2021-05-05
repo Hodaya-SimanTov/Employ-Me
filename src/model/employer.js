@@ -60,7 +60,7 @@ function validateEditEmployer(employer) {
         lastName: Joi.string().min(3).max(50).trim().required(),
         phone: Joi.string().length(10).required(),
         companyName: Joi.string().required(),
-        role: Joi.string().default(" ")
+        role: Joi.string().default(" ").empty("")
     });
     return  schema.validate(employer);
 }
