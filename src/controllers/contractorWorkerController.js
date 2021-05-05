@@ -109,14 +109,24 @@ const addDateToUnavailabilityarray=(idArray,startDate,endDate)=>{// בהנחה �
 }
 
 
-//-פונקציה לחיפוש עובד בתאריך מסויים - רק התחלה
-// const findContractorInSpecDate=(req,res)=>{
-//     Unavailability.findOne({ unavailability: { $elemMatch: { $eq:req.body.date } } }).then(unavailability=>{  
-//         //לבדוק עם התאריך קיים במערך אם לא לקחת את האידי של העובד ולהחזיר אותו כי הוא פנוי
-//     }).catch(err=>{
-//         console.log(err);
-//     })
-// }
+
+//מחזיר מערך אידי של עובדים שתפוסם בתאריכים אלו
+const findContractorInSpecDate=(req,res)=>{
+    var array=[];
+    var i=0;
+    Unavailability.find( {unavailabArray : { $in: [req.body.date] }}).then(unavailability=>{  
+        res.send({contractors:unavailability});        
+        for(i=0;i<unavailability.length;i++){
+            array[i]=unavailability[i].contractorId;
+        }
+        console.log(array);    
+        return array;  
+    }).catch(err=>{
+        console.log(err);
+    })
+}
+
+
 
 // const loginUser=(req,res)=>{
 //     ContractorWorker.findById(req.params.mail).then(contractorWorker=>{
@@ -204,5 +214,6 @@ const deleteContractorWorkerById=(req,res)=>{
 
 
 module.exports={addContractorWorker,getContractorWorkerById,updateContractorWorkerById,deleteContractorWorkerById
-    ,getAllContractorWorkers,getContractorWorkerByMail,updateContractorWorkerByMail,loginUser,addDateToUnavailabilityarray,addUn};
+    ,getAllContractorWorkers,getContractorWorkerByMail,updateContractorWorkerByMail,loginUser,addDateToUnavailabilityarray
+    ,addUn , findContractorInSpecDate};
 
