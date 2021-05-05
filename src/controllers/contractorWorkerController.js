@@ -2,7 +2,24 @@ const ContractorWorker=require('../model/contractorWorker')
 const Unavailability=require('../model/UnavailabilityContractor')
 const nodemailer=require('nodemailer')
 const jwt = require('jsonwebtoken')
+var mongo=require('mongodb');
+var assert=require('assert');
 
+const salaryOfHour =function (contractor_id,birthday) {
+    let bd = new Date('2000, 01, 01')// the month is 0-indexed
+    const b=new Date(birthday);
+    var x;
+    if(b>=bd)
+        x=25;
+    else
+        x=30;
+    ContractorWorker.findByIdAndUpdate(contractor_id, {hourlyWage:x})
+        .then(()=>{
+            console.log('add salary');
+        }).catch(err=>{
+        console.log(err);
+    })
+}
 function sendmail(email, name) {
     console.log(email)
     console.log(name)
@@ -30,21 +47,33 @@ function sendmail(email, name) {
     });
 }
 
-
-
-
 const addContractorWorker=(req,res)=>{
     console.log(req.body);
     const newContractorWorker=new ContractorWorker(req.body)
     newContractorWorker.save().then(contractorWorker =>{
         //sendmail(contractorWorker.mail,contractorWorker.firstName)//שולח מייל בהרשמה
-        console.log("add conrtactor");
-        addUnavailabilityArray(contractorWorker._id)//הוספת מערך חופשות ריק      
-        res.redirect('/contractorWorker/contractorHomepage');        
+        console.log('add conrtactor');
+        addUnavailabilityArray(contractorWorker._id)//הוספת מערך חופשות ריק
+        salaryOfHour(contractorWorker._id,contractorWorker.birthday);
+        //console.log('what',salaryOfHour(req.body.birthday));
+        // hourlyWage=salaryOfHour(req.body.birthday);
+        res.redirect('/contractorWorker/contractorHomepage');
     }).catch(err=>{
         console.log(`can not add this worker! ${err}`);
     })   
 }
+
+// const loginUser=(req,res)=>{
+//     ContractorWorker.findById(req.params.mail).then(contractorWorker=>{
+//         console.log("in login");
+//         const token=jwt.sign({mail: contractorWorker.mail, password: contractorWorker.password}, process.env.SECRET);
+//         res.send(token);
+//     }).catch(err=>{
+//         console.log(err);
+//     })
+
+
+// }
 
 const addUnavailabilityArray=(contractor_id)=>{
     const newUnavailability=new Unavailability({contractorId:contractor_id})

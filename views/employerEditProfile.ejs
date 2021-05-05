@@ -9,36 +9,102 @@
     <body>
         <div class="container">
             <div class="title">Edit Your Profile</div>
-            <form action="#">
+            <form class="model-content animate" id="form" action='/employer/editProfile/<%=email%>'  method="POST" >
                 <div class="user-details">
-                    <div class="input-box">
+                    <div class="input-box" data-error="Error message">
                         <span class="details">First Name</span>
-                        <kt="text" placeholder="First name">
+                        <input type="text" class="input" id="firstName" name="firstName"   value=<%=firstName%>>
                     </div>
-                    <div class="input-box">
+                    <div class="input-box" data-error="Error message" >
                         <span class="details">Last Name</span>
-                        <input type="text" placeholder="Last name">
+                        <input type="text" class="input" id="lastName" name="lastName" value=<%=lastName%>>
                     </div>
-                    <div class="input-box">
+                    <div class="input-box" data-error="Error message">
                         <span class="details">Phone</span>
-                        <input type="number" placeholder="Phone number">
+                        <input type="number" id="phone" name="phone" minlength="10" maxlength="10" value=<%=phone%>>
                     </div>
-                    <div class="input-box">
+                    <div class="input-box" data-error="Error message">
                         <span class="details">Company</span>
-                        <input type="text" placeholder="Company name">
+                        <input type="text" id="companyName" name="companyName" value=<%=companyName%>>
                     </div>
-                    <div class="input-box">
+                    <div class="input-box" data-error="Error message">
                         <span class="details">Role</span>
-                        <input type="text" placeholder="Role">
+                        <input type="text" name="role" id="role" value=<%=role%>>
                     </div>
                     <div class="button1">
-                        <input type="submit" value="Reset Password">
+                        <input value="Reset Password" readonly>
                     </div> 
                 </div>
                 <div class="button">
-                    <input type="submit" value="Save">
+                    <input  value="Save" onclick="checkInputs()"  readonly>
                 </div> 
             </form>
         </div>
-    </body>  
+    </body> 
+   <script>
+       const form=document.getElementById("form");
+       const firstName=document.getElementById("firstName");
+       const lastName=document.getElementById("lastName");
+       const phone=document.getElementById("phone");
+       const companyName=document.getElementById("companyName");
+       const role=document.getElementById("role");
+       
+ 
+       document.querySelectorAll('.input-box[data-error] .input').forEach(inpEl=>{
+           inpEl.addEventListener('input',()=>inpEl.parentElement.removeAttribute('data-error'));
+       });
+       firstName.parentElement.removeAttribute('data-error');
+       lastName.parentElement.removeAttribute('data-error');
+       phone.parentElement.removeAttribute('data-error');
+       companyName.parentElement.removeAttribute('data-error');
+       role.parentElement.removeAttribute('data-error');
+       function checkInputs(){
+            const firstNameValue=firstName.value.trim();
+            const lastNameValue=lastName.value.trim();
+            const phoneValue=phone.value.trim();
+            const companyNameValue=companyName.value.trim();
+            const roleValue=role.value.trim();
+        
+            const flag=0;
+            if(firstNameValue==""){
+                firstName.parentElement.setAttribute('data-error','First name can not be empty');
+                flag=1;
+            }
+            if(firstNameValue.length<3 ){
+                firstName.parentElement.setAttribute('data-error','First name must contain less 3 character');
+                flag=1;
+            }
+            if(firstNameValue.length>50 ){
+                firstName.parentElement.setAttribute('data-error','First name must contain no more  50 character');
+                flag=1;
+            }
+            if(lastNameValue==""){
+                lastName.parentElement.setAttribute('data-error','Last name can not be empty');
+                flag=1;
+            }
+            if(lastNameValue.length<3){
+                lastName.parentElement.setAttribute('data-error','Last name must contain less 3 character');
+                flag=1;
+            }
+            if(lastNameValue.length>50){
+                lastName.parentElement.setAttribute('data-error','Last name must contain no more  50 character');
+                flag=1;
+            }
+            if(phoneValue.length!=10){
+                phone.parentElement.setAttribute('data-error','Phone must contain 10 digits');
+                flag=1;
+            }
+            if(companyNameValue==""){
+                companyName.parentElement.setAttribute('data-error','Company name can not be empty');
+                flag=1;
+            }
+            if(roleValue=="")  {
+                role.setAttribute("value","  ");
+            }   
+            if(flag==0){
+                document.getElementById("form").submit();
+            }
+             
+       }
+   </script>
 </html>
