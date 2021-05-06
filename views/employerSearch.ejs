@@ -20,30 +20,30 @@
             </nav>
             <div class="container">
                 <div class="headline">Search contractors</div>
-                <form class=search>
+                <form class=search action="/employer/searchContractorByFields" method="GET" id="searchContractorByFields">
                     <div class="clr"></div>
                     <div class=date>
                         <lable class="title">Select Employment Date*</lable>
                         <br>
-                        <input type="date" name="Employment Date">
+                        <input type="date" name="employmentDate" required>
                     </div>
                     <br>
                     <div class=occupation>
                         <lable>Select Occupation Area*</lable>
                         <br>
-                        <select name="Occupation">
-                            <option value="biotechnology">Biotechnology</option>
+                        <select name="occupation" required>
+                            <option value="biotechnology">Biotech</option>
                             <option value="cleaning">Cleaning</option>
-                            <option value="customer service">Customer Service</option>
+                            <option value="customer service">Customer service</option>
                             <option value="digital">Digital</option>
-                            <option value="financial">Financial</option>
-                            <option value="high tech">High Tech</option>
-                            <option value="human resources">Human Resources</option>
+                            <option value="financial">Finance</option>
+                            <option value="high tech">High-tech</option>
+                            <option value="human resources">Human resources</option>
                             <option value="insurance">Insurance</option>
                             <option value="marketing">Marketing</option>
                             <option value="offices">Offices</option>
-                            <option value="operation and logistics">Operation and Logistics</option>
-                            <option value="production workers">Prodection Workers</option>
+                            <option value="operation and logistics">Operations and logistics</option>
+                            <option value="production workers">Production workers</option>
                             <option value="renovations">Renovations</option>
                             <option value="sales">Sales</option>
                             <option value="technical">Technical</option>
@@ -56,8 +56,10 @@
                         <lable>Select Service Area</lable>
                         <br>
                         <select name="service">
+                            <option value="select">Select </option>
                             <option value="north">North</option>
                             <option value="south">South</option>
+                            <option value="lowland">Lowlands</option>
                             <option value="jerusalen area">Jerusalem Area</option>
                             <option value="dan area">Dan Area</option>
                             <option value="galilee">Galilee</option>    
@@ -68,6 +70,7 @@
                         <lable>Select Hour Job Scope</lable>
                         <br>
                         <select name="scope">
+                            <option value="select">Select </option>
                             <option value="threeToSix">3-6</option>
                             <option value="sixToEight">6-8</option>
                             <option value="eightToTen">8-10</option>
@@ -78,10 +81,11 @@
                         <lable>Select Years Of Experience</lable>
                         <br>
                         <select name="experience">
-                            <option value="oneToFive">1-5 Years</option>
-                            <option value="fiveToTen">5-10 Years</option>
-                            <option value="tenToFifteen">10-15 Years</option>
-                            <option value="overFifteen">Over 15 Years</option>   
+                            <option value="select">Select </option>
+                            <option value="oneToFive">1-5 years</option>
+                            <option value="fiveToTen">5-10 years</option>
+                            <option value="tenToFifteen">10-15 years</option>
+                            <option value="overFifteen">Over 15 years</option>   
                         </select>
                     </div>
                     <div class="button">
