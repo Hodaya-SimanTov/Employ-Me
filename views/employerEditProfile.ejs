@@ -21,15 +21,15 @@
                     </div>
                     <div class="input-box" data-error="Error message">
                         <span class="details">Phone</span>
-                        <input type="number" id="phone" name="phone" minlength="10" maxlength="10" value=<%=phone%>>
+                        <input type="number" class="input" id="phone" name="phone" minlength="10" maxlength="10" value=<%=phone%>>
                     </div>
                     <div class="input-box" data-error="Error message">
                         <span class="details">Company</span>
-                        <input type="text" id="companyName" name="companyName" value=<%=companyName%>>
+                        <input type="text" class="input" id="companyName" name="companyName" value=<%=companyName%>>
                     </div>
                     <div class="input-box" data-error="Error message">
                         <span class="details">Role</span>
-                        <input type="text" name="role" id="role" value=<%=role%>>
+                        <input type="text" class="input" name="role" id="role" value=<%=role%>>
                     </div>
                     <div class="button1">
                         <input value="Reset Password" readonly>
@@ -65,7 +65,7 @@
             const companyNameValue=companyName.value.trim();
             const roleValue=role.value.trim();
         
-            const flag=0;
+            var flag=0;
             if(firstNameValue==""){
                 firstName.parentElement.setAttribute('data-error','First name can not be empty');
                 flag=1;
@@ -77,6 +77,9 @@
             if(firstNameValue.length>50 ){
                 firstName.parentElement.setAttribute('data-error','First name must contain no more  50 character');
                 flag=1;
+            }
+            if(!/^[a-zA-Z]+$/.test(firstNameValue)){
+                firstName.parentElement.setAttribute('data-error','First name must contain only character');
             }
             if(lastNameValue==""){
                 lastName.parentElement.setAttribute('data-error','Last name can not be empty');
@@ -106,5 +109,14 @@
             }
              
        }
+       function resetPassword(){
+            
+       }
    </script>
+   <script type="text/javascript"src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function(){
+            emailjs.init("service_m3luncq");
+        })();
+    </script>
 </html>

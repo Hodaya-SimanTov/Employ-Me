@@ -1,3 +1,4 @@
+/*
 <<<<<<< HEAD
 function signup(){ 
     var name=document.getElementById("name").value;
@@ -19,7 +20,6 @@ function signup(){
             }
 }
 module.exports={signup}
-=======
 // var firebaseConfig = {
 //     apiKey: "AIzaSyAYFylGCNTuv_WPEn6YN9QaK3B7utgLwns",
 //     authDomain: "employ-me-6f74e.firebaseapp.com",
@@ -33,4 +33,4 @@ module.exports={signup}
 //   firebase.initializeApp(firebaseConfig);
 //   firebase.analytics();
 
->>>>>>> c19e33e0830956dfdc69d170b5255bc2c4fd2128
+*/

@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken')
 var mongo=require('mongodb');
 var assert=require('assert');
 
+//חישוב שכר לפי גיל
 const salaryOfHour =function (contractor_id,birthday) {
     let bd = new Date('2000, 01, 01')// the month is 0-indexed
     const b=new Date(birthday);
@@ -54,9 +55,7 @@ const addContractorWorker=(req,res)=>{
         //sendmail(contractorWorker.mail,contractorWorker.firstName)//שולח מייל בהרשמה
         console.log('add conrtactor');
         addUnavailabilityArray(contractorWorker._id)//הוספת מערך חופשות ריק
-        salaryOfHour(contractorWorker._id,contractorWorker.birthday);
-        //console.log('what',salaryOfHour(req.body.birthday));
-        // hourlyWage=salaryOfHour(req.body.birthday);
+        salaryOfHour(contractorWorker._id,contractorWorker.birthday);//עדכון השכר לשעה
         res.redirect('/contractorWorker/contractorHomepage');
     }).catch(err=>{
         console.log(`can not add this worker! ${err}`);

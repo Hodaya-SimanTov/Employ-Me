@@ -23,8 +23,6 @@ const Employer=mongoose.model('Employer',new mongoose.Schema({
     email:{
         type:String,
         required:true,
-        minlength: 5,
-        maxlength: 100,
         unique: true
     },
     companyName:{
@@ -47,10 +45,10 @@ function validateEmployer(employer) {
         firstName: Joi.string().min(3).max(50).trim().required(),
         lastName: Joi.string().min(3).max(50).trim().required(),
         phone: Joi.string().length(10).required(),
-        email: Joi.string().min(5).max(100).required().email(),
+        email: Joi.string().required().email(),
         companyName: Joi.string().required(),
         password: Joi.string().min(6).max(128).required(),
-        role: Joi.string().default(" ")
+        role: Joi.string().default(" ").empty("")
     });
     return  schema.validate(employer);
 }
