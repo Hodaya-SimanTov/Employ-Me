@@ -4,7 +4,7 @@
 	margin: 0;
 }
 .wrapper{
-	background: url('images/emlogo1.PNG') no-repeat;
+	background: url('images/employerHomeP.PNG') no-repeat;
 	background-size: cover;
 	height: 100vh;
 }
@@ -39,7 +39,7 @@
 	background: rgb(247, 250, 94);
 	border-radius: 2px;
 }
-.wrapper .center{
+/* .wrapper .center{
 	position: absolute;
 	top: 35%;
 	left: 25%;
@@ -61,4 +61,4 @@
 	width: 895px;
 	margin-top: 10px;
 	text-align: center;
-}
+} */
