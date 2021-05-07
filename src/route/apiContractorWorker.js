@@ -28,7 +28,7 @@ router.delete('/deleteContractorWorkerById/:id',contractorWorker.deleteContracto
 router.get('/loginUser/:mail',contractorWorker.loginUser);
 
 router.patch('/addUn/:id',contractorWorker.addUn);
-router.get('/findContractorInSpecDate',contractorWorker.findContractorInSpecDate);
+//router.get('/findContractorInSpecDate',contractorWorker.findContractorInSpecDate);
 
 
 

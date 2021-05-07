@@ -1,39 +1,38 @@
+const nodemailer=require('nodemailer')
 const jwt = require('jsonwebtoken');
 const ContractorWorker=require('../model/contractorWorker');
 const Unavailability=require('../model/unavailabilityContractor');
-
-
 const bcrypt = require('bcrypt');
 const { Employer, validate,validateEditEmployer } = require('../model/employer');
-
+const {Employement,validateEmployement}=require('../model/employement');
 const express = require('express');
 const router = express.Router();
 const _ = require('lodash');
 
 const addEmployer=async (req, res) => {
-    // console.log(req.body);
-    // // First Validate The Request
-    // const { error } = validate(req.body); 
-    // if (error) {
-    //     return res.status(400).send(error.details[0].message);
-    // }
+    console.log(req.body);
+    // First Validate The Request
+    const { error } = validate(req.body);
+    if (error) {
+        return res.status(400).send(error.details[0].message);
+    }
 
-    // // Check if this user already exisits
-    // let employer = await Employer.findOne({ email: req.body.email });
-    // if (employer) {
-    //     return res.status(400).send('That user already exisits!');
-    // } else {
-    //     // Insert the new user if they do not exist yet
-    //     employer = new Employer(_.pick(req.body, ['firstName','lastName','phone', 'email','companyName','password','role']));
-    //     const salt = await bcrypt.genSalt(10);
-    //     employer.password = await bcrypt.hash(employer.password, salt);
-    //     await employer.save();
-    //     //const token = jwt.sign({ _id: employer._id }, config.get('PrivateKey'));
-    //     //res.header('x-auth-token', token).send(_.pick(employer, ['_id','firstName','lastName','phone', 'email','companyName','rule']));
-    //     //res.send(_.pick(employer, ['_id','firstName','lastName','phone', 'email','companyName','rule']));
+    // Check if this user already exisits
+    let employer = await Employer.findOne({ email: req.body.email });
+    if (employer) {
+        return res.status(400).send('That user already exisits!');
+    } else {
+        // Insert the new user if they do not exist yet
+        employer = new Employer(_.pick(req.body, ['firstName','lastName','phone', 'email','companyName','password','role']));
+        const salt = await bcrypt.genSalt(10);
+        employer.password = await bcrypt.hash(employer.password, salt);
+        await employer.save();
+        //const token = jwt.sign({ _id: employer._id }, config.get('PrivateKey'));
+        //res.header('x-auth-token', token).send(_.pick(employer, ['_id','firstName','lastName','phone', 'email','companyName','rule']));
+        //res.send(_.pick(employer, ['_id','firstName','lastName','phone', 'email','companyName','rule']));
     
-    //     res.redirect('/employer/homePage');
-    // }
+        res.redirect('/employer/homePage');
+    }
     // console.log('I am in add employer')
 }
 
@@ -41,7 +40,6 @@ const getEmployerByEmail=async(email)=>{
     
     let employer = await Employer.findOne({email:req.params.email})
     if (employer) {
-      // res.json(employer)
        res.render('../views/employerEditProfile',{employer})
     } 
     else {
@@ -66,6 +64,22 @@ const editProfile=async (req, res) => {
     let employer= await Employer.findOneAndUpdate({email: req.params.email}, req.body, {new: true });
     res.redirect('/employer/homePage');
 }
+const resetPasswordDisplay=async (req, res) => {
+    let employer = await Employer.findOne({email:req.params.email})
+    if (employer) {
+       res.render('../views/resetPasswordEmployer',employer);
+    } 
+    else {
+        return res.status(400).send('That email is error!');
+    }
+}
+const resetPassword=async (req, res) =>{
+    
+    const salt = await bcrypt.genSalt(10);
+    const password= await bcrypt.hash(req.body.password, salt);
+    let employer= await Employer.findOneAndUpdate({email: req.params.email}, { password: password}, {new: true });
+    res.redirect('/employer/homePage');
+}
 //פונקציה שמחזירה עובדים שתפוסים בין 2 תאריכים
 const ContractorAvialableDate=async(date)=>{
     var array=[];
@@ -77,6 +91,15 @@ const ContractorAvialableDate=async(date)=>{
     }
     return array;  
 }
+
+
+        // res.status(200).json({ user: user._id })
+        //return user
+    // }
+    // catch (err) {
+    //     const errors = handleErrors(err)
+    //     res.status(400).json({ errors })
+    // }
 
 
 //  פונקציה שמחזירה עובדים שעומדים בסינונים ופנויים בתאריך
@@ -203,7 +226,15 @@ const searchContractorByFields=async(req,res)=> {
     res.render('../views/employerSearchResult',{result});
 }
 
-
+const addEmployemnt=async (req, res) => {
+    const { error } = validateEmployement(req.body);
+    if (error) {
+        return res.status(400).send(error.details[0].message);
+    }
+    employement = new Employement(_.pick(req.body, ['employerEmail','constructorEmail','date', 'jobScope','status','hourlyWage','rating','feedback']));
+    await employement.save();
+    res.redirect('/employer/homePage');
+}
 //פונקציה שמקבלת 2 מערכים אחד של הקונטרקטורים שזמינים בתאריך מסויים ואחד של הקונטרקטורים שמתאימים לסינון ומחזירה מערך של קונטרקטורים שמתאימים 
 const availableCons=(avilableConsArr,filteredConsArr)=>{
     var availableCons=[];
@@ -222,4 +253,6 @@ const availableCons=(avilableConsArr,filteredConsArr)=>{
     return availableCons;
 }
 
-module.exports={addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons};
+
+module.exports={addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,addEmployemnt,resetPasswordDisplay};
+
