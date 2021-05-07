@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile Of | companyWorker</title>
+    <link rel="stylesheet" href="/css/styleCompanyWorkerEditProfile.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="container">
+    <div class="title">Edit Your Profile</div>
+    <form class="model-content animate" id="form" action='/companyWorker/editProfile/<%=email%>'  method="POST" >
+        <div class="user-details">
+            <div class="input-box" data-error="Error message">
+                <span class="details">First Name</span>
+                <input type="text" class="input" id="firstName" name="firstName"   value=<%=firstName%>>
+            </div>
+            <div class="input-box" data-error="Error message" >
+                <span class="details">Last Name</span>
+                <input type="text" class="input" id="lastName" name="lastName" value=<%=lastName%>>
+            </div>
+            <div class="input-box" data-error="Error message">
+                <span class="details">Phone</span>
+                <input type="number" class="input" id="phone" name="phone" minlength="10" maxlength="10" value=<%=phone%>>
+            </div>
+            <div class="button1">
+                <input value="Reset Password" readonly>
+            </div>
+        </div>
+        <div class="button">
+            <input  value="Save" onclick="checkInputs()"  readonly>
+        </div>
+    </form>
+</div>
+</body>
+<script>
+    const form=document.getElementById("form");
+    const firstName=document.getElementById("firstName");
+    const lastName=document.getElementById("lastName");
+    const phone=document.getElementById("phone");
+
+    document.querySelectorAll('.input-box[data-error] .input').forEach(inpEl=>{
+        inpEl.addEventListener('input',()=>inpEl.parentElement.removeAttribute('data-error'));
+    });
+    firstName.parentElement.removeAttribute('data-error');
+    lastName.parentElement.removeAttribute('data-error');
+    phone.parentElement.removeAttribute('data-error');
+    function checkInputs(){
+        const firstNameValue=firstName.value.trim();
+        const lastNameValue=lastName.value.trim();
+        const phoneValue=phone.value.trim();
+
+        var flag=0;
+        if(firstNameValue==""){
+            firstName.parentElement.setAttribute('data-error','First name can not be empty');
+            flag=1;
+        }
+        if(firstNameValue.length<3 ){
+            firstName.parentElement.setAttribute('data-error','First name must contain less 3 character');
+            flag=1;
+        }
+        if(firstNameValue.length>50 ){
+            firstName.parentElement.setAttribute('data-error','First name must contain no more  50 character');
+            flag=1;
+        }
+        if(!/^[a-zA-Z]+$/.test(firstNameValue)){
+            firstName.parentElement.setAttribute('data-error','First name must contain only character');
+        }
+        if(lastNameValue==""){
+            lastName.parentElement.setAttribute('data-error','Last name can not be empty');
+            flag=1;
+        }
+        if(lastNameValue.length<3){
+            lastName.parentElement.setAttribute('data-error','Last name must contain less 3 character');
+            flag=1;
+        }
+        if(lastNameValue.length>50){
+            lastName.parentElement.setAttribute('data-error','Last name must contain no more  50 character');
+            flag=1;
+        }
+        if(phoneValue.length!=10){
+            phone.parentElement.setAttribute('data-error','Phone must contain 10 digits');
+            flag=1;
+        }
+        if(flag==0){
+            document.getElementById("form").submit();
+        }
+    }
+    function resetPassword(){
+
+    }
+</script>
+<script type="text/javascript"src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+<script type="text/javascript">
+    (function(){
+        emailjs.init("service_m3luncq");
+    })();
+</script>
+</html>
