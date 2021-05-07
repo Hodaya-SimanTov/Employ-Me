@@ -19,7 +19,7 @@ router.post('/resetPassword',employer.resetPassword)
 
 router.get('/editProfile/:email',employer.editProfileDisplay);
 router.post('/editProfile/:email',employer.editProfile);
-
+router.post('/addEmployement',employer.addEmployemnt)
 
 router.get('/search',(req,res)=>{
     res.render('../views/employerSearch')

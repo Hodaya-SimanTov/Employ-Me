@@ -25,20 +25,18 @@ const Employement=mongoose.model('Employement',new mongoose.Schema({
         required:true
     },
     hourlyWage:{
-        type:Double,
+        type:Number,
         required:true,
         min:1
     },
     rating:{
         type:Number,
-        required:true,
         min:0,
         max:5,
         default: 0
     },
     feedback:{
         type:String,
-        required:true,
     }
 }));
 function validateEmployement(employement) {
@@ -46,17 +44,15 @@ function validateEmployement(employement) {
         employerEmail: Joi.string().required().email(),
         constructorEmail: Joi.string().required().email(),
         date: Joi.date().required(),
-        jobScope: Joi.Number().min(1).max(24).required(),
+        jobScope: Joi.number().min(1).max(24).required(),
         status: Joi.string().required(),
-        hourlyWage: Joi.Double.min(1).required(),
-        rating: Joi.Number().min(0).max(5).default(0).required(),
-        lastName: Joi.string().min(3).max(50).trim().required(),
-        feedback: Joi.string().required()
+        hourlyWage: Joi.number().min(1).required(),
+        rating: Joi.number().min(0).max(5).default(0).required(),
+        feedback: Joi.string().empty("")
     });
     return  schema.validate(employement);
 }
-
 exports.Employement = Employement;
-exports.validate = validateEmployement;
+exports.validateEmployement = validateEmployement;
 
 

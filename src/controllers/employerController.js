@@ -4,7 +4,7 @@ const ContractorWorker=require('../model/contractorWorker');
 const Unavailability=require('../model/unavailabilityContractor');
 const bcrypt = require('bcrypt');
 const { Employer, validate,validateEditEmployer } = require('../model/employer');
-
+const {Employement,validateEmployement}=require('../model/employement');
 const express = require('express');
 const router = express.Router();
 const _ = require('lodash');
@@ -240,7 +240,15 @@ const searchContractorByFields=async(req,res)=> {
     }
 }
 
-
+const addEmployemnt=async (req, res) => {
+    const { error } = validateEmployement(req.body);
+    if (error) {
+        return res.status(400).send(error.details[0].message);
+    }
+    employement = new Employement(_.pick(req.body, ['employerEmail','constructorEmail','date', 'jobScope','status','hourlyWage','rating','feedback']));
+    await employement.save();
+    res.redirect('/employer/homePage');
+}
 //פונקציה שמקבלת 2 מערכים אחד של הקונטרקטורים שזמינים בתאריך מסויים ואחד של הקונטרקטורים שמתאימים לסינון ומחזירה מערך של קונטרקטורים שמתאימים 
 const availableCons=(avilableConsArr,filteredConsArr)=>{
     var availableCons=[];
@@ -260,5 +268,5 @@ const availableCons=(avilableConsArr,filteredConsArr)=>{
 }
 
 
-module.exports={addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword};
+module.exports={addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,addEmployemnt};
 
