@@ -48,7 +48,7 @@ function validateEmployer(employer) {
         email: Joi.string().required().email(),
         companyName: Joi.string().required(),
         password: Joi.string().min(6).max(128).required(),
-        role: Joi.string().default(" ")
+        role: Joi.string().default(" ").empty("")
     });
     return  schema.validate(employer);
 }
