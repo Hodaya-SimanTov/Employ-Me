@@ -1,8 +1,26 @@
 const ContractorWorker=require('../model/contractorWorker')
-const Unavailability=require('../model/UnavailabilityContractor')
+const Unavailability=require('../model/unavailabilityContractor')
 const nodemailer=require('nodemailer')
 const jwt = require('jsonwebtoken')
+var mongo=require('mongodb');
+var assert=require('assert');
 
+//חישוב שכר לפי גיל
+const salaryOfHour =function (contractor_id,birthday) {
+    let bd = new Date('2000, 01, 01')// the month is 0-indexed
+    const b=new Date(birthday);
+    var x;
+    if(b>=bd)
+        x=25;
+    else
+        x=30;
+    ContractorWorker.findByIdAndUpdate(contractor_id, {hourlyWage:x})
+        .then(()=>{
+            console.log('add salary');
+        }).catch(err=>{
+        console.log(err);
+    })
+}
 function sendmail(email, name) {
     console.log(email)
     console.log(name)
@@ -30,17 +48,15 @@ function sendmail(email, name) {
     });
 }
 
-
-
-
 const addContractorWorker=(req,res)=>{
     console.log(req.body);
     const newContractorWorker=new ContractorWorker(req.body)
     newContractorWorker.save().then(contractorWorker =>{
         //sendmail(contractorWorker.mail,contractorWorker.firstName)//שולח מייל בהרשמה
-        console.log("add conrtactor");
-        addUnavailabilityArray(contractorWorker._id)//הוספת מערך חופשות ריק      
-        res.redirect('/contractorWorker/contractorHomepage');        
+        console.log('add conrtactor');
+        addUnavailabilityArray(contractorWorker._id)//הוספת מערך חופשות ריק
+        salaryOfHour(contractorWorker._id,contractorWorker.birthday);//עדכון השכר לשעה
+        res.redirect('/contractorWorker/contractorHomepage');
     }).catch(err=>{
         console.log(`can not add this worker! ${err}`);
     })   
@@ -122,14 +138,23 @@ const addDateToUnavailabilityarray=(idArray,startDate,endDate)=>{// בהנחה �
 
 
 
-//-פונקציה לחיפוש עובד בתאריך מסויים - רק התחלה
-// const findContractorInSpecDate=(req,res)=>{
-//     Unavailability.findOne({ unavailability: { $elemMatch: { $eq:req.body.date } } }).then(unavailability=>{  
-//         //לבדוק עם התאריך קיים במערך אם לא לקחת את האידי של העובד ולהחזיר אותו כי הוא פנוי
-//     }).catch(err=>{
-//         console.log(err);
-//     })
-// }
+//מחזיר מערך אידי של עובדים שתפוסם בתאריכים אלו
+const findContractorInSpecDate=(req,res)=>{
+    var array=[];
+    var i=0;
+    Unavailability.find( {unavailabArray : { $in: [req.body.date] }}).then(unavailability=>{  
+        res.send({contractors:unavailability});        
+        for(i=0;i<unavailability.length;i++){
+            array[i]=unavailability[i].contractorId;
+        }
+        console.log(array);    
+        return array;  
+    }).catch(err=>{
+        console.log(err);
+    })
+}
+
+
 
 // const loginUser=(req,res)=>{
 //     ContractorWorker.findById(req.params.mail).then(contractorWorker=>{
@@ -217,5 +242,6 @@ const deleteContractorWorkerById=(req,res)=>{
 
 
 module.exports={addContractorWorker,getContractorWorkerById,updateContractorWorkerById,deleteContractorWorkerById
-    ,getAllContractorWorkers,getContractorWorkerByMail,updateContractorWorkerByMail,loginUser,addDateToUnavailabilityarray,addUn};
+    ,getAllContractorWorkers,getContractorWorkerByMail,updateContractorWorkerByMail,loginUser,addDateToUnavailabilityarray
+    ,addUn , findContractorInSpecDate};
 

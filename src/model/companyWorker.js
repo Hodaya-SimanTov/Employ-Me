@@ -23,9 +23,6 @@ const CompanyWorkerSchema=mongoose.Schema({
         require:true,
         minlength:6
     },
-    rule:{
-        type:String,
-        default:0
-    }
+
 })
 module.exports=mongoose.model('CompanyWorker',CompanyWorkerSchema)

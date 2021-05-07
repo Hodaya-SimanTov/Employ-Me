@@ -1,21 +1,17 @@
-const CompanyWorker=require('../model/companyWorker')
 const nodeMailer=require('nodemailer')
-const companyWorker = require('../model/companyWorker')
-const router = require("../route/apiEmployer");
+const CompanyWorker = require('../model/companyWorker')
 
 
 const addCompanyWorker=(req,res)=>{
-    const newComapnyWorker=new companyWorker(req.body)
+    const newComapnyWorker=new CompanyWorker(req.body)
     newComapnyWorker.save().then(companyWorker =>{
         //sendmail(contractorWorker.mail,contractorWorker.firstName)//שולח מייל בהרשמה
-        res.send("success to add db")
-
+        res.send('success to add db')
+        console.log('succ');
     }).catch(err=>{
         console.log(`can not add this worker! ${err}`);
     })
 }
-//חישוב שכר
-
 /*
 const deleteCompanyWorker=(req,res)=>{
     CompanyWorker.deleteOne({mail: req.params.mail }).then(companyWorker=>{
