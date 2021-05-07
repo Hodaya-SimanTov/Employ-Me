@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 const { Employer, validate,validateEditEmployer } = require('../model/employer');
 
 const express = require('express');

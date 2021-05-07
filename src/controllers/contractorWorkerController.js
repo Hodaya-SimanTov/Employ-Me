@@ -140,20 +140,20 @@ const addDateToUnavailabilityarray=(idArray,startDate,endDate)=>{// בהנחה �
 
 
 //מחזיר מערך אידי של עובדים שתפוסם בתאריכים אלו
-const findContractorInSpecDate=(req,res)=>{
-    var array=[];
-    var i=0;
-    Unavailability.find( {unavailabArray : { $in: [req.body.date] }}).then(unavailability=>{  
-        res.send({contractors:unavailability});        
-        for(i=0;i<unavailability.length;i++){
-            array[i]=unavailability[i].contractorId;
-        }
-        console.log(array);    
-        return array;  
-    }).catch(err=>{
-        console.log(err);
-    })
-}
+// const findContractorInSpecDate=(req,res)=>{
+//     var array=[];
+//     var i=0;
+//     Unavailability.find( {unavailabArray : { $in: [req.body.date] }}).then(unavailability=>{  
+//         res.send({contractors:unavailability});        
+//         for(i=0;i<unavailability.length;i++){
+//             array[i]=unavailability[i].contractorId;
+//         }
+//         console.log(array);    
+//         return array;  
+//     }).catch(err=>{
+//         console.log(err);
+//     })
+// }
 
 
 
@@ -244,5 +244,5 @@ const deleteContractorWorkerById=(req,res)=>{
 
 module.exports={addContractorWorker,getContractorWorkerById,updateContractorWorkerById,deleteContractorWorkerById
     ,getAllContractorWorkers,getContractorWorkerByMail,updateContractorWorkerByMail,loginUser,addDateToUnavailabilityarray
-    ,addUn , findContractorInSpecDate};
+    ,addUn };
 
