@@ -25,10 +25,15 @@ router.get('/search',(req,res)=>{
     res.render('../views/employerSearch')
 });
 
+
 //הוספות של כנרת לסינון
 //router.get('/ContractorAvialableDate',employer.ContractorUnavialableDate);
-router.get('/searchContractorByFields',employer.searchContractorByFields);
+router.post('/searchContractorByFields',employer.searchContractorByFields);
 //עד כאן
+// router.get('/searchResult',(req,res)=>{
+//     res.render('../views/employerSearchResults')
+// });
+
 
 module.exports=router
 

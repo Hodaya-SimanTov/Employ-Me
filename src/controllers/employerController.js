@@ -81,21 +81,23 @@ const ContractorAvialableDate=async(date)=>{
 
 //  פונקציה שמחזירה עובדים שעומדים בסינונים ופנויים בתאריך
 const searchContractorByFields=async(req,res)=> {
+    console.log(req.body);
     const avilableConsArr=await ContractorAvialableDate(req.body.employmentDate);
     var result;
     var filteredCons=[];
-    if(req.body.service=='Select')
+    if(req.body.service=='select')
     {
-        if(req.body.scope=='Select')
+        if(req.body.scope=='select')
         {
-            if(req.body.experience=='Select')
+            if(req.body.experience=='select')
             {
                 try{
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation})
                     console.log("filter1");
                     result = await availableCons(avilableConsArr,filteredCons);
                     console.log(result+"i result");
-                    res.send(result)
+                    
+                    //res.send(result)
                 }
                 catch(err){
                     console.log(err);
@@ -197,6 +199,8 @@ const searchContractorByFields=async(req,res)=> {
             }
         }
     }
+    console.log(result);
+    res.render('../views/employerSearchResult',{result});
 }
 
 
