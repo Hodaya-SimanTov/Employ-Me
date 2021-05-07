@@ -74,7 +74,7 @@ const resetPasswordDisplay=async (req, res) => {
     }
 }
 const resetPassword=async (req, res) =>{
-    
+
     const salt = await bcrypt.genSalt(10);
     const password= await bcrypt.hash(req.body.password, salt);
     let employer= await Employer.findOneAndUpdate({email: req.params.email}, { password: password}, {new: true });
@@ -91,15 +91,6 @@ const ContractorAvialableDate=async(date)=>{
     }
     return array;  
 }
-
-
-        // res.status(200).json({ user: user._id })
-        //return user
-    // }
-    // catch (err) {
-    //     const errors = handleErrors(err)
-    //     res.status(400).json({ errors })
-    // }
 
 
 //  פונקציה שמחזירה עובדים שעומדים בסינונים ופנויים בתאריך
