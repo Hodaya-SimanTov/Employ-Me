@@ -20,12 +20,12 @@
             </nav>
             <div class="container">
                 <div class="headline">Search contractors</div>
-                <form class=search action="/employer/searchContractorByFields" method="POST">
+                <form class=search action="/employer/searchContractorByFields" method="POST" id="form">
                     <div class="clr"></div>
-                    <div class=date >
+                    <div class=date data-error="Error message">
                         <lable class="title">Select Employment Date*</lable>
                         <br>
-                        <input type="date" name="employmentDate" id="employerDate" required>
+                        <input type="date" class="input" name="employmentDate" id="employmentDate" min="2000-01-01" max="2100-01-01" required >
                     </div>
                     <br>
                     <div class=occupation>
@@ -65,7 +65,7 @@
                             <option value="Galilee">Galilee</option>    
                         </select>
                     </div>
-                    <br>
+                    <br> 
                     <div class="jobScope">
                         <lable>Select Hour Job Scope</lable>
                         <br>
@@ -90,7 +90,7 @@
                     </div>
                     <div class="button">
                         <input type="submit" value="Search Contractors" href="/employer/styleEmployerSearchResults">
-                    </div> 
+                    </div>
                     <br>
                 </form>
             </div>
