@@ -64,40 +64,22 @@ const editProfile=async (req, res) => {
     let employer= await Employer.findOneAndUpdate({email: req.params.email}, req.body, {new: true });
     res.redirect('/employer/homePage');
 }
-const resetPassword=async (req, res) =>{
-    const { email } = req.body.email
-    const name=req.body.firstName
-    let randomstring = Math.random().toString(36).slice(-8)
-            const salt = await bcrypt.genSalt(10);
-            let password= await bcrypt.hash(randomstring, salt);
-            let employer = await Employer.findOne({ email: req.body.email }).then(employer=>{
-            employer.password=password
-            employer.markModified('password')
-            employer.save(err => console.log(err))
-            })
-            
-        let transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: 'ravitlevi999@gmail.com',
-                pass: 'ravit99clark'
-            }
-        })
-
-        let mailOptions = {
-            from: 'ravitlevi999@gmail.com',
-            to: email,
-            subject: 'password reset',
-            text: `Hello ${name},\nYour password has been reset and your password is now is:  ${randomstring}\n,Sincerely, The Site Staff`
-        }
-        transporter.sendMail(mailOptions, function(error, info){
-            if (error) {
-                console.log(error)
-            } else {
-                console.log('Email sent: ' + info.response)
-            }
-        })
+const resetPasswordDisplay=async (req, res) => {
+    let employer = await Employer.findOne({email:req.params.email})
+    if (employer) {
+       res.render('../views/resetPasswordEmployer',employer);
+    } 
+    else {
+        return res.status(400).send('That email is error!');
     }
+}
+const resetPassword=async (req, res) =>{
+
+    const salt = await bcrypt.genSalt(10);
+    const password= await bcrypt.hash(req.body.password, salt);
+    let employer= await Employer.findOneAndUpdate({email: req.params.email}, { password: password}, {new: true });
+    res.redirect('/employer/homePage');
+}
 //פונקציה שמחזירה עובדים שתפוסים בין 2 תאריכים
 const ContractorAvialableDate=async(date)=>{
     var array=[];
@@ -111,32 +93,25 @@ const ContractorAvialableDate=async(date)=>{
 }
 
 
-        // res.status(200).json({ user: user._id })
-        //return user
-    // }
-    // catch (err) {
-    //     const errors = handleErrors(err)
-    //     res.status(400).json({ errors })
-    // }
-
-
 //  פונקציה שמחזירה עובדים שעומדים בסינונים ופנויים בתאריך
 const searchContractorByFields=async(req,res)=> {
+    console.log(req.body);
     const avilableConsArr=await ContractorAvialableDate(req.body.employmentDate);
     var result;
     var filteredCons=[];
-    if(req.body.service=='Select')
+    if(req.body.service=='select')
     {
-        if(req.body.scope=='Select')
+        if(req.body.scope=='select')
         {
-            if(req.body.experience=='Select')
+            if(req.body.experience=='select')
             {
                 try{
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation})
                     console.log("filter1");
                     result = await availableCons(avilableConsArr,filteredCons);
                     console.log(result+"i result");
-                    res.send(result)
+                    
+                    //res.send(result)
                 }
                 catch(err){
                     console.log(err);
@@ -238,6 +213,8 @@ const searchContractorByFields=async(req,res)=> {
             }
         }
     }
+    console.log(result);
+    res.render('../views/employerSearchResult',{result});
 }
 
 const addEmployemnt=async (req, res) => {
@@ -266,7 +243,14 @@ const availableCons=(avilableConsArr,filteredConsArr)=>{
     console.log(availableCons)
     return availableCons;
 }
+const bookContractorDisplay=async (req, res) => {
+    let contractor=await ContractorWorker.findById(req.params.idConstractor)
+    if (!contractor) {
+        return res.status(400).send('That contractor not exit in system');
+    } else {
+        res.render('../views/bookContractor',{contractor: contractor,emailEmployer: req.params.emailEmployer,date: req.params.date})
+    }
+}
 
-
-module.exports={addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,addEmployemnt};
+module.exports={addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,addEmployemnt,resetPasswordDisplay,bookContractorDisplay};
 

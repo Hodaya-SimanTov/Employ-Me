@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Search-Results</title>
+        <link rel="stylesheet" href="/css/styleEmployerSearchResults.css">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row col-md-6 col-md-offset-2 custyle">
+                <div class="page-header">
+                    <h3><small class="pull-right"><%=result.length %></small> Contractors Results </h3>
+                </div>
+            <table class="table table-striped custab">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Occupation</th>
+                    <th>Phone</th>
+                    <th class="text-center"> </th>
+                </tr>
+            </thead>
+                <%
+                if(result.length!=0) {
+                    var i=1;
+                result.forEach(function(worker){
+                %>
+                <tr>
+                    <td><%= worker.firstName %> <%= worker.lastName %></td>
+                    <td><%= worker.Occupation %></td>
+                    <td><%= worker.phone %></td>
+                    <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> BOOK </a></td>
+                </tr>
+                <% i++;}) %>
+                    <% } else{ %>
+                        <h2>Sorry, no contractors found for the search results you entered</h2> 
+                    <% } %>
+            </table>
+            </div>
+        </div>
+    </body>
+</html>
+        <!-- <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="page-header">
+                        <h1><small class="pull-right"><%=result.length %></small> Contractors </h1>
+                    </div> 
+                    <%
+                        if(result.length!=0) {
+                        var i=1;
+                        result.forEach(function(worker)
+                        {
+                        %>
+                            <div class="comments-list">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h4 class="media-heading user_name"><%= worker.firstName %></h4>
+                                        <h5>Contractor details</h5>
+                                        <br>
+                                        <h5>last name: <%= worker.lastName %></h5>
+                                        <h5>occupation:: <%= worker.occupation %></h5>
+                                        <h5>phone: <%= worker.phone %></h5>
+                                        <p><small><a href="">BOOK</p>
+                                    </div>
+                                </div>
+                            </div>       
+                        <% i++;}) %>
+                    <% } else{ %>
+                        <h2>Sorry, no contractors found for the search results you entered</h2> 
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </body>
+</html> -->
+    
+    <!-- <head>
+        <meta charset="UTF-8">
+        <title>Search-Results</title>
+        <link rel="stylesheet" href="/css/styleEmployerSearchResults.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <h1>Search result</h1>
+        <%
+            if(result.length!=0) {
+                var i=1;
+                result.forEach(function(worker)
+                {
+                %>
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-primary" aria-current="true">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1"><%= worker.firstName %></h5>  
+                        </div>
+                         <h1 class="mb-1">Contractor Details:</h1>
+                         <h2>   |   </h2tName %></h2>
+                         <h2>   |   </h2>
+                         <h2><%= worker.occupation %></h2>
+                         <h2>   |   </h2>
+                         <h2><%= worker.phone %></h2>
+                   </a>
+                
+                <% i++;}) %>
+                <% } else{ %>
+                        <h2>Sorry, no contractors found for the search results you entered</h2> 
+                    <% } %>
+                </div>
+        </body> 
+    </html>-->
