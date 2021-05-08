@@ -245,10 +245,11 @@ const availableCons=(avilableConsArr,filteredConsArr)=>{
 }
 const bookContractorDisplay=async (req, res) => {
     let contractor=await ContractorWorker.findById(req.params.idConstractor)
-    if (!contractor) {
-        return res.status(400).send('That contractor not exit in system');
+    let employer=await Employer.findOne({email: req.params.emailEmployer})
+    if (!contractor || !employer) {
+        return res.status(400).send('That error in system');
     } else {
-        res.render('../views/bookContractor',{contractor: contractor,emailEmployer: req.params.emailEmployer,date: req.params.date})
+        res.render('../views/bookContractor',{contractor: contractor,emailEmployer: req.params.emailEmployer,date: req.params.date,companyName: employer.companyName})
     }
 }
 
