@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Book Contractor</title>
+        <link rel="stylesheet" href="/css/styleBookContractor.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="container">
+            <div class="title">Book Contractor</div>
+            <form class="model-content animate" id="form" action='/employer/homePage/<%=emailEmployer%>'  method="GET" >
+                <br/>
+                <span class="title2">Contractor Details</span>
+                <div class="user-details">
+                    <div class="input-box" >
+                        <span class="details">First Name</span>
+                        <p><%=contractor.firstName%><p>
+                    </div>
+                    <div class="input-box"  >
+                        <span class="details">Last Name</span>
+                        <p><%=contractor.lastName%></p>
+                    </div>
+                    <div class="input-box"  >
+                        <span class="details">Occupation Area</span>
+                        <p><%=contractor.occupationArea%></p>
+                    </div>
+                    <div class="input-box"  >
+                        <span class="details">Experience</span>
+                        <p><%=contractor.experienceField%></p>
+                    </div>
+                    
+                    <div class="input-box">
+                        <span class="details">Phone</span>
+                        <p><%=contractor.phone%></p>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Service Area</span>
+                        <p><%=contractor.serviceArea%></p>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Hourly Wage</span>
+                        <p><%=contractor.hourlyWage%></p>
+                    </div>
+                    <div class="input-box">
+                        <span class="details">Scope Work(in hour)</span>
+                        <input id="scopeWork"  value=<%=contractor.scopeWork%> readonly>
+                    </div>
+                </div>
+                    <br/>
+                    <span class="title2">Employement Details</span>
+                    <div class="user-details">
+                        <div class="input-box" >
+                            <span class="details">company Name</span>
+                            <p><%=companyName%></p>
+                        </div>
+                    </div>
+                    <div class="user-details">
+                        <div class="input-box" >
+                            <span class="details">Date Of Occupation</span>
+                            <input type="date" class="input" id="mydate" value=<%=date%> readonly >
+                        </div>
+                        <div class="input-box" data-error="Error message">
+                            <span class="details">Number of business hours</span>
+                            <input type="number" class="input" id="numBusinessHours" min=1  max=12 maxlength="2" required>
+                        </div>
+                   
+                    </div>
+                <div class="button">
+                    <input  value="BOOK" onclick="checkInputs(scopeWork)" readonly>
+                </div> 
+            </form>
+
+        </div>
+    </body> 
+   <script>
+       const form=document.getElementById("form");
+       const numBusinessHours=document.getElementById("numBusinessHours");
+       document.querySelectorAll('.input-box[data-error] .input').forEach(inpEl=>{
+           inpEl.addEventListener('input',()=>inpEl.parentElement.removeAttribute('data-error'));
+       });
+       numBusinessHours.parentElement.removeAttribute('data-error');
+       function checkInputs(scopeWork){
+            const numBusinessHoursValue=numBusinessHours.value.trim();
+            const scopeWorkValue=scopeWork.value.trim()
+            console.log(scopeWorkValue)
+            var flag=0;
+            if(numBusinessHoursValue==""){
+                numBusinessHours.parentElement.setAttribute('data-error','Number of business hours can not be empty');
+                flag=1;
+            }
+            if(numBusinessHoursValue>12 ||  numBusinessHoursValue<1){
+                numBusinessHours.parentElement.setAttribute('data-error','Number of business hours invalid');
+                flag=1;
+            }
+           else{
+                if(scopeWorkValue=='3-6'){
+                    if(numBusinessHoursValue<3 || numBusinessHoursValue>6){
+                        numBusinessHours.parentElement.setAttribute('data-error','Sorry, number of business hours not match to  scope work of contractor');
+                            flag=1;
+                    }
+                }
+                else
+                    if(scopeWorkValue=='6-8'){
+                        if(numBusinessHoursValue<6 || numBusinessHoursValue>8){
+                            numBusinessHours.parentElement.setAttribute('data-error','Sorry, number of business hours not match to  scope work of contractor');
+                            flag=1;
+                        }
+                    }
+                    else
+                        if(scopeWorkValue=='8-10'){
+                            if(numBusinessHoursValue<8 || numBusinessHoursValue>10){
+                                numBusinessHours.parentElement.setAttribute('data-error','Sorry, number of business hours not match to  scope work of contractor');
+                                    flag=1;
+                            }
+                        }
+                        else
+                            if(scopeWorkValue=='10-12'){
+                                if(numBusinessHoursValue<10 || numBusinessHoursValue>12){
+                                    numBusinessHours.parentElement.setAttribute('data-error','Sorry, number of business hours not match to  scope work of contractor');
+                                    flag=1;
+                                }
+                            }
+            }
+            if(flag==0){
+                document.getElementById("form").submit();
+            }
+             
+       }
+    </script>
+</html>

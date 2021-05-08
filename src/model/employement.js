@@ -47,7 +47,7 @@ function validateEmployement(employement) {
         jobScope: Joi.number().min(1).max(24).required(),
         status: Joi.string().required(),
         hourlyWage: Joi.number().min(1).required(),
-        rating: Joi.number().min(0).max(5).default(0).required(),
+        rating: Joi.number().min(0).max(5).default(0).required().empty(""),
         feedback: Joi.string().empty("")
     });
     return  schema.validate(employement);

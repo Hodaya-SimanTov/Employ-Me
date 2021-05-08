@@ -74,7 +74,7 @@ const resetPasswordDisplay=async (req, res) => {
     }
 }
 const resetPassword=async (req, res) =>{
-    
+
     const salt = await bcrypt.genSalt(10);
     const password= await bcrypt.hash(req.body.password, salt);
     let employer= await Employer.findOneAndUpdate({email: req.params.email}, { password: password}, {new: true });
@@ -91,15 +91,6 @@ const ContractorAvialableDate=async(date)=>{
     }
     return array;  
 }
-
-
-        // res.status(200).json({ user: user._id })
-        //return user
-    // }
-    // catch (err) {
-    //     const errors = handleErrors(err)
-    //     res.status(400).json({ errors })
-    // }
 
 
 //  פונקציה שמחזירה עובדים שעומדים בסינונים ופנויים בתאריך
@@ -223,7 +214,7 @@ const searchContractorByFields=async(req,res)=> {
         }
     }
     console.log(result);
-    res.render('../views/employerSearchResult',{result});
+    res.render('../views/employerSearchResult',{result:result,emailEmployer: req.params.email,date: req.body.employmentDate});
 }
 
 const addEmployemnt=async (req, res) => {
@@ -252,7 +243,15 @@ const availableCons=(avilableConsArr,filteredConsArr)=>{
     console.log(availableCons)
     return availableCons;
 }
+const bookContractorDisplay=async (req, res) => {
+    let contractor=await ContractorWorker.findById(req.params.idConstractor)
+    let employer=await Employer.findOne({email: req.params.emailEmployer})
+    if (!contractor || !employer) {
+        return res.status(400).send('That error in system');
+    } else {
+        res.render('../views/bookContractor',{contractor: contractor,emailEmployer: req.params.emailEmployer,date: req.params.date,companyName: employer.companyName})
+    }
+}
 
-
-module.exports={addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,addEmployemnt,resetPasswordDisplay};
+module.exports={addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,addEmployemnt,resetPasswordDisplay,bookContractorDisplay};
 
