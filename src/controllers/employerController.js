@@ -243,7 +243,14 @@ const availableCons=(avilableConsArr,filteredConsArr)=>{
     console.log(availableCons)
     return availableCons;
 }
+const bookContractorDisplay=async (req, res) => {
+    let contractor=await ContractorWorker.findById(req.params.idConstractor)
+    if (!contractor) {
+        return res.status(400).send('That contractor not exit in system');
+    } else {
+        res.render('../views/bookContractor',{contractor: contractor,emailEmployer: req.params.emailEmployer,date: req.params.date})
+    }
+}
 
-
-module.exports={addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,addEmployemnt,resetPasswordDisplay};
+module.exports={addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,addEmployemnt,resetPasswordDisplay,bookContractorDisplay};
 

@@ -11,7 +11,7 @@ router.post('/addEmployer',employer.addEmployer)
 router.get('/signUp',(req,res)=>{
     res.render('../views/employerSignUp1')
 });
-router.get('/homePage',(req,res)=>{
+router.get('/homePage/:email',(req,res)=>{
     res.render('../views/employerHomePage')
 });
 
@@ -20,7 +20,7 @@ router.post('/resetPassword/:email',employer.resetPassword)
 router.get('/editProfile/:email',employer.editProfileDisplay);
 router.post('/editProfile/:email',employer.editProfile);
 router.post('/addEmployement',employer.addEmployemnt)
-
+router.get('/bookContractor/:emailEmployer/:idConstractor/:date',employer.bookContractorDisplay)
 router.get('/search',(req,res)=>{
     res.render('../views/employerSearch')
 });
