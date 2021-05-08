@@ -21,14 +21,14 @@ router.get('/editProfile/:email',employer.editProfileDisplay);
 router.post('/editProfile/:email',employer.editProfile);
 router.post('/addEmployement',employer.addEmployemnt)
 router.get('/bookContractor/:emailEmployer/:idConstractor/:date',employer.bookContractorDisplay)
-router.get('/search',(req,res)=>{
-    res.render('../views/employerSearch')
+router.get('/search/:email',(req,res)=>{
+    res.render('../views/employerSearch',{email: req.params.email})
 });
 
 
 //הוספות של כנרת לסינון
 //router.get('/ContractorAvialableDate',employer.ContractorUnavialableDate);
-router.post('/searchContractorByFields',employer.searchContractorByFields);
+router.post('/searchContractorByFields/:email',employer.searchContractorByFields);
 //עד כאן
 // router.get('/searchResult',(req,res)=>{
 //     res.render('../views/employerSearchResults')

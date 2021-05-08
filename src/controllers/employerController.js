@@ -214,7 +214,7 @@ const searchContractorByFields=async(req,res)=> {
         }
     }
     console.log(result);
-    res.render('../views/employerSearchResult',{result});
+    res.render('../views/employerSearchResult',{result:result,emailEmployer: req.params.email,date: req.body.employmentDate});
 }
 
 const addEmployemnt=async (req, res) => {
