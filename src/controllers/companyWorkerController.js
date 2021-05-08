@@ -91,6 +91,6 @@ const editProfile=async (req, res) => {
         return res.status(400).send(error.details[0].message);
     }
     let companyWorker= await CompanyWorker.findOneAndUpdate({email: req.params.email}, req.body, {new: true });
-    res.redirect('/employer/homePage');
+    res.redirect('/companyWorker/homePage');
 }
 module.exports={addCompanyWorker,deleteCompanyWorkerById,getCompanyWorkerByEmail,resetPassword,editProfileDisplay,editProfile}
