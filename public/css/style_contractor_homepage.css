@@ -4,7 +4,7 @@
     text-decoration: none;
     list-style: none;
     box-sizing: border-box;
-    }
+}
     body{
         font-family:montserrat;
     }
@@ -19,8 +19,9 @@
         font-size: 100px;
         line-height: 80px;
         padding: 0 150px;
-        width: 50px;
-        height: 90px;
+        width: 20px;
+        height: 40px;
+
     }
     nav ul{
         float: right;
@@ -59,4 +60,6 @@
         z-index: 1;
         position: fixed;
         opacity: 0.9;
-      }
+    }
+
+          

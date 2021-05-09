@@ -3,11 +3,11 @@ const router=require('express').Router()
 const contractorWorker=require('../controllers/contractorWorkerController')
 
 
-router.get('/contractorHomepage',(req,res)=>{
-    res.render('contractorHomepage')        
-});
-router.get('/contractorProfile',(req,res)=>{
-    res.render('contractorProfile')        
+// router.get('/contractorHomepage',(req,res)=>{
+//     res.render('contractorHomepage')        
+// });
+router.get('/homepage',(req,res)=>{
+    res.render('homepage1')        
 });
 router.get('/contractorSignUp',(req,res)=>{
     res.render('contractorSignUp')        
@@ -15,7 +15,6 @@ router.get('/contractorSignUp',(req,res)=>{
 router.get('/login',(req,res)=>{
     res.render('login')        
 });
-
 
 
 router.post('/addContractorWorker',contractorWorker.addContractorWorker);
@@ -27,7 +26,20 @@ router.patch('/updateContractorWorkerMail/:mail',contractorWorker.updateContract
 router.delete('/deleteContractorWorkerById/:id',contractorWorker.deleteContractorWorkerById);
 router.get('/loginUser/:mail',contractorWorker.loginUser);
 
-router.patch('/addUn/:id',contractorWorker.addUn);
+router.get('/contractorProfile/:mail',contractorWorker.editProfileDisplay);
+router.post('/contractorProfile/:mail',contractorWorker.editProfile);
+
+router.post('/updateContractorPass/:mail',contractorWorker.updateContractorPass);
+//router.patch('/updateContractorPass/:mail',contractorWorker.updateContractorPass);
+
+
+router.get('/contractorUnavailability/:mail',contractorWorker.unDisplay);
+router.post('/addUn/:mail',contractorWorker.addUn);
+
+router.get('/contractorHomepage/:mail',contractorWorker.homepageDisplay);
+
+router.get('/login/:mail',contractorWorker.loginUser);
+
 //router.get('/findContractorInSpecDate',contractorWorker.findContractorInSpecDate);
 
 

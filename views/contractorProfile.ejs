@@ -1,40 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
     <head>
         <meta charset="UTF-8">
         <title>Contractor-Profile</title>
-        <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
         <link rel="stylesheet" href="/css/styleContractorProfile.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        
     </head>
     <body>
+        <form class="homeLogo" action='/contractorWorker/contractorHomepage/<%=contractor.mail%>'  method="GET" >
+            <button type="submit" style="font-size:24px"><img class="logo" type="submit" src="/css/images/logo.PNG"></button>            
+        </form>
         <div class="container">
             <div class="title">Edit Your Profile</div>
-            <form action="#">
-                <div class="user-details">
-                    <div class="input-box">
+            <br />
+            <form class="model-content animate " id="form-pass" action='/contractorWorker/updateContractorPass/<%=contractor.mail%>'  method="POST" >
+                <div class="row">
+                <div class="col-1"><span class="details">Password:</span></div>
+                <div class="col-3"><input type="text" class="input" readonly  id="passwordNew" value=<%=contractor.password%>></div>
+                <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal">
+                   Reset Password
+                </button>
+                </div>                                     
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                            <span class="details">please enter new pass:</span>
+                            <input type="text" class="input" id="password" form="form-pass" name="password" >
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <input type="submit" class="btn btn-primary" value="Save changes" form="form-pass" onclick="resetPassword()" >
+                        </div>
+                      </div>
+                    </div>
+                </div>                                    
+            </form>
+            <hr>
+            <form class="model-content animate" id="form" action='/contractorWorker/contractorProfile/<%=contractor.mail%>'  method="POST" >            
+                <div>
+                <div class="user-details" >
+                    <div class="input-box" data-error="Error message">
                         <span class="details">First Name</span>
-                        <input type="text" >
+                        <input type="text" class="input" id="firstName" name="firstName" form="form"  value=<%=contractor.firstName%>>
+                        
                     </div>
-                    <div class="input-box">
+                    <div class="input-box" data-error="Error message">
                         <span class="details">Last Name</span>
-                        <input type="text" >
+                        <input type="text" class="input" id="lastName" name="lastName" form="form"  value=<%=contractor.lastName%>>
                     </div>
-                    <div class="input-box">
+                    <div class="input-box" >
                         <span class="details">Birthday</span>
-                        <input type="date" name="birthday">
+                        <input type="date" class="input" id="birthday" name="birthday" form="form" value=<%=contractor.birthday%> >
                     </div>
-                    <div class="input-box">
+                    <div class="input-box" data-error="Error message">
                         <span class="details">Mail</span>
-                        <input type="email"  name="mail" >
+                        <input type="email" class="input" id="mail" name="mail" form="form"  value=<%=contractor.mail%>>
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="input-box" data-error="Error message">
+                        <span class="details">Phone</span>
+                        <input type="phone" class="input" id="phone" name="phone" form="form"  value=<%=contractor.phone%>>
                     </div>
                     <div class="input-box">
-                        <span class="details">Phone</span>
-                        <input type="number" >
+                        <span class="details">My hourly wage</span>
+                        <input type="text" class="input" id="hourlyWage" name="hourlyWage" readonly  value=<%=contractor.hourlyWage%> >
                     </div>
+                </div>
+                <hr> 
+                <div class="col my-2 d-flex justify-content-between align-items-end p-0">
+                <div class="col-4">  
+                    <br />
                     <p>Employment details:</p>
+                    <br />
                     <label>Occupation Area</label>
-                    <select id="occupationArea" name="occupationArea">
+                    <select id="occupationArea" name="occupationArea" form="form" value=<%=contractor.occupationArea%>>
                         <option >Insurance</option>
                         <option >High-tech</option>
                         <option >Technical</option>
@@ -54,62 +106,135 @@
                         <option >Other</option>
                     </select>
                     <br />
+                    <br />
                     <label>Experience Field</label>
-                    <select id="experienceField" name="experienceField">
+                    <select id="experienceField" name="experienceField" form="form" value=<%=contractor.experienceField%>>
                         <option >1-5 years</option>
                         <option >5-10 years</option>
                         <option >10-15 years</option>
                         <option >Over 15 years</option>
                     </select>
                     <br />
+                    <br />
                     <label>Service Area</label>
-                    <select id="serviceArea" name="serviceArea">
+                    <select class="input" id="serviceArea" name="serviceArea" form="form" value=<%=contractor.serviceArea%>>
                         <option >North</option>
-                        <option >south</option>
-                        <option >lowlands</option>
-                        <option >Jerusalem and the surrounding area</option>
-                        <option >Dan area</option>
-                        <option >Galilee</option>
+                        <option >South</option>
+                        <option>Lowlands</option>
+                        <option >Jerusalem Area</option>
+                        <option >Dan Area</option>
+                        <option >Galilee</option> 
                     </select>
                     <br />
+                    <br />
                     <label>Scope Work</label>
-                    <select id="scopeWork" name="scopeWork">
+                    <select id="scopeWork" name="scopeWork" form="form" value=<%=contractor.scopeWork%>>
                         <option >3-6</option>
                         <option >6-8</option>
                         <option >8-10</option>
                         <option >10-12</option>
                     </select>
-                    <div class="input-box">
-                        <span class="details">My hourly wage</span>
-                        <input type="text" readonly/>
-                    </div>
-                    <p>Vacation dates:</p>
-                    <div class="input-box">
-                        <span class="details">Start Vacation</span>
-                        <input type="date"  placeholder="vacation" name="vacation">
-                        <span class="details">End Vacation</span>
-                        <input type="date"  placeholder="vacation" name="vacation">
-                    </div>
-                    <div class="input-box">
-                        <span class="details">Explanation</span>
-                        <input type="text" >
-                    </div>
-                    <br />
-                    <div class="button0">
-                        <input type="submit" value="Save Unavailability">
-                    </div> 
-                    <br />
-                    <div class="button1">
-                        <input type="submit" value="Reset Password">
-                    </div>
-                    <br /> 
-                    <div class="button2">
-                        <input type="submit" value="Save">
-                    </div>
                 </div> 
-            </form>
+                <!-- <div class="col-4">
+                    <p>Vacation dates:</p>
+                    <span class="details">Start Vacation</span>
+                    <input type="date" class="input" id="start" name="start" form="unavailability-form" >
+                    <br />
+                    <br />
+                    <span class="details">End Vacation</span>
+                    <input type="date" class="input" id="end" name="end" form="unavailability-form" >
+                    <br />
+                    <br />
+                     <input type="save" value="Save Unavailability" onclick="saveUnavailability()" readonly> 
+                    <button type="submit" class="btn btn-outline-info" form="unavailability-form" >Save Unavailability</button> 
+                    <br />
+                    <br />
+                    <br />
+                    <br /> 
+                </div>   -->
+                </div>
+                <div class="button">
+                    <input  value="Save" form="form" onclick="checkInputs()"  readonly>
+                </div>
+            </div>          
+        </form>    
         </div>
-    </body>  
-</html>
+    </body>
+    <script>
+        const form1=document.getElementById("form1");
+        const form=document.getElementById("form");
+        const firstName=document.getElementById("firstName");
+        const lastName=document.getElementById("lastName");
+        const phone=document.getElementById("phone");
+        const mail=document.getElementById("mail");         
+  
+        document.querySelectorAll('.input-box[data-error] .input').forEach(inpEl=>{
+            inpEl.addEventListener('input',()=>inpEl.parentElement.removeAttribute('data-error'));
+        });
+        firstName.parentElement.removeAttribute('data-error');
+        lastName.parentElement.removeAttribute('data-error');
+        phone.parentElement.removeAttribute('data-error');
+        mail.parentElement.removeAttribute('data-error');
 
+        function checkInputs(){
+            const firstNameValue=firstName.value.trim();
+            const lastNameValue=lastName.value.trim();
+            const phoneValue=phone.value.trim();
+            const mailValue=mail.value.trim();
+         
+            var flag=0;
+            if(firstNameValue==""){
+                firstName.parentElement.setAttribute('data-error','First name can not be empty');
+                flag=1;
+            }
+            if(firstNameValue.length<3 ){
+                firstName.parentElement.setAttribute('data-error','First name must contain less 3 character');
+                flag=1;
+            }
+            if(firstNameValue.length>50 ){
+                firstName.parentElement.setAttribute('data-error','First name must contain no more  50 character');
+                flag=1;
+            }
+            if(!/^[a-zA-Z]+$/.test(firstNameValue)){
+                firstName.parentElement.setAttribute('data-error','First name must contain only character');
+            }
+            if(lastNameValue==""){
+                lastName.parentElement.setAttribute('data-error','Last name can not be empty');
+                flag=1;
+            }
+            if(lastNameValue.length<3){
+                lastName.parentElement.setAttribute('data-error','Last name must contain less 3 character');
+                flag=1;
+            }
+            if(lastNameValue.length>50){
+                lastName.parentElement.setAttribute('data-error','Last name must contain no more  50 character');
+                flag=1;
+            }
+            if(phoneValue.length!=10){
+                phone.parentElement.setAttribute('data-error','Phone must contain 10 digits');
+                flag=1;
+            } 
+            if(!mailValue.includes('@')){
+                mail.parentElement.setAttribute('data-error','mail must be example@example.com');
+                flag=1;
+            }   
+            if(flag==0){
+                document.getElementById("form").submit();
+            }
+              
+        }
+        function resetPassword() {            
+            document.getElementById("form-pass").submit();
+        }
+        function saveUnavailability() {
+            
+        } 
+    </script>
+    <script type="text/javascript"src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+     <script type="text/javascript">
+        (function(){
+             emailjs.init("service_m3luncq");
+        })();
+    </script>
+</html>  
 
