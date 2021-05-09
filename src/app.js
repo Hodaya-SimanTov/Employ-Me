@@ -30,7 +30,7 @@ const connectionParams={
     useCreateIndex: true,
     useUnifiedTopology: true
 }
-mongoose.connect(process.env.CONNECT_DB, {connectionParams})
+mongoose.connect(process.env.CONNECT_DB, connectionParams)
     .then(()=>{
         console.log('connected');
 

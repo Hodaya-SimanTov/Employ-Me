@@ -11,7 +11,6 @@ const router = express.Router();
 const _ = require('lodash');
 
 const addEmployer=async (req, res) => {
-    console.log(req.body);
     // First Validate The Request
     const { error } = validate(req.body);
     if (error) {
@@ -28,7 +27,7 @@ const addEmployer=async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         employer.password = await bcrypt.hash(employer.password, salt);
         await employer.save();
-        res.redirect('/employer/homePage');
+        res.redirect(`/employer/homePage/${employer.email}`);
     }
     // console.log('I am in add employer')
 }
@@ -59,7 +58,7 @@ const editProfile=async (req, res) => {
         return res.status(400).send(error.details[0].message);
     }
     let employer= await Employer.findOneAndUpdate({email: req.params.email}, req.body, {new: true });
-    res.redirect('/employer/homePage');
+    res.redirect(`/employer/homePage/${req.params.email}`);
 }
 const resetPasswordDisplay=async (req, res) => {
     let employer = await Employer.findOne({email:req.params.email})
@@ -229,15 +228,15 @@ const searchContractorByFields=async(req,res)=> {
     res.render('../views/employerSearchResult',{result:result,emailEmployer: req.params.email,date: req.body.employmentDate});
 }
 
-const addEmployemnt=async (req, res) => {
-    const { error } = validateEmployement(req.body);
-    if (error) {
-        return res.status(400).send(error.details[0].message);
-    }
-    employement = new Employement(_.pick(req.body, ['employerEmail','constructorEmail','date', 'jobScope','status','hourlyWage','rating','feedback']));
-    await employement.save();
-    res.redirect('/employer/homePage');
-}
+// const addEmployemnt=async (req, res) => {
+//     const { error } = validateEmployement(req.body);
+//     if (error) {
+//         return res.status(400).send(error.details[0].message);
+//     }
+//     employement = new Employement(_.pick(req.body, ['employerEmail','constructorEmail','date', 'jobScope','status','hourlyWage','rating','feedback']));
+//     await employement.save();
+//     res.redirect('/employer/homePage');
+// }
 //פונקציה שמקבלת 2 מערכים אחד של הקונטרקטורים שזמינים בתאריך מסויים ואחד של הקונטרקטורים שמתאימים לסינון ומחזירה מערך של קונטרקטורים שמתאימים 
 const availableCons=(avilableConsArr,filteredConsArr)=>{
     var availableCons=[];
@@ -278,5 +277,5 @@ const bookContractor=async (req, res) => {
     }
 }
 
-module.exports={addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,addEmployemnt,resetPasswordDisplay,bookContractorDisplay,bookContractor};
+module.exports={addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,resetPasswordDisplay,bookContractorDisplay,bookContractor};
 
