@@ -252,6 +252,15 @@ const bookContractorDisplay=async (req, res) => {
         res.render('../views/bookContractor',{contractor: contractor,emailEmployer: req.params.emailEmployer,date: req.params.date,companyName: employer.companyName})
     }
 }
+const bookContractor=async (req, res) => {
+    let contractor=await ContractorWorker.findById(req.params.idConstractor)
+    let employer=await Employer.findOne({email: req.params.emailEmployer})
+    if (!contractor || !employer) {
+        return res.status(400).send('That error in system');
+    } else {
+        
+    }
+}
 
-module.exports={addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,addEmployemnt,resetPasswordDisplay,bookContractorDisplay};
+module.exports={addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,addEmployemnt,resetPasswordDisplay,bookContractorDisplay,bookContractor};
 
