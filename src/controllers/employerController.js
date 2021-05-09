@@ -1,6 +1,7 @@
 const nodemailer=require('nodemailer')
 const jwt = require('jsonwebtoken');
-const ContractorWorker=require('../model/contractorWorker');
+const {ContractorWorker}=require('../model/contractorWorker');
+const ContractorWorkeController=require('../controllers/contractorWorkerController');
 const Unavailability=require('../model/unavailabilityContractor');
 const bcrypt = require('bcrypt');
 const { Employer, validate,validateEditEmployer } = require('../model/employer');
@@ -74,7 +75,7 @@ const resetPassword=async (req, res) =>{
     const salt = await bcrypt.genSalt(10);
     const password= await bcrypt.hash(req.body.password, salt);
     let employer= await Employer.findOneAndUpdate({email: req.params.email}, { password: password}, {new: true });
-    res.redirect('/employer/homePage');
+    res.redirect(`/employer/homePage/${req.params.email}`);
 }
 //פונקציה שמחזירה עובדים שתפוסים בין 2 תאריכים
 const ContractorAvialableDate=async(date)=>{
@@ -83,11 +84,26 @@ const ContractorAvialableDate=async(date)=>{
     var unavailability = await Unavailability.find( {unavailabArray : { $nin: [date] }}); 
         //res.send({contractors:unavailability});        
     for(i=0;i<unavailability.length;i++){
-        array.push(unavailability[i].contractorId);
+        array[i]=unavailability[i].contractorId;
     }
+    console.log("#######"+array.length+"\n")
     return array;  
 }
-
+// const findContractorInSpecDate=(req,res)=>{
+//         var array=[];
+//         var i=0;
+//         Unavailability.find( {unavailabArray : { $in: [req.body.date] }}).then(unavailability=>{  
+//             res.send({contractors:unavailability});        
+//             for(i=0;i<unavailability.length;i++){
+//                 array[i]=unavailability[i].contractorId;
+//             }
+//             console.log(array);    
+//             return array;  
+//         }).catch(err=>{
+//             console.log(err);
+//         })
+//     }
+ 
 
 //  פונקציה שמחזירה עובדים שעומדים בסינונים ופנויים בתאריך
 const searchContractorByFields=async(req,res)=> {
@@ -102,7 +118,7 @@ const searchContractorByFields=async(req,res)=> {
             if(req.body.experience=='select')
             {
                 try{
-                    filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation})
+                    filteredCons = await ContractorWorker.find( {occupationArea: req.body.occupation})
                     console.log('filter1');
                     result = await availableCons(avilableConsArr,filteredCons);
                     console.log(result+'i result');
@@ -255,8 +271,9 @@ const bookContractor=async (req, res) => {
         return res.status(400).send('That error in system');
     } else {
         let employement=new Employement({employerEmail: req.params.emailEmployer,constructorEmail: contractor.mail,date: req.params.date,jobScope: req.body.numBusinessHours,status: 'open',hourlyWage: contractor.hourlyWage,rating: 0,feedback:'' })
-        console.log(employement)
         await employement.save();
+        console.log({id: contractor.unavailability,date:req.params.date})
+        ContractorWorkeController.addDateToUnavailabilityarray(contractor.unavailability,req.params.date,req.params.date)
         res.redirect(`/employer/homePage/${req.params.emailEmployer}`);
     }
 }
