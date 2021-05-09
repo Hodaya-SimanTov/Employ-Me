@@ -40,7 +40,10 @@ router.post('/searchContractorByFields/:email',employer.searchContractorByFields
 router.get('/confirmEmployments/:email',employer.confirmEmployments);
 router.get('/employerHistory/:email',employer.historyEmployments);
 
-// router.get('/employerRate/:emailEmployer/:idConstractor/:date',employer.);
+//  router.get('/employerRate',(req,res)=>{
+//     res.render('../views/employerRate')
+// });
+
 // router.post('/employerRate/:emailEmployer/:idConstractor/:date',employer.bookContractor);
 
 
