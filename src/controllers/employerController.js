@@ -80,9 +80,16 @@ const resetPassword=async (req, res) =>{
 const ContractorAvialableDate=async(date)=>{
     var array=[];
     var i=0;
-    var unavailability = await Unavailability.find( {unavailabArray : { $nin: [date] }}); 
-        //res.send({contractors:unavailability});        
+    const d=new Date(date)
+    console.log(d)
+    const myDate=new Date(d.getFullYear(),d.getMonth(),d.getUTCDate()+1)
+    // const myDate=new Date(date)
+    console.log(myDate)
+    var unavailability = await Unavailability.find( {unavailabArray : { $nin: [myDate] }}); 
+    console.log("$$$$$$"+unavailability+"\n")
+    //res.send({contractors:unavailability});        
     for(i=0;i<unavailability.length;i++){
+        console.log(typeof unavailability[i].unavailabArray+"type\n" )
         array[i]=unavailability[i].contractorId;
     }
     console.log("#######"+array.length+"\n")
@@ -118,9 +125,9 @@ const searchContractorByFields=async(req,res)=> {
             {
                 try{
                     filteredCons = await ContractorWorker.find( {occupationArea: req.body.occupation})
-                    console.log('filter1');
+                    // console.log('filter1');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    console.log(result+'i result');
+                    // console.log(result+'i result');
                     
                     //res.send(result)
                 }
@@ -131,9 +138,9 @@ const searchContractorByFields=async(req,res)=> {
             else{
                 try{
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation, experienceField:req.body.experience})
-                    console.log('filter2');
+                    // console.log('filter2');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    console.log(result+'i result');
+                    // console.log(result+'i result');
                     res.send(result)
                 }
                 catch(err){
@@ -146,9 +153,9 @@ const searchContractorByFields=async(req,res)=> {
             {
                 try {
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation, scopeWork:req.body.scope})
-                    console.log('filter3');
+                    // console.log('filter3');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    console.log(result+'i result');
+                    // console.log(result+'i result');
                     res.send(result)
                 }
                 catch(err){
@@ -158,9 +165,9 @@ const searchContractorByFields=async(req,res)=> {
             else {
                 try {
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation ,scopeWork:req.body.scope, experienceField:req.body.experience})
-                    console.log('filter4');
+                    // console.log('filter4');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    console.log(result+'i result');
+                    // console.log(result+'i result');
                     res.send(result)
                 }
                 catch(err){
@@ -175,9 +182,9 @@ const searchContractorByFields=async(req,res)=> {
             if(req.body.experience=='Select') {
                 try {
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation ,serviceArea:req.body.service})
-                    console.log('filter5');
+                    // console.log('filter5');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    console.log(result+'i result');
+                    // console.log(result+'i result');
                     res.send(result)
                 }
                 catch(err){
@@ -187,9 +194,9 @@ const searchContractorByFields=async(req,res)=> {
             else {
                 try {
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation, serviceArea:req.body.service, experienceField:req.body.experience})
-                    console.log('filter6');
+                    // console.log('filter6');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    console.log(result+'i result');
+                    // console.log(result+'i result');
                     res.send(result)
                 }
                 catch(err){
@@ -201,9 +208,9 @@ const searchContractorByFields=async(req,res)=> {
             if(req.body.experience=='Select'){
                 try {
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation, serviceArea:req.body.service, scopeWork:req.body.scope})
-                    console.log('filter7');
+                    // console.log('filter7');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    console.log(result+'i result');
+                    // console.log(result+'i result');
                     res.send(result)
                 }
                 catch(err){
@@ -213,9 +220,9 @@ const searchContractorByFields=async(req,res)=> {
             else {
                 try {
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation, serviceArea:req.body.service, scopeWork:req.body.scope, experienceField:req.body.experience})
-                    console.log('filter8');
+                    // console.log('filter8');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    console.log(result+'i result');
+                    // console.log(result+'i result');
                     res.send(result)
                 }
                 catch(err){
@@ -271,7 +278,7 @@ const bookContractor=async (req, res) => {
     } else {
         let employement=new Employement({employerEmail: req.params.emailEmployer,constructorEmail: contractor.mail,date: req.params.date,jobScope: req.body.numBusinessHours,status: 'open',hourlyWage: contractor.hourlyWage,rating: 0,feedback:'' })
         await employement.save();
-        console.log({id: contractor.unavailability,date:req.params.date})
+        // console.log({id: contractor.unavailability,date:req.params.date})
         ContractorWorkeController.addDateToUnavailabilityarray(contractor.unavailability,req.params.date,req.params.date)
         res.redirect(`/employer/homePage/${req.params.emailEmployer}`);
     }
