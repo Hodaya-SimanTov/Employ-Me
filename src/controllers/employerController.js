@@ -283,6 +283,34 @@ const bookContractor=async (req, res) => {
         res.redirect(`/employer/homePage/${req.params.emailEmployer}`);
     }
 }
+const confirmEmployments=async (req, res) => {
+    try{
+        let cEmployment=await Employement.find({employerEmail: req.params.email, status:'verified'})
+        console.log(cEmployment);
+        res.render('../views/employerConfirmEmployments',{cEmployment:cEmployment,emailEmployer: req.params.email});
+    }
+    catch(err){
+        console.log(err);
+    }    
+}
 
-module.exports={addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,resetPasswordDisplay,bookContractorDisplay,bookContractor};
+const historyEmployments=async (req, res) => {
+    try{
+        let hEmployment=await Employement.find({employerEmail: req.params.email, status:'close'})
+        console.log(hEmployment);
+        res.render('../views/employerHistory',{hEmployment:hEmployment,emailEmployer: req.params.email});
+    }
+    catch(err){
+        console.log(err);
+    }    
+}
+
+// const rateAndFidback=async (req, res) => {
+//     let rEployment=await Employement.findOne({employerEmail: req.params.emailEmployer, idConstractor: req.params.idConstractor, date: req.params.date})
+
+
+
+    
+
+module.exports={addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,resetPasswordDisplay,bookContractorDisplay,bookContractor,confirmEmployments,historyEmployments};
 
