@@ -9,7 +9,7 @@
     <body>
         <div class="container">
             <div class="title">Book Contractor</div>
-            <form class="model-content animate" id="form" action='/employer/homePage/<%=emailEmployer%>'  method="GET" >
+            <form class="model-content animate" id="form" action='/employer/bookContractor/<%=emailEmployer%>/<%=contractor.id%>/<%=date%>'  method="POST" >
                 <br/>
                 <span class="title2">Contractor Details</span>
                 <div class="user-details">
@@ -20,6 +20,10 @@
                     <div class="input-box"  >
                         <span class="details">Last Name</span>
                         <p><%=contractor.lastName%></p>
+                    </div>
+                    <div class="input-box"  >
+                        <span class="details">Email Address</span>
+                        <p><%=contractor.mail%></p>
                     </div>
                     <div class="input-box"  >
                         <span class="details">Occupation Area</span>
@@ -58,11 +62,11 @@
                     <div class="user-details">
                         <div class="input-box" >
                             <span class="details">Date Of Occupation</span>
-                            <input type="date" class="input" id="mydate" value=<%=date%> readonly >
+                            <input type="date" class="input" value=<%=date%> readonly >
                         </div>
                         <div class="input-box" data-error="Error message">
                             <span class="details">Number of business hours</span>
-                            <input type="number" class="input" id="numBusinessHours" min=1  max=12 maxlength="2" required>
+                            <input type="number" class="input" id="numBusinessHours" name="numBusinessHours" min=1  max=12 maxlength="2" required>
                         </div>
                    
                     </div>

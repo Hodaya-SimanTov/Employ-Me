@@ -27,10 +27,6 @@ const addEmployer=async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         employer.password = await bcrypt.hash(employer.password, salt);
         await employer.save();
-        //const token = jwt.sign({ _id: employer._id }, config.get('PrivateKey'));
-        //res.header('x-auth-token', token).send(_.pick(employer, ['_id','firstName','lastName','phone', 'email','companyName','rule']));
-        //res.send(_.pick(employer, ['_id','firstName','lastName','phone', 'email','companyName','rule']));
-    
         res.redirect('/employer/homePage');
     }
     // console.log('I am in add employer')
@@ -258,7 +254,10 @@ const bookContractor=async (req, res) => {
     if (!contractor || !employer) {
         return res.status(400).send('That error in system');
     } else {
-        
+        let employement=new Employement({employerEmail: req.params.emailEmployer,constructorEmail: contractor.mail,date: req.params.date,jobScope: req.body.numBusinessHours,status: 'open',hourlyWage: contractor.hourlyWage,rating: 0,feedback:'' })
+        console.log(employement)
+        await employement.save();
+        res.redirect(`/employer/homePage/${req.params.emailEmployer}`);
     }
 }
 
