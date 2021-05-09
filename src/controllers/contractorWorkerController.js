@@ -1,5 +1,7 @@
-const ContractorWorker=require('../model/contractorWorker')
+//const ContractorWorker=require('../model/contractorWorker')
 const Unavailability=require('../model/unavailabilityContractor')
+const {ContractorWorker,validate,validateEditContractor } = require('../model/contractorWorker');
+
 const nodemailer=require('nodemailer')
 const jwt = require('jsonwebtoken')
 var mongo=require('mongodb');
@@ -21,6 +23,8 @@ const salaryOfHour =function (contractor_id,birthday) {
         console.log(err);
     })
 }
+
+//שליחת מייל
 function sendmail(email, name) {
     console.log(email)
     console.log(name)
@@ -48,6 +52,8 @@ function sendmail(email, name) {
     });
 }
 
+
+//הוספת עובד חדש
 const addContractorWorker=(req,res)=>{
     console.log(req.body);
     const newContractorWorker=new ContractorWorker(req.body)
@@ -100,8 +106,23 @@ const addDateToArray=(idArray,year,month,day)=>{
     })
 }
 
+const unDisplay=async (req, res) => {
+    let contractor = await ContractorWorker.findOne({mail:req.params.mail})
+    if (contractor) {
+       res.render('../views/contractorUnavailability',contractor);
+    } 
+    else {
+        return res.status(400).send('That email is error!');
+    }
+}
+
 const addUn=(req,res)=>{//פונקציה מפעילה את הכל- מקבלת בניתוב אידי של אי זמינות
-    addDateToUnavailabilityarray(req.params.id,req.body.start,req.body.end);   
+    ContractorWorker.findOne({mail:req.params.mail}).then(contractor=>{
+        addDateToUnavailabilityarray(contractor.unavailability,req.body.start,req.body.end);
+        res.redirect(`/contractorWorker/contractorHomepage/${req.params.mail}`); 
+    }).catch(err=>{
+        console.log(err);
+    })      
 }
 
 
@@ -240,8 +261,61 @@ const deleteContractorWorkerById=(req,res)=>{
 //         experienceField:req.body.experienceField,serviceArea:req.body.serviceArea,
 //         scopeWork:req.body.scopeWork}
 
+const getContractorByEmail=async(email)=>{
+    
+    let contractor = await ContractorWorker.findOne({mail:req.params.mail})
+    if (contractor) {
+       res.render('../views/contractorProfile',{contractor})
+    } 
+    else {
+        return res.status(400).send('That mail is error!');
+    }
+   
+}
+const editProfileDisplay=async (req, res) => {
+    let contractor = await ContractorWorker.findOne({mail:req.params.mail})
+    if (contractor) {
+       res.render('../views/contractorProfile',{contractor:contractor});
+    } 
+    else {
+        return res.status(400).send('That email is error!');
+    }
+}
+const editProfile=async (req, res) => {
+    // const { error } = validateEditContractor(req.body);
+    // if (error) {
+    //     return res.status(400).send(error.details[0].message);
+    // }
+    let contractor= await ContractorWorker.findOneAndUpdate({mail: req.params.mail}, req.body, {new: true });
+    res.redirect('/contractorWorker/contractorHomepage');
+}
+
+
+
+const updateContractorPass=(req,res)=>{
+    console.log(`in update pass`);
+    ContractorWorker.findOneAndUpdate({mail: req.params.mail}, {password: req.body.password})
+    .then(contractorWorker=>{
+        console.log(req.body.password);
+        console.log(req.body.mail);
+        res.redirect(`/contractorWorker/contractorHomepage/${req.params.mail}`);
+    }).catch(err=>{
+        console.log(`can not update this paa! ${err}`);
+    })
+    
+}
+
+const homepageDisplay=async (req, res) => {
+    let contractor = await ContractorWorker.findOne({mail:req.params.mail})
+    if (contractor) {
+       res.render('../views/contractorhomepage');
+    } 
+    else {
+        return res.status(400).send('That email is error!');
+    }
+}
 
 module.exports={addContractorWorker,getContractorWorkerById,updateContractorWorkerById,deleteContractorWorkerById
     ,getAllContractorWorkers,getContractorWorkerByMail,updateContractorWorkerByMail,loginUser,addDateToUnavailabilityarray
-    ,addUn };
+    ,addUn , getContractorByEmail ,editProfileDisplay ,editProfile,updateContractorPass,unDisplay,homepageDisplay};
 

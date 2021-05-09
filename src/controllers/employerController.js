@@ -27,10 +27,6 @@ const addEmployer=async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         employer.password = await bcrypt.hash(employer.password, salt);
         await employer.save();
-        //const token = jwt.sign({ _id: employer._id }, config.get('PrivateKey'));
-        //res.header('x-auth-token', token).send(_.pick(employer, ['_id','firstName','lastName','phone', 'email','companyName','rule']));
-        //res.send(_.pick(employer, ['_id','firstName','lastName','phone', 'email','companyName','rule']));
-    
         res.redirect('/employer/homePage');
     }
     // console.log('I am in add employer')
@@ -107,9 +103,9 @@ const searchContractorByFields=async(req,res)=> {
             {
                 try{
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation})
-                    console.log("filter1");
+                    console.log('filter1');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    console.log(result+"i result");
+                    console.log(result+'i result');
                     
                     //res.send(result)
                 }
@@ -120,9 +116,9 @@ const searchContractorByFields=async(req,res)=> {
             else{
                 try{
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation, experienceField:req.body.experience})
-                    console.log("filter2");
+                    console.log('filter2');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    console.log(result+"i result");
+                    console.log(result+'i result');
                     res.send(result)
                 }
                 catch(err){
@@ -135,9 +131,9 @@ const searchContractorByFields=async(req,res)=> {
             {
                 try {
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation, scopeWork:req.body.scope})
-                    console.log("filter3");
+                    console.log('filter3');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    console.log(result+"i result");
+                    console.log(result+'i result');
                     res.send(result)
                 }
                 catch(err){
@@ -147,9 +143,9 @@ const searchContractorByFields=async(req,res)=> {
             else {
                 try {
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation ,scopeWork:req.body.scope, experienceField:req.body.experience})
-                    console.log("filter4");
+                    console.log('filter4');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    console.log(result+"i result");
+                    console.log(result+'i result');
                     res.send(result)
                 }
                 catch(err){
@@ -164,9 +160,9 @@ const searchContractorByFields=async(req,res)=> {
             if(req.body.experience=='Select') {
                 try {
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation ,serviceArea:req.body.service})
-                    console.log("filter5");
+                    console.log('filter5');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    console.log(result+"i result");
+                    console.log(result+'i result');
                     res.send(result)
                 }
                 catch(err){
@@ -176,9 +172,9 @@ const searchContractorByFields=async(req,res)=> {
             else {
                 try {
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation, serviceArea:req.body.service, experienceField:req.body.experience})
-                    console.log("filter6");
+                    console.log('filter6');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    console.log(result+"i result");
+                    console.log(result+'i result');
                     res.send(result)
                 }
                 catch(err){
@@ -190,9 +186,9 @@ const searchContractorByFields=async(req,res)=> {
             if(req.body.experience=='Select'){
                 try {
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation, serviceArea:req.body.service, scopeWork:req.body.scope})
-                    console.log("filter7");
+                    console.log('filter7');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    console.log(result+"i result");
+                    console.log(result+'i result');
                     res.send(result)
                 }
                 catch(err){
@@ -202,9 +198,9 @@ const searchContractorByFields=async(req,res)=> {
             else {
                 try {
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation, serviceArea:req.body.service, scopeWork:req.body.scope, experienceField:req.body.experience})
-                    console.log("filter8");
+                    console.log('filter8');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    console.log(result+"i result");
+                    console.log(result+'i result');
                     res.send(result)
                 }
                 catch(err){
@@ -229,8 +225,8 @@ const addEmployemnt=async (req, res) => {
 //פונקציה שמקבלת 2 מערכים אחד של הקונטרקטורים שזמינים בתאריך מסויים ואחד של הקונטרקטורים שמתאימים לסינון ומחזירה מערך של קונטרקטורים שמתאימים 
 const availableCons=(avilableConsArr,filteredConsArr)=>{
     var availableCons=[];
-    console.log(avilableConsArr+"i idesss")
-    console.log(filteredConsArr+"i objects")
+    console.log(avilableConsArr+'i idesss')
+    console.log(filteredConsArr+'i objects')
     for(let i=0; i<avilableConsArr.length; i++)
     {
         for (let j=0; j<filteredConsArr.length; j++)
@@ -252,6 +248,18 @@ const bookContractorDisplay=async (req, res) => {
         res.render('../views/bookContractor',{contractor: contractor,emailEmployer: req.params.emailEmployer,date: req.params.date,companyName: employer.companyName})
     }
 }
+const bookContractor=async (req, res) => {
+    let contractor=await ContractorWorker.findById(req.params.idConstractor)
+    let employer=await Employer.findOne({email: req.params.emailEmployer})
+    if (!contractor || !employer) {
+        return res.status(400).send('That error in system');
+    } else {
+        let employement=new Employement({employerEmail: req.params.emailEmployer,constructorEmail: contractor.mail,date: req.params.date,jobScope: req.body.numBusinessHours,status: 'open',hourlyWage: contractor.hourlyWage,rating: 0,feedback:'' })
+        console.log(employement)
+        await employement.save();
+        res.redirect(`/employer/homePage/${req.params.emailEmployer}`);
+    }
+}
 
-module.exports={addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,addEmployemnt,resetPasswordDisplay,bookContractorDisplay};
+module.exports={addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,addEmployemnt,resetPasswordDisplay,bookContractorDisplay,bookContractor};
 

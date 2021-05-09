@@ -21,6 +21,7 @@ router.get('/editProfile/:email',employer.editProfileDisplay);
 router.post('/editProfile/:email',employer.editProfile);
 router.post('/addEmployement',employer.addEmployemnt)
 router.get('/bookContractor/:emailEmployer/:idConstractor/:date',employer.bookContractorDisplay)
+router.post('/bookContractor/:emailEmployer/:idConstractor/:date',employer.bookContractor)
 router.get('/search/:email',(req,res)=>{
     res.render('../views/employerSearch',{email: req.params.email})
 });

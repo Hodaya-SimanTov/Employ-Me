@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Unavailability Conractor</title>
+        <link rel="stylesheet"  href="/css/styleContractorUnavailability.css">
+    </head>
+    <body>     
+        <!-- <form class="homeLogo" action='/contractorWorker/contractorHomepage/<%mail%>'  method="GET" >
+            <button type="submit" style="font-size:24px"><img class="logo" type="submit" src="/css/images/logo.PNG"></button>            
+        </form>    -->
+        <div class="container">
+            <form class="model-content animate" id="form" action='/contractorWorker/addUn/<%=mail%>'  method="POST" >
+                <div class="user-details">
+                    <div><span>Vacation dates:</span></div>
+                    <div><span class="details">Start Vacation</span></div>
+                    <div><input type="date" class="input" id="start" name="start" form="form" ></div>
+                    <div><span class="details">End Vacation</span></div>
+                    <div><input type="date" class="input" id="end" name="end" form="form" ></div>
+                     <!-- <input type="save" value="Save Unavailability" onclick="saveUnavailability()" readonly> -->
+                    <div><button type="submit" class="btn btn-outline-info" form="form" >Save Unavailability</button></div>
+                   
+                </div> 
+            </form>
+        </div>    
+    </body>
+</html>
