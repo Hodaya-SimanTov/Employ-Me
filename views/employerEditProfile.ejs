@@ -91,6 +91,10 @@
                 lastName.parentElement.setAttribute('data-error','Last name can not be empty');
                 flag=1;
             }
+            if(!/^[a-zA-Z]+$/.test(lastNameValue)){
+                lastName.parentElement.setAttribute('data-error','Last name must contain only character');
+                flag=1;
+            }
             if(lastNameValue.length<3){
                 lastName.parentElement.setAttribute('data-error','Last name must contain less 3 character');
                 flag=1;
