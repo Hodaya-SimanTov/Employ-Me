@@ -1,6 +1,6 @@
 {
   "name": "my-website",
-  "version": "1.0.0",
+  "version": "7.12.0",
   "description": "my first website",
   "main": "app.js",
   "directories": {
@@ -23,16 +23,12 @@
   },
   "homepage": "https://github.com/Hodaya-SimanTov/My-Website#readme",
   "dependencies": {
-    "@hapi/joi": "^15.0.3",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "config": "^3.3.6",
-    "data-parser": "^1.0.1",
     "date-and-time": "^1.0.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
-    "emailjs": "^3.4.0",
-    "emailjs-com": "^2.6.4",
     "express": "^4.17.1",
     "express-joi-validation": "^5.0.0",
     "express-validation": "^3.0.8",
@@ -42,11 +38,8 @@
     "lodash": "^4.17.21",
     "mongodb": "^3.6.6",
     "mongoose": "^5.12.7",
-    "mongoose-intl-phone-number": "^1.1.1",
     "nodemailer": "^6.5.0",
-    "nodemod": "^2.7.2",
-    "path": "^0.12.7",
-    "smtp-client": "^0.4.0"
+    "nodemod": "^2.7.2"
   },
   "devDependencies": {
     "@types/chai": "^4.2.15",

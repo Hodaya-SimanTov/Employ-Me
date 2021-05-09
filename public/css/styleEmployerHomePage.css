@@ -4,11 +4,47 @@
 	margin: 0;
 }
 .wrapper{
-	background: url('images/emlogo1.PNG') no-repeat;
+	background: url('images/employerHomeP.PNG') no-repeat;
 	background-size: cover;
 	height: 100vh;
 }
-.navbar{
+.logo{
+	width: 230px;
+	height: 50px;
+	padding: 5px 50px;
+	float: left;
+}
+.navbar {
+	width: 100%;
+	background-color: #fff;
+	overflow: auto;
+	float: right;
+	padding-right: 12px;
+}
+.navbar a {
+	float: right;
+	text-align: center;
+	padding: 12px;
+	color: rgb(9, 5, 68);
+	text-decoration: none;
+	font-size: 17px;
+	height: 25px;
+	border-radius: 10px;
+}
+.navbar a:hover {
+	background-color: rgb(247, 250, 94);
+}
+.active {
+	background-color: rgb(247, 250, 94);
+	border-radius: 10px;
+}
+@media screen and (max-width: 500px) {
+	.navbar a {
+		float: none;
+		display: block;
+	}
+}
+/* .navbar{
 	height: 80px;
 	width: 100%;
 	background: rgb(255, 255, 255);
@@ -38,8 +74,8 @@
 .navbar ul li a.active, .navbar ul li a:hover{
 	background: rgb(247, 250, 94);
 	border-radius: 2px;
-}
-.wrapper .center{
+} */
+/* .wrapper .center{
 	position: absolute;
 	top: 35%;
 	left: 25%;
@@ -61,4 +97,4 @@
 	width: 895px;
 	margin-top: 10px;
 	text-align: center;
-}
+} */

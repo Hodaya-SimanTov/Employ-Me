@@ -31,13 +31,18 @@
                         <span class="details">Role</span>
                         <input type="text" class="input" name="role" id="role" value=<%=role%>>
                     </div>
-                    <div class="button1">
-                        <input value="Reset Password" readonly>
-                    </div> 
+                    
                 </div>
                 <div class="button">
                     <input  value="Save" onclick="checkInputs()"  readonly>
                 </div> 
+            </form>
+            <form class="model-content animate"  action='/employer/resetPassword/<%=email%>'  method="GET" >
+                <div class="user-details">
+                    <div class="button1">
+                        <input value="Reset Password" type="submit" readonly>
+                    </div> 
+                </div>
             </form>
         </div>
     </body> 
@@ -109,14 +114,6 @@
             }
              
        }
-       function resetPassword(){
-            
-       }
-   </script>
-   <script type="text/javascript"src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function(){
-            emailjs.init("service_m3luncq");
-        })();
+   
     </script>
 </html>

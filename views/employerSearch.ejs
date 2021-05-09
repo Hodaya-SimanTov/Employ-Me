@@ -9,8 +9,8 @@
             <nav class="navbar">
                 <img class="logo" src="/css/images/logo.PNG">
                 <ul>
-                    <li><a class="active" href="#">My Profile</a> </li>
-                    <li><a href="#">Search</a> </li>
+                    <li><a class="active" href="editProfile">My Profile</a> </li>
+                    <li><a href="search">Search</a> </li>
                     <li><a href="#">Info & Statistics</a> </li>
                     <li><a href="#">Confirm Employments</a> </li>
                     <li><a href="#">History</a> </li>
@@ -20,35 +20,35 @@
             </nav>
             <div class="container">
                 <div class="headline">Search contractors</div>
-                <form class=search action="/employer/searchContractorByFields" method="GET" id="searchContractorByFields">
+                <form class=search action="/employer/searchContractorByFields/<%=email%>" method="POST">
                     <div class="clr"></div>
-                    <div class=date>
+                    <div class=date data-error="Error message">
                         <lable class="title">Select Employment Date*</lable>
                         <br>
-                        <input type="date" name="employmentDate" required>
+                        <input type="date" class="input" name="employmentDate" id="employmentDate" min="2000-01-01" max="2100-01-01" required >
                     </div>
                     <br>
                     <div class=occupation>
                         <lable>Select Occupation Area*</lable>
                         <br>
-                        <select name="occupation" required>
-                            <option value="biotechnology">Biotech</option>
-                            <option value="cleaning">Cleaning</option>
-                            <option value="customer service">Customer service</option>
-                            <option value="digital">Digital</option>
-                            <option value="financial">Finance</option>
-                            <option value="high tech">High-tech</option>
-                            <option value="human resources">Human resources</option>
-                            <option value="insurance">Insurance</option>
-                            <option value="marketing">Marketing</option>
-                            <option value="offices">Offices</option>
-                            <option value="operation and logistics">Operations and logistics</option>
-                            <option value="production workers">Production workers</option>
-                            <option value="renovations">Renovations</option>
-                            <option value="sales">Sales</option>
-                            <option value="technical">Technical</option>
-                            <option value="waitresses">Waitresses</option>
-                            <option value="other">Other</option>
+                        <select name="occupation" required> 
+                            <option value="Biotech">Biotech</option>
+                            <option value="Cleaning">Cleaning</option>
+                            <option value="Customer service">Customer service</option>
+                            <option value="Digital">Digital</option>
+                            <option value="Finance">Finance</option>
+                            <option value="High-tech">High-tech</option>
+                            <option value="Human resources">Human resources</option>
+                            <option value="Insurance">Insurance</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Offices">Offices</option>
+                            <option value="Operations and logistics">Operations and logistics</option>
+                            <option value="Production workers">Production workers</option>
+                            <option value="Renovations">Renovations</option>
+                            <option value="Sales">Sales</option>
+                            <option value="Technical">Technical</option>
+                            <option value="Waitresses">Waitresses</option>
+                            <option value="Other">Other</option>
                         </select>
                     </div>
                     <br>
@@ -57,24 +57,24 @@
                         <br>
                         <select name="service">
                             <option value="select">Select </option>
-                            <option value="north">North</option>
-                            <option value="south">South</option>
-                            <option value="lowland">Lowlands</option>
-                            <option value="jerusalen area">Jerusalem Area</option>
-                            <option value="dan area">Dan Area</option>
-                            <option value="galilee">Galilee</option>    
+                            <option value="North">North</option>
+                            <option value="South">South</option>
+                            <option value="Lowlands">Lowlands</option>
+                            <option value="Jerusalem Area">Jerusalem Area</option>
+                            <option value="Dan Area">Dan Area</option>
+                            <option value="Galilee">Galilee</option>    
                         </select>
                     </div>
-                    <br>
+                    <br> 
                     <div class="jobScope">
                         <lable>Select Hour Job Scope</lable>
                         <br>
                         <select name="scope">
                             <option value="select">Select </option>
-                            <option value="threeToSix">3-6</option>
-                            <option value="sixToEight">6-8</option>
-                            <option value="eightToTen">8-10</option>
-                            <option value="tenToTwelve">10-12</option>   
+                            <option value="3-6">3-6</option>
+                            <option value="6-8">6-8</option>
+                            <option value="8-10">8-10</option>
+                            <option value="10-12">10-12</option>   
                         </select>
                     </div>
                     <div class="experienceYears">
@@ -82,15 +82,15 @@
                         <br>
                         <select name="experience">
                             <option value="select">Select </option>
-                            <option value="oneToFive">1-5 years</option>
-                            <option value="fiveToTen">5-10 years</option>
-                            <option value="tenToFifteen">10-15 years</option>
-                            <option value="overFifteen">Over 15 years</option>   
+                            <option value="1-5 years">1-5 years</option>
+                            <option value="5-10 years">5-10 years</option>
+                            <option value="10-15 years">10-15 years</option>
+                            <option value="Over 15 years">Over 15 years</option>   
                         </select>
                     </div>
                     <div class="button">
-                        <input type="submit" value="Search Contractors">
-                    </div> 
+                        <input type="submit" value="Search Contractors" href="/employer/styleEmployerSearchResults">
+                    </div>
                     <br>
                 </form>
             </div>

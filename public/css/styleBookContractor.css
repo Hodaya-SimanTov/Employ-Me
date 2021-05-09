@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Poppins',sans-serif;  
 }
 body{
     display: flex;
@@ -15,6 +15,7 @@ body{
 .container{
     max-width: 600px;
     width: 100%;
+    height: 125%;
     background: #fff;
     padding: 30px 30px;
     border-radius: 10px;
@@ -43,12 +44,12 @@ body{
 }
 form .user-details .input-box{
     margin-bottom: 15px;
-    width: 45%;
+    width: 45%;  
     margin: 0 5px;
 }
 .user-details .button1{
     margin-bottom: 15px;
-    width: 45%;
+    width: 45%;  
     margin: 0 5px;
     padding-top: 27px;
 }
@@ -63,7 +64,7 @@ form .user-details .input-box{
     border-radius: 5px;
     text-align: center;
     letter-spacing: 1px;
-    background-color: #989a9b;
+    background-color: #989a9b;   
 }
 .user-details .button1 input:hover{
     background-color: #ebd264
@@ -124,6 +125,15 @@ form .button input{
 }
 form .button input:hover{
     background: linear-gradient(-135deg, #71b7e6, #e6d171)
+}
+.details{
+    color: #ecc40e;
+}
+.title2{
+    font-size: 18px;
+    font-weight: 500;
+    position:relative;
+    text-align: center;
 }
 /* .input{
     transition: background 0.2s, border 0.2s;

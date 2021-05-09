@@ -11,24 +11,30 @@ router.post('/addEmployer',employer.addEmployer)
 router.get('/signUp',(req,res)=>{
     res.render('../views/employerSignUp1')
 });
-router.get('/homePage',(req,res)=>{
+router.get('/homePage/:email',(req,res)=>{
     res.render('../views/employerHomePage')
 });
 
-router.post('/resetPassword',employer.resetPassword)
-
+router.get('/resetPassword/:email',employer.resetPasswordDisplay)
+router.post('/resetPassword/:email',employer.resetPassword)
 router.get('/editProfile/:email',employer.editProfileDisplay);
 router.post('/editProfile/:email',employer.editProfile);
 router.post('/addEmployement',employer.addEmployemnt)
-
-router.get('/search',(req,res)=>{
-    res.render('../views/employerSearch')
+router.get('/bookContractor/:emailEmployer/:idConstractor/:date',employer.bookContractorDisplay)
+router.post('/bookContractor/:emailEmployer/:idConstractor/:date',employer.bookContractor)
+router.get('/search/:email',(req,res)=>{
+    res.render('../views/employerSearch',{email: req.params.email})
 });
+
 
 //הוספות של כנרת לסינון
 //router.get('/ContractorAvialableDate',employer.ContractorUnavialableDate);
-router.get('/searchContractorByFields',employer.searchContractorByFields);
+router.post('/searchContractorByFields/:email',employer.searchContractorByFields);
 //עד כאן
+// router.get('/searchResult',(req,res)=>{
+//     res.render('../views/employerSearchResults')
+// });
+
 
 module.exports=router
 
