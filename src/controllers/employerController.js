@@ -307,7 +307,6 @@ const confirmEmployments=async (req, res) => {
 const historyEmployments=async (req, res) => {
     try{
         let hEmployment=await Employement.find({employerEmail: req.params.email, status:'close'})
-        console.log(hEmployment);
         res.render('../views/employerHistory',{hEmployment:hEmployment,emailEmployer: req.params.email});
     }
     catch(err){
