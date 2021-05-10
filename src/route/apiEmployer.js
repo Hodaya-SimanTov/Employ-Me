@@ -37,7 +37,8 @@ router.post('/searchContractorByFields/:email',employer.searchContractorByFields
 // router.get('/confirmEmployments/:email',(req,res)=>{
 //     res.render('../views/employerConfirmEmployments',{email: req.params.email})
 // });
-router.get('/confirmEmployments/:email',employer.confirmEmployments);
+router.get('/confirmEmployment/:email/:id',employer.confirmEmployments);
+router.get('/confirmEmployments/:email',employer.confirmEmploymentsDisplay);
 router.get('/employerHistory/:email',employer.historyEmployments);
 
 //  router.get('/employerRate',(req,res)=>{

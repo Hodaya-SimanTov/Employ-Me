@@ -9,6 +9,7 @@ const {Employement,validateEmployement}=require('../model/employement');
 const express = require('express');
 const router = express.Router();
 const _ = require('lodash');
+const { ObjectId } = require('bson');
 
 const addEmployer=async (req, res) => {
     // First Validate The Request
@@ -283,7 +284,7 @@ const bookContractor=async (req, res) => {
         res.redirect(`/employer/homePage/${req.params.emailEmployer}`);
     }
 }
-const confirmEmployments=async (req, res) => {
+const confirmEmploymentsDisplay=async (req, res) => {
     try{
         let cEmployment=await Employement.find({employerEmail: req.params.email, status:'verified'})
         console.log(cEmployment);
@@ -293,7 +294,16 @@ const confirmEmployments=async (req, res) => {
         console.log(err);
     }    
 }
-
+const confirmEmployments=async (req, res) => {
+    try{
+        let CEmployment=await Employement.update({_id: ObjectId(req.params.id)}, {status:'close'}, {new: true });
+        console.log(CEmployment);
+        res.redirect(`/employer/homePage/${req.params.emailEmployer}`);
+    }
+    catch(err){
+        console.log(err);
+    }    
+}
 const historyEmployments=async (req, res) => {
     try{
         let hEmployment=await Employement.find({employerEmail: req.params.email, status:'close'})
@@ -312,5 +322,5 @@ const historyEmployments=async (req, res) => {
 
     
 
-module.exports={addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,resetPasswordDisplay,bookContractorDisplay,bookContractor,confirmEmployments,historyEmployments};
+module.exports={addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,resetPasswordDisplay,bookContractorDisplay,bookContractor,confirmEmploymentsDisplay,historyEmployments,confirmEmployments};
 
