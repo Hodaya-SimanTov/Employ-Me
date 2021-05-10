@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu Employers</title>
+    <link rel="stylesheet"  href="/css/styleCompanyWorkerMenuEmployers.css">
+</head>
+<body>
+<form id="homePageCompanyManager">
+    <div class="wrapper">
+        <nav class="navbar">
+            <img class="logo" src="/css/images/logo.PNG" >
+            <ul>
+                <li><a href="/companyWorker/editProfile<%=email%>" class="active">My Profile</a> </li>
+                <li><a>Employers</a> </li>
+                <li><a href="#">Contractor Workers</a> </li>
+                <li><a href="#">Statistics</a> </li>
+                <li><a href="#">Messages</a> </li>
+                <li><a href="#">Log Out</a> </li>
+            </ul>
+        </nav>
+        <div class="serviceArea">
+            <lable>Menu Employers</lable>
+        </div>
+        <div class="serviceArea">
+            <lable>To add an employers on the "Add employer" button</lable>
+            <div class="button" >
+                <input type="submit" value="Add employer" onclick="addEmp()"  href="/companyWorker/styleCompanyWorkerMenuEmployers" readonly>
+            </div>
+        </div>
+        <div class="serviceArea">
+            <lable>To delete an employers on the "Delete employer" button</lable>
+            <div class="button">
+                <input type="submit" value="Delete employer" target="_blank"  onclick="addEmp()" href="/companyWorker/styleCompanyWorkerMenuEmployers" readonly>
+            </div>
+        </div>
+    </div>
+</form>
+
+</body>
+<script>
+    function addEmp() {
+        window.open("/employer/signUp", "_blank");
+    }
+</script>
+</html>

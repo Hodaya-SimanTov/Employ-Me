@@ -11,8 +11,14 @@ router.post('/editProfile/:email',companyWorker.editProfile);
 router.get('/companyWorkerSignUp',(req,res)=>{
     res.render('../views/companyWorkerSignUp')
 });
-router.get('/companyWorkerHomePage',(req,res)=>{
-    res.render('../views/companyWorkerHomePage')
-});
 
+router.get('/homePage/:email',(req,res)=>{
+    res.render('../views/companyWorkerHomePage',{email:req.params.email})
+});
+router.get('/menuEmployers/:email',(req,res)=>{
+    res.render('../views/companyWorkerMenuEmployers',{email:req.params.email})
+});
+router.get('/menuContractorWorker/:email',(req,res)=>{
+    res.render('../views/companyWorkerMenuContractor',{email:req.params.email})
+});
 module.exports=router
