@@ -21,7 +21,7 @@ const CompanyWorker=mongoose.model('CompanyWorker',new mongoose.Schema({
         required:true,
         length: 10
     },
-    email:{
+    mail:{
         type:String,
         required:true,
         unique: true

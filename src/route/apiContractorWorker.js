@@ -17,6 +17,7 @@ router.get('/login',(req,res)=>{
 });
 
 
+
 router.post('/addContractorWorker',contractorWorker.addContractorWorker);
 router.get('/getContractorWorkerById/:id',contractorWorker.getContractorWorkerById);
 router.get('/getContractorWorkerByMail/:mail',contractorWorker.getContractorWorkerByMail);
@@ -38,12 +39,15 @@ router.post('/addUn/:mail',contractorWorker.addUn);
 
 router.get('/contractorHomepage/:mail',contractorWorker.homepageDisplay);
 
-router.get('/login/:mail',contractorWorker.loginUser);
+router.post('/login',contractorWorker.loginUser);
 
-//router.get('/findContractorInSpecDate',contractorWorker.findContractorInSpecDate);
+router.get('/findContractorInSpecDate',contractorWorker.findContractorInSpecDate);
 
+router.get('/contractorFuture/:mail',contractorWorker.contractorFuture);
 
+router.get('/contractorHistory/:mail',contractorWorker.contractorHistory);
 
+router.get('/endEmployement/:id',contractorWorker.endEmployement);
 
 module.exports=router
 

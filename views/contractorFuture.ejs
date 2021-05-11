@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Future shifts</title>
+        <link rel="stylesheet" href="/css/styleEmployerSearchResults.css">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row col-md-6 col-md-offset-2 custyle">
+                <div class="page-header">
+                    <h3><small class="pull-right"><%=result.length %></small> Future shifts </h3>
+                </div>
+            <table class="table table-striped custab">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Employer Email</th>
+                    <th>status</th>
+                    <th class="text-center"> </th>
+                </tr>
+            </thead>
+                <%
+                if(result.length!=0) {
+                    var i=1;
+                result.forEach(function(employement){
+                %>
+                <tr>
+                    <td><%= employement.date.getDate() %>.<%= employement.date.getMonth() %>.<%= employement.date.getFullYear() %></td>
+                    <td><%= employement.employerEmail %></td>
+                    <td><%= employement.status %></td>                    
+                    <td class="text-center"><a class='btn btn-info btn-xs' id="start" href="#" onclick="startClick()"><span class="glyphicon glyphicon-edit" ></span> כניסה </a></td>
+                    <td class="text-center"><a class='btn btn-info btn-xs' id="end" href="/contractorWorker/endEmployement/<%=employement._id%>" onclick="endClick()"><span class="glyphicon glyphicon-edit"></span> יציאה </a></td>
+                </tr>
+                <% i++;}) %>
+                    <% } else{ %>
+                        <h2>There are no future shifts</h2> 
+                    <% } %>
+            </table>
+            </div>
+        </div>
+    </body>
+    <script >
+        function startClick() {
+            const start=document.getElementById("start");
+            start.disabled=true;
+        }
+        function endClick() {
+            const end=document.getElementById("end");
+            end.disabled=true;
+        }
+    </script>
+</html>

@@ -86,3 +86,19 @@ span.psw{
     float: right;
     padding-top: 16px;
 }
+.user-details .input-box[data-error] .input{
+    border-color: #c92432;
+    color:#c92432;
+
+}
+.user-details .input-box[data-error]::after{
+    content: attr(data-error);
+    font-size: 0.80em;
+    color:#c92432;
+    display: block;
+    margin: 10px 0;
+} 
+.select{
+    width:40vmax;
+    height: 30px;
+}

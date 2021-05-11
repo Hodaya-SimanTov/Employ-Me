@@ -29,24 +29,24 @@ const deleteCompanyWorkerById=(req,res)=>{
     })
 }
 //עובד חברה לפי מייל
-const getCompanyWorkerByEmail=async(email)=>{
+const getCompanyWorkerByEmail=async(mail)=>{
 
-    let companyWorker = await CompanyWorker.findOne({email:req.params.email})
+    let companyWorker = await CompanyWorker.findOne({mail:req.params.mail})
     if (companyWorker) {
         res.render('../views/companyWorkerEditProfile',{companyWorker})
     }
     else {
-        return res.status(400).send('That email is error!');
+        return res.status(400).send('That mail is error!');
     }
 }
 //סיסמא
 const resetPassword=async (req, res) =>{
-    const { email } = req.body.email
+    const { mail } = req.body.mail
     const name=req.body.firstName
     let randomstring = Math.random().toString(36).slice(-8)
     const salt = await bcrypt.genSalt(10);
     let password= await bcrypt.hash(randomstring, salt);
-    let companyWorker = await CompanyWorker.findOne({ email: req.body.email }).then(companyWorker=>{
+    let companyWorker = await CompanyWorker.findOne({ mail: req.body.mail }).then(companyWorker=>{
         companyWorker.password=password
         companyWorker.markModified('password')
         companyWorker.save(err => console.log(err))
@@ -76,7 +76,7 @@ const resetPassword=async (req, res) =>{
 }
 //הצגת פרופיל
 const editProfileDisplay=async (req, res) => {
-    let companyWorker = await CompanyWorker.findOne({email:req.params.email})
+    let companyWorker = await CompanyWorker.findOne({mail:req.params.mail})
     if (companyWorker) {
         res.render('../views/companyWorkerEditProfile',companyWorker);
     }
@@ -90,7 +90,7 @@ const editProfile=async (req, res) => {
     if (error) {
         return res.status(400).send(error.details[0].message);
     }
-    let companyWorker= await CompanyWorker.findOneAndUpdate({email: req.params.email}, req.body, {new: true });
+    let companyWorker= await CompanyWorker.findOneAndUpdate({mail: req.params.mail}, req.body, {new: true });
     res.redirect('/companyWorker/homePage');
 }
 module.exports={addCompanyWorker,deleteCompanyWorkerById,getCompanyWorkerByEmail,resetPassword,editProfileDisplay,editProfile}

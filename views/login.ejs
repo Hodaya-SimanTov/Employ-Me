@@ -2,38 +2,80 @@
 <html>
 <head>  
     <title>login</title>
-    <link rel="stylesheet" type="text/css" href="/css/style_login.css"/>    
+    <link rel="stylesheet" type="text/css" href="/css/styleLogin.css"/>
+    
 </head>
 <body>
   <div class="modal">
   <div class="container">
-    <form class="modal-content animate" action="/contractor w orker/login" method="get">
+    <form class="modal-content animate" id="form" name="form" action="/contractorWorker/login" method="POST">
     <div class="imgconteiner">
     <img src="/css/images/user_img.png" class="avatar"/>
     </div>
   <div class="container">
-    <label>Mail Address</label>
+    <div  class="input-box" data-error="Error message" >
+      <span class="details">Mail Address</span>
+      <input type="email" class="input" id="mail" name="mail" placeholder="Name@example.com"  >
+    </div>
+    <div  class="input-box" data-error="Error message" >
+      <span class="details">Password</span>
+      <input type="password" class="input" id="password" name="password"  placeholder="Password"   >
+    </div>
+    <span class="details">Select:</span>
+      <select id="select" name="select" class="select" required>
+        <option >Employer</option>
+        <option >EmployMe Worker</option>
+        <option >Contractor Worker</option>
+      </select>
     <br>
-    <input type="email" id="email" placeholder="Name@example.com" required/>
     <br>
-    <label>Password</label>
-    <input type="password" id="password" placeholder="Password" required/>
-    <br>
-    <input type="checkbox">Employer
-    <input type="checkbox">EmployMe Worker
-    <input type="checkbox">Contractor worker
-    <button type='submit' class='loginbtn btn-outline-info' >Log-in</button>
+
+    <!-- <input type="radio" id="checkEmployer" name="check" required/>Enployer
+    <input type="radio" id="checkEmployMeWorker" name="check" required/>EmployMe Worker
+    <input type="radio" id="checkContractorWorker" name="check" required/>Contractor worker -->
+
+    <button type="submit" class='loginbtn btn-outline-info' onclick="login()"  >Log-in</button>
    
   </div>
-
+ 
   </form>
 
 </div>
-<script type='text/javascript'>
-  function login(){ 
+<script >
+  
+  var mail=document.getElementById("mail").value;
   var pass=document.getElementById("password").value;
-  if (pass.length <6)
-    alert('Password is invalid,\npassword must contain at least 6 characters');      
+
+  var check=document.getElementByName("check");
+
+  document.querySelectorAll('.input-box[data-error] .input').forEach(inpEl=>{
+    inpEl.addEventListener('input',()=>inpEl.parentElement.removeAttribute('data-error'));
+  });
+  //pass.parentElement.removeAttribute('data-error');
+  //mail.parentElement.removeAttribute('data-error');
+  
+  function login(){   
+  var employerCheck=document.getElementById("checkEmployMeWorker");
+  var workerCheck=document.getElementById("checkEmployMeWorker");
+  var contractorCheck=document.getElementById("checkContractorWorker");
+  console.log(checkEmployMeWorker.checked);
+    const mailValue=mail.value.trim();
+    const passValue=pass.value.trim();
+
+    if(!mailValue.includes('@')){
+      mail.parentElement.setAttribute('data-error','mail must be example@example.com');
+      flag=1;
+    } 
+    if(!passValue.length<6){
+      pass.parentElement.setAttribute('data-error','Password must contain less 6 character');
+      flag=1;
+    }   
+    
+    if(flag==0){
+      document.getElementById("form").submit();
+    }
+    
+
   }
 </script>
 </body>
