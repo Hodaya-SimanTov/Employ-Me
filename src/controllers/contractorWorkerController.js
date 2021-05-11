@@ -113,7 +113,7 @@ const addDateToArray=(idArray,year,month,day)=>{
 const unDisplay=async (req, res) => {
     let contractor = await ContractorWorker.findOne({mail:req.params.mail})
     if (contractor) {
-       res.render('../views/contractorUnavailability',contractor);
+       res.render('../views/contractorUnavailability',{mail:req.params.mail});
     } 
     else {
         return res.status(400).send('That email is error!');
@@ -207,11 +207,11 @@ const loginUser=(req,res)=>{
                 res.redirect(`/contractorWorker/login`);
             }) 
     }
-    if(req.body.select=="Company Worker"){
+    if(req.body.select=="EmployMe Worker"){
         CompanyWorker.findOne({ mail: req.body.mail }).then(company=>{
             console.log("in login company");
             if(company.password==req.body.password){
-                res.redirect(`/companyWorker/companyWorkerHomePage/${req.body.mail}`);
+                res.redirect(`/companyWorker/homePage/${req.body.mail}`);
             }
             }).catch(err=>{
                 console.log(err);
@@ -336,7 +336,7 @@ const updateContractorPass=(req,res)=>{
 const homepageDisplay=async (req, res) => {
     let contractor = await ContractorWorker.findOne({mail:req.params.mail})
     if (contractor) {
-       res.render('../views/contractorhomepage');
+       res.render('../views/contractorhomepage',{mail:req.params.mail});
     } 
     else {
         return res.status(400).send('That email is error!');
