@@ -82,18 +82,11 @@ const ContractorAvialableDate=async(date)=>{
     var array=[];
     var i=0;
     const d=new Date(date)
-    console.log(d)
     const myDate=new Date(d.getFullYear(),d.getMonth(),d.getUTCDate()+1)
-    // const myDate=new Date(date)
-    console.log(myDate)
-    var unavailability = await Unavailability.find( {unavailabArray : { $nin: [myDate] }}); 
-    console.log("$$$$$$"+unavailability+"\n")
-    //res.send({contractors:unavailability});        
+    var unavailability = await Unavailability.find( {unavailabArray : { $nin: [myDate] }});        
     for(i=0;i<unavailability.length;i++){
-        console.log(typeof unavailability[i].unavailabArray+"type\n" )
         array[i]=unavailability[i].contractorId;
     }
-    console.log("#######"+array.length+"\n")
     return array;  
 }
 // const findContractorInSpecDate=(req,res)=>{
@@ -114,7 +107,6 @@ const ContractorAvialableDate=async(date)=>{
 
 //  פונקציה שמחזירה עובדים שעומדים בסינונים ופנויים בתאריך
 const searchContractorByFields=async(req,res)=> {
-    console.log(req.body);
     const avilableConsArr=await ContractorAvialableDate(req.body.employmentDate);
     var result;
     var filteredCons=[];
@@ -230,8 +222,6 @@ const searchContractorByFields=async(req,res)=> {
 //פונקציה שמקבלת 2 מערכים אחד של הקונטרקטורים שזמינים בתאריך מסויים ואחד של הקונטרקטורים שמתאימים לסינון ומחזירה מערך של קונטרקטורים שמתאימים 
 const availableCons=(avilableConsArr,filteredConsArr)=>{
     var availableCons=[];
-    console.log(avilableConsArr+'i idesss')
-    console.log(filteredConsArr+'i objects')
     for(let i=0; i<avilableConsArr.length; i++)
     {
         for (let j=0; j<filteredConsArr.length; j++)
@@ -241,7 +231,6 @@ const availableCons=(avilableConsArr,filteredConsArr)=>{
             }
         }
     }
-    console.log(availableCons)
     return availableCons;
 }
 const bookContractorDisplay=async (req, res) => {
