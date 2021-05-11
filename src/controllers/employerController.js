@@ -286,7 +286,7 @@ const bookContractor=async (req, res) => {
 }
 const confirmEmploymentsDisplay=async (req, res) => {
     try{
-        let cEmployment=await Employement.find({employerEmail: req.params.email, status:'verified'})
+        let cEmployment=await Employement.find({employerEmail: req.params.email, status:'verified‏'})
         console.log(cEmployment);
         res.render('../views/employerConfirmEmployments',{cEmployment:cEmployment,emailEmployer: req.params.email});
     }
