@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Shifts history</title>
+        <link rel="stylesheet" href="/css/styleEmployerSearchResults.css">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row col-md-6 col-md-offset-2 custyle">
+                <div class="page-header">
+                    <h3><small class="pull-right"><%=result.length %></small> Shifts history </h3>
+                </div>
+            <table class="table table-striped custab">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Employer Email</th>
+                    <th>status</th>
+                    <th class="text-center"> </th>
+                </tr>
+            </thead>
+                <%
+                if(result.length!=0) {
+                    var i=1;
+                result.forEach(function(employement){
+                %>
+                <tr>
+                    <td><%= employement.date.getDate() %>.<%= employement.date.getMonth() %>.<%= employement.date.getFullYear() %></td>
+                    <td><%= employement.employerEmail %></td>
+                    <td><%= employement.status %></td>                   
+                </tr>
+                <% i++;}) %>
+                    <% } else{ %>
+                        <h2>No shifts passed</h2> 
+                    <% } %>
+            </table>
+            </div>
+        </div>
+    </body>
+</html>
