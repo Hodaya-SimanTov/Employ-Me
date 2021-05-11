@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Confirm-Employments</title>
+        <link rel="stylesheet" href="#">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row col-md-6 col-md-offset-2 custyle">
+                <div class="page-header">
+                    <h3><small class="pull-right"><%= cEmployment.length %></small> Employments to Confirm </h3>
+                </div>
+            <table class="table table-striped custab">
+            <thead>
+                <tr>
+                    <th>Contractor Email</th>
+                    <th> Date </th>
+                    <th>Job Scope</th>
+                    <th>Hourly wage</th>
+                    <th class="text-center"> </th>
+                </tr>
+            </thead>
+                <%
+                if(cEmployment.length!=0) {
+                var i=1;
+                cEmployment.forEach(function(worker){
+                %>
+                <tr>
+                    <td name="emailContractor"><%= worker.constructorEmail %></td>
+                    <td name="date"><%= worker.date.toDateString() %></td>
+                    <td><%= worker.jobScope %></td>
+                    <td><%= worker.hourlyWage %></td>
+                    <td class="text-center"><a class='btn btn-info btn-xs' href='/employer/confirmEmployment/<%=emailEmployer%>/<%= worker.id%>'><span class="glyphicon glyphicon-edit"></span> Confirm </a></td>
+                </tr>
+                <% i++;}) %>
+                    <% } else{ %>
+                        <h2>Sorry, no employments to confirm were found </h2> 
+                    <% } %>
+            </table>
+            </div>
+       
+    </div>
+
+    </body>
+</html>
+
+    
+ 
+        
+ 

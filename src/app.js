@@ -30,7 +30,7 @@ const connectionParams={
     useCreateIndex: true,
     useUnifiedTopology: true
 }
-mongoose.connect(process.env.CONNECT_DB, {connectionParams})
+mongoose.connect(process.env.CONNECT_DB, connectionParams)
     .then(()=>{
         console.log('connected');
 
@@ -42,7 +42,7 @@ app.get('/',(req,res)=>{
 });
 
 app.use(express.json());
-app.use(express.urlencoded({extend:false}));
+//app.use(express.urlencoded({extend:false}));
 app.use(express.static('public'))
 app.use('/css', express.static(__dirname + 'public/css'))
 app.use('/js', express.static(__dirname + 'public/js'))
@@ -51,15 +51,9 @@ app.use('/imgages', express.static(__dirname + 'public/imgages'))
 app.get('/',(req,res)=>{
     res.render('contractorSignUp')        
 });
-
-//app.use(express.urlencoded({extended:false}))
-
 app.use('/employer',apiEmployer)
 app.use('/contractorWorker',apiContractorWorker)
 app.use('/companyWorker',apiCompanyWorker)
-
-
-// app.use('/api/authEmployer', authEmployer);
 
 const port = process.env.PORT
 app.listen(port,()=>{    

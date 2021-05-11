@@ -18,7 +18,7 @@ const Employement=mongoose.model('Employement',new mongoose.Schema({
         type:Number,
         required:true,
         min:1,
-        max: 24
+        max: 12
     },
     status:{
         type:String,

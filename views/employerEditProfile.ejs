@@ -85,9 +85,14 @@
             }
             if(!/^[a-zA-Z]+$/.test(firstNameValue)){
                 firstName.parentElement.setAttribute('data-error','First name must contain only character');
+                flag=1;
             }
             if(lastNameValue==""){
                 lastName.parentElement.setAttribute('data-error','Last name can not be empty');
+                flag=1;
+            }
+            if(!/^[a-zA-Z]+$/.test(lastNameValue)){
+                lastName.parentElement.setAttribute('data-error','Last name must contain only character');
                 flag=1;
             }
             if(lastNameValue.length<3){
