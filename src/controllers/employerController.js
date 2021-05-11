@@ -126,11 +126,8 @@ const searchContractorByFields=async(req,res)=> {
             {
                 try{
                     filteredCons = await ContractorWorker.find( {occupationArea: req.body.occupation})
-                    // console.log('filter1');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    // console.log(result+'i result');
-                    
-                    //res.send(result)
+                    res.render('../views/employerSearchResult',{result:result,emailEmployer: req.params.email,date: req.body.employmentDate});
                 }
                 catch(err){
                     console.log(err);
@@ -139,10 +136,8 @@ const searchContractorByFields=async(req,res)=> {
             else{
                 try{
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation, experienceField:req.body.experience})
-                    // console.log('filter2');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    // console.log(result+'i result');
-                    res.send(result)
+                    res.render('../views/employerSearchResult',{result:result,emailEmployer: req.params.email,date: req.body.employmentDate});
                 }
                 catch(err){
                     console.log(err);
@@ -154,10 +149,8 @@ const searchContractorByFields=async(req,res)=> {
             {
                 try {
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation, scopeWork:req.body.scope})
-                    // console.log('filter3');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    // console.log(result+'i result');
-                    res.send(result)
+                    res.render('../views/employerSearchResult',{result:result,emailEmployer: req.params.email,date: req.body.employmentDate});
                 }
                 catch(err){
                     console.log(err);
@@ -166,10 +159,8 @@ const searchContractorByFields=async(req,res)=> {
             else {
                 try {
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation ,scopeWork:req.body.scope, experienceField:req.body.experience})
-                    // console.log('filter4');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    // console.log(result+'i result');
-                    res.send(result)
+                    res.render('../views/employerSearchResult',{result:result,emailEmployer: req.params.email,date: req.body.employmentDate});
                 }
                 catch(err){
                     console.log(err);
@@ -183,10 +174,8 @@ const searchContractorByFields=async(req,res)=> {
             if(req.body.experience=='Select') {
                 try {
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation ,serviceArea:req.body.service})
-                    // console.log('filter5');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    // console.log(result+'i result');
-                    res.send(result)
+                    res.render('../views/employerSearchResult',{result:result,emailEmployer: req.params.email,date: req.body.employmentDate});
                 }
                 catch(err){
                     console.log(err);
@@ -195,10 +184,8 @@ const searchContractorByFields=async(req,res)=> {
             else {
                 try {
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation, serviceArea:req.body.service, experienceField:req.body.experience})
-                    // console.log('filter6');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    // console.log(result+'i result');
-                    res.send(result)
+                    res.render('../views/employerSearchResult',{result:result,emailEmployer: req.params.email,date: req.body.employmentDate});
                 }
                 catch(err){
                     console.log(err);
@@ -209,10 +196,8 @@ const searchContractorByFields=async(req,res)=> {
             if(req.body.experience=='Select'){
                 try {
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation, serviceArea:req.body.service, scopeWork:req.body.scope})
-                    // console.log('filter7');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    // console.log(result+'i result');
-                    res.send(result)
+                    res.render('../views/employerSearchResult',{result:result,emailEmployer: req.params.email,date: req.body.employmentDate});
                 }
                 catch(err){
                     console.log(err);
@@ -221,10 +206,8 @@ const searchContractorByFields=async(req,res)=> {
             else {
                 try {
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation, serviceArea:req.body.service, scopeWork:req.body.scope, experienceField:req.body.experience})
-                    // console.log('filter8');
                     result = await availableCons(avilableConsArr,filteredCons);
-                    // console.log(result+'i result');
-                    res.send(result)
+                    res.render('../views/employerSearchResult',{result:result,emailEmployer: req.params.email,date: req.body.employmentDate});
                 }
                 catch(err){
                     console.log(err);
@@ -232,8 +215,7 @@ const searchContractorByFields=async(req,res)=> {
             }
         }
     }
-    console.log(result);
-    res.render('../views/employerSearchResult',{result:result,emailEmployer: req.params.email,date: req.body.employmentDate});
+    
 }
 
 // const addEmployemnt=async (req, res) => {
