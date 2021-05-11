@@ -296,9 +296,9 @@ const confirmEmploymentsDisplay=async (req, res) => {
 }
 const confirmEmployments=async (req, res) => {
     try{
-        let CEmployment=await Employement.update({_id: ObjectId(req.params.id)}, {status:'close'}, {new: true });
+        let CEmployment=await Employement.findOneAndUpdate({_id: ObjectId(req.params.id)}, {status:'close'}, {new: true });
         console.log(CEmployment);
-        res.redirect(`/employer/homePage/${req.params.emailEmployer}`);
+        res.redirect(`/employer/homePage/${req.params.email}`);
     }
     catch(err){
         console.log(err);
