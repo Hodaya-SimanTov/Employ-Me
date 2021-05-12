@@ -206,24 +206,24 @@ const loginUser=(req,res)=>{
         })
     }
     if(req.body.select=="Company Worker"){
-        // CompanyWorker.findOne({mail: req.body.mail}).then(company => {
-        //     console.log("in login company");
-        //     if (company.password == req.body.password) {
-        //         if (company.firstLogin == 0) {
-        //             CompanyWorker.findOneAndUpdate({mail: req.body.mail}, {firstLogin: 1}).then(company => {
-        //                 res.redirect(`/companyWorker/editProfile/${req.body.mail}`);
-        //             }).catch(err => {
-        //                 console.log(err);
-        //                 res.redirect(`/contractorWorker/login`);
-        //             })
-        //         } else {
-        //             res.redirect(`/companyWorker/homePage/${req.body.mail}`);
-        //         }
-        //     }
-        // }).catch(err => {
-        //     console.log(err);
-        //     res.redirect(`/contractorWorker/login`);
-        // })
+         CompanyWorker.findOne({mail: req.body.mail}).then(company => {
+             console.log("in login company");
+             if (company.password == req.body.password) {
+                 if (company.firstLogin == 0) {
+                     CompanyWorker.findOneAndUpdate({mail: req.body.mail}, {firstLogin: 1}).then(company => {
+                         res.redirect(`/companyWorker/editProfile/${req.body.mail}`);
+                     }).catch(err => {
+                         console.log(err);
+                         res.redirect(`/contractorWorker/login`);
+                     })
+                 } else {
+                     res.redirect(`/companyWorker/homePage/${req.body.mail}`);
+                 }
+             }
+         }).catch(err => {
+             console.log(err);
+             res.redirect(`/contractorWorker/login`);
+         })
     }
     if(req.body.select=="Contractor Worker"){
         ContractorWorker.findOne({ mail: req.body.mail }).then(contractor=>{
