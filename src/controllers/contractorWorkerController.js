@@ -9,7 +9,7 @@ const nodemailer=require('nodemailer')
 const jwt = require('jsonwebtoken')
 var mongo=require('mongodb');
 var assert=require('assert');
-//const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 
 //חישוב שכר לפי גיל
 const salaryOfHour =function (contractor_id,birthday) {
@@ -216,7 +216,7 @@ const loginUser=(req,res)=>{
                     res.redirect(`/employer/homePage/${req.body.mail}`);  
                 }    
             }).catch(err=>{
-                
+
             })
                    
         }).catch(err=>{
