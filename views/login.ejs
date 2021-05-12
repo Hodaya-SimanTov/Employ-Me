@@ -6,77 +6,82 @@
     
 </head>
 <body>
-  <div class="modal">
   <div class="container">
+    <div class="title">Login</div>
+    <br />
     <form class="modal-content animate" id="form" name="form" action="/contractorWorker/login" method="POST">
-    <div class="imgconteiner">
+    <!-- <div class="imgconteiner">
     <img src="/css/images/user_img.png" class="avatar"/>
-    </div>
-  <div class="container">
+    </div> -->
+  <div class="user-details">
     <div  class="input-box" data-error="Error message" >
       <span class="details">Mail Address</span>
-      <input type="email" class="input" id="mail" name="mail" placeholder="Name@example.com"  >
+      <input type="text" class="input" id="mail" name="mail" placeholder="Name@example.com"  >
     </div>
     <div  class="input-box" data-error="Error message" >
       <span class="details">Password</span>
       <input type="password" class="input" id="password" name="password"  placeholder="Password"   >
     </div>
+    <div>
+    <br />
+    <br />
     <span class="details">Select:</span>
-      <select id="select" name="select" class="select" required>
+    <br />
+      <select id="select" name="select" class="select" >
         <option >Employer</option>
-        <option >EmployMe Worker</option>
+        <option >Company Worker</option>
         <option >Contractor Worker</option>
       </select>
-    <br>
-    <br>
+    </div>
 
-    <!-- <input type="radio" id="checkEmployer" name="check" required/>Enployer
-    <input type="radio" id="checkEmployMeWorker" name="check" required/>EmployMe Worker
-    <input type="radio" id="checkContractorWorker" name="check" required/>Contractor worker -->
-
-    <button type="submit" class='loginbtn btn-outline-info' onclick="login()"  >Log-in</button>
+    <div class="button">
+      <input  value="Log-in" form="form" onclick="login()"  readonly>
+    </div>
+    <!-- <button  class='loginbtn btn-outline-info' onclick="login()"  >Log-in</button> -->
    
   </div>
  
   </form>
 
 </div>
+</body>
 <script >
   
-  var mail=document.getElementById("mail").value;
-  var pass=document.getElementById("password").value;
-
-  var check=document.getElementByName("check");
+  var mail=document.getElementById("mail");
+  var pass=document.getElementById("password");
+  // var form=document.getElementById("from");
+  //var check=document.getElementByName("check");
 
   document.querySelectorAll('.input-box[data-error] .input').forEach(inpEl=>{
     inpEl.addEventListener('input',()=>inpEl.parentElement.removeAttribute('data-error'));
   });
-  //pass.parentElement.removeAttribute('data-error');
-  //mail.parentElement.removeAttribute('data-error');
+  pass.parentElement.removeAttribute('data-error');
+  mail.parentElement.removeAttribute('data-error');
   
   function login(){   
-  var employerCheck=document.getElementById("checkEmployMeWorker");
-  var workerCheck=document.getElementById("checkEmployMeWorker");
-  var contractorCheck=document.getElementById("checkContractorWorker");
-  console.log(checkEmployMeWorker.checked);
+  // var employerCheck=document.getElementById("checkEmployMeWorker");
+  // var workerCheck=document.getElementById("checkEmployMeWorker");
+  // var contractorCheck=document.getElementById("checkContractorWorker");
+  // console.log(checkEmployMeWorker.checked);
     const mailValue=mail.value.trim();
     const passValue=pass.value.trim();
-
+    var flag=0;
     if(!mailValue.includes('@')){
       mail.parentElement.setAttribute('data-error','mail must be example@example.com');
       flag=1;
     } 
-    if(!passValue.length<6){
+    if(passValue.length<6){
       pass.parentElement.setAttribute('data-error','Password must contain less 6 character');
       flag=1;
     }   
     
     if(flag==0){
-      document.getElementById("form").submit();
+      var err=document.getElementById("form").submit();     
+         
     }
     
 
   }
 </script>
-</body>
+
 </html>

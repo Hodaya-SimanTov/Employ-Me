@@ -11,9 +11,8 @@
         
     </haed>
     <body>
-        <div class="model">
-        <div class="container">
-        <form class="model-content animate" action="/contractorWorker/addContractorWorker" method="POST" id="addContractorWorker" >
+        <div class="user-details">
+        <form class="model-content animate" action="/contractorWorker/addContractorWorker" method="POST" id="form" >
             <div class="imgcontainer">
             <img src="/css/images/user_img.png" class="avatar" />
             </div>
@@ -21,20 +20,30 @@
             <h1>Sign up</h1>            
             <hr>   
             <p>Personal Information:</p>
+            <div class="input-box" data-error="Error message">
              <lable>Fisrt Name</lable>
-            <input type="text" id="firstName" placeholder="Name" name="firstName" pattern="[A-z]+{3,50}" title="Name in error" required/>
+            <input type="text" class="input" id="firstName" placeholder="Name" name="firstName" pattern="[A-z]+{3,50}" title="Name in error" />
+            </div>
             <br />
+            <div class="input-box" data-error="Error message">
             <lable>Last Name</lable>
-            <input type="text" id="lastName" placeholder="LastName" name="lastName" required/>
+            <input type="text" class="input" id="lastName" placeholder="LastName" name="lastName" />
+            </div>
             <br />
+            <div class="input-box" data-error="Error message">
             <lable>Birthday</lable>
-            <input type="date" id="birthday" placeholder="Birthday" name="birthday" required/>
+            <input type="date" class="input" id="birthday" name="birthday" max="2002-12-31" required />
+            </div>
             <br />
+            <div class="input-box" data-error="Error message">
             <label>Email</label>
-            <input type="email" id="mail" placeholder="Name@example.com" name="mail" required/>
+            <input type="email" class="input" id="mail" placeholder="Name@example.com" name="mail" />
+            </div>
             <br />
+            <div class="input-box" data-error="Error message">
             <label>Phone</label>
-            <input type="phone" id="phone" placeholder="Phone" name="phone" required/>
+            <input type="phone" class="input" id="phone" placeholder="Phone" name="phone" />
+            </div>
             <br />
             <hr>
             <p>Employment details:</p>
@@ -61,10 +70,10 @@
             <br />
             <label>Experience Field</label>
               <select id="experienceField" name="experienceField">
-              <option >1-5 years</option>
-              <option >5-10 years</option>
-              <option >10-15 years</option>
-              <option >Over 15 years</option>
+              <option value="1-5 years" >1-5 years</option>
+              <option value="5-10 years" >5-10 years</option>
+              <option value="10-15 years" >10-15 years</option>
+              <option value="Over 15 years" >Over 15 years</option>
             </select>
             <br />
             <label>Service Area</label>
@@ -86,45 +95,108 @@
               </select>
             <br />
             <hr>
-            <p>Account details:</p>
+            <div class="input-box" data-error="Error message">
             <lable>Password</lable>
-            <input type="password" id="password" placeholder="Password" name=password required/>
+            <input type="text" id="password" class="password"  name="password" readonly  />            
+            </div>
+            <button type="button" class="btn btn-outline-info" onclick="getPassword()">Get Password</button>
             <br />
-            <label>Re-Password</label>
-            <input type='password' id='rePassword' placeholder="Re-password"  required/>
-            <button type='submit' class='registerbtn btn-outline-info' onclick="signup()">Sign Up</button>
+            <input  class='registerbtn btn-outline-info' value="Sign Up" onclick="signup()" readonly>
         </div>
         </form>
-        <div class='login'>
-        <p> Alreade have account? <a href="/contractorWorker/login"> Login</a></p>
-        </div>
     </div>
     </body>
 
-    <script type='text/javascript'>
+    <script >
+        
+        var firstName=document.getElementById("firstName");
+        var lastName=document.getElementById("lastName");
+        var mail=document.getElementById("mail");
+        var phone=document.getElementById("phone");
+        var birthday=document.getElementById("birthday");
+        var pass=document.getElementById("password");
+        document.querySelectorAll('.input-box[data-error] .input').forEach(inpEl=>{
+            inpEl.addEventListener('input',()=>inpEl.parentElement.removeAttribute('data-error'));
+        });
+        firstName.parentElement.removeAttribute('data-error');
+        lastName.parentElement.removeAttribute('data-error');
+        phone.parentElement.removeAttribute('data-error');
+        mail.parentElement.removeAttribute('data-error');
+        birthday.parentElement.removeAttribute('data-error');
+        pass.parentElement.removeAttribute('data-error');
+
+        var temp=0;
     function signup(){ 
-        var name=document.getElementById("firstName").value;
-        var pass=document.getElementById("password").value;
-        var rePass=document.getElementById("rePassword").value;
-        console.log(name);
-        if(!/^[a-zA-Z]+$/.test(name))
-            alert('Name is invalid');
-        else{
-            if (pass.length <6)
-                alert('Password is invalid,\npassword must contain at least 6 characters');
-            else {
-                if(rePass==""){
-                    alert('Please confirm the password');
-                }
-                else{
-                    if(rePass!=pass){
-                        alert("Invalid password verification");
-                    }
-                }
-            }
+        
+        const firstNameValue=firstName.value.trim();
+        const lastNameValue=lastName.value.trim();
+        const phoneValue=phone.value.trim();
+        const mailValue=mail.value.trim();
+        const birthdayValue=birthday.value.trim();     
+        const passValue=birthday.value.trim();  
+
+        var flag=0;
+        const birth=new Date(birthdayValue);
+        const b=new Date('2000/01/01');
+        if(firstNameValue==""){
+                firstName.parentElement.setAttribute('data-error','First name can not be empty');
+                flag=1;
+        }
+        if(firstNameValue.length<3 ){
+            firstName.parentElement.setAttribute('data-error','First name must contain less 3 character');
+            flag=1;
+        }
+        if(firstNameValue.length>50 ){
+            firstName.parentElement.setAttribute('data-error','First name must contain no more  50 character');
+            flag=1;
+        }
+        if(!/^[a-zA-Z]+$/.test(firstNameValue)){
+            firstName.parentElement.setAttribute('data-error','First name must contain only character');
+        }
+        if(lastNameValue==""){
+            lastName.parentElement.setAttribute('data-error','Last name can not be empty');
+            flag=1;
+        }
+        if(lastNameValue.length<3){
+            lastName.parentElement.setAttribute('data-error','Last name must contain less 3 character');
+            flag=1;
+        }
+        if(lastNameValue.length>50){
+            lastName.parentElement.setAttribute('data-error','Last name must contain no more  50 character');
+            flag=1;
+        }
+        if(phoneValue.length!=10){
+            phone.parentElement.setAttribute('data-error','Phone must contain 10 digits');
+            flag=1;
+        } 
+        if(!mailValue.includes('@')){
+            mail.parentElement.setAttribute('data-error','mail must be example@example.com');
+            flag=1;
+        } 
+        if(birthdayValue == ''){
+                birthday.parentElement.setAttribute('data-error','Birthday empty, The minimum age is 18 years');
+                flag=1;
+        } 
+        if(temp==0){
+            pass.parentElement.setAttribute('data-error','You did not get a password');
+            flag=1;
+        }
+          
+        if(flag==0){
+            document.getElementById("form").submit();
         }
 
-    }            
+    }  
+    
+    function getPassword() {
+        let p=""
+        for(var i=0;i<6;i++){
+            p+=Math.floor(Math.random() * 6);
+        }
+        temp=1;
+       document.getElementById("password").setAttribute('value',p)
+    
+    }
 </script>
   
 </html>

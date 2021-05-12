@@ -6,22 +6,84 @@
         <link rel="stylesheet"  href="/css/styleContractorUnavailability.css">
     </head>
     <body>     
-        <!-- <form class="homeLogo" action='/contractorWorker/contractorHomepage/<%mail%>'  method="GET" >
-            <button type="submit" style="font-size:24px"><img class="logo" type="submit" src="/css/images/logo.PNG"></button>            
-        </form>    -->
         <div class="container">
-            <form class="model-content animate" id="form" action='/contractorWorker/addUn/<%=mail%>'  method="POST" >
+            <!-- <form class="model-content animate" id="form" action='/contractorWorker/addUn/<%=mail%>'  method="POST" >
                 <div class="user-details">
                     <div><span>Vacation dates:</span></div>
                     <div><span class="details">Start Vacation</span></div>
                     <div><input type="date" class="input" id="start" name="start" form="form" ></div>
                     <div><span class="details">End Vacation</span></div>
                     <div><input type="date" class="input" id="end" name="end" form="form" ></div>
-                     <!-- <input type="save" value="Save Unavailability" onclick="saveUnavailability()" readonly> -->
+                     <!-- <input type="save" value="Save Unavailability" onclick="saveUnavailability()" readonly> 
                     <div><button type="submit" class="btn btn-outline-info" form="form" >Save Unavailability</button></div>
                    
                 </div> 
-            </form>
+            </form> -->
+            <div class="title">Vacation Report</div>
+                <form class="model-content animate" id="form" action='/contractorWorker/addUn/<%=mail%>'  method="POST" >
+                    <div class="user-details">
+                        <div class="input-box" data-error="Error message">
+                            <span class="details">Start Vacation</span>
+                            <input type="date" class="input" id="start" form="form" name="start" >
+                        </div>
+                        <div class="input-box" data-error="Error message" >
+                            <span class="details">End Vacation</span>
+                            <input type="date" class="input" id="end" form="form" name="end">
+                        </div>                       
+                        
+                    </div>
+                    <div class="button">
+                        <input value="Save Unavailability" onclick="checkInputs()"  readonly>
+                    </div> 
+                </form>                
+            </div>
         </div>    
     </body>
+    <script>
+        const form=document.getElementById("form");
+       const start=document.getElementById("start");
+       const end=document.getElementById("end");
+
+       start.min = new Date().toISOString().split("T")[0]; 
+       end.min = new Date().toISOString().split("T")[0]; 
+
+       document.querySelectorAll('.input-box[data-error] .input').forEach(inpEl=>{
+           inpEl.addEventListener('input',()=>inpEl.parentElement.removeAttribute('data-error'));
+       });
+
+       start.parentElement.removeAttribute('data-error');
+       end.parentElement.removeAttribute('data-error');
+
+       function checkInputs(){
+            const startValue=start.value.trim();
+            const endValue=end.value.trim();
+
+            const startD=new Date(startValue);
+            const endD=new Date(endValue);
+
+            var flag=0;
+            if(startD.valueOf != Date.valueOf){
+                start.parentElement.setAttribute('data-error','Start date cannot be empty');
+                flag=1;
+            }
+            if(endD.valueOf != Date.valueOf){
+                end.parentElement.setAttribute('data-error','End date cannot be empty');
+                flag=1;
+            }
+            if(startD>endD){                
+                start.parentElement.setAttribute('data-error','Start date cannot be greater than end date');
+                end.parentElement.setAttribute('data-error','Start date cannot be greater than end date');
+                flag=1;
+            }               
+            else{ 
+                if(flag==0){
+                    start.parentElement.removeAttribute('data-error');
+                    end.parentElement.removeAttribute('data-error');
+                    document.getElementById("form").submit();
+                }
+            }
+             
+       }
+
+    </script>
 </html>

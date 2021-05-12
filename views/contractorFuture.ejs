@@ -26,14 +26,17 @@
                 <%
                 if(result.length!=0) {
                     var i=1;
+                    var d=new Date();
                 result.forEach(function(employement){
                 %>
                 <tr>
-                    <td><%= employement.date.getDate() %>.<%= employement.date.getMonth() %>.<%= employement.date.getFullYear() %></td>
+                    <td><%= employement.date.getDate() %>.<%= employement.date.getMonth()+1 %>.<%= employement.date.getFullYear() %></td>
                     <td><%= employement.employerEmail %></td>
-                    <td><%= employement.status %></td>                    
-                    <td class="text-center"><a class='btn btn-info btn-xs' id="start" href="#" onclick="startClick()"><span class="glyphicon glyphicon-edit" ></span> כניסה </a></td>
-                    <td class="text-center"><a class='btn btn-info btn-xs' id="end" href="/contractorWorker/endEmployement/<%=employement._id%>" onclick="endClick()"><span class="glyphicon glyphicon-edit"></span> יציאה </a></td>
+                    <td><%= employement.status %></td>
+                    <%if(employement.date.getDate()==d.getDate())  {%>                  
+                        <td class="text-center"><a class='btn btn-info btn-xs' id="start" href="#" onclick="startClick()"><span class="glyphicon glyphicon-edit" ></span> כניסה </a></td>
+                        <td class="text-center"><a class='btn btn-info btn-xs' id="end" href="/contractorWorker/endEmployement/<%=employement._id%>" onclick="endClick()"><span class="glyphicon glyphicon-edit"></span> יציאה </a></td>
+                    <%}%>    
                 </tr>
                 <% i++;}) %>
                     <% } else{ %>
@@ -47,6 +50,7 @@
         function startClick() {
             const start=document.getElementById("start");
             start.disabled=true;
+            start.setAttribute("style", "display:none");
         }
         function endClick() {
             const end=document.getElementById("end");
