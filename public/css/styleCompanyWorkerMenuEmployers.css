@@ -1,22 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:700&display=swap');
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color:white;
+    margin: auto;
+    background-image: url('images/empsignup.PNG');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
 *{
-    margin: 0;
     padding: 0;
-    font-family: 'Poppins',sans-serif;
+    margin: 0;
 }
-.headline
-{
-    text-decoration: none;
-    color: rgb(40, 21, 94);
-    font-size: 30px;
-    font-family: 'Roboto', sans-serif;
-    transition: .4s;
-}
-.body{
-    display:flex;
-    height: 100%;
-    width:100%;
-}
-.body .navbar{
+
+.navbar{
     height: 80px;
     width: 100%;
     background: rgb(255, 255, 255);
@@ -29,12 +26,14 @@
 .navbar ul{
     float: right;
     margin-right: 20px;
+
 }
 .navbar ul li{
     list-style: none;
     margin: 0 8px;
     display: inline-block;
     line-height: 80px;
+
 }
 .navbar ul li a{
     text-decoration: none;
@@ -42,102 +41,65 @@
     font-size: 17px;
     font-family: 'Roboto', sans-serif;
     transition: .4s;
+
 }
-.navbar ul li a.active, .navbar ul li a:hover{
+.navbar ul li a.active,
+.navbar ul li a:hover{
     background: rgb(247, 250, 94);
     border-radius: 2px;
-}
-.clr{
-    clear:both;
-}
-.container{
-    justify-content: left;
-    align-items: left;
-    width: 40%;
-    position:relative;
-    background:  rgba(247, 245, 219, 0.308);
-    margin-left: 10px;
-    border-radius: 5px;
-}
-.container .headline{
-    font-size: 25px;
-    font-weight: 500;
-    position: relative;
-    margin-left: 15px;
 
-}
-.container .headline::before{
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 3px;
-    width: 30px;
-    margin-left: 5px;
-    background: linear-gradient(135deg, #71b7e6,#e6d171);
-}
-.search{
-    width: 100%;
-    position:relative;
-    border-radius: 5px;
-}
-
-.date{
-    margin-top: 20px;
-    font-size: 20px;
-    font-weight: bold;
-    color:rgb(12, 12, 12);
-    text-align: center;
-
-}
-.date .title{
-    font-size: 18px;
-    font-weight: bold;
-    position: relative;
-    text-align: left;
-}
-.date input{
-    width:90%;
-    min-height: 30px;
-    background:#fff;
-    color:rgb(51, 17, 105);
-    outline: none;
-    text-align: center;
-    border: 2px solid #e6d171;
-}
-.occupation{
-    margin-top: 10px;
-    font-size: 20px;
-    font-weight: bold;
-    color:rgb(12, 12, 12);
-    text-align: center;
-
-}
-.occupation select{
-    width:90%;
-    min-height: 30px;
-    background:#fff;
-    color:rgb(51, 17, 105);
-    outline: none;
-    text-align: center;
-    border: 2px solid #e6d171;
 }
 .serviceArea{
-    margin-top: 10px;
+    margin-top: 30px;
+    margin-left: -130px;
+     margin-bottom: 60px;
+    font-size: 25px;
+    font-weight: bold;
+    color:#e6d171;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+.serviceArea1{
+margin-left: 40px;
+    margin-bottom: 40px;
+    font-size: 20px;
+font-weight: bold;
+color:rgb(12, 12, 12);
+text-align: center;
+font-family: 'Roboto', sans-serif;
+
+}
+.serviceArea2{
+    margin-left: 40px;
+    margin-bottom: 40px;
+
     font-size: 20px;
     font-weight: bold;
     color:rgb(12, 12, 12);
     text-align: center;
-
+    font-family: 'Roboto', sans-serif;
 }
+
 .serviceArea select{
-    width:90%;
+    width:10%;
     min-height: 30px;
     background:#fff;
     color:rgb(51, 17, 105);
     outline: none;
     text-align: center;
     border: 2px solid #e6d171;
+    font-family: 'Roboto', sans-serif;
+
+}
+.serviceArea select1{
+    width:10%;
+    min-height: 30px;
+    background:#fff;
+    color:rgb(51, 17, 105);
+    outline: none;
+    text-align: center;
+    border: 2px solid #e6d171;
+    font-family: 'Roboto', sans-serif;
 
 }
 .jobScope{
@@ -146,6 +108,7 @@
     font-weight: bold;
     color:rgb(12, 12, 12);
     text-align: center;
+    font-family: 'Roboto', sans-serif;
 
 }
 .jobScope select{
@@ -175,12 +138,12 @@
     border: 2px solid #e6d171;
 }
 form .button{
-    margin-top: 20px;
+    margin-left: -800px;
     text-align: center;
 
 }
 form .button input{
-    width:90%;
+    width:10%;
     min-height: 45px;
     outline: none;
     color: #fff;

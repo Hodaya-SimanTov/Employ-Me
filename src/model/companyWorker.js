@@ -31,6 +31,11 @@ const CompanyWorker=mongoose.model('CompanyWorker',new mongoose.Schema({
         required:true,
         minlength:6,
         maxlength: 128
+    },
+    firstLogin:{
+        type:Number,
+        required:true,
+        default:0
     }
 }));
 function validateCompanyWorker(companyWorker) {
@@ -38,8 +43,9 @@ function validateCompanyWorker(companyWorker) {
         firstName: Joi.string().min(3).max(50).trim().required(),
         lastName: Joi.string().min(3).max(50).trim().required(),
         phone: Joi.string().length(10).required(),
-        email: Joi.string().required().email(),
+        mail: Joi.string().required().email(),
         password: Joi.string().min(6).max(128).required(),
+        firstLogin:Joi.number().required(),
     });
     return  schema.validate(companyWorker);
 }
@@ -48,6 +54,8 @@ function validateEditCompanyWorker(companyWorker) {
         firstName: Joi.string().min(3).max(50).trim().required(),
         lastName: Joi.string().min(3).max(50).trim().required(),
         phone: Joi.string().length(10).required(),
+        firstLogin:Joi.number().required(),
+
     });
     return  schema.validate(companyWorker);
 }
