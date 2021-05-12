@@ -11,13 +11,33 @@ const _ = require('lodash');
 
 //הוספת עובדי משאבי אנוש
 const addCompanyWorker=(req,res)=>{
+    if(companyExists(req.body.mail)==false){
+        console.log(req.body);
     const newComapnyWorker=new CompanyWorker(req.body)
-    newComapnyWorker.save().then(companyWorker =>{
-        //sendmail(contractorWorker.mail,contractorWorker.firstName)//שולח מייל בהרשמה
-        res.send('success to add db')
+        if(!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(String(req.body.mail).toLowerCase()))
+            console.log('no succ');
+        else
+        {
+            newComapnyWorker.save().then(companyWorker =>{
+            res.send('success to add db')
         console.log('succ');
     }).catch(err=>{
         console.log(`can not add this worker! ${err}`);
+    })
+}
+        }
+    else{
+        console.log("exists!!");
+    }
+}
+
+const companyExists=(mail)=>{
+    CompanyWorker.findOne({ mail:mail }).then(CompanyWorker=>{
+        console.log("exists");
+        return true;
+    }).catch(err=>{
+        console.log("not exists!!");
+        return false;
     })
 }
 //מחיקת עובד משאבי אנוש
@@ -105,4 +125,4 @@ const updateCompanyWorkerPass=(req,res)=>{
 
 }
 
-module.exports={addCompanyWorker,deleteCompanyWorkerById,getCompanyWorkerByEmail,resetPassword,editProfileDisplay,editProfile,updateCompanyWorkerPass}
+module.exports={addCompanyWorker,companyExists,deleteCompanyWorkerById,getCompanyWorkerByEmail,resetPassword,editProfileDisplay,editProfile,updateCompanyWorkerPass}
