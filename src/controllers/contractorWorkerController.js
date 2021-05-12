@@ -188,46 +188,45 @@ const findContractorInSpecDate=(req,res)=>{
 // }
 
 
-const loginUser=(req,res)=>{
-    console.log("select: "+req.body.select);
-   
-    if(req.body.select=="Employer"){
-        Employer.findOne({ mail: req.body.mail }).then(employer=>{
+const loginUser=(req,res)=> {
+    console.log("select: " + req.body.select);
+
+    if (req.body.select == "Employer") {
+        Employer.findOne({mail: req.body.mail}).then(employer => {
             console.log("in login employer");
             //const salt = await bcrypt.genSalt(10);
             //const pass= await bcrypt.hash(employer.password, salt);
-            if(pass==req.body.password){
-                res.redirect(`/employer/homePage/${req.body.mail}`);                
-            }
-            else{
+            if (pass == req.body.password) {
+                res.redirect(`/employer/homePage/${req.body.mail}`);
+            } else {
 
             }
-            }).catch(err=>{
-                console.log(err);
-                res.redirect(`/contractorWorker/login`);
-            }) 
-    }
-    if(req.body.select=="EmployMe Worker"){
-        CompanyWorker.findOne({ mail: req.body.mail }).then(company=>{
-            console.log("in login company");
-            if(company.password==req.body.password){
-                res.redirect(`/companyWorker/homePage/${req.body.mail}`);
-            }
-            }).catch(err=>{
-                console.log(err);
-                res.redirect(`/contractorWorker/login`);
-            }) 
-    }
-    if(req.body.select=="Contractor Worker"){
-      ContractorWorker.findOne({ mail: req.body.mail }).then(contractor=>{
-        console.log("in login contractor");
-        if(contractor.password==req.body.password){
-            res.redirect(`/contractorWorker/contractorHomepage/${req.body.mail}`);
-        }
-        }).catch(err=>{
+        }).catch(err => {
             console.log(err);
             res.redirect(`/contractorWorker/login`);
-        })  
+        })
+    }
+    if (req.body.select == "EmployMe Worker") {
+        CompanyWorker.findOne({mail: req.body.mail}).then(company => {
+            console.log("in login company");
+            if (company.password == req.body.password) {
+                res.redirect(`/companyWorker/homePage/${req.body.mail}`);
+            }
+        }).catch(err => {
+            console.log(err);
+            res.redirect(`/contractorWorker/login`);
+        })
+    }
+    if (req.body.select == "Contractor Worker") {
+        ContractorWorker.findOne({mail: req.body.mail}).then(contractor => {
+            console.log("in login contractor");
+            if (contractor.password == req.body.password) {
+                res.redirect(`/contractorWorker/contractorHomepage/${req.body.mail}`);
+            }
+        }).catch(err => {
+            console.log(err);
+            res.redirect(`/contractorWorker/login`);
+        })
     }
     
 }
