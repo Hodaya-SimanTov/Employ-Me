@@ -208,13 +208,17 @@ const loginUser=(req,res)=>{
     console.log("select: "+req.body.select);
     if(req.body.select=="Employer"){
         Employer.findOne({ email: req.body.mail }).then(employer=>{
-            const validPassword =  bcrypt.compare(req.body.password, employer.password);
-            if (!validPassword) {
-                res.redirect(`/contractorWorker/notLogin`);
-            }
-            else{
-                res.redirect(`/employer/homePage/${req.body.mail}`);  
-            }           
+            const validPassword =  bcrypt.compare(req.body.password, employer.password).then(validPassword=>{
+                if (!validPassword) {
+                    res.redirect(`/contractorWorker/notLogin`);
+                }
+                else{
+                    res.redirect(`/employer/homePage/${req.body.mail}`);  
+                }    
+            }).catch(err=>{
+                
+            })
+                   
         }).catch(err=>{
             console.log(err);
             res.redirect(`/contractorWorker/notLogin`);

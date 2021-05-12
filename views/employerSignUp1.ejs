@@ -59,7 +59,7 @@
                 </div>
                 
                 <div class='login'>
-                    <p> Already have account? <a href="/login"> Login</a></p>
+                    <p> Already have account? <a href="/contractorWorker/login"> Login</a></p>
                 </div>
             </form>
         </div>
@@ -129,7 +129,7 @@
                 flag=1;
             }
             if(companyNameValue=="" || !/^[a-zA-Z]+$/.test(companyNameValue)){
-                companyName.parentElement.setAttribute('data-error','Companu name is invalid');
+                companyName.parentElement.setAttribute('data-error','Company name is invalid');
                 flag=1;
             }
             if(!agreeSite.checked){
