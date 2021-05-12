@@ -20,7 +20,7 @@ body{
     padding: 30px 30px;
     border-radius: 10px;
     right: 0px;
-    border:groove rgb(26, 2, 112);
+    
 }
 .container .title{
     font-size: 25px;
@@ -91,12 +91,12 @@ form .button input:hover{
     border-color: #c92432;
 }
 
-.user-details .input-box[data-error] .input{
+.input-box[data-error] .input{
     border-color: #c92432;
     color:#c92432;
 
 }
-.user-details .input-box[data-error]::after{
+.input-box[data-error]::after{
     content: attr(data-error);
     font-size: 0.80em;
     color:#c92432;

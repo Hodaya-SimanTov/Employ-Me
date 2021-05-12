@@ -47,7 +47,7 @@
     align-items: left;
     width: 40%;
     position:relative; 
-    background:  rgba(247, 245, 219, 0.308); 
+    background:  #fff; 
     margin-left: 10px;
     border-radius: 5px;
 }
