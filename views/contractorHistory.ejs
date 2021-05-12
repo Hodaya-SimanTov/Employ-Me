@@ -29,7 +29,7 @@
                 result.forEach(function(employement){
                 %>
                 <tr>
-                    <td><%= employement.date.getDate() %>.<%= employement.date.getMonth() %>.<%= employement.date.getFullYear() %></td>
+                    <td><%= employement.date.getDate() %>.<%= employement.date.getMonth()+1 %>.<%= employement.date.getFullYear() %></td>
                     <td><%= employement.employerEmail %></td>
                     <td><%= employement.status %></td>                   
                 </tr>

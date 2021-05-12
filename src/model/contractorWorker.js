@@ -13,7 +13,8 @@ const ContractorWorker=mongoose.model('ContractorWorker',new mongoose.Schema({
         require:true
     },
     birthday:{
-        type:Date
+        type:Date,
+        require:true
     },
     mail:{
         type:String,
