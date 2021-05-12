@@ -19,7 +19,7 @@ body{
     padding: 30px 30px;
     border-radius: 10px;
     right: 0px;
-    border:groove rgb(26, 2, 112);
+ 
 }
 .container .title{
     font-size: 25px;
@@ -80,7 +80,7 @@ form .user-details .input-box{
     border-radius: 5px;
     border: 1px solid #ccc;
     padding-left: 10px;
-    font-size: 13px;
+    font-size: 15px;
     border-bottom-width: 2px;
     transition: all 0.3s ease;
 }

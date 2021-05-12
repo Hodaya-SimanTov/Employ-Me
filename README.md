@@ -26,17 +26,18 @@ The system runs on a Windows operating system and is built with Visual Studio Co
  * nodemon 2.0.7 - To track changes in the code and restart the server after each change
  * circleCi - For the Continues integration process
  * ESlint
+ * Joi- For test for DB
+ * Mongoose - For schemes
+ * Body parcer
+ * bcrypt - For encription of passwords
  * java script
  * css
  * html
- * The system uses Heroku for cloud services and firebaseDB.
+ * The system uses Heroku for cloud services and MongoDB.
 
 ## Setup
 Clone this repo to your desktop and run npm install: 
- `npm init`
-
-Then you need to install nodemon, use:
- `npm install nodemon -save`
+ `npm install`
 
 In order to run the tests use:
  `npm run test`
@@ -46,6 +47,9 @@ In order to run the lint use:
  
 In order to activate and run the server use:
  `npm run dev`
+
+ In order to run the project use:
+ `npm start`
  
  ## Team
  * Hodaya Siman Tov
