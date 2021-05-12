@@ -59,16 +59,32 @@ function sendmail(email, name) {
 
 //הוספת עובד חדש
 const addContractorWorker=(req,res)=>{
-    console.log(req.body);
-    const newContractorWorker=new ContractorWorker(req.body)
-    newContractorWorker.save().then(contractorWorker =>{
-        //sendmail(contractorWorker.mail,contractorWorker.firstName)//שולח מייל בהרשמה
-        console.log('add conrtactor');
-        addUnavailabilityArray(contractorWorker._id)//הוספת מערך חופשות ריק
-        salaryOfHour(contractorWorker._id,contractorWorker.birthday);//עדכון השכר לשעה
-        res.redirect('/contractorWorker/contractorHomepage');
+    if(contractorExists(req.body.mail)==false){
+        console.log(req.body);
+        const newContractorWorker=new ContractorWorker(req.body)
+        newContractorWorker.save().then(contractorWorker =>{
+            //sendmail(contractorWorker.mail,contractorWorker.firstName)//שולח מייל בהרשמה
+            console.log('add conrtactor');
+            addUnavailabilityArray(contractorWorker._id)//הוספת מערך חופשות ריק
+            salaryOfHour(contractorWorker._id,contractorWorker.birthday);//עדכון השכר לשעה
+            res.redirect('/contractorWorker/contractorHomepage');
+        }).catch(err=>{
+            console.log(`can not add this worker! ${err}`);
+        }) 
+    }  
+    else{
+        console.log("exists!!");
+        res.redirect(`/contractorWorker/contractorExists`); 
+    }
+}
+
+const contractorExists=(mail)=>{
+    ContractorWorker.findOne({ mail:mail }).then(contractor=>{
+        console.log("exists");
+        return true;
     }).catch(err=>{
-        console.log(`can not add this worker! ${err}`);
+        console.log("not exists!!");
+        return false;
     })
 }
 
@@ -84,7 +100,7 @@ const addContractorWorker=(req,res)=>{
 
 // }
 
-const addUnavailabilityArray=(contractor_id)=>{
+const addUnavailabilityArray=(contractor_id)=>{    
     const newUnavailability=new Unavailability({contractorId:contractor_id})
     newUnavailability.save().then(unavailability =>{
         console.log("add new unavailability object");
@@ -192,55 +208,59 @@ const loginUser=(req,res)=>{
     console.log("select: "+req.body.select);
     if(req.body.select=="Employer"){
         Employer.findOne({ email: req.body.mail }).then(employer=>{
-            // const validPassword =  bcrypt.compare(req.body.password, employer.password);
-            // if (!validPassword) {
-            //     return res.status(400).send('Incorrect email or password.');
-            // }
-            // else{
-            //     res.redirect(`/employer/homePage/${req.body.mail}`);
-            // }
-
+            const validPassword =  bcrypt.compare(req.body.password, employer.password).then(validPassword=>{
+                if (!validPassword) {
+                    res.redirect(`/contractorWorker/notLogin`);
+                }
+                else{
+                    res.redirect(`/employer/homePage/${req.body.mail}`);  
+                }    
+            }).catch(err=>{
+                
+            })
+                   
         }).catch(err=>{
             console.log(err);
-            res.redirect(`/contractorWorker/login`);
-        })
+            res.redirect(`/contractorWorker/notLogin`);
+        }) 
     }
     if(req.body.select=="Company Worker"){
-         CompanyWorker.findOne({mail: req.body.mail}).then(company => {
-             console.log("in login company");
-             if (company.password == req.body.password) {
-                 if (company.firstLogin == 0) {
-                     CompanyWorker.findOneAndUpdate({mail: req.body.mail}, {firstLogin: 1}).then(company => {
-                         res.redirect(`/companyWorker/editProfile/${req.body.mail}`);
-                     }).catch(err => {
-                         console.log(err);
-                         res.redirect(`/contractorWorker/login`);
-                     })
-                 } else {
-                     res.redirect(`/companyWorker/homePage/${req.body.mail}`);
-                 }
-             }
-         }).catch(err => {
-             console.log(err);
-             res.redirect(`/contractorWorker/login`);
-         })
-    }
-    if(req.body.select=="Contractor Worker"){
-        ContractorWorker.findOne({ mail: req.body.mail }).then(contractor=>{
-            console.log("in login contractor");
-            if(contractor.password==req.body.password){
-                res.redirect(`/contractorWorker/contractorHomepage/${req.body.mail}`);
-            }
-            else{
-                res.redirect(`/contractorWorker/login`);
-            }
-        }).catch(err=>{
+        CompanyWorker.findOne({mail: req.body.mail}).then(company => {
+            console.log("in login company");
+            if (company.password == req.body.password) {
+                if (company.firstLogin == 0) {
+                    CompanyWorker.findOneAndUpdate({mail: req.body.mail}, {firstLogin: 1}).then(company => {
+                        res.redirect(`/companyWorker/editProfile/${req.body.mail}`);
+                    }).catch(err => {
+                        console.log(err);
+                        res.redirect(`/contractorWorker/notLogin`);
+                    })
+                }
+            }else{
+                    res.redirect(`/contractorWorker/notLogin`);
+                }    
+        }).catch(err => {
             console.log(err);
-
+            res.redirect(`/contractorWorker/notLogin`);
         })
     }
-
+    if(req.body.select=="Contractor Worker"){        
+      ContractorWorker.findOne({ mail: req.body.mail }).then(contractor=>{
+        console.log("in login contractor");
+        if(contractor.password==req.body.password){
+            res.redirect(`/contractorWorker/contractorHomepage/${req.body.mail}`);
+        }
+        else{
+            res.redirect(`/contractorWorker/notLogin`);
+        }
+        }).catch(err=>{
+            console.log(err);
+            res.redirect(`/contractorWorker/notLogin`);
+        })  
+    }    
 }
+
+
 
 const getContractorWorkerById=(req,res)=>{
     ContractorWorker.findById(req.params.id).then(contractorWorker=>{
@@ -270,24 +290,6 @@ const getAllContractorWorkers=(req,res)=>{
     })
 }
 
-const updateContractorWorkerById=(req,res)=>{//עוד לא עובדת
-    ContractorWorker.findByIdAndUpdate(req.params.id,{firstName:req.body.firstName},{new:true})
-        .then(contractorWorker=>{
-            res.json({contractorWorker:contractorWorker})
-        }).catch(err=>{
-        console.log(`can not update this worker! ${err}`);
-    })
-
-}
-
-const updateContractorWorkerByMail=(req,res)=>{//עוד לא עובדת
-    ContractorWorker.findOneAndUpdate({mail:req.params.mail},{phone:req.body.phone},{new:true}).then(contractorWorker=>{
-        res.json({contractorWorker:contractorWorker})
-    }).catch(err=>{
-        console.log(`can not update this worker! ${err}`);
-    })
-
-}
 
 const deleteContractorWorkerById=(req,res)=>{
     ContractorWorker.findByIdAndDelete(req.params.id).then(contractorWorker=>{
@@ -389,7 +391,7 @@ const endEmployement=(req,res)=>{
 }
 
 
-module.exports={addContractorWorker,getContractorWorkerById,updateContractorWorkerById,deleteContractorWorkerById
-    ,getAllContractorWorkers,getContractorWorkerByMail,updateContractorWorkerByMail,loginUser,addDateToUnavailabilityarray
+module.exports={addContractorWorker,getContractorWorkerById,deleteContractorWorkerById
+    ,getAllContractorWorkers,getContractorWorkerByMail,loginUser,addDateToUnavailabilityarray
     ,addUn , getContractorByEmail ,editProfileDisplay ,editProfile,updateContractorPass,unDisplay,homepageDisplay, findContractorInSpecDate
     ,contractorFuture,contractorHistory,endEmployement,};

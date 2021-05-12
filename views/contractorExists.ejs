@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>  
+    <title>login error</title>
+    <link rel="stylesheet" type="text/css" href="/css/styleLogin.css"/>
+    
+</head>
+<body>
+  <div class="container">
+    <div class="title">Sign Up Error</div>
+    <br />
+    <form class="modal-content animate" id="form1" name="form1" action="/contractorWorker/login" method="GET">
+  
+    <div class="user-details">
+      <span class="span">The contractor already exists in the system with this email please log in with this email or re-register with another email</span>
+    </div>   
+
+    <div class="button">
+      <input  value="Login" form="form1" onclick="loginAgain()" readonly>
+
+    </div>
+   </form>
+   <form class="modal-content animate" id="form2" name="form2" action="/contractorWorker/contractorSignUp" method="GET">
+     
+
+    <div class="button">
+          <input  value="SignUp" form="form2" onclick="signupAgain()" readonly>
+
+    </div>
+   </form>
+   
+
+</div>
+</body>
+
+<script>
+    function loginAgain() {
+        document.getElementById("form1").submit();
+    }
+    function signupAgain() {
+        document.getElementById("form2").submit();
+    }
+
+</script>
+</html>

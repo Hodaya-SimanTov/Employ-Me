@@ -8,6 +8,11 @@
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
          <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     </head>
+    <style>
+        .text-center-e{
+            display: true;
+        }
+    </style>
     <body>
         <div class="container">
             <div class="row col-md-6 col-md-offset-2 custyle">
@@ -35,7 +40,7 @@
                     <td><%= employement.status %></td>
                     <%if(employement.date.getDate()==d.getDate())  {%>                  
                         <td class="text-center"><a class='btn btn-info btn-xs' id="start" href="#" onclick="startClick()"><span class="glyphicon glyphicon-edit" ></span> כניסה </a></td>
-                        <td class="text-center"><a class='btn btn-info btn-xs' id="end" href="/contractorWorker/endEmployement/<%=employement._id%>" onclick="endClick()"><span class="glyphicon glyphicon-edit"></span> יציאה </a></td>
+                        <td class="text-center-e"><a class='btn btn-info btn-xs' id="end" href="/contractorWorker/endEmployement/<%=employement._id%>" onclick="endClick()"><span class="glyphicon glyphicon-edit"></span> יציאה </a></td>
                     <%}%>    
                 </tr>
                 <% i++;}) %>
@@ -47,14 +52,16 @@
         </div>
     </body>
     <script >
-        function startClick() {
-            const start=document.getElementById("start");
+        const start=document.getElementById("start");
+        const end=document.getElementById("end");
+        end.setAttribute("style", "display:none");
+        function startClick() {            
             start.disabled=true;
             start.setAttribute("style", "display:none");
+            end.setAttribute("style", "display:inline-block");
         }
-        function endClick() {
-            const end=document.getElementById("end");
-            end.disabled=true;
+        function endClick() {            
+            end.disabled=true;            
         }
     </script>
 </html>
