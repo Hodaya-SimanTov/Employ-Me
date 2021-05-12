@@ -78,7 +78,7 @@ const resetPassword=async (req, res) =>{
 const editProfileDisplay=async (req, res) => {
     let companyWorker = await CompanyWorker.findOne({mail:req.params.mail})
     if (companyWorker) {
-        res.render('../views/companyWorkerEditProfile',companyWorker);
+        res.render('../views/companyWorkerEditProfile',{companyWorker:companyWorker});
     }
     else {
         return res.status(400).send('That email is error!');
@@ -86,11 +86,23 @@ const editProfileDisplay=async (req, res) => {
 }
 //עריכת פרופיל
 const editProfile=async (req, res) => {
-    const { error } = validateEditCompanyWorker(req.body);
-    if (error) {
-        return res.status(400).send(error.details[0].message);
-    }
     let companyWorker= await CompanyWorker.findOneAndUpdate({mail: req.params.mail}, req.body, {new: true });
-    res.redirect('/companyWorker/homePage');
+    res.redirect(`/companyWorker/homePage/${req.params.mail}`);
+
+
 }
-module.exports={addCompanyWorker,deleteCompanyWorkerById,getCompanyWorkerByEmail,resetPassword,editProfileDisplay,editProfile}
+
+const updateCompanyWorkerPass=(req,res)=>{
+    console.log(`in update pass`);
+    CompanyWorker.findOneAndUpdate({mail: req.params.mail}, {password: req.body.password})
+        .then(companyWorker=>{
+            console.log(req.body.password);
+            console.log(req.body.mail);
+            res.redirect(`/companyWorker/homePage/${req.params.mail}`);
+        }).catch(err=>{
+        console.log(`can not update this paa! ${err}`);
+    })
+
+}
+
+module.exports={addCompanyWorker,deleteCompanyWorkerById,getCompanyWorkerByEmail,resetPassword,editProfileDisplay,editProfile,updateCompanyWorkerPass}

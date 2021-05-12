@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+
         <div class="container">
             <div class="title">Employer-Registration</div>
             <form class="model-content animate" id="form" action="/employer/addEmployer" method="POST">
@@ -43,11 +44,20 @@
                         <span class="details">Role</span>
                         <input type="text" class="input" placeholder="Role" name="role" id="role">
                     </div>
+                    
                 </div>
+                <div class="input-box" data-error="Error message">
+                    <input type="checkbox" value="agreeSite" id="agreeSite" required>
+                    <label for="agreeSite"> I agree to the terms of privacy and use of the site *</label>
+                    <br>
+                    <br>
+                </div>
+
                 <lable>* Mandatory fields</lable>
                 <div class="button">
                     <input value="Register" onclick="signup()" readonly>
                 </div>
+                
                 <div class='login'>
                     <p> Already have account? <a href="/login"> Login</a></p>
                 </div>
@@ -64,9 +74,11 @@
         const password=document.getElementById("password");
         const rePassword=document.getElementById("rePassword");
         const email=document.getElementById("email");
+        const agreeSite=document.getElementById("agreeSite");
         document.querySelectorAll('.input-box[data-error] .input').forEach(inpEl=>{
             inpEl.addEventListener('input',()=>inpEl.parentElement.removeAttribute('data-error'));
         });
+        
         firstName.parentElement.removeAttribute('data-error');
         lastName.parentElement.removeAttribute('data-error');
         phone.parentElement.removeAttribute('data-error');
@@ -75,6 +87,7 @@
         password.parentElement.removeAttribute('data-error');
         rePassword.parentElement.removeAttribute('data-error');
         email.parentElement.removeAttribute('data-error');
+        agreeSite.parentElement.removeAttribute('data-error');
         function signup()
         { 
             var firstNameValue=firstName.value.trim();
@@ -117,6 +130,10 @@
             }
             if(companyNameValue=="" || !/^[a-zA-Z]+$/.test(companyNameValue)){
                 companyName.parentElement.setAttribute('data-error','Companu name is invalid');
+                flag=1;
+            }
+            if(!agreeSite.checked){
+                agreeSite.parentElement.setAttribute('data-error','Please confirm your agreement to the site rules');
                 flag=1;
             }
             if(flag==0){

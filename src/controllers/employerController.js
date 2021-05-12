@@ -21,7 +21,7 @@ const addEmployer=async (req, res) => {
     // Check if this user already exisits
     let employer = await Employer.findOne({ email: req.body.email });
     if (employer) {
-        return res.status(400).send('That user already exisits!');
+        return res.send('That user already exisits!');
     } else {
         // Insert the new user if they do not exist yet
         employer = new Employer(_.pick(req.body, ['firstName','lastName','phone', 'email','companyName','password','role']));

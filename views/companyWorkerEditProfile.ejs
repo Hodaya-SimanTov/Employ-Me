@@ -2,42 +2,88 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Profile Of | companyWorker</title>
-    <link rel="stylesheet" href="/css/styleCompanyWorkerEditProfile.css">
+    <title>Company Worker-Profile</title>
+    <link rel="stylesheet" href="/css/styleContractorProfile.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
 </head>
 <body>
+<!-- <form class="homeLogo" action='/companyWorker/homePage/<%=companyWorker.mail%>'  method="GET" >
+            <button type="submit" style="font-size:24px"><img class="logo" type="submit" src="/css/images/logo.PNG"></button>
+        </form> -->
 <div class="container">
     <div class="title">Edit Your Profile</div>
-    <form class="model-content animate" id="form" action='/companyWorker/editProfile/<%=email%>'  method="POST" >
-        <div class="user-details">
-            <div class="input-box" data-error="Error message">
-                <span class="details">First Name</span>
-                <input type="text" class="input" id="firstName" name="firstName"   value=<%=firstName%>>
-            </div>
-            <div class="input-box" data-error="Error message" >
-                <span class="details">Last Name</span>
-                <input type="text" class="input" id="lastName" name="lastName" value=<%=lastName%>>
-            </div>
-            <div class="input-box" data-error="Error message">
-                <span class="details">Phone</span>
-                <input type="number" class="input" id="phone" name="phone" minlength="10" maxlength="10" value=<%=phone%>>
-            </div>
-            <div class="button1">
-                <input value="Reset Password" readonly>
+    <br />
+    <form class="model-content animate " id="form-pass" action='/companyWorker/updateCompanyWorkerPass/<%=companyWorker.mail%>'  method="POST" >
+        <div class="row">
+            <div class="col-1"><span class="details">Password:</span></div>
+            <div class="col-3"><input type="text" class="input" readonly  id="passwordNew" value=<%=companyWorker.password%>></div>
+            <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal">
+                Reset Password
+            </button>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <span class="details">please enter new pass:</span>
+                        <input type="text" class="input" id="password" form="form-pass" name="password" >
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save changes" form="form-pass" onclick="resetPassword()" >
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="button">
-            <input  value="Save" onclick="checkInputs()"  readonly>
-        </div>
+    </form>
+    <hr>
+    <form class="model-content animate" id="form" action='/companyWorker/editProfile/<%=companyWorker.mail%>'  method="POST" >
+        <div>
+            <div class="user-details" >
+                <div class="input-box" data-error="Error message">
+                    <span class="details">First Name</span>
+                    <input type="text" class="input" id="firstName" name="firstName" form="form"  value=<%=companyWorker.firstName%>>
+
+                </div>
+                <div class="input-box" data-error="Error message">
+                    <span class="details">Last Name</span>
+                    <input type="text" class="input" id="lastName" name="lastName" form="form"  value=<%=companyWorker.lastName%>>
+                </div>
+                <div class="input-box" data-error="Error message">
+                    <span class="details">Mail</span>
+                    <input type="email" class="input" id="mail" name="mail" form="form"  value=<%=companyWorker.mail%>>
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="input-box" data-error="Error message">
+                    <span class="details">Phone</span>
+                    <input type="phone" class="input" id="phone" name="phone" form="form"  value=<%=companyWorker.phone%>>
+                </div>
+                <div class="button">
+                    <input  value="Save" form="form" onclick="checkInputs()"  readonly>
+                </div>
+            </div>
     </form>
 </div>
 </body>
 <script>
+    const form1=document.getElementById("form1");
     const form=document.getElementById("form");
     const firstName=document.getElementById("firstName");
     const lastName=document.getElementById("lastName");
     const phone=document.getElementById("phone");
+    const mail=document.getElementById("mail");
 
     document.querySelectorAll('.input-box[data-error] .input').forEach(inpEl=>{
         inpEl.addEventListener('input',()=>inpEl.parentElement.removeAttribute('data-error'));
@@ -45,10 +91,13 @@
     firstName.parentElement.removeAttribute('data-error');
     lastName.parentElement.removeAttribute('data-error');
     phone.parentElement.removeAttribute('data-error');
+    mail.parentElement.removeAttribute('data-error');
+
     function checkInputs(){
         const firstNameValue=firstName.value.trim();
         const lastNameValue=lastName.value.trim();
         const phoneValue=phone.value.trim();
+        const mailValue=mail.value.trim();
 
         var flag=0;
         if(firstNameValue==""){
@@ -82,11 +131,19 @@
             phone.parentElement.setAttribute('data-error','Phone must contain 10 digits');
             flag=1;
         }
+        if(!mailValue.includes('@')){
+            mail.parentElement.setAttribute('data-error','mail must be example@example.com');
+            flag=1;
+        }
         if(flag==0){
             document.getElementById("form").submit();
         }
+
     }
-    function resetPassword(){
+    function resetPassword() {
+        document.getElementById("form-pass").submit();
+    }
+    function saveUnavailability() {
 
     }
 </script>
@@ -97,3 +154,4 @@
     })();
 </script>
 </html>
+
