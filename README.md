@@ -26,9 +26,10 @@ The system runs on a Windows operating system and is built with Visual Studio Co
  * nodemon 2.0.7 - To track changes in the code and restart the server after each change
  * circleCi - For the Continues integration process
  * ESlint
+ * jQuery
  * Joi- For test for DB
  * Mongoose - For schemes
- * Body parcer
+ * body parcer
  * bcrypt - For encription of passwords
  * java script
  * css
