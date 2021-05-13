@@ -85,7 +85,7 @@
     const phone=document.getElementById("phone");
     const mail=document.getElementById("mail");
 
-    document.querySelectorAll('.input-box[data-error] .input').forEach(inpEl=>{
+    document.querySelectorAll('.input-box[data-error] .input').forEach(inpEl => {
         inpEl.addEventListener('input',()=>inpEl.parentElement.removeAttribute('data-error'));
     });
     firstName.parentElement.removeAttribute('data-error');
@@ -93,49 +93,49 @@
     phone.parentElement.removeAttribute('data-error');
     mail.parentElement.removeAttribute('data-error');
 
-    function checkInputs(){
+    function checkInputs() {
         const firstNameValue=firstName.value.trim();
         const lastNameValue=lastName.value.trim();
         const phoneValue=phone.value.trim();
         const mailValue=mail.value.trim();
 
         var flag=0;
-        if(firstNameValue==""){
+        if(firstNameValue=="") {
             firstName.parentElement.setAttribute('data-error','First name can not be empty');
             flag=1;
         }
-        if(firstNameValue.length<3 ){
+        if(firstNameValue.length<3 ) {
             firstName.parentElement.setAttribute('data-error','First name must contain less 3 character');
             flag=1;
         }
-        if(firstNameValue.length>50 ){
+        if(firstNameValue.length>50 ) {
             firstName.parentElement.setAttribute('data-error','First name must contain no more  50 character');
             flag=1;
         }
-        if(!/^[a-zA-Z]+$/.test(firstNameValue)){
+        if(!/^[a-zA-Z]+$/.test(firstNameValue)) {
             firstName.parentElement.setAttribute('data-error','First name must contain only character');
         }
-        if(lastNameValue==""){
+        if(lastNameValue=="") {
             lastName.parentElement.setAttribute('data-error','Last name can not be empty');
             flag=1;
         }
-        if(lastNameValue.length<3){
+        if(lastNameValue.length<3) {
             lastName.parentElement.setAttribute('data-error','Last name must contain less 3 character');
             flag=1;
         }
-        if(lastNameValue.length>50){
+        if(lastNameValue.length>50) {
             lastName.parentElement.setAttribute('data-error','Last name must contain no more  50 character');
             flag=1;
         }
-        if(phoneValue.length!=10){
+        if(phoneValue.length!=10) {
             phone.parentElement.setAttribute('data-error','Phone must contain 10 digits');
             flag=1;
         }
-        if(!mailValue.includes('@')){
+        if(!mailValue.includes('@')) {
             mail.parentElement.setAttribute('data-error','mail must be example@example.com');
             flag=1;
         }
-        if(flag==0){
+        if(flag==0) {
             document.getElementById("form").submit();
         }
 
@@ -149,7 +149,7 @@
 </script>
 <script type="text/javascript"src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
 <script type="text/javascript">
-    (function(){
+    (function() {
         emailjs.init("service_m3luncq");
     })();
 </script>
