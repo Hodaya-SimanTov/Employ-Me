@@ -21,7 +21,7 @@ const salaryOfHour = function (contractor_id,birthday) {
     else
         x=30;
     ContractorWorker.findByIdAndUpdate(contractor_id, {hourlyWage:x})
-        .then(()=>{
+        .then(()=> {
             console.log('add salary');
         }).catch(err=>{
         console.log(err);
@@ -58,24 +58,29 @@ function sendmail(email, name) {
 
 
 //הוספת עובד חדש
-const addContractorWorker = (req,res)=>{
-    if(contractorExists(req.body.mail) == false){
-        console.log(req.body);
-        const newContractorWorker=new ContractorWorker(req.body);
-        newContractorWorker.save().then(contractorWorker => {
+const addContractorWorker = (req,res)=> {
+    ContractorWorker.findOne({mail:req.body.mail}).then(con=> {
+        if(con) {
+            console.log('exists!!');
+            res.redirect(`/contractorWorker/contractorExists`); 
+        }
+        else {
+           const newContractorWorker=new ContractorWorker(req.body);
+            newContractorWorker.save().then(contractorWorker => {
             //sendmail(contractorWorker.mail,contractorWorker.firstName)//שולח מייל בהרשמה
-            console.log('add conrtactor');
-            addUnavailabilityArray(contractorWorker._id);//הוספת מערך חופשות ריק
-            salaryOfHour(contractorWorker._id,contractorWorker.birthday);//עדכון השכר לשעה
-            res.redirect('/contractorWorker/contractorHomepage');
-        }).catch(err=>{
+                console.log('add conrtactor');
+                addUnavailabilityArray(contractorWorker._id);//הוספת מערך חופשות ריק
+                salaryOfHour(contractorWorker._id,contractorWorker.birthday);//עדכון השכר לשעה
+            res.redirect(`/companyWorker/homePage/${req.body.mail}`);
+        }).catch(err=> {
             console.log(`can not add this worker! ${err}`);
-        }); 
-    }  
-    else{
-        console.log('exists!!');
-        res.redirect(`/contractorWorker/contractorExists`); 
-    }
+        });  
+        }       
+   
+    }).catch(err=> {
+        console.log(err);
+    });
+    
 }
 
 const contractorExists = (mail) => {
@@ -89,23 +94,23 @@ const contractorExists = (mail) => {
 }
 
 
-const addUnavailabilityArray = (contractor_id)=>{    
+const addUnavailabilityArray = (contractor_id)=> {    
     const newUnavailability=new Unavailability({contractorId:contractor_id});
     newUnavailability.save().then(unavailability => {
         console.log('add new unavailability object');
         ContractorWorker.findByIdAndUpdate(contractor_id, {unavailability:unavailability._id})
             .then(() => {
                 console.log("add unavailability array to contractor");
-            }).catch(err=>{
+            }).catch(err=> {
             console.log(err);
         });
-    }).catch(err=>{
+    }).catch(err=> {
         console.log(`can not add this unavailability! ${err}`);
     });
 }
 
 //מקבלת תאריך בודד ומוסיפה אותו למערך שבאובייקט אי זמינות
-const addDateToArray = (idArray,year,month,day)=>{
+const addDateToArray = (idArray,year,month,day)=> {
     const d = new Date(year,month,day);
     Unavailability.findByIdAndUpdate(idArray, {$push:{'unavailabArray':d}})
         .then(() => {
@@ -137,24 +142,24 @@ const addUn = (req,res) => {
 
 
 //מקבל תאריך התחלה וסוף ומוסיף את כל הימים האלו למערך החופשות של העובד
-const addDateToUnavailabilityarray = (idArray,startDate,endDate)=>{// בהנחה שהתאריכים עוקבים
+const addDateToUnavailabilityarray = (idArray,startDate,endDate)=> {// בהנחה שהתאריכים עוקבים
     var m = [31,29,31,30,31,30,31,31,30,31,30,31];
     var i;
     var s = new Date(startDate);
     var e = new Date(endDate);
     var start = s.getDate();//מחזיר את היום 1-31
     var end = e.getDate();
-    if(s.getMonth() != e.getMonth()){
+    if(s.getMonth() != e.getMonth()) {
 
-        for( i = start+1 ; i <= m[s.getMonth()] ; i++){
+        for( i = start+1 ; i <= m[s.getMonth()] ; i++) {
             addDateToArray(idArray,s.getFullYear(),s.getMonth(),i);
         }
-        for(i = 1 ; i <= end+1 ; i++){
+        for(i = 1 ; i <= end+1 ; i++) {
             addDateToArray(idArray,s.getFullYear(),e.getMonth(),i);
         }
     }
-    else{
-        for(i = start+1 ; i <= end+1 ; i++){
+    else {
+        for(i = start+1 ; i <= end+1 ; i++) {
             addDateToArray(idArray,s.getFullYear(),s.getMonth(),i);
         }
     }
@@ -166,10 +171,10 @@ const addDateToUnavailabilityarray = (idArray,startDate,endDate)=>{// בהנחה
 const findContractorInSpecDate = (req,res) => {
     var array = [];
     var i = 0;
-    Unavailability.find( {unavailabArray : { $nin: [req.body.date] }}).then(unavailability=>{
+    Unavailability.find( {unavailabArray : { $nin: [req.body.date] }}).then(unavailability=> {
         res.send({contractors:unavailability});
         console.log(unavailability);
-        for(i = 0 ; i < unavailability.length ; i++){
+        for(i = 0 ; i < unavailability.length ; i++) {
             array[i] = unavailability[i].contractorId;
         }
         console.log(array);
@@ -184,13 +189,13 @@ const findContractorInSpecDate = (req,res) => {
 
 const loginUser = (req,res) => {
     console.log('select: ' + req.body.select);
-    if(req.body.select == 'Employer'){
-        Employer.findOne({ email: req.body.mail }).then(employer=>{
-            const validPassword =  bcrypt.compare(req.body.password, employer.password).then(validPassword=>{
+    if(req.body.select == 'Employer') {
+        Employer.findOne({ email: req.body.mail }).then(employer=> {
+            const validPassword =  bcrypt.compare(req.body.password, employer.password).then(validPassword=> {
                 if (!validPassword) {
                     res.redirect(`/contractorWorker/notLogin`);
                 }
-                else{
+                else {
                     res.redirect(`/employer/homePage/${req.body.mail}`);  
                 }    
             }).catch(err => {
@@ -202,7 +207,7 @@ const loginUser = (req,res) => {
             res.redirect(`/contractorWorker/notLogin`);
         });
     }
-    if(req.body.select == 'Company Worker'){
+    if(req.body.select == 'Company Worker') {
         CompanyWorker.findOne({mail: req.body.mail}).then(company => {
             console.log('in login company');
             if (company.password == req.body.password) {
@@ -214,7 +219,10 @@ const loginUser = (req,res) => {
                         res.redirect(`/contractorWorker/notLogin`);
                     });
                 }
-            }else{
+                else {
+                    res.redirect(`/companyWorker/homePage/${req.body.mail}`);
+                }
+            }else {
                     res.redirect(`/contractorWorker/notLogin`);
                 }    
         }).catch(err => {
@@ -222,13 +230,13 @@ const loginUser = (req,res) => {
             res.redirect(`/contractorWorker/notLogin`);
         });
     }
-    if(req.body.select == 'Contractor Worker'){        
+    if(req.body.select == 'Contractor Worker') {        
       ContractorWorker.findOne({ mail: req.body.mail }).then(contractor => {
         console.log('in login contractor');
-        if(contractor.password == req.body.password){
+        if(contractor.password == req.body.password) {
             res.redirect(`/contractorWorker/contractorHomepage/${req.body.mail}`);
         }
-        else{
+        else {
             res.redirect(`/contractorWorker/notLogin`);
         }
         }).catch(err => {
@@ -270,7 +278,7 @@ const getAllContractorWorkers = (req,res) => {
 
 
 const deleteContractorWorkerById = (req,res) => {
-    ContractorWorker.findByIdAndDelete(req.params.id).then(contractorWorker=>{
+    ContractorWorker.findByIdAndDelete(req.params.id).then(contractorWorker => {
         res.send('success to dalete');
     }).catch(err => {
         console.log(`can not delete this worker! ${err}`);
@@ -305,7 +313,7 @@ const editProfile = async (req, res) => {
     // if (error) {
     //     return res.status(400).send(error.details[0].message);
     // }
-    let contractor= await ContractorWorker.findOneAndUpdate({mail: req.params.mail}, req.body, {new: true });
+    let contractor = await ContractorWorker.findOneAndUpdate({mail: req.params.mail}, req.body, {new: true });
     res.redirect(`/contractorWorker/contractorHomepage/${req.params.mail}`);
 }
 
@@ -368,7 +376,7 @@ const endEmployement = (req,res) => {
 }
 
 
-module.exports = { addContractorWorker,getContractorWorkerById,deleteContractorWorkerById
-    ,getAllContractorWorkers,getContractorWorkerByMail,loginUser,addDateToUnavailabilityarray
-    ,addUn , getContractorByEmail ,editProfileDisplay ,editProfile,updateContractorPass,unDisplay,homepageDisplay, findContractorInSpecDate
-    ,contractorFuture,contractorHistory,endEmployement };
+module.exports = { addContractorWorker , getContractorWorkerById , deleteContractorWorkerById
+    , getAllContractorWorkers , getContractorWorkerByMail , loginUser , addDateToUnavailabilityarray
+    , addUn , getContractorByEmail , editProfileDisplay , editProfile , updateContractorPass , unDisplay 
+    , homepageDisplay , findContractorInSpecDate , contractorFuture , contractorHistory , endEmployement };
