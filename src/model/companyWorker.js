@@ -2,44 +2,44 @@ const Joi = require('joi');
 const mongoose=require('mongoose')
 
 const CompanyWorker=mongoose.model('CompanyWorker',new mongoose.Schema({
-    firstName:{
+    firstName: {
         type:String,
         required:true,
         trim:true,
         minlength: 3,
         maxlength: 50
     },
-    lastName:{
+    lastName: {
         type:String,
         required:true,
         trim:true,
         minlength: 3,
         maxlength: 50
     },
-    phone:{
+    phone: {
         type:String,
         required:true,
         length: 10
     },
-    mail:{
+    mail: {
         type:String,
         required:true,
         unique: true
     },
-    password:{
+    password: {
         type:String,
         required:true,
         minlength:6,
         maxlength: 128
     },
-    firstLogin:{
+    firstLogin: {
         type:Number,
         required:true,
         default:0
     }
 }));
 function validateCompanyWorker(companyWorker) {
-    const schema =Joi.object( {
+    const schema = Joi.object( {
         firstName: Joi.string().min(3).max(50).trim().required(),
         lastName: Joi.string().min(3).max(50).trim().required(),
         phone: Joi.string().length(10).required(),
@@ -50,7 +50,7 @@ function validateCompanyWorker(companyWorker) {
     return  schema.validate(companyWorker);
 }
 function validateEditCompanyWorker(companyWorker) {
-    const schema =Joi.object( {
+    const schema = Joi.object( {
         firstName: Joi.string().min(3).max(50).trim().required(),
         lastName: Joi.string().min(3).max(50).trim().required(),
         phone: Joi.string().length(10).required(),
@@ -61,4 +61,4 @@ function validateEditCompanyWorker(companyWorker) {
 }
 exports.CompanyWorker = CompanyWorker;
 exports.validate = validateCompanyWorker;
-exports.validateEditCompanyWorker=validateEditCompanyWorker;
+exports.validateEditCompanyWorker = validateEditCompanyWorker;

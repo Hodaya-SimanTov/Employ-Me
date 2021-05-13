@@ -10,46 +10,47 @@ const router = express.Router();
 const _ = require('lodash');
 
 //הוספת עובדי משאבי אנוש
-const addCompanyWorker=(req,res)=>{
-    if(companyExists(req.body.mail)==false){
-        console.log(req.body);
-    const newComapnyWorker=new CompanyWorker(req.body)
-        if(!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(String(req.body.mail).toLowerCase()))
-            console.log('no succ');
-        else
-        {
-            newComapnyWorker.save().then(companyWorker =>{
-            res.send('success to add db')
-        console.log('succ');
-    }).catch(err=>{
-        console.log(`can not add this worker! ${err}`);
-    })
-}
+const addCompanyWorker = (req,res) => {
+    if (/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(String(req.body.mail).toLowerCase())) {
+        if (companyExists(req.body.mail) == false) {
+            console.log(req.body);
+            const newComapnyWorker = new CompanyWorker(req.body)
+                newComapnyWorker.save().then(companyWorker => {
+                    res.send('success to add db')
+                    console.log('succ');
+                }).catch(err => {
+                    console.log(`can not add this worker! ${err}`);
+                })
         }
-    else{
-        console.log("exists!!");
+        else {
+            console.log('exists!!');
+        }
+    }
+    else {
+        console.log('not valid!!');
     }
 }
 
-const companyExists=(mail)=>{
-    CompanyWorker.findOne({ mail:mail }).then(CompanyWorker=>{
-        console.log("exists");
+const companyExists = (mail) => {
+    CompanyWorker.findOne({ mail:mail }).then(CompanyWorker=> {
+        console.log('exists');
         return true;
-    }).catch(err=>{
-        console.log("not exists!!");
+    }).catch(err=> {
+        console.log(`not exists!! ${err}`);
         return false;
     })
+    return false;
 }
 //מחיקת עובד משאבי אנוש
-const deleteCompanyWorkerById=(req,res)=>{
-    CompanyWorker.findByIdAndDelete(req.params.id).then(CompanyWorker=>{
-        res.send("success to dalete")
-    }).catch(err=>{
+const deleteCompanyWorkerById = (req,res) => {
+    CompanyWorker.findByIdAndDelete(req.params.id).then(CompanyWorker=> {
+        res.send('success to dalete')
+    }).catch(err => {
         console.log(`can not delete this worker! ${err}`);
     })
 }
 //עובד חברה לפי מייל
-const getCompanyWorkerByEmail=async(mail)=>{
+const getCompanyWorkerByEmail = async(mail) => {
 
     let companyWorker = await CompanyWorker.findOne({mail:req.params.mail})
     if (companyWorker) {
@@ -60,12 +61,12 @@ const getCompanyWorkerByEmail=async(mail)=>{
     }
 }
 //סיסמא
-const resetPassword=async (req, res) =>{
+const resetPassword = async (req, res) => {
     const { mail } = req.body.mail
-    const name=req.body.firstName
+    const name = req.body.firstName
     let randomstring = Math.random().toString(36).slice(-8)
     const salt = await bcrypt.genSalt(10);
-    let password= await bcrypt.hash(randomstring, salt);
+    let password = await bcrypt.hash(randomstring, salt);
     let companyWorker = await CompanyWorker.findOne({ mail: req.body.mail }).then(companyWorker=>{
         companyWorker.password=password
         companyWorker.markModified('password')
@@ -95,7 +96,7 @@ const resetPassword=async (req, res) =>{
     })
 }
 //הצגת פרופיל
-const editProfileDisplay=async (req, res) => {
+const editProfileDisplay = async (req, res) => {
     let companyWorker = await CompanyWorker.findOne({mail:req.params.mail})
     if (companyWorker) {
         res.render('../views/companyWorkerEditProfile',{companyWorker:companyWorker});
@@ -105,21 +106,21 @@ const editProfileDisplay=async (req, res) => {
     }
 }
 //עריכת פרופיל
-const editProfile=async (req, res) => {
-    let companyWorker= await CompanyWorker.findOneAndUpdate({mail: req.params.mail}, req.body, {new: true });
+const editProfile = async (req, res) => {
+    let companyWorker = await CompanyWorker.findOneAndUpdate({mail: req.params.mail}, req.body, {new: true });
     res.redirect(`/companyWorker/homePage/${req.params.mail}`);
 
 
 }
 
-const updateCompanyWorkerPass=(req,res)=>{
+const updateCompanyWorkerPass = (req,res) => {
     console.log(`in update pass`);
     CompanyWorker.findOneAndUpdate({mail: req.params.mail}, {password: req.body.password})
-        .then(companyWorker=>{
+        .then(companyWorker => {
             console.log(req.body.password);
             console.log(req.body.mail);
             res.redirect(`/companyWorker/homePage/${req.params.mail}`);
-        }).catch(err=>{
+        }).catch(err => {
         console.log(`can not update this paa! ${err}`);
     })
 
