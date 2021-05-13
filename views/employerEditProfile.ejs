@@ -19,10 +19,15 @@
                         <span class="details">Last Name</span>
                         <input type="text" class="input" id="lastName" name="lastName" value=<%=lastName%>>
                     </div>
+                    <div class="input-box">
+                        <span class="details">Email Address</span>
+                        <input type="email" class="input" id="email" name="email" readonly value=<%=email%> >
+                    </div>
                     <div class="input-box" data-error="Error message">
                         <span class="details">Phone</span>
                         <input type="number" class="input" id="phone" name="phone" minlength="10" maxlength="10" value=<%=phone%>>
                     </div>
+                    
                     <div class="input-box" data-error="Error message">
                         <span class="details">Company</span>
                         <input type="text" class="input" id="companyName" name="companyName" value=<%=companyName%>>
