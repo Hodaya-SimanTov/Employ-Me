@@ -61,7 +61,7 @@ app.use('/companyWorker', apiCompanyWorker);
 
 
 // const port = process.env.PORT
-const port = 4000 || process.env.PORT
+const port =  process.env.PORT || 4000
 app.listen(port, () => {    
     console.log(`\nserver is up and running at: http://127.0.0.1:${port}\n` )
 })
