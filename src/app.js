@@ -3,7 +3,9 @@ const express = require('express')
 const app = express()
 const path=require('path');
 const dotenv=require('dotenv')
-dotenv.config({path:'.env'})
+const isProd = process.env.APP_ENV === 'prod'
+if(!isProd)
+    dotenv.config({path:'.env'})
 const bodyParser=require('body-parser')
 const mongoose=require('mongoose')
 
@@ -55,7 +57,8 @@ app.use('/employer',apiEmployer)
 app.use('/contractorWorker',apiContractorWorker)
 app.use('/companyWorker',apiCompanyWorker)
 
-const port = process.env.PORT
+// const port = process.env.PORT
+const port = 4000 || process.env.PORT
 app.listen(port,()=>{    
     console.log(`\nserver is up and running at: http://127.0.0.1:${port}\n` )
 })
