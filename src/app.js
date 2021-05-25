@@ -7,10 +7,6 @@ if(!isProd)
     dotenv.config({path:'.env'})
 const bodyParser=require('body-parser')
 const mongoose=require('mongoose')
-
-
-
-
 const apiEmployer = require('./route/apiEmployer');
 const apiContractorWorker = require('./route/apiContractorWorker');
 const apiCompanyWorker = require('./route/apiCompanyWorker');
@@ -32,7 +28,8 @@ app.set('view engine', 'ejs')
 const connectionParams = {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 }
 mongoose.connect(process.env.CONNECT_DB, connectionParams)
     .then(() => {

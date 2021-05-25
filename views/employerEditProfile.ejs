@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
-        <!-- <meta charset="UTF-8"> -->
+        <meta charset="UTF-8">
         <title>Edit Profile Of | Employer</title>
         <link rel="stylesheet" type="text/css" href="/css/styleEmployerEditProfile.css">
-        <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <div class="container"> 
@@ -21,7 +21,7 @@
                     </div>
                     <div class="input-box">
                         <span class="details">Email Address</span>
-                        <input type="email" class="input" id="email" name="email" readonly value=<%=email%> >
+                        <input type="email" class="input" id="email" name="email"  value=<%=email%> readonly >
                     </div>
                     <div class="input-box" data-error="Error message">
                         <span class="details">Phone</span>
@@ -58,7 +58,6 @@
        const phone=document.getElementById("phone");
        const companyName=document.getElementById("companyName");
        const role=document.getElementById("role");
-       
  
        document.querySelectorAll('.input-box[data-error] .input').forEach(inpEl=>{
            inpEl.addEventListener('input',()=>inpEl.parentElement.removeAttribute('data-error'));
@@ -68,6 +67,7 @@
        phone.parentElement.removeAttribute('data-error');
        companyName.parentElement.removeAttribute('data-error');
        role.parentElement.removeAttribute('data-error');
+
        function checkInputs(){
             const firstNameValue=firstName.value.trim();
             const lastNameValue=lastName.value.trim();

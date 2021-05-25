@@ -56,6 +56,7 @@ function validateEditEmployer(employer) {
     const schema = Joi.object( {
         firstName: Joi.string().min(3).max(50).trim().required(),
         lastName: Joi.string().min(3).max(50).trim().required(),
+        email: Joi.string().required().email(),
         phone: Joi.string().length(10).required(),
         companyName: Joi.string().required(),
         role: Joi.string().default(" ").empty("")
