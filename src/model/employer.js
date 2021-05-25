@@ -1,3 +1,4 @@
+const { ObjectId } = require('bson');
 const Joi = require('joi');
 const mongoose = require('mongoose');
 const Employer = mongoose.model('Employer', new mongoose.Schema({
@@ -39,10 +40,9 @@ const Employer = mongoose.model('Employer', new mongoose.Schema({
         type:String,
         default:" "
     },
-    favorites:{
-        type:mongoose.Types.ObjectId,
-        ref:"FavoritesContractors"
-    }
+    favoritesArray:[{
+        type:ObjectId
+    }]
 }));
 function validateEmployer(employer) {
     const schema = Joi.object( {
