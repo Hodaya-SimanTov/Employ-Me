@@ -11,6 +11,7 @@ const router = express.Router();
 const _ = require('lodash');
 const { ObjectId } = require('bson');
 
+
 const addEmployer = async (req, res) => {
     // First Validate The Request
     const { error } = validate(req.body);
@@ -285,7 +286,14 @@ const historyEmployments = async (req, res) => {
 // const rateAndFidback=async (req, res) => {
 //     let rEployment=await Employement.findOne({employerEmail: req.params.emailEmployer, idConstractor: req.params.idConstractor, date: req.params.date})
 
-
+const addFavoriteConToArray = (employerId, contractorId)=> {
+    Employer.findByIdAndUpdate(employerId, {$addToSet: { favorites: contractorId}})
+        .then(() => {
+            console.log("add favorite contractor to employer");
+        }).catch(err => {
+        console.log(err);
+    })
+}
 
     
 
