@@ -251,8 +251,8 @@ form .button input:hover{
     transition: background 0.2s, border 0.2s;
 } */
 .select{
-    width:40vmax;
-    height: 30px;
+    height: 39px;
+    width: 520px;
 }
 
 

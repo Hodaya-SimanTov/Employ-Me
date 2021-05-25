@@ -2,9 +2,9 @@ const router = require('express').Router();
 const employer = require('../controllers/employerController');
 
 router.post('/addEmployer', employer.addEmployer)
-// router.post('/addEmployer',(req,res)=>{
-//     res.render('../views/employerHomePage')
-// });
+router.get('/rate',(req,res)=>{
+    res.render('../views/employerRate')
+});
 
 // router.get('/getEmployerByEmail/:email',employer.getEmployerByEmail);
 
