@@ -264,9 +264,9 @@ const confirmEmploymentsDisplay = async (req, res) => {
 }
 const confirmEmployments = async (req, res) => {
     try {
-        console.log(req.body);
+        
         let cEmployment = await Employement.findOneAndUpdate({_id: ObjectId(req.params.id)}, {status:'close',rating: req.body.myRate,feedback:req.body.description }, {new: true });
-        console.log(cEmployment);
+        cEmployment.sort((a, b) => a.date - b.date);
         res.redirect(`/employer/confirmEmployments/${req.body.employerEmail}`);
     }
     catch(err) {
@@ -282,6 +282,7 @@ const terminationOfEmploymentDisplay=async(req,res)=>{
 const historyEmployments = async (req, res) => {
     try {
         let hEmployment = await Employement.find({employerEmail: req.params.email, status:'close'})
+        hEmployment.sort((a, b) => b.date - a.date);
         res.render('../views/employerHistory', {hEmployment:hEmployment,emailEmployer: req.params.email});
     }
     catch(err) {

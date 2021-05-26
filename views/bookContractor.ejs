@@ -48,7 +48,8 @@
                     </div>
                     <div class="input-box">
                         <span class="details">Scope Work(in hour)</span>
-                        <input id="scopeWork"  value=<%=contractor.scopeWork%> readonly>
+                        <p><%=contractor.scopeWork%></p>
+                        <input type="hidden" id="scopeWork"  value=<%=contractor.scopeWork%>>
                     </div>
                 </div>
                     <br/>
@@ -62,7 +63,8 @@
                     <div class="user-details">
                         <div class="input-box" >
                             <span class="details">Date Of Occupation</span>
-                            <input type="date" class="input" value=<%=date%> readonly >
+                            <p><%=date%></p>
+                            <input type="hidden" class="input" value=<%=date%> readonly >
                         </div>
                         <div class="input-box" data-error="Error message">
                             <span class="details">Number of business hours</span>
