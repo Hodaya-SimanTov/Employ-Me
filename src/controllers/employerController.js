@@ -11,6 +11,7 @@ const router = express.Router();
 const _ = require('lodash');
 const { ObjectId } = require('bson');
 
+
 const addEmployer = async (req, res) => {
     // First Validate The Request
     const { error } = validate(req.body);
@@ -196,7 +197,7 @@ const searchContractorByFields = async(req, res) => {
                 try {
                     filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation, serviceArea:req.body.service, scopeWork:req.body.scope, experienceField:req.body.experience})
                     result = await availableCons(avilableConsArr, filteredCons);
-                    res.render('../views/employerSearchResult', {result:result, emailEmployer: req.params.email, date: req.body.employmentDate});
+                    res.render('../views/employerHomePage', {result:result, emailEmployer: req.params.email, date: req.body.employmentDate});
                 }
                 catch(err) {
                     console.log(err);
@@ -290,10 +291,29 @@ const historyEmployments = async (req, res) => {
 
 // const rateAndFidback=async (req, res) => {
 //     let rEployment=await Employement.findOne({employerEmail: req.params.emailEmployer, idConstractor: req.params.idConstractor, date: req.params.date})
+//>וספות של כנרת למועדפים
 
-
+const addFavoriteConToArray = async (req, res) => {
+    try {
+        let employerFav = await Employer.findOneAndUpdate({email: req.params.email}, {$addToSet:{'favoritesArray': req.params.id}}, {new: true });
+        console.log(employerFav);
+        res.redirect(`/employer/homePage/${req.params.email}`);
+    }
+    catch(err) {
+        console.log(err);
+    }   
+    // Employer.findOneAndUpdate(req.params.email, {$addToSet:{'favoritesArray': req.params.id}})
+    //     .then(() => {
+    //         console.log("Add favorite contractor to employer");
+    //     }).catch(err => {
+    //     console.log(err);
+    // })
+    // res.redirect(`/employer/homePage/${req.params.email}`);
+}
 
     
 
-module.exports = {addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,resetPasswordDisplay,bookContractorDisplay,bookContractor,confirmEmploymentsDisplay,historyEmployments,confirmEmployments,terminationOfEmploymentDisplay};
+
+module.exports = {addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,resetPasswordDisplay,bookContractorDisplay,bookContractor,confirmEmploymentsDisplay,historyEmployments,confirmEmployments,terminationOfEmploymentDisplay,addFavoriteConToArray};
+
 

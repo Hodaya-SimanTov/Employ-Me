@@ -47,7 +47,8 @@ router.get('/employerHistory/:email', employer.historyEmployments);
 // });
 
 // router.post('/employerRate/:emailEmployer/:idConstractor/:date',employer.bookContractor);
-
+//תוספות של כנרת למועדפים
+router.get('/addFavorites/:email/:id', employer.addFavoriteConToArray);
 
 module.exports = router;
 
