@@ -225,6 +225,9 @@ form .user-details .input-box{
 .user-details .input-box input:focus{
     border-color: #e6d171
 }
+.user-details .input-box input:hover{
+    border-color: #e6d171
+}
 
 form .button{
     height: 39px;
@@ -250,9 +253,14 @@ form .button input:hover{
 /* .input{
     transition: background 0.2s, border 0.2s;
 } */
-.select{
-    width:40vmax;
-    height: 30px;
+.select {
+    width:500px;
+    height: 40px;
+    border-radius: 5px;
 }
-
-
+.select:focus{
+    border-color: #e6d171
+}
+.select:hover{
+    border-color: #e6d171;
+}

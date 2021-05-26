@@ -3,42 +3,180 @@
     <head>
         <meta charset="UTF-8">
         <title>Shifts history</title>
-        <link rel="stylesheet" href="/css/styleEmployerSearchResults.css">
+        <link rel="stylesheet" href="/css/styleContractorHistory.css">
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
          <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     </head>
     <body>
         <div class="container">
-            <div class="row col-md-6 col-md-offset-2 custyle">
-                <div class="page-header">
-                    <h3><small class="pull-right"><%=result.length %></small> Shifts history </h3>
+            <div class="row col-12 col-md-offset-2 custyle">
+                <div class="page-header user-details">
+                <div class="title"><h2><small class="pull-right"></small> Shifts history </h2></div>
                 </div>
-            <table class="table table-striped custab">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Employer Email</th>
-                    <th>status</th>
-                    <th class="text-center"> </th>
-                </tr>
-            </thead>
+                <div>
+                <div>
+                <div>  <label class="l">Sort by: </label></div>  
+                <!-- <select id="sort">
+                    <option value="date" onclick="sortByDate()">Date</option>
+                    <option value="employer" onclick="sortByEmployer()">Employer</option>
+                    <option value="wage" onclick="sortByWage()">Wage</option>
+                </select>  -->
+                    <button class="btn" onclick="sortByDate()">Sort by date</button>
+                    <button class="btn" onclick="sortByEmployer()">Sort by employer</button>
+                    <button class="btn" onclick="sortByWage()">Sort by wage</button>
+                </div>
+                <div class="user-details">
+                    <label class="l">Search a specific shift by date: </label>
+                    <div class="div-search">
+                    <input type="date" id="date" class="input-box">
+                    <button class="btn" onclick="searchSpecific()">Search</button>
+                </div>
+                </div>
+                <table class="table table-striped custab" id="table">
+                      
                 <%
-                if(result.length!=0) {
+                if(result.length!=0 ) {
                     var i=1;
                 result.forEach(function(employement){
-                %>
-                <tr>
-                    <td><%= employement.date.getDate() %>.<%= employement.date.getMonth()+1 %>.<%= employement.date.getFullYear() %></td>
-                    <td><%= employement.employerEmail %></td>
-                    <td><%= employement.status %></td>                   
-                </tr>
+                %>     
+                <tr class="line">                     
+                    <td class="date"><%= employement.date.getDate() %>.<%= employement.date.getMonth()+1 %>.<%= employement.date.getFullYear() %></td>
+                    <td class="employer"><%= employement.employerEmail %></td>
+                    <td class="wage"><%= employement.jobScope * employement.hourlyWage %>   NIS</td>  
+                 </tr>                     
+                    <!-- <dt><b><%= employement.date.getDate() %>
+                        <dd class="date"><%= employement.date.getDate() %>.<%= employement.date.getMonth()+1 %>.<%= employement.date.getFullYear() %></dd>
+                        <dd class="email"><%= employement.employerEmail %></dd>
+                        <dd class="status"><%= employement.status %></dd>                
+                    
+                    </b></dt>                        -->
+                    <!-- <div class="column" style="background-color:rgb(228, 224, 224);">
+                        <dd class="date"><%= employement.date.getDate() %>.<%= employement.date.getMonth()+1 %>.<%= employement.date.getFullYear() %></dd>
+                        <dd class="email"><%= employement.employerEmail %></dd>
+                        <dd class="status"><%= employement.status %></dd> 
+                    </div> -->
+               
+                
+               
                 <% i++;}) %>
                     <% } else{ %>
-                        <h2>No shifts passed</h2> 
+                        <h3>No shifts found ..</h3> 
                     <% } %>
+            <!-- <button class="sort" data-sort="status">sort by date</button> -->
             </table>
-            </div>
         </div>
+        </div>
+        </div>
+        <script>
+            // select=document.getElementById("sort");
+            function sortByWage() {
+                var list, i,j, line ,wage,temp1,temp2;
+                list = document.getElementById("table");
+                wage = list.getElementsByClassName("wage");
+                line = list.getElementsByClassName("line");
+                for(j = 0; j < (line.length - 1); j++){
+                    for (i = 0; i < (line.length - 1); i++) {
+                        temp1=parseInt(wage[i].innerHTML,10);
+                        temp2=parseInt(wage[i+1].innerHTML,10);
+                        if (temp1 < temp2) {
+                            line[i].parentNode.insertBefore(line[i + 1], line[i]);//החלפת השורות
+                        }
+                    }
+                }
+              
+            }
+            
+            function sortByEmployer() {
+                var list, i,j, line ,employer,temp1,temp2;
+                list = document.getElementById("table");
+                employer = list.getElementsByClassName("employer");
+                line = list.getElementsByClassName("line");
+                
+                for(j = 0; j < (line.length - 1); j++){
+                    for (i = 0; i < (line.length - 1); i++) {
+                        temp1=employer[i].innerHTML;
+                        temp2=employer[i+1].innerHTML;
+                        if (temp1 > temp2) {
+                            line[i].parentNode.insertBefore(line[i + 1], line[i]);//החלפת השורות
+                        }
+                    }
+                }
+              
+            }
+
+
+            function sortByDate() {
+                var list, i,j, line ,date,temp1,temp2;
+                list = document.getElementById("table");
+                date = list.getElementsByClassName("date");
+                line = list.getElementsByClassName("line");
+
+                for(j = 0; j < (line.length - 1); j++){
+                    for (i = 0; i < (line.length - 1); i++) {
+                        temp1=getDate(date[i].innerHTML);
+                        temp2=getDate(date[i+1].innerHTML);
+                        if (temp1 < temp2) {
+                            line[i].parentNode.insertBefore(line[i + 1], line[i]);//החלפת השורות
+                        }
+                    }
+                }
+              
+            }
+            function getDate(date) {
+                var day, month, year, d;
+
+                if(date.length == 8 ){
+                    day=parseInt(date.substr(0,1),10);
+                    month=parseInt(date.substr(2,3),10);
+                    year=parseInt(date.substr(4,7),10);
+                }                
+                if(date.length == 9  && date.indexOf(".") == 1){
+                    day=parseInt(date.substr(0,1),10);
+                    month=parseInt(date.substr(2,4),10);
+                    year=parseInt(date.substr(5,8),10);
+                }
+                if(date.length == 9  && date.indexOf(".") == 2){
+                    day=parseInt(date.substr(0,2),10);
+                    month=parseInt(date.substr(3,4),10);
+                    year=parseInt(date.substr(5,8),10);
+                }
+                if(date.length == 10){
+                    day=parseInt(date.substr(0,2),10);
+                    month=parseInt(date.substr(3,5),10);
+                    year=parseInt(date.substr(6,9),10);
+                }
+
+                d=new Date(year,month-1,day);
+                return d;
+            }
+
+            
+            function searchSpecific() {
+                var list, i,j, line ,employer,temp;
+                list = document.getElementById("table");
+                d = list.getElementsByClassName("date");
+                e =  list.getElementsByClassName("em");
+                w = list.getElementsByClassName("wage");
+                line = list.getElementsByClassName("line");
+                const date=document.getElementById("date");
+                const dateValue=date.value.trim();
+
+                var o=new Date(dateValue);
+                var choose=o.getDate()+"."+(o.getMonth()+1)+"."+o.getFullYear();
+
+
+                for (i = 0; i < (line.length ); i++) {
+                    if(choose == d[i].innerHTML){                        
+                        d[i].setAttribute("style", "background: linear-gradient(135deg, #71b7e6, #e6d171)");
+                        e[i].setAttribute("style", "background: linear-gradient(135deg, #71b7e6, #e6d171)");
+                        w[i].setAttribute("style", "background: linear-gradient(135deg, #71b7e6, #e6d171)");
+                    }
+                    
+                }
+              
+            }
+        </script>
     </body>
+
 </html>

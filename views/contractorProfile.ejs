@@ -21,8 +21,8 @@
             <form class="model-content animate " id="form-pass" action='/contractorWorker/updateContractorPass/<%=contractor.mail%>'  method="POST" >
                 <div class="row">
                 <div class="col-1"><span class="details">Password:</span></div>
-                <div class="col-3"><input type="text" class="input" readonly  id="passwordNew" value=<%=contractor.password%>></div>
-                <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal">
+                <div class="col-2"><lable type="text" class="input" readonly  id="passwordNew" ><%=contractor.password%></label></div>
+                <button type="button" class="btn btn-outline-info"  data-toggle="modal" data-target="#exampleModal">
                    Reset Password
                 </button>
                 </div>                                     
@@ -51,41 +51,64 @@
             <hr>
             <form class="model-content animate" id="form" action='/contractorWorker/contractorProfile/<%=contractor.mail%>'  method="POST" >            
                 <div>
-                <div class="user-details" >
+                <div class="user-details row-12" >
+                    <div class="col-5">
                     <div class="input-box" data-error="Error message">
                         <span class="details">First Name</span>
                         <input type="text" class="input" id="firstName" name="firstName" form="form"  value=<%=contractor.firstName%>>
                         
                     </div>
                     <div class="input-box" data-error="Error message">
+                        <br>
                         <span class="details">Last Name</span>
                         <input type="text" class="input" id="lastName" name="lastName" form="form"  value=<%=contractor.lastName%>>
                     </div>
-                    <div class="input-box" >
-                        <span class="details">Birthday</span>
-                        <input type="text" class="input" id="birthday" name="birthday" form="form" readonly value=<%=date%> >
-                    </div>
                     <div class="input-box" data-error="Error message">
-                        <span class="details">Mail</span>
-                        <input type="email" class="input" id="mail" name="mail" form="form" readonly value=<%=contractor.mail%> >
-                        <small id="emailHelp" class="form-text text-muted">The email cannot be modified.</small>
-                    </div>
-                    <div class="input-box" data-error="Error message">
+                        <br>
                         <span class="details">Phone</span>
                         <input type="phone" class="input" id="phone" name="phone" form="form"  value=<%=contractor.phone%>>
                     </div>
-                    <div class="input-box">
-                        <span class="details">My hourly wage</span>
-                        <input type="text" class="input" id="hourlyWage" name="hourlyWage" readonly  value=<%=contractor.hourlyWage%> >
+                </div>
+                
+                <div class="col-7">
+                        <br>
+                        <br>
+                    <div class="input-box row" >
+                        <br>   
+                        <br>            
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                          </svg>
+                        <span class="details col-4">Birthday:      </span>
+                        <label type="text" class="input col-6" id="birthday" name="birthday" form="form" readonly ><%=date%></label>                       
                     </div>
+                        <br>
+                    <div class="input-box row" data-error="Error message">                        
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-envelope " viewBox="0 0 16 16">
+                            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+                          </svg>
+                        <span class="details col-4">Email:    </span>
+                        <label type="email" class="input col-6" id="mail" name="mail" form="form" readonly  ><%=contractor.mail%></label>
+                    </div>
+                        <br>
+                        <br>
+                    <div class="input-box row">
+                        
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 16 16">
+                            <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
+                          </svg>
+                        <span class="details col-6">Hourly wage:</span>
+                        <label type="text" class="input col-4" id="hourlyWage" name="hourlyWage" readonly  ><%=contractor.hourlyWage%></label>
+                    </div>
+                </div>
+                <div class="col-4"></div>
                 </div>
                 <hr> 
                 <div class="col my-2 d-flex justify-content-between align-items-end p-0">
-                <div class="user-details">  
-                   <div>
-                    <br />
+                <div class="user-details row-12">  
+                   <div class="col-2">
                     <label>Occupation Area</label>
-                    <select id="occupationArea" name="occupationArea" form="form" >
+                    <select class="select" id="occupationArea" name="occupationArea" form="form" >
                         <option ><%=contractor.occupationArea%></option>
                         <option >Insurance</option>
                         <option >High-tech</option>
@@ -106,11 +129,9 @@
                         <option >Other</option>
                     </select>
                 </div>
-                    <br />
-                    <br />
-                    <div>
+                    <div class="col-2">
                     <label>Experience Field</label>
-                    <select id="experienceField" name="experienceField" form="form" placeholder="<%=contractor.experienceField%>" selected=<%=contractor.experienceField%>>
+                    <select class="select" id="experienceField" name="experienceField" form="form" placeholder="<%=contractor.experienceField%>" selected=<%=contractor.experienceField%>>
                         <option ><%=contractor.experienceField%></option>
                         <option >1-5 years</option>
                         <option >5-10 years</option>
@@ -118,11 +139,9 @@
                         <option >Over 15 years</option>
                     </select>
                 </div>
-                    <br />
-                    <br />
-                    <div>
+                    <div class="col-2">
                     <label>Service Area</label>
-                    <select class="input" id="serviceArea" name="serviceArea" form="form" value=<%=contractor.serviceArea%>>
+                    <select class="select" class="input" id="serviceArea" name="serviceArea" form="form" value=<%=contractor.serviceArea%>>
                         <option ><%=contractor.serviceArea%></option>
                         <option >North</option>
                         <option >South</option>
@@ -132,11 +151,9 @@
                         <option >Galilee</option> 
                     </select>
                 </div>
-                    <br />
-                    <br />
-                    <div>
+                    <div class="col-2">
                     <label>Scope Work</label>
-                    <select id="scopeWork" name="scopeWork" form="form" value=<%=contractor.scopeWork%>>
+                    <select class="select" id="scopeWork" name="scopeWork" form="form" value=<%=contractor.scopeWork%>>
                         <option ><%=contractor.scopeWork%></option>
                         <option >3-6</option>
                         <option >6-8</option>

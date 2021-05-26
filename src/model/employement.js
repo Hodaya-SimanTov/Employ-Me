@@ -37,6 +37,9 @@ const Employement=mongoose.model('Employement',new mongoose.Schema({
     },
     feedback:{
         type:String,
+    },
+    start:{
+        type:String
     }
 }));
 function validateEmployement(employement) {

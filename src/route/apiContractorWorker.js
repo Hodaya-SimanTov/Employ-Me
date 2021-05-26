@@ -52,6 +52,7 @@ router.get('/contractorFuture/:mail',contractorWorker.contractorFuture);
 router.get('/contractorHistory/:mail',contractorWorker.contractorHistory);
 
 router.get('/endEmployement/:id',contractorWorker.endEmployement);
+router.get('/startEmployement/:id',contractorWorker.startEmployement);
 
 module.exports=router
 

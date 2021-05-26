@@ -130,3 +130,6 @@ form .button input:hover{
 /* .input{
     transition: background 0.2s, border 0.2s;
 } */
+.user-details .input-box input:hover{
+    border-color: #e6d171
+}
