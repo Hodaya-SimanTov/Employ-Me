@@ -1,6 +1,7 @@
+const { ObjectId } = require('bson');
 const Joi = require('joi');
-const mongoose=require('mongoose')
-const Employer=mongoose.model('Employer',new mongoose.Schema({
+const mongoose = require('mongoose');
+const Employer = mongoose.model('Employer', new mongoose.Schema({
     firstName:{
         type:String,
         required:true,
@@ -38,10 +39,13 @@ const Employer=mongoose.model('Employer',new mongoose.Schema({
     role:{
         type:String,
         default:" "
-    } 
+    },
+    favoritesArray:[{
+        type:ObjectId
+    }]
 }));
 function validateEmployer(employer) {
-    const schema =Joi.object( {
+    const schema = Joi.object( {
         firstName: Joi.string().min(3).max(50).trim().required(),
         lastName: Joi.string().min(3).max(50).trim().required(),
         phone: Joi.string().length(10).required(),
@@ -53,9 +57,10 @@ function validateEmployer(employer) {
     return  schema.validate(employer);
 }
 function validateEditEmployer(employer) {
-    const schema =Joi.object( {
+    const schema = Joi.object( {
         firstName: Joi.string().min(3).max(50).trim().required(),
         lastName: Joi.string().min(3).max(50).trim().required(),
+        email: Joi.string().required().email(),
         phone: Joi.string().length(10).required(),
         companyName: Joi.string().required(),
         role: Joi.string().default(" ").empty("")
@@ -64,5 +69,5 @@ function validateEditEmployer(employer) {
 }
 exports.Employer = Employer;
 exports.validate = validateEmployer;
-exports.validateEditEmployer=validateEditEmployer;
+exports.validateEditEmployer = validateEditEmployer;
 

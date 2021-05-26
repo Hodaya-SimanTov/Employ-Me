@@ -1,7 +1,7 @@
 const Joi = require('joi');
-const mongoose=require('mongoose')
+const mongoose = require('mongoose')
 
-const CompanyWorker=mongoose.model('CompanyWorker',new mongoose.Schema({
+const CompanyWorker = mongoose.model('CompanyWorker', new mongoose.Schema({
     firstName: {
         type:String,
         required:true,
@@ -45,7 +45,7 @@ function validateCompanyWorker(companyWorker) {
         phone: Joi.string().length(10).required(),
         mail: Joi.string().required().email(),
         password: Joi.string().min(6).max(128).required(),
-        firstLogin:Joi.number().required(),
+        firstLogin: Joi.number().required(),
     });
     return  schema.validate(companyWorker);
 }
@@ -54,7 +54,7 @@ function validateEditCompanyWorker(companyWorker) {
         firstName: Joi.string().min(3).max(50).trim().required(),
         lastName: Joi.string().min(3).max(50).trim().required(),
         phone: Joi.string().length(10).required(),
-        firstLogin:Joi.number().required(),
+        firstLogin: Joi.number().required(),
 
     });
     return  schema.validate(companyWorker);

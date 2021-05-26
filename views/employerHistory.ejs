@@ -27,6 +27,7 @@
             <table class="table table-striped custab">
             <thead>
                 <tr>
+                    <th>Occupation Area</th>
                     <th>Contractor Email</th>
                     <th> Date </th>
                     <th>Job Scope</th>
@@ -41,6 +42,7 @@
                 hEmployment.forEach(function(worker){
                 %>
                 <tr>
+                    <td><%= worker.occupationArea %></td>
                     <td><%= worker.constructorEmail %></td>
                     <td><%= worker.date.toDateString() %></td>
                     <td><%= worker.jobScope %></td>

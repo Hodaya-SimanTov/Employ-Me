@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins',sans-serif;  
+    font-family: 'Poppins',sans-serif;
 }
 body{
     display: flex;
@@ -15,11 +15,12 @@ body{
 .container{
     max-width: 600px;
     width: 100%;
+    height: 130%;
     background: #fff;
     padding: 30px 30px;
     border-radius: 10px;
     right: 0px;
- 
+    border:groove rgb(26, 2, 112);
 }
 .container .title{
     font-size: 25px;
@@ -80,7 +81,7 @@ form .user-details .input-box{
     border-radius: 5px;
     border: 1px solid #ccc;
     padding-left: 10px;
-    font-size: 15px;
+    font-size: 13px;
     border-bottom-width: 2px;
     transition: all 0.3s ease;
 }
@@ -125,6 +126,49 @@ form .button input{
 form .button input:hover{
     background: linear-gradient(-135deg, #71b7e6, #e6d171)
 }
-/* .input{
-    transition: background 0.2s, border 0.2s;
-} */
+.details{
+    color: #ecc40e;
+}
+.title2{
+    font-size: 18px;
+    font-weight: 500;
+    position:relative;
+    text-align: center;
+}
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+
+/* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */

@@ -43,6 +43,7 @@
                     <td><%= worker.occupationArea %></td>
                     <td><%= worker.phone %></td>
                     <td class="text-center"><a class='btn btn-info btn-xs' href="/employer/bookContractor/<%=emailEmployer%>/<%= worker.id %>/<%=date%>"><span class="glyphicon glyphicon-edit"></span> BOOK </a></td>
+                    <td class="text-center"><a class='btn btn-info btn-xs' href="/employer/addFavorites/<%=emailEmployer%>/<%= worker.id %>"><span class="glyphicon glyphicon-edit"></span> ADD FAVORITE </a></td>
                 </tr>
                 <% i++;}) %>
                     <% } else{ %>

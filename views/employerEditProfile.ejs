@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Edit Profile Of | Employer</title>
-        <link rel="stylesheet" href="/css/styleEmployerEditProfile.css">
+        <link rel="stylesheet" type="text/css" href="/css/styleEmployerEditProfile.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
@@ -11,6 +11,11 @@
             <div class="title">Edit Your Profile</div>
             <form class="model-content animate" id="form" action='/employer/editProfile/<%=email%>'  method="POST" >
                 <div class="user-details">
+                    <div class="input-box">
+                        <span class="details">Email Address</span>
+                        <p><%=email%></p>
+                        <input type="hidden" class="input" id="email" name="email"  value=<%=email%> readonly >
+                    </div>
                     <div class="input-box" data-error="Error message">
                         <span class="details">First Name</span>
                         <input type="text" class="input" id="firstName" name="firstName"   value=<%=firstName%>>
@@ -19,10 +24,12 @@
                         <span class="details">Last Name</span>
                         <input type="text" class="input" id="lastName" name="lastName" value=<%=lastName%>>
                     </div>
+                    
                     <div class="input-box" data-error="Error message">
                         <span class="details">Phone</span>
                         <input type="number" class="input" id="phone" name="phone" minlength="10" maxlength="10" value=<%=phone%>>
                     </div>
+                    
                     <div class="input-box" data-error="Error message">
                         <span class="details">Company</span>
                         <input type="text" class="input" id="companyName" name="companyName" value=<%=companyName%>>
@@ -53,7 +60,6 @@
        const phone=document.getElementById("phone");
        const companyName=document.getElementById("companyName");
        const role=document.getElementById("role");
-       
  
        document.querySelectorAll('.input-box[data-error] .input').forEach(inpEl=>{
            inpEl.addEventListener('input',()=>inpEl.parentElement.removeAttribute('data-error'));
@@ -63,6 +69,7 @@
        phone.parentElement.removeAttribute('data-error');
        companyName.parentElement.removeAttribute('data-error');
        role.parentElement.removeAttribute('data-error');
+
        function checkInputs(){
             const firstNameValue=firstName.value.trim();
             const lastNameValue=lastName.value.trim();
