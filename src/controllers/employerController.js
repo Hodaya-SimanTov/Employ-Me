@@ -254,8 +254,7 @@ const bookContractor = async (req, res) => {
 }
 const confirmEmploymentsDisplay = async (req, res) => {
     try {
-        let cEmployment = await Employement.find({employerEmail: req.params.email, status:'verified‏'})
-        console.log(cEmployment);
+        let cEmployment = await Employement.find({employerEmail: req.params.email, status:'verified‏'});
         res.render('../views/employerConfirmEmployments', {cEmployment:cEmployment, emailEmployer: req.params.email});
     }
     catch(err) {
@@ -264,13 +263,20 @@ const confirmEmploymentsDisplay = async (req, res) => {
 }
 const confirmEmployments = async (req, res) => {
     try {
-        let CEmployment = await Employement.findOneAndUpdate({_id: ObjectId(req.params.id)}, {status:'close'}, {new: true });
-        console.log(CEmployment);
-        res.redirect(`/employer/homePage/${req.params.email}`);
+        console.log(req.body);
+        let cEmployment = await Employement.findOneAndUpdate({_id: ObjectId(req.params.id)}, {status:'close',rating: req.body.myRate,feedback:req.body.description }, {new: true });
+        console.log(cEmployment);
+        res.redirect(`/employer/confirmEmployments/${req.body.employerEmail}`);
     }
     catch(err) {
         console.log(err);
     }    
+}
+const terminationOfEmploymentDisplay=async(req,res)=>{
+    let cEmployment = await Employement.findById(req.params.id);
+    let contractor =  await ContractorWorker.findOne({mail: cEmployment.constructorEmail});
+
+    res.render('../views/employerTerminationOfEmployment',{employement: cEmployment,contractor:contractor});
 }
 const historyEmployments = async (req, res) => {
     try {
@@ -289,5 +295,5 @@ const historyEmployments = async (req, res) => {
 
     
 
-module.exports = {addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,resetPasswordDisplay,bookContractorDisplay,bookContractor,confirmEmploymentsDisplay,historyEmployments,confirmEmployments};
+module.exports = {addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,resetPasswordDisplay,bookContractorDisplay,bookContractor,confirmEmploymentsDisplay,historyEmployments,confirmEmployments,terminationOfEmploymentDisplay};
 

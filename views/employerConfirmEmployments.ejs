@@ -48,7 +48,7 @@
                         <td name="date"><%= worker.date.toDateString() %></td>
                         <td><%= worker.jobScope %></td>
                         <td><%= worker.hourlyWage %></td>
-                        <td class="text-center"><a class='btn btn-info btn-xs' href='/employer/confirmEmployment/<%=emailEmployer%>/<%=worker._id%>'><span class="glyphicon glyphicon-edit"></span> Confirm </a></td>
+                        <td class="text-center"><a class='btn btn-info btn-xs' href='/employer/terminationOfEmployment/<%=worker._id%>'><span class="glyphicon glyphicon-edit"></span> Confirm </a></td>
                     </tr>
                     <% i++;}) %>
                         <% } else{ %>

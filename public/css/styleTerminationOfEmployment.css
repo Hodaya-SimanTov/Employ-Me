@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+}
+body{
+    display: flex;
+    height: 100vh;
+    justify-content: left;
+    align-items: left;
+    padding: 10px;
+}
+.container{
+    max-width: 600px;
+    width: 100%;
+    height: 130%;
+    background: #fff;
+    padding: 30px 30px;
+    border-radius: 10px;
+    right: 0px;
+    border:groove rgb(26, 2, 112);
+}
+.container .title{
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+}
+.container .title::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    background: linear-gradient(135deg, #71b7e6,#e6d171);
+}
+.container form .user-details{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
+}
+form .user-details .input-box{
+    margin-bottom: 15px;
+    width: 45%;  
+    margin: 0 5px;
+}
+.user-details .button1{
+    margin-bottom: 15px;
+    width: 45%;  
+    margin: 0 5px;
+    padding-top: 27px;
+}
+.user-details .button1 input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    color: #fff;
+    border: none;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 5px;
+    text-align: center;
+    letter-spacing: 1px;
+    background-color: #989a9b;   
+}
+.user-details .button1 input:hover{
+    background-color: #ebd264
+}
+.user-details .input-box .details{
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.user-details .input-box input{
+    height: 45px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-left: 10px;
+    font-size: 13px;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+.input-box.error input{
+    border-color: #c92432;
+}
+
+.user-details .input-box[data-error] .input{
+    border-color: #c92432;
+    color:#c92432;
+
+}
+.user-details .input-box[data-error]::after{
+    content: attr(data-error);
+    font-size: 0.80em;
+    color:#c92432;
+    display: block;
+    margin: 10px 0;
+}
+
+.user-details .input-box input:focus{
+    border-color: #e6d171
+}
+
+form .button{
+    height: 39px;
+    margin: 39px 0;
+}
+form .button input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    text-align: center;
+    background: linear-gradient(135deg, #71b7e6, #e6d171)
+}
+form .button input:hover{
+    background: linear-gradient(-135deg, #71b7e6, #e6d171)
+}
+.details{
+    color: #ecc40e;
+}
+.title2{
+    font-size: 18px;
+    font-weight: 500;
+    position:relative;
+    text-align: center;
+}
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+
+/* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
