@@ -37,6 +37,11 @@ const Employement=mongoose.model('Employement',new mongoose.Schema({
     },
     feedback:{
         type:String,
+    },
+    occupationArea:{//תחום עיסוק
+        type:String,
+        require:false,
+        default:0
     }
 }));
 function validateEmployement(employement) {
@@ -48,7 +53,8 @@ function validateEmployement(employement) {
         status: Joi.string().required(),
         hourlyWage: Joi.number().min(1).required(),
         rating: Joi.number().min(0).max(5).default(0).required().empty(""),
-        feedback: Joi.string().empty("")
+        feedback: Joi.string().empty(""),
+        occupationArea: Joi.string().default(0).empty("")
     });
     return  schema.validate(employement);
 }

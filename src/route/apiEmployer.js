@@ -41,7 +41,7 @@ router.get('/terminationOfEmployment/:id',employer.terminationOfEmploymentDispla
 router.post('/terminationOfEmployment/:id', employer.confirmEmployments);
 router.get('/confirmEmployments/:email', employer.confirmEmploymentsDisplay);
 router.get('/employerHistory/:email', employer.historyEmployments);
-
+router.get('/futureEmployement/:email', employer.futureEmployement);
 //  router.get('/employerRate',(req,res)=>{
 //     res.render('../views/employerRate')
 // });
