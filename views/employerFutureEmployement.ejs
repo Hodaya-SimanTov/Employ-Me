@@ -56,44 +56,6 @@
             </div>
             
         </div>
-        <div class="container">
-            <div class="row col-md-6 col-md-offset-2 custyle">
-                <div class="page-header">
-                    <h3><small class="pull-right"><%= fEmployment.length %></small> Future Employments </h3>
-                </div>
-            <table class="table table-striped custab">
-            <thead>
-                <tr>
-                    <th>Occupation Area</th>
-                    <th>Contractor Email</th>
-                    <th> Date </th>
-                    <th>Job Scope</th>
-                    <th>Hourly wage</th>
-                    <th>Status</th>
-                    <th class="text-center"> </th>
-                </tr>
-            </thead>
-                <%
-                if(fEmployment.length!=0) {
-                var i=1;
-                fEmployment.forEach(function(worker){
-                %>
-                <tr>
-                    <td><%= worker.occupationArea %></td>
-                    <td><%= worker.constructorEmail %></td>
-                    <td><%= worker.date.toDateString() %></td>
-                    <td><%= worker.jobScope %></td>
-                    <td><%= worker.hourlyWage %></td>
-                    <td><%= worker.status%></td>
-                    <!-- <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Confirm </a></td> -->
-                </tr>
-                <% i++;}) %>
-                    <% } else{ %>
-                        <h2>Sorry, future employments not exist </h2> 
-                    <% } %>
-            </table>
-            </div>
-            
-        </div>
+        
     </body>
 </html>
