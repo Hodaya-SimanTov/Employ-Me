@@ -375,8 +375,20 @@ const endEmployement = (req,res) => {
     });
 }
 
+const startEmployement = (req,res) => {
+    Employement.findByIdAndUpdate(req.params.id,{start:"yes"})
+        .then(employement => {
+            //res.render('../views/contractorFuture',{result:employement});
+            res.redirect(`/contractorWorker/contractorFuture/${employement.constructorEmail}`);
+        }).catch(err => {
+        console.log(`can not find this employement! ${err}`);
+    });
+}
+
+
 
 module.exports = { addContractorWorker , getContractorWorkerById , deleteContractorWorkerById
     , getAllContractorWorkers , getContractorWorkerByMail , loginUser , addDateToUnavailabilityarray
     , addUn , getContractorByEmail , editProfileDisplay , editProfile , updateContractorPass , unDisplay 
-    , homepageDisplay , findContractorInSpecDate , contractorFuture , contractorHistory , endEmployement };
+    , homepageDisplay , findContractorInSpecDate , contractorFuture , contractorHistory , endEmployement
+    , startEmployement };

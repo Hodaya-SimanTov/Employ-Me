@@ -38,6 +38,10 @@ const Employement=mongoose.model('Employement',new mongoose.Schema({
     feedback:{
         type:String,
     },
+    start:{
+        type:String,
+        default:"no"
+    },
     occupationArea:{//תחום עיסוק
         type:String,
         require:false,

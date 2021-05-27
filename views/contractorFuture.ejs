@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Future shifts</title>
-        <link rel="stylesheet" href="/css/styleEmployerSearchResults.css">
+        <link rel="stylesheet" href="/css/styleContractorHistory.css">
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
          <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -17,7 +17,7 @@
         <div class="container">
             <div class="row col-md-6 col-md-offset-2 custyle">
                 <div class="page-header">
-                    <h3><small class="pull-right"><%=result.length %></small> Future shifts </h3>
+                    <div class="title"><h2><small class="pull-right"></small> Future shifts </h2></div>
                 </div>
             <table class="table table-striped custab">
             <thead>
@@ -38,30 +38,22 @@
                     <td><%= employement.date.getDate() %>.<%= employement.date.getMonth()+1 %>.<%= employement.date.getFullYear() %></td>
                     <td><%= employement.employerEmail %></td>
                     <td><%= employement.status %></td>
-                    <%if(employement.date.getDate()==d.getDate())  {%>                  
-                        <td class="text-center"><a class='btn btn-info btn-xs' id="start" href="#" onclick="startClick()"><span class="glyphicon glyphicon-edit" ></span> כניסה </a></td>
-                        <td class="text-center-e"><a class='btn btn-info btn-xs' id="end" href="/contractorWorker/endEmployement/<%=employement._id%>" onclick="endClick()"><span class="glyphicon glyphicon-edit"></span> יציאה </a></td>
-                    <%}%>    
+                    <%if(employement.date.getDate()==d.getDate() && employement.start == "no")  {%>
+                        <td class="text-center"><a class='btn btn-info btn-xs' id="start" href="/contractorWorker/startEmployement/<%=employement._id%>" ><span class="glyphicon glyphicon-edit" ></span> כניסה </a></td>
+                    <%}%> 
+                    <%if(employement.date.getDate()==d.getDate() && employement.start == "yes")  {%>
+                        <td class="text-center-e"><a class='btn btn-info btn-xs' id="end"  href="/contractorWorker/endEmployement/<%=employement._id%>" ><span class="glyphicon glyphicon-edit"></span> יציאה </a></td>
+                    <%}%>                       
                 </tr>
                 <% i++;}) %>
                     <% } else{ %>
-                        <h2>There are no future shifts</h2> 
+                        <div class="h3"><h3>No shifts found ..</h3> </div>
                     <% } %>
             </table>
             </div>
         </div>
     </body>
     <script >
-        const start=document.getElementById("start");
-        const end=document.getElementById("end");
-        end.setAttribute("style", "display:none");
-        function startClick() {            
-            start.disabled=true;
-            start.setAttribute("style", "display:none");
-            end.setAttribute("style", "display:inline-block");
-        }
-        function endClick() {            
-            end.disabled=true;            
-        }
+        
     </script>
 </html>
