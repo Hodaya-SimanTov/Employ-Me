@@ -291,8 +291,8 @@ const historyEmployments = async (req, res) => {
 }
 const futureEmployement = async (req,res) => {
     try {
-        let fEmployment = await Employement.find({employerEmail: req.params.email, status:'waiting for approval'})
-        fEmployment.sort((a, b) => b.date - a.date);
+        let fEmployment = await Employement.find({employerEmail: req.params.email, status: {$in: ['canceled‏','waiting for approval','approved‏']}});
+        fEmployment.sort((a, b) => a.date - b.date);
         res.render('../views/employerFutureEmployement', {fEmployment:fEmployment,emailEmployer: req.params.email});
     }
     catch(err) {
