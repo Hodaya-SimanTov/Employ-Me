@@ -50,9 +50,13 @@ router.get('/findContractorInSpecDate',contractorWorker.findContractorInSpecDate
 router.get('/contractorFuture/:mail',contractorWorker.contractorFuture);
 
 router.get('/contractorHistory/:mail',contractorWorker.contractorHistory);
+router.get('/contractorWaitApproval/:mail',contractorWorker.contractorWaitApproval);
 
 router.get('/endEmployement/:id',contractorWorker.endEmployement);
 router.get('/startEmployement/:id',contractorWorker.startEmployement);
+
+router.get('/approveShift/:id',contractorWorker.approveShift);
+router.get('/cancelShift/:id',contractorWorker.cancelShift);
 
 module.exports=router
 

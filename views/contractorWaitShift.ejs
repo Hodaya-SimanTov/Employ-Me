@@ -2,8 +2,8 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="UTF-8">
-        <title>Future shifts</title>
-        <link rel="stylesheet" href="/css/styleContractorHistory.css">
+        <title>Shifts await approval</title>
+        <link rel="stylesheet" href="/css/styleContractorWaitShift.css">
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
          <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -14,20 +14,19 @@
         }
     </style>
     <body>
-        <div class="container">
-            <div class="row col-md-6 col-md-offset-2 custyle">
+        <div class="container">  
+            <div class="row col-md-6 col-offset-2 custyle">
                 <div class="page-header">
-                    <div class="title"><h2><small class="pull-right"></small> Future shifts </h2></div>
+                    <div class="title"><h2><small class="pull-right"></small>Shifts await approval</h2></div>
                 </div>
-           
                 <%
                 if(result.length!=0) {
                     var i=1;
                     var d=new Date();
                 result.forEach(function(employement){
                 %>
-                <div class="container row"> 
-                    <div class="d">  
+                <div class="container "> 
+                    <div class="user-details d">  
                         <div >
                             <label class="details">Date: </label>
                             <span ><%= employement.date.getDate() %>.<%= employement.date.getMonth()+1 %>.<%= employement.date.getFullYear() %></span>
@@ -41,22 +40,16 @@
                             <label class="details">Employer Email: </label>
                             <span ><%= employement.employerEmail %></span>                            
                         </div>
-                    <%if(employement.date.getDate()==d.getDate() && employement.start == "no")  {%>
-                        <a class='btn1' id="start" href="/contractorWorker/startEmployement/<%=employement._id%>" >Enter </a>
-                    <%}%> 
-                    <%if(employement.date.getDate()==d.getDate() && employement.start == "yes")  {%>
-                        <a class='btn1' id="end"  href="/contractorWorker/endEmployement/<%=employement._id%>" > Exit </a>
-                    <%}%>                     
-                
+                        <div  >
+                             <a class='btn'  href="/contractorWorker/approveShift/<%=employement._id%>" >APPROVE</a>
+                             <a class='btn'  href="/contractorWorker/cancelShift/<%=employement._id%>" >CANCEL</a>
+                        </div>
                     </div>
                 </div> 
-                  
-                    
                 <% i++;}) %>
                     <% } else{ %>
                         <div class="h3"><h3>No shifts found ..</h3> </div>
                     <% } %>
-            
             </div>
         </div>
     </body>
