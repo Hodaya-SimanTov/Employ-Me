@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet"
+              href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+              integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+              crossorigin="anonymous"/>
+        <link rel="stylesheet" href="/css/styleEmployerInfo.css">
+        <script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-core.min.js"></script>
+        <script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-pie.min.js"></script>
+        <title>Employer - Info & Statistics</title>
+    </head>
+    <body>
+        <div class="container">
+            
+            <main>
+                <div class="main__container">
+
+                    <div class="main__title">
+                        <div class="main__greeting">
+                            <h1>Hello Employer</h1>
+                            <p>Welcome to your information dashboard</p>
+                        </div>  
+                    </div>
+
+                    <div class="main__cards">
+                        <div class="card">
+                            <i class="fa fa-user fa-2x text-lightblue"></i>
+                            <div class="card__inner">
+                                <p class="text-primary-p">Number of Employments</p>
+                                <span class="font-bold text-title"><%= empCount %></span>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <i class="fa fa-times fa-2x text-brown"></i>
+                            <div class="card__inner">
+                                <p class="text-primary-p">Canceled Employments</p>
+                                <span class="font-bold text-title"><%= countCanceled %></span>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <i class="fa fa-thumbs-up fa-2x text-green"></i>
+                            <div class="card__inner">
+                                <p class="text-primary-p">Number of Rates</p>
+                                <span class="font-bold text-title"><%= countRate %></span>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            
+                            <i class="fa fa-pie-chart fa-2x text-yellow"></i>
+                            <div class="card__inner">
+                                <p class="text-primary-p">Rates Avarage</p>
+                                <span class="font-bold text-title"><%= avgRate %></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="charts">
+                        <div class="charts__left">
+                            <div class="charts__left__title">
+                                <div>
+                                    <h1>Employments Status Percentage</h1>
+                                    <P>Percentage of  employments in each state:</P>
+                                </div>
+                            </div>
+                            <div id="chart"></div>
+                        </div>
+
+                        <div class="charts__right">
+                            <div class="charts__right__title">
+                                <div>
+                                    <h1>Closed Employments and Rating</h1>
+                                    <p>See the closed employment vs. the employment you have rated in the past year</p>
+                                </div>
+                            </div>
+                            <div id="chart1"></div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <input type="hidden" id="countClosed" value=<%=countClosed%>>
+            <input type="hidden" id="waitCon" value=<%=waitCon%>>
+            <input type="hidden" id="waitEmp" value=<%=waitEmp%>>
+            <input type="hidden" id="yearAmount" value=<%=yearAmount%>>
+            <input type="hidden" id="rateYearAmount" value=<%=rateYearAmount%>>
+            <input type="hidden" id="year" value=<%=year%>>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script>
+            var x = document.getElementById("countClosed").value;
+            var y = document.getElementById("waitCon").value;
+            var z = document.getElementById("waitEmp").value;
+            var k = x + y + z;
+            // console.log(x);
+            // console.log(y);
+            // console.log(z);
+            var options = {
+                series: [x/k,y/k,z/k],
+                chart: {
+                width: 600,
+                type: 'pie',
+                },
+                labels: ['Closed Employments  ' + '[' + x + ']', 'Employments Awaiting Contractor Approval  ' + '[' + y + ']', 'Employments Awaiting Employer Approval  ' + '[' + z + ']'],
+                responsive: [{
+                breakpoint: 680,
+                options: {
+                    chart: {
+                    width: 250
+                    },
+                    legend: {
+                    position: 'bottom'
+                    }
+                }
+                }]
+                };
+
+                var chart = new ApexCharts(document.querySelector("#chart"), options);
+                chart.render();    
+        </script>
+
+        <script>
+            var amount = document.getElementById("yearAmount").value;
+            var rate = document.getElementById("rateYearAmount").value;
+            var year = document.getElementById("year").value;
+             var options = {
+                series: [{
+                name: 'Closed Employments',
+                data: [amount]
+                }, {
+                name: 'Rated Employments',
+                data: [rate]
+                }],
+                chart: {
+                type: 'bar',
+                height: 350
+                },
+                plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '30%',
+                    endingShape: 'rounded'
+                },
+                },
+                dataLabels: {
+                enabled: false
+                },
+                stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+                },
+                xaxis: {
+                categories: [year],
+                },
+                yaxis: {
+                title: {
+                    text: 'amount of employments'
+                }
+                },
+                fill: {
+                opacity: 1
+                },
+                
+                };
+
+                var chart1 = new ApexCharts(document.querySelector("#chart1"), options);
+                chart1.render();
+        </script>
+
+    </body>
+
+</html>
+  

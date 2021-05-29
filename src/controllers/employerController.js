@@ -305,7 +305,68 @@ const addFavoriteConToArray = async (req, res) => {
     // res.redirect(`/employer/homePage/${req.params.email}`);
 }
 
-    
 
-module.exports = {addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,resetPasswordDisplay,bookContractorDisplay,bookContractor,confirmEmploymentsDisplay,historyEmployments,confirmEmployments,addFavoriteConToArray};
+const infoEmployment = async (req, res) => {
+    try {
+        let closedEmp = await Employement.find({employerEmail: req.params.email, status:'closed'});
+        let cancelEmp = await Employement.find({employerEmail: req.params.email, status:'canceled'});
+        let waitConEmp = await Employement.find({employerEmail: req.params.email, status:'waiting for approval'});
+        let waitEmpEmp = await Employement.find({employerEmail: req.params.email, status:'verified'});
+        let rateNum = await Employement.find({employerEmail: req.params.email, rating: { $nin:['0'] }});  
+        var lastDate = 0;
+        var count = 0;
+        var avgRate = 0;
+        var countRate = 0;
+        var countClosed = 0;
+        var countCanceled = 0;
+        var waitCon = 0;
+        var waitEmp = 0;
+        var yearAmount = 0;
+        var rateYearAmount = 0;
+        for (let i = 0; i < rateNum.length; i++) {
+            count += rateNum[i].rate;
+        }
+        if (rateNum != 0) {
+            avgRate = count/rateNum.length;
+            countRate = rateNum.length;
+        }
+        if (closedEmp != 0) {
+            countClosed = closedEmp.length;
+            lastDate = closedEmp[0].date;
+        }
+        if (cancelEmp != 0) {
+            countCanceled = cancelEmp.length;
+        }
+        if (waitConEmp != 0) {
+            waitCon = waitConEmp.length;
+        }
+        if (waitEmpEmp != 0) {
+            waitEmp = waitEmpEmp.length;
+        }
+        let empCount = countClosed + waitCon + waitEmp;
+        for (var j=1; j < closedEmp.length; j++) {
+            if (closedEmp[j].date > lastDate) {
+                lastDate = closedEmp[j].date;
+            }
+        }
+        var year = lastDate.getUTCFullYear();
+        for (var j=0; j < closedEmp.length; j++) {
+            if (closedEmp[j].date.getUTCFullYear() == year) {
+                if (closedEmp[j].rating > 0) {
+                    rateYearAmount++;
+                }
+                yearAmount++;
+            }
+        }
+        // console.log(yearAmount);
+        // console.log(rateYearAmount);
+        res.render('../views/employerInfo', {empCount: empCount, countRate: countRate, avgRate: avgRate, countClosed: countClosed, countCanceled: countCanceled, waitCon: waitCon, waitEmp: waitEmp, yearAmount:yearAmount, rateYearAmount:rateYearAmount, year:year});
+    }
+    catch(err) {
+        console.log(err);
+    }
+    
+}
+    
+module.exports = {addEmployer, getEmployerByEmail, editProfileDisplay, editProfile, searchContractorByFields, ContractorAvialableDate, availableCons, resetPassword, resetPasswordDisplay, bookContractorDisplay, bookContractor, confirmEmploymentsDisplay, historyEmployments, confirmEmployments, addFavoriteConToArray, infoEmployment};
 
