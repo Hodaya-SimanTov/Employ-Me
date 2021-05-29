@@ -4,9 +4,13 @@
         <meta charset="utf-8">
         <title>menu</title>
         <link rel="stylesheet" href="/css/styleContractorHomepage.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
+   
 <body>
     <div class="wrapper"></div>
+    
     <nav class="navbar">
         <a href="/">
             <img class="logo" src="/css/images/logo.PNG">
@@ -15,14 +19,15 @@
             <li><a href="/contractorWorker/contractorProfile/<%=mail%>">Profile</a></li>
                  <li><a href="/contractorWorker/contractorFuture/<%=mail%>">Future shifts</a></li>
                  <li><a href="/contractorWorker/contractorHistory/<%=mail%>">Shifts history</a></li>
+                 <li><a href="/contractorWorker/contractorWaitApproval/<%=mail%>">Shifts await approval</a></li>
                  <li><a href="/contractorWorker/contractorUnavailability/<%=mail%>">Vacation report</a></li>
                  <li><a href="#">Pay checks</a></li>
                  <li><a href="#">My job rate</a></li>
                  <li><a href="#">Contact Us</a></li>
                  <li><a href="#">Messages</a></li>
-                 <li><a href="/">Log Out</a></li>
-        </ul>
+                 <li><a href="/"><i class="fa fa-fw fa-sign-out"></i>Log Out</a> </li>
+        </ul>        
     </nav>
-    </div>
+    
 </body>
 </html>

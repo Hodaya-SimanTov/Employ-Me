@@ -1,0 +1,111 @@
+*{
+    margin: 0;
+    padding: 10;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;  
+    margin: 10px 10px 10px 0;
+}
+body{
+    justify-content: center;
+    align-items: center;
+    /* padding-left: 20px;
+    padding-top: 30px;
+    padding-bottom: 30px; */
+
+    
+
+    /* background-color:white;
+    margin: auto;
+    background-image: url('images/team.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover; */
+}
+.container .title{
+    font-size: 35px;
+    font-weight: 550;
+    padding-left: 160px;
+    position: relative;
+}
+.container .user-details{    
+    flex-wrap: wrap;    
+    margin: 20px 0 12px 0;
+}
+.title::before{
+    content: '';
+    position: absolute;
+    left: 30;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    background: linear-gradient(135deg, #71b7e6,#e6d171);
+}
+.user-details .input-box input{
+    height: 45px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-left: 10px;
+    font-size: 13px;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.btn {
+    height: 35px;
+    width: 28%;
+    outline: none;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    text-align: center;
+    background: linear-gradient(135deg, #71b7e6, #e6d171)
+}
+.btn:hover{
+    background: linear-gradient(-135deg, #71b7e6, #e6d171)
+}
+
+.container .d{    
+    border:groove rgb(255, 248, 248);
+    border-radius: 7px;
+    border-color:  rgb(197, 188, 188);
+    padding-left: 20px;
+    width: 600px;
+    height: 150px;
+}
+.user-details .input-box{
+    margin-bottom: 15px;
+    width: 55%;
+    height: 32px;  
+    margin: 0 5px;
+}
+.user-details {
+    margin-bottom: 15px;
+    width: 70%;  
+    margin: 0 5px;
+    padding-top: 0px;
+}
+.l{
+    font-size: 20px;
+    font-weight: 30;
+    padding-left: 10px;
+    position: relative;
+}
+h3{
+    font-size: 20px;
+    font-weight: 30;
+    padding-left: 105px;
+    padding-top: 40px;
+    position: relative;
+}
+.h3{
+    font-size: 20px;
+    font-weight: 30;
+    padding-left: 50px;
+    position: relative;
+}
+

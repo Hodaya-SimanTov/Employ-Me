@@ -2,9 +2,6 @@ const router = require('express').Router();
 const employer = require('../controllers/employerController');
 
 router.post('/addEmployer', employer.addEmployer)
-router.get('/rate',(req,res)=>{
-    res.render('../views/employerRate')
-});
 
 // router.get('/getEmployerByEmail/:email',employer.getEmployerByEmail);
 
@@ -43,10 +40,11 @@ router.post('/searchContractorByFields/:email', employer.searchContractorByField
 router.get('/employerExists',(req, res) => {
     res.render('../views/employerExists'); 
 })
-router.get('/confirmEmployment/:email/:id', employer.confirmEmployments);
+router.get('/terminationOfEmployment/:id',employer.terminationOfEmploymentDisplay);
+router.post('/terminationOfEmployment/:id', employer.confirmEmployments);
 router.get('/confirmEmployments/:email', employer.confirmEmploymentsDisplay);
 router.get('/employerHistory/:email', employer.historyEmployments);
-
+router.get('/futureEmployement/:email', employer.futureEmployement);
 //  router.get('/employerRate',(req,res)=>{
 //     res.render('../views/employerRate')
 // });

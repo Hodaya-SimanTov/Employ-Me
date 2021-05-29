@@ -246,17 +246,16 @@ const bookContractor = async (req, res) => {
         return res.status(400).send('That error in system');
     } 
     else {
-        let employement = new Employement({employerEmail: req.params.emailEmployer, constructorEmail: contractor.mail, date: req.params.date, jobScope: req.body.numBusinessHours, status: 'open',hourlyWage: contractor.hourlyWage, rating: 0, feedback:'' });
+        let employement = new Employement({employerEmail: req.params.emailEmployer, constructorEmail: contractor.mail, date: req.params.date, jobScope: req.body.numBusinessHours, status: 'waiting for approval',hourlyWage: contractor.hourlyWage, rating: 0, feedback:'',occupationArea: contractor.occupationArea});
         await employement.save();
         // console.log({id: contractor.unavailability,date:req.params.date})
-        ContractorWorkeController.addDateToUnavailabilityarray(contractor.unavailability, req.params.date,req.params.date);
+        // ContractorWorkeController.addDateToUnavailabilityarray(contractor.unavailability, req.params.date,req.params.date);
         res.redirect(`/employer/homePage/${req.params.emailEmployer}`);
     }
 }
 const confirmEmploymentsDisplay = async (req, res) => {
     try {
-        let cEmployment = await Employement.find({employerEmail: req.params.email, status:'verified‏'})
-        console.log(cEmployment);
+        let cEmployment = await Employement.find({employerEmail: req.params.email, status:'verified‏'});
         res.render('../views/employerConfirmEmployments', {cEmployment:cEmployment, emailEmployer: req.params.email});
     }
     catch(err) {
@@ -265,24 +264,41 @@ const confirmEmploymentsDisplay = async (req, res) => {
 }
 const confirmEmployments = async (req, res) => {
     try {
-        let CEmployment = await Employement.findOneAndUpdate({_id: ObjectId(req.params.id)}, {status:'close'}, {new: true });
-        console.log(CEmployment);
-        res.redirect(`/employer/homePage/${req.params.email}`);
+        
+        let cEmployment = await Employement.findOneAndUpdate({_id: ObjectId(req.params.id)}, {status:'close',rating: req.body.myRate,feedback:req.body.description }, {new: true });
+        cEmployment.sort((a, b) => a.date - b.date);
+        res.redirect(`/employer/confirmEmployments/${req.body.employerEmail}`);
     }
     catch(err) {
         console.log(err);
     }    
 }
+const terminationOfEmploymentDisplay=async(req,res)=>{
+    let cEmployment = await Employement.findById(req.params.id);
+    let contractor =  await ContractorWorker.findOne({mail: cEmployment.constructorEmail});
+
+    res.render('../views/employerTerminationOfEmployment',{employement: cEmployment,contractor:contractor});
+}
 const historyEmployments = async (req, res) => {
     try {
         let hEmployment = await Employement.find({employerEmail: req.params.email, status:'close'})
+        hEmployment.sort((a, b) => b.date - a.date);
         res.render('../views/employerHistory', {hEmployment:hEmployment,emailEmployer: req.params.email});
     }
     catch(err) {
         console.log(err);
     }    
 }
-
+const futureEmployement = async (req,res) => {
+    try {
+        let fEmployment = await Employement.find({employerEmail: req.params.email, status: {$in: ['canceled‏','waiting for approval','approved‏']}});
+        fEmployment.sort((a, b) => a.date - b.date);
+        res.render('../views/employerFutureEmployement', {fEmployment:fEmployment,emailEmployer: req.params.email});
+    }
+    catch(err) {
+        console.log(err);
+    }
+}
 // const rateAndFidback=async (req, res) => {
 //     let rEployment=await Employement.findOne({employerEmail: req.params.emailEmployer, idConstractor: req.params.idConstractor, date: req.params.date})
 //>וספות של כנרת למועדפים
@@ -368,5 +384,4 @@ const infoEmployment = async (req, res) => {
     
 }
     
-module.exports = {addEmployer, getEmployerByEmail, editProfileDisplay, editProfile, searchContractorByFields, ContractorAvialableDate, availableCons, resetPassword, resetPasswordDisplay, bookContractorDisplay, bookContractor, confirmEmploymentsDisplay, historyEmployments, confirmEmployments, addFavoriteConToArray, infoEmployment};
-
+module.exports = {addEmployer, getEmployerByEmail, editProfileDisplay, editProfile, searchContractorByFields, ContractorAvialableDate, availableCons, resetPassword, resetPasswordDisplay, bookContractorDisplay, bookContractor, confirmEmploymentsDisplay, historyEmployments, confirmEmployments, terminationOfEmploymentDisplay, addFavoriteConToArray, infoEmployment,futureEmployement};

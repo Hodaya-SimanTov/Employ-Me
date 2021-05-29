@@ -11,6 +11,11 @@
             <div class="title">Edit Your Profile</div>
             <form class="model-content animate" id="form" action='/employer/editProfile/<%=email%>'  method="POST" >
                 <div class="user-details">
+                    <div class="input-box">
+                        <span class="details">Email Address</span>
+                        <p><%=email%></p>
+                        <input type="hidden" class="input" id="email" name="email"  value=<%=email%> readonly >
+                    </div>
                     <div class="input-box" data-error="Error message">
                         <span class="details">First Name</span>
                         <input type="text" class="input" id="firstName" name="firstName"   value=<%=firstName%>>
@@ -19,10 +24,7 @@
                         <span class="details">Last Name</span>
                         <input type="text" class="input" id="lastName" name="lastName" value=<%=lastName%>>
                     </div>
-                    <div class="input-box">
-                        <span class="details">Email Address</span>
-                        <input type="email" class="input" id="email" name="email"  value=<%=email%> readonly >
-                    </div>
+                    
                     <div class="input-box" data-error="Error message">
                         <span class="details">Phone</span>
                         <input type="number" class="input" id="phone" name="phone" minlength="10" maxlength="10" value=<%=phone%>>

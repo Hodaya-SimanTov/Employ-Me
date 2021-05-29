@@ -2,13 +2,11 @@
 <html lang="en" >
     <head>
         <meta charset="UTF-8">
-        <title>History-Employments</title>
+        <title>Future-Employments</title>
         <link rel="stylesheet" href="#">
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    </head>
-    <body>
         <a href="/employer/homePage/<%=emailEmployer%>">
             <img class="logo" src="/css/images/logo.PNG" >
             <style>
@@ -22,7 +20,7 @@
         <div class="container">
             <!-- <div class="row col-md-6 col-md-offset-2 custyle"> -->
                 <div class="page-header">
-                    <h3><small class="pull-right"><%= hEmployment.length %></small> Employments History </h3>
+                    <h3><small class="pull-right"><%= fEmployment.length %></small> Future Employments </h3>
                 </div>
             <table class="table table-striped custab">
             <thead>
@@ -32,14 +30,14 @@
                     <th> Date </th>
                     <th>Job Scope</th>
                     <th>Hourly wage</th>
-                    <th>Rate</th>
+                    <th>Status</th>
                     <th class="text-center"> </th>
                 </tr>
             </thead>
                 <%
-                if(hEmployment.length!=0) {
+                if(fEmployment.length!=0) {
                 var i=1;
-                hEmployment.forEach(function(worker){
+                fEmployment.forEach(function(worker){
                 %>
                 <tr>
                     <td><%= worker.occupationArea %></td>
@@ -47,15 +45,17 @@
                     <td><%= worker.date.toDateString() %></td>
                     <td><%= worker.jobScope %></td>
                     <td><%= worker.hourlyWage %></td>
-                    <td><%= worker.rating %></td>
+                    <td><%= worker.status%></td>
                     <!-- <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Confirm </a></td> -->
                 </tr>
                 <% i++;}) %>
                     <% } else{ %>
-                        <h2>Sorry, history employments not exist </h2> 
+                        <h2>Sorry, future employments not exist </h2> 
                     <% } %>
             </table>
             <!-- </div> -->
+            
         </div>
+        
     </body>
 </html>

@@ -13,24 +13,21 @@
             <img class="logo" src="/css/images/logo.PNG" >
             <style>
                 .logo{
-                    float:left;
+                    /* float:left; */
                     margin-top: 0;
                     margin-left:5px;
                 }
             </style>
         </a>
-        <br>
-        <br>
-        <br>
-      
             <div class="container">
-                <div class="row col-md-6 col-md-offset-2 custyle">
+                <!-- <div class="row col-md-6 col-md-offset-2 custyle"> -->
                     <div class="page-header">
                         <h3><small class="pull-right"><%= cEmployment.length %></small> Employments to Confirm </h3>
                     </div>
                 <table class="table table-striped custab">
                 <thead>
                     <tr>
+                        <th>Occupation Area</th>
                         <th>Contractor Email</th>
                         <th> Date </th>
                         <th>Job Scope</th>
@@ -44,18 +41,19 @@
                     cEmployment.forEach(function(worker){
                     %>
                     <tr>
+                        <td><%= worker.occupationArea %></td>
                         <td name="emailContractor"><%= worker.constructorEmail %></td>
                         <td name="date"><%= worker.date.toDateString() %></td>
                         <td><%= worker.jobScope %></td>
                         <td><%= worker.hourlyWage %></td>
-                        <td class="text-center"><a class='btn btn-info btn-xs' href='/employer/confirmEmployment/<%=emailEmployer%>/<%=worker._id%>'><span class="glyphicon glyphicon-edit"></span> Confirm </a></td>
+                        <td class="text-center"><a class='btn btn-info btn-xs' href='/employer/terminationOfEmployment/<%=worker._id%>'><span class="glyphicon glyphicon-edit"></span> Confirm </a></td>
                     </tr>
                     <% i++;}) %>
                         <% } else{ %>
                             <h2>Sorry, no employments to confirm were found </h2> 
                         <% } %>
                 </table>
-                </div>
+                <!-- </div> -->
         
         </div>
 
