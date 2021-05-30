@@ -324,11 +324,12 @@ const addFavoriteConToArray = async (req, res) => {
 
 const infoEmployment = async (req, res) => {
     try {
-        let closedEmp = await Employement.find({employerEmail: req.params.email, status:'closed'});
+        let closedEmp = await Employement.find({employerEmail: req.params.email, status:'close'});
         let cancelEmp = await Employement.find({employerEmail: req.params.email, status:'canceled'});
         let waitConEmp = await Employement.find({employerEmail: req.params.email, status:'waiting for approval'});
         let waitEmpEmp = await Employement.find({employerEmail: req.params.email, status:'verified'});
-        let rateNum = await Employement.find({employerEmail: req.params.email, rating: { $nin:['0'] }});  
+        let rateNum = await Employement.find({employerEmail: req.params.email, rating: { $nin:[0] }}); 
+        console.log(rateNum);
         var lastDate = 0;
         var count = 0;
         var avgRate = 0;
@@ -339,13 +340,20 @@ const infoEmployment = async (req, res) => {
         var waitEmp = 0;
         var yearAmount = 0;
         var rateYearAmount = 0;
+        var year = 0;
+        var kindAmount = [];
+        var index = 0;
+        var kind = [];
+        var kCount = 0;
         for (let i = 0; i < rateNum.length; i++) {
-            count += rateNum[i].rate;
+            count += rateNum[i].rating;
         }
-        if (rateNum != 0) {
-            avgRate = count/rateNum.length;
+        if (rateNum.length != 0) {
+            avgRate = count / rateNum.length;
             countRate = rateNum.length;
         }
+        console.log(avgRate);
+        console.log(countRate);
         if (closedEmp != 0) {
             countClosed = closedEmp.length;
             lastDate = closedEmp[0].date;
@@ -365,7 +373,6 @@ const infoEmployment = async (req, res) => {
                 lastDate = closedEmp[j].date;
             }
         }
-        var year = 0;
         if (closedEmp.length != 0) {
             year = lastDate.getUTCFullYear();
         }
@@ -375,11 +382,20 @@ const infoEmployment = async (req, res) => {
                     rateYearAmount++;
                 }
                 yearAmount++;
+            } 
+            if (kind.indexOf(closedEmp[j].occupationArea) > -1) {
+                index = kind.findIndex(kind => kind === closedEmp[j].occupationArea)
+                kindAmount[index]++;
+            }
+            else {
+                kind[kCount] = closedEmp[j].occupationArea;
+                kindAmount[kCount] = 1;
+                kCount++;
             }
         }
-        // console.log(yearAmount);
-        // console.log(rateYearAmount);
-        res.render('../views/employerInfo', {empCount: empCount, countRate: countRate, avgRate: avgRate, countClosed: countClosed, countCanceled: countCanceled, waitCon: waitCon, waitEmp: waitEmp, yearAmount:yearAmount, rateYearAmount:rateYearAmount, year:year});
+        
+        console.log({kindAmount:kindAmount, kind:kind});
+        res.render('../views/employerInfo', {empCount: empCount, countRate: countRate, avgRate: avgRate, countClosed: countClosed, countCanceled: countCanceled, waitCon: waitCon, waitEmp: waitEmp, yearAmount:yearAmount, rateYearAmount:rateYearAmount, year:year, kind:kind, kindAmount:kindAmount });
     }
     catch(err) {
         console.log(err);

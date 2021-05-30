@@ -70,14 +70,23 @@
                             <div id="chart"></div>
                         </div>
 
-                        <div class="charts__right">
-                            <div class="charts__right__title">
+                        <div class="charts__middle">
+                            <div class="charts__middle__title">
                                 <div>
                                     <h1>Closed Employments and Rating</h1>
                                     <p>See the closed employment vs. the employment you have rated in the past year</p>
                                 </div>
                             </div>
                             <div id="chart1"></div>
+                        </div>
+                        <div class="charts__right">
+                            <div class="charts__right__title">
+                                <div>
+                                    <h1>Distribution of employments by occupation area</h1>
+                                    <p>See the amount of employments according to occupation area</p>
+                                </div>
+                            </div>
+                            <div id="chart2"></div>
                         </div>
                     </div>
                 </div>
@@ -88,6 +97,19 @@
             <input type="hidden" id="yearAmount" value=<%=yearAmount%>>
             <input type="hidden" id="rateYearAmount" value=<%=rateYearAmount%>>
             <input type="hidden" id="year" value=<%=year%>>
+            
+            <% kindAmount.forEach((item) => { 
+                %>
+                <input type="hidden" name="array[]" value=<%=item%>>
+                <%
+             }); %>
+             <% kind.forEach((item) => { 
+                %>
+                <input type="hidden" name="array1[]" value=<%=item%>>
+                <%
+             }); %>
+
+            
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -127,52 +149,104 @@
             var amount = document.getElementById("yearAmount").value;
             var rate = document.getElementById("rateYearAmount").value;
             var year = document.getElementById("year").value;
-             var options = {
+            var options = {
                 series: [{
-                name: 'Closed Employments',
-                data: [amount]
-                }, {
-                name: 'Rated Employments',
-                data: [rate]
+                    name: 'Closed Employments',
+                    data: [amount]
+                }, 
+                {
+                    name: 'Rated Employments',
+                    data: [rate]
                 }],
                 chart: {
-                type: 'bar',
-                height: 350
+                    type: 'bar',
+                    height: 350
                 },
                 plotOptions: {
-                bar: {
-                    horizontal: false,
-                    columnWidth: '30%',
-                    endingShape: 'rounded'
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '30%',
+                        endingShape: 'rounded'
+                    },
                 },
+                    dataLabels: {
+                    enabled: false
                 },
-                dataLabels: {
-                enabled: false
+                    stroke: {
+                    show: true,
+                    width: 2,
+                    colors: ['transparent']
                 },
-                stroke: {
-                show: true,
-                width: 2,
-                colors: ['transparent']
+                    xaxis: {
+                    categories: [year],
                 },
-                xaxis: {
-                categories: [year],
+                    yaxis: {
+                        title: {
+                            text: 'amount of employments'
+                        }
                 },
-                yaxis: {
-                title: {
-                    text: 'amount of employments'
-                }
-                },
-                fill: {
-                opacity: 1
-                },
-                
-                };
-
-                var chart1 = new ApexCharts(document.querySelector("#chart1"), options);
-                chart1.render();
+                    fill: {
+                    opacity: 1
+                },    
+            };
+            var chart1 = new ApexCharts(document.querySelector("#chart1"), options);
+            chart1.render();
         </script>
-
     </body>
+    <script>
+        var dataA = document.getElementsByName('array[]');
+        var dataC = document.getElementsByName('array1[]');
+        var dataB = [];
+        var dataD = [];
+        for (var i = 0; i < dataA.length; i++) { 
+           dataB[i] = dataA[i].value;
+        }
+        for (var j = 0; j < dataC.length; j++) { 
+           dataD[j] = dataC[j].value;
+        }
+
+        console.log(dataB);
+        console.log(dataD);
+        var options = {
+                series: [{
+                    name: 'Closed Employments',
+                    data: dataB
+                }],
+                chart: {
+                    type: 'bar',
+                    height: 350
+                },
+                plotOptions: {
+                    bar: {
+                        horizontal: false,
+                        columnWidth: '55%',
+                        endingShape: 'rounded'
+                    },
+                },
+                    dataLabels: {
+                    enabled: false
+                },
+                    stroke: {
+                    show: true,
+                    width: 2,
+                    colors: ['transparent']
+                },
+                    xaxis: {
+                        categories: dataD,
+                },
+                    yaxis: {
+                        title: {
+                            text: 'amount of employments'
+                        }
+                },
+                    fill: {
+                    opacity: 1
+                }
+            };
+
+        var chart = new ApexCharts(document.querySelector("#chart2"), options);
+        chart.render();
+    </script>
 
 </html>
   
