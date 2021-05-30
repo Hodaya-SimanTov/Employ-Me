@@ -8,23 +8,13 @@
         <script src="https://kit.fontawesome.com/10e7a38072.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <!-- <div class="navbar">
-            <img class="logo" src="/css/images/logo.PNG">
-            <a href="#"><i class="fa fa-fw fa-sign-out"></i> Log Out</a>
-            <a href="#"><i class="fa fa-fw fa-heart"></i> Favorites</a>
-            <a href="#"><i class="fa fa-fw fa-history"></i> History</a>
-            <a href="#"><i class="fa fa-fw fa-hourglass-half"></i> Confirm Employments</a>
-            <a href="#"><i class="fa fa-fw fa-pie-chart"></i> Info & Statistics</a> 
-            <a href="search"><i class="fa fa-fw fa-search"></i> Search</a> 
-            <a class="active" href="editProfile"><i class="fa fa-fw fa-home"></i> My Profile</a> 
-          </div> -->
             <nav class="navbar">
                 <a href="/employer/homePage/<%=email%>">
                     <img class="logo" src="/css/images/logo.PNG">
                 </a>
                 <ul>
-                    <li><a class="active" href="/employer/editProfile/<%=email%>"><i class="fa fa-fw fa-home"></i>My Profile</a> </li>
-                    <li><a href="/employer/search/<%=email%>"><i class="fa fa-fw fa-search"></i>Search</a> </li>
+                    <li><a  href="/employer/editProfile/<%=email%>"><i class="fa fa-fw fa-home"></i>My Profile</a> </li>
+                    <li><a class="active" href="/employer/search/<%=email%>"><i class="fa fa-fw fa-search"></i>Search</a> </li>
                     <li><a href="/employer/info/<%=email%>"><i class="fa fa-fw fa-pie-chart"></i>Info & Statistics</a> </li>
                     <li><a href="/employer/futureEmployement/<%=email%>"><i class="fas fa-clock"></i>Future Employement</a> </li>
                     <li><a href="/employer/confirmEmployments/<%=email%>"><i class="fa fa-fw fa-hourglass-half"></i>Confirm Employments</a> </li>
