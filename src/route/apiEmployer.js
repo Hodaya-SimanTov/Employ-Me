@@ -23,9 +23,6 @@ router.get('/search/:email',(req, res) => {
     res.render('../views/employerSearch', {email: req.params.email});
 });
 
-//וספת כנרת מידע וסטטיסטיקות
-router.get('/info/:email', employer.infoEmployment);
-
 
 //הוספות של כנרת לסינון
 //router.get('/ContractorAvialableDate',employer.ContractorUnavialableDate);
@@ -52,7 +49,8 @@ router.get('/futureEmployement/:email', employer.futureEmployement);
 // router.post('/employerRate/:emailEmployer/:idConstractor/:date',employer.bookContractor);
 //תוספות של כנרת למועדפים
 router.get('/addFavorites/:email/:id', employer.addFavoriteConToArray);
-
+//וספת כנרת מידע וסטטיסטיקות
+router.get('/info/:email', employer.infoEmployment);
 module.exports = router;
 
 
