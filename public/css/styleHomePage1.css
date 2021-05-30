@@ -38,11 +38,11 @@
 }
 .navbar ul li a.active,
 .navbar ul li a:hover{
-	background: rgb(244, 247, 105);
+	background: rgb(245, 230, 100);
 	border-radius: 2px;
 }
 .container{
-	background: url('images/backweb.jpg')no-repeat;
+	background: url('images/try5.jpg')no-repeat;
 	/* background-size:cover; */
 	background-size: 100% 100%;
 	height: 100%; 
@@ -50,7 +50,7 @@
 .center{
 	position: relative;
 	width: 30%;
-	top: 28%;
+	top: 10%;
 	margin-left: 20px;
 	/* left: 40%;
 	transform: translate(-50%, -50%); */
@@ -58,20 +58,30 @@
 	background: rgba(255, 255, 255, 0.808);
 	border-radius: 15px;
 }
-.center h1{
-	color: rgb(37, 8, 167);
-	font-size: 45px;
+.center h2{
+	color: rgb(55, 36, 139);
+	font-size: 30px;
 	font-weight: bold;
 	width: 800px;
 	text-align: left;
 	font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
-.center h2{
-	color: rgb(37, 8, 167);
-	font-size: 30px;
+.center h3{
+	color: rgb(55, 36, 139);
+	font-size: 20px;
 	font-weight: bold;
 	width: 750px;
 	margin-top: 0px;
 	text-align: left;
+	font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
+.center h1{
+	color: rgb(243, 220, 14);
+	font-size: 35px;
+	font-weight: bold;
+	width: 800px;
+	text-align: left;
+	font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
 
