@@ -256,7 +256,7 @@ const bookContractor = async (req, res) => {
 const confirmEmploymentsDisplay = async (req, res) => {
     try {
         let cEmployment = await Employement.find({employerEmail: req.params.email, status:'verified'});
-        console.log(cEmployment)
+        cEmployment.sort((a, b) => a.date - b.date);
         res.render('../views/employerConfirmEmployments', {cEmployment:cEmployment, emailEmployer: req.params.email});
     }
     catch(err) {
@@ -320,6 +320,7 @@ const addFavoriteConToArray = async (req, res) => {
     // })
     // res.redirect(`/employer/homePage/${req.params.email}`);
 }
+
 
 
 const infoEmployment = async (req, res) => {
