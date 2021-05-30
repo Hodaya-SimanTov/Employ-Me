@@ -255,7 +255,8 @@ const bookContractor = async (req, res) => {
 }
 const confirmEmploymentsDisplay = async (req, res) => {
     try {
-        let cEmployment = await Employement.find({employerEmail: req.params.email, status:'verified‏'});
+        let cEmployment = await Employement.find({employerEmail: req.params.email, status:'verified'});
+        console.log(cEmployment)
         res.render('../views/employerConfirmEmployments', {cEmployment:cEmployment, emailEmployer: req.params.email});
     }
     catch(err) {
@@ -266,7 +267,6 @@ const confirmEmployments = async (req, res) => {
     try {
         
         let cEmployment = await Employement.findOneAndUpdate({_id: ObjectId(req.params.id)}, {status:'close',rating: req.body.myRate,feedback:req.body.description }, {new: true });
-        cEmployment.sort((a, b) => a.date - b.date);
         res.redirect(`/employer/confirmEmployments/${req.body.employerEmail}`);
     }
     catch(err) {
