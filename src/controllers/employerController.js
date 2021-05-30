@@ -365,7 +365,10 @@ const infoEmployment = async (req, res) => {
                 lastDate = closedEmp[j].date;
             }
         }
-        var year = lastDate.getUTCFullYear();
+        var year = 0;
+        if (closedEmp.length != 0) {
+            year = lastDate.getUTCFullYear();
+        }
         for (var j=0; j < closedEmp.length; j++) {
             if (closedEmp[j].date.getUTCFullYear() == year) {
                 if (closedEmp[j].rating > 0) {
