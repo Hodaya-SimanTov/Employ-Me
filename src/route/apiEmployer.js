@@ -23,6 +23,9 @@ router.get('/search/:email',(req, res) => {
     res.render('../views/employerSearch', {email: req.params.email});
 });
 
+//וספת כנרת מידע וסטטיסטיקות
+router.get('/info/:email', employer.infoEmployment);
+
 
 //הוספות של כנרת לסינון
 //router.get('/ContractorAvialableDate',employer.ContractorUnavialableDate);

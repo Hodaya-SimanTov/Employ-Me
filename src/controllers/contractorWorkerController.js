@@ -365,6 +365,34 @@ const contractorHistory = (req,res) => {
     });
 }
 
+const contractorWaitApproval = (req,res) => {
+    Employement.find( {constructorEmail: req.params.mail , status:'waiting for approval' })
+        .then(currentEmployement => {
+            currentEmployement.sort((a, b) => b.date - a.date)
+            res.render('../views/contractorWaitShift',{result:currentEmployement});
+        }).catch(err => {
+        console.log(`can not find this employement! ${err}`);
+    });
+}
+
+const approveShift = (req,res) => {
+    Employement.findByIdAndUpdate(req.params.id,{status:`open`})
+        .then(employement => {
+            res.redirect(`/contractorWorker/contractorFuture/${employement.constructorEmail}`);
+        }).catch(err => {
+        console.log(`can not find this employement! ${err}`);
+    });
+}
+const cancelShift = (req,res) => {
+    Employement.findByIdAndUpdate(req.params.id,{status:`canceled`})
+        .then(employement => {
+            res.redirect(`/contractorWorker/contractorWaitApproval/${employement.constructorEmail}`);
+        }).catch(err => {
+        console.log(`can not find this employement! ${err}`);
+    });
+}
+
+
 const endEmployement = (req,res) => {
     Employement.findByIdAndUpdate(req.params.id,{status:`verified‏`})
         .then(employement => {
@@ -391,4 +419,4 @@ module.exports = { addContractorWorker , getContractorWorkerById , deleteContrac
     , getAllContractorWorkers , getContractorWorkerByMail , loginUser , addDateToUnavailabilityarray
     , addUn , getContractorByEmail , editProfileDisplay , editProfile , updateContractorPass , unDisplay 
     , homepageDisplay , findContractorInSpecDate , contractorFuture , contractorHistory , endEmployement
-    , startEmployement };
+    , startEmployement ,contractorWaitApproval , approveShift , cancelShift};
