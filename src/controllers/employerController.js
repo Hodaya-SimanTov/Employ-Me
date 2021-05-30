@@ -396,7 +396,7 @@ const infoEmployment = async (req, res) => {
         }
         
         console.log({kindAmount:kindAmount, kind:kind});
-        res.render('../views/employerInfo', {empCount: empCount, countRate: countRate, avgRate: avgRate, countClosed: countClosed, countCanceled: countCanceled, waitCon: waitCon, waitEmp: waitEmp, yearAmount:yearAmount, rateYearAmount:rateYearAmount, year:year, kind:kind, kindAmount:kindAmount });
+        res.render('../views/employerInfo', {email: req.params.email,empCount: empCount, countRate: countRate, avgRate: avgRate, countClosed: countClosed, countCanceled: countCanceled, waitCon: waitCon, waitEmp: waitEmp, yearAmount:yearAmount, rateYearAmount:rateYearAmount, year:year, kind:kind, kindAmount:kindAmount });
     }
     catch(err) {
         console.log(err);

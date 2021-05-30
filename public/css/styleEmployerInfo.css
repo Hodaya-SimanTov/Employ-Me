@@ -1,4 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap'); 
+.body{
+    font-family: 'Poppins',sans-serif;  
+    box-sizing: border-box;
+    
+}
+.navbar{
+	height: 40px;
+	width: 100%;
+	background: rgb(255, 255, 255);
+}
+.logo{
+	float: left;
+	margin-left: 20px;
+	width: 200px;
+	height: 60px;
+	/* padding: 5px 50px; */
+}
+.navbar ul{
+	float: right;
+	margin-right: 20px;
+}
+.navbar ul li{
+	list-style: none;
+	margin: 0 8px;
+	display: inline-block;
+	line-height: 40px;
+}
+.navbar ul li a{
+	text-decoration: none;
+	color: rgb(40, 21, 94);
+	font-size: 17px;
+	font-family: 'Roboto', sans-serif;
+	transition: .4s;
+}
+.navbar ul li a.active, .navbar ul li a:hover{
+	background: rgb(247, 250, 94);
+	border-radius: 2px;
+} 
+
 ::-webkit-scrollbar {
     width: 5px;
     height: 6px;
@@ -17,15 +56,12 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #a5aaad;
 }
-*{
+/* *{
     margin: 0;
     padding: 0; 
     
-}
-body{
-    font-family: 'Poppins',sans-serif;  
-    box-sizing: border-box;
-}
+} */
+
 
 .text-primary-p {
     color: #a5aaad;
@@ -59,6 +95,7 @@ body{
 .container {
     /* display: grid; */
     height: 100vh;
+    margin-top: 40px;
     /* grid-template-columns: 0.8fr 1fr 1fr 1fr;
     grid-template-rows: 0.2fr 3fr; */
     /* grid-template-areas: ; */
