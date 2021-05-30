@@ -249,13 +249,14 @@ const bookContractor = async (req, res) => {
         let employement = new Employement({employerEmail: req.params.emailEmployer, constructorEmail: contractor.mail, date: req.params.date, jobScope: req.body.numBusinessHours, status: 'waiting for approval',hourlyWage: contractor.hourlyWage, rating: 0, feedback:'',occupationArea: contractor.occupationArea});
         await employement.save();
         // console.log({id: contractor.unavailability,date:req.params.date})
-        // ContractorWorkeController.addDateToUnavailabilityarray(contractor.unavailability, req.params.date,req.params.date);
+        ContractorWorkeController.addDateToUnavailabilityarray(contractor.unavailability, req.params.date,req.params.date);
         res.redirect(`/employer/homePage/${req.params.emailEmployer}`);
     }
 }
 const confirmEmploymentsDisplay = async (req, res) => {
     try {
-        let cEmployment = await Employement.find({employerEmail: req.params.email, status:'verified‏'});
+        let cEmployment = await Employement.find({employerEmail: req.params.email, status:'verified'});
+        cEmployment.sort((a, b) => a.date - b.date);
         res.render('../views/employerConfirmEmployments', {cEmployment:cEmployment, emailEmployer: req.params.email});
     }
     catch(err) {
@@ -266,7 +267,6 @@ const confirmEmployments = async (req, res) => {
     try {
         
         let cEmployment = await Employement.findOneAndUpdate({_id: ObjectId(req.params.id)}, {status:'close',rating: req.body.myRate,feedback:req.body.description }, {new: true });
-        cEmployment.sort((a, b) => a.date - b.date);
         res.redirect(`/employer/confirmEmployments/${req.body.employerEmail}`);
     }
     catch(err) {
@@ -320,6 +320,7 @@ const addFavoriteConToArray = async (req, res) => {
     // })
     // res.redirect(`/employer/homePage/${req.params.email}`);
 }
+
 
 
 const infoEmployment = async (req, res) => {
