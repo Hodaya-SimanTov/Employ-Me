@@ -33,7 +33,7 @@
 	transition: .4s;
 }
 .navbar ul li a.active, .navbar ul li a:hover{
-	background: rgb(247, 250, 94);
+	background: rgb(241, 230, 67);
 	border-radius: 2px;
 } 
 
@@ -103,13 +103,13 @@
 /* navbar */
 
 main{
-    background: #f3f4f6;
+    background: #f8f7b7;
     grid-area: main;
     overflow-y: auto;
 }
 
 .main__container {
-    padding: 30px 10px;
+    padding: 10px 10px;
 
 }
 .main__title {
@@ -132,7 +132,8 @@ main{
     display: grid; 
     grid-template-columns: 1fr 1fr 1fr 1fr ;
     gap: 45px;
-    margin: 20px 0;
+    margin: 5px 0;
+    
 }
 .card {
     display: flex;
@@ -141,7 +142,7 @@ main{
     height: 70px;
     padding: 25px;
     border-radius: 5px;
-    background: #ffffff;
+    background: #ffffff;;
     box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 .card_inner {
