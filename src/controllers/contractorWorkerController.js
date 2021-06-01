@@ -474,7 +474,6 @@ const addPaycheck =  (mail,month,year,hours,shifts,vacation) => {
             if(!pay){
                 const newPaycheck=new ContractorPaycheck({month:month,year:year,contractorMail:mail,totalHours:hours,totalShifts:shifts,totalVacation:vacation,totalSalary:0,contractorName:fullName,hourlyWage:con.hourlyWage,tHours:hours,tShifts:shifts,tVacation:vacation});
                 newPaycheck.save().then(paycheck => {
-                    console.log("add paycheck to: "+mail+" of month: "+month+" "+year);
                 }).catch(err=> {
                     console.log(`can not add this paycheck! ${err}`);
                 });
@@ -485,7 +484,6 @@ const addPaycheck =  (mail,month,year,hours,shifts,vacation) => {
                 var v = pay.totalVacation + vacation;
                 const newPaycheck=new ContractorPaycheck({month:month,year:year,contractorMail:mail,totalHours:hours,totalShifts:shifts,totalVacation:vacation,totalSalary:0,contractorName:fullName,hourlyWage:con.hourlyWage,tHours:h,tShifts:s,tVacation:v});
                 newPaycheck.save().then(paycheck => {
-                    console.log("add paycheck to: "+mail+" of month: "+month+" "+year);
                 }).catch(err => {
                     console.log(`can not add this paycheck! ${err}`);
                 });
@@ -504,11 +502,9 @@ const totalHours=(mail,month,year)=>{
         for(i=0;i<employements.length;i++){
             if(employements[i].date.getMonth()+1 == month && employements[i].date.getFullYear() == year && employements[i].status == 'close'){
                 totalHours+=employements[i].jobScope;
-                console.log("th"+totalHours);
             }        
         }
         ContractorPaycheck.findOneAndUpdate({contractorMail:mail,month:month,year:year},{totalHours:totalHours}).then(pay=>{
-            console.log("totalHour: "+mail+" :  "+totalHours);
         }).catch(err=>{console.log(err);})
     }).catch(err => {
         console.log(`can not find this employement! ${err}`);
@@ -522,11 +518,9 @@ const totalShifts=(mail,month,year)=>{
         for(i=0;i<employements.length;i++){
             if(employements[i].date.getMonth()+1 == month && employements[i].date.getFullYear() == year && employements[i].status == 'close'){
                 totalShifts+=1;
-                console.log("ts"+totalShifts);
             }    
         } 
         ContractorPaycheck.findOneAndUpdate({contractorMail:mail,month:month,year:year},{totalShifts:totalShifts}).then(pay=>{
-            console.log("totalShifts: "+mail+" :  "+totalShifts);
         }).catch(err=>{console.log(err);})
     }).catch(err => {     
         console.log(`can not find this employement! ${err}`);        
@@ -541,13 +535,11 @@ const totalVacation=(mail,month,year)=>{
                 for(j=0;j<un[i].unavailabArray.length;j++){
                     if(un[i].unavailabArray[j].getMonth()+1 == month && un[i].unavailabArray[j].getFullYear() == year){
                         totalVacation+=1;
-                        console.log("tv"+ "  "+i+"  "+totalVacation);
                     }    
                 }
 
             } 
             ContractorPaycheck.findOneAndUpdate({contractorMail:mail,month:month,year:year},{totalVacation:totalVacation}).then(pay=>{
-                console.log("totalVacation: "+mail+" :  "+totalVacation);
             }).catch(err=>{console.log(err);})
         }).catch(err => {
             console.log(`can not find this unavalability! ${err}`);
@@ -565,7 +557,6 @@ const startPaycheck = () => {
     ContractorWorker.find().then(contractors => {
         for(i=0;i<contractors.length;i++){
             addPaycheck(contractors[i].mail,date.getMonth()+1,date.getFullYear(),0,0,0);
-            console.log("start day - paycheck for : "+contractors[i].mail+"  "+date.getMonth()+1);
         }
     })
 }
@@ -581,7 +572,6 @@ const updatePaycheckEnd =  () => {
                 totalVacation(pays[i].contractorMail,pays[i].month,pays[i].year);
                 let t=(pays[i].totalHours * pays[i].hourlyWage)-((pays[i].totalHours * pays[i].hourlyWage * 0.004) + (pays[i].totalHours * pays[i].hourlyWage * 0.031) + (pays[i].totalHours * pays[i].hourlyWage * 0.125))
                 ContractorPaycheck.findByIdAndUpdate(pays[i]._id,{tHours:pays[i].tHours+pays[i].totalHours,tShifts:pays[i].tShifts+pays[i].totalShifts,tVacation:pays[i].tVacation+pays[i].totalVacation,totalSalary:t}).then(pay => {
-                    console.log(pay.totalSalary);
                 }).catch(err=>{
                     console.log(err);
                 })
@@ -602,7 +592,6 @@ const updatePaycheckEnd =  () => {
     ContractorPaycheck.findOne({contractorMail:mail,month:month,year:year}).then(pay => {
         let t=(pay.totalHours * pay.hourlyWage)-((pay.totalHours * pay.hourlyWage * 0.004) + (pay.totalHours * pay.hourlyWage * 0.031) + (pay.totalHours * pay.hourlyWage * 0.125))
         ContractorPaycheck.findByIdAndUpdate(pay._id,{tHours:pay.tHours+pay.totalHours,tShifts:pay.tShifts+pay.totalShifts,tVacation:pay.tVacation+pay.totalVacation,totalSalary:t}).then(pay => {
-            console.log(pay.totalSalary);
         }).catch(err=>{console.log(err);});
     }).catch(err=>{
         console.log(err);
@@ -615,7 +604,6 @@ const updatePaycheckEvery5Minutes = () => {
     ContractorWorker.find().then(contractors => {
         for(i=0;i<contractors.length;i++){
             updatePaycheck(contractors[i].mail,date.getMonth()+1,date.getFullYear());
-            console.log("update: "+contractors[i].mail);
         }
     }).catch(err => {
         console.log(err);
@@ -625,14 +613,14 @@ const updatePaycheckEvery5Minutes = () => {
 
 // תזמון כל תחילת חודש ליצור תלוש ריק לכל העובדים ומעדכנת סופית שכר לתלוש הקודם
 cron.schedule("0 0 1 * *", function() {
-    console.log("cron running");
+    console.log("cron running - start month - close the old paychecks and open new paychecks");
     updatePaycheckEnd();
-    startPaycheck();    
+    startPaycheck();        
 });
 
 //תזמון כל 5 דקות לעדכן את נתוני התלוש הנוכחי
 cron.schedule("*/12 * * * *", function() {
-    console.log("cron running");
+    console.log("cron running - update all paychecks");
     updatePaycheckEvery5Minutes();
 });
     
