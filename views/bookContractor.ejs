@@ -9,6 +9,7 @@
         <script src="https://kit.fontawesome.com/10e7a38072.js" crossorigin="anonymous"></script>
     </head>
     <body>
+        <div class="back">
         <nav class="navbar">
             <a href="/employer/homePage/<%=emailEmployer%>">
                 <img class="logo" src="/css/images/logo.PNG">
@@ -23,6 +24,7 @@
                 <li><a href="/"><i class="fa fa-fw fa-sign-out"></i>Log Out</a> </li>
             </ul>
         </nav>
+        
         <div class="container">
             <div class="title">Book Contractor</div>
             <form class="model-content animate" id="form" action='/employer/bookContractor/<%=emailEmployer%>/<%=contractor.id%>/<%=date%>'  method="POST" >
@@ -93,6 +95,7 @@
             </form>
 
         </div>
+    </div>
     </body> 
    <script>
        const form=document.getElementById("form");

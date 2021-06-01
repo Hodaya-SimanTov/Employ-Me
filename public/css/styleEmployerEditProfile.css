@@ -46,7 +46,11 @@
 	border-radius: 2px;
 } 
 
-
+.back{
+    background: url('images/back4.jpg') no-repeat;
+	background-size: cover;
+	height: 120vh;
+}
 .container{
     max-width: 600px;
     width: 100%;
@@ -54,7 +58,10 @@
     padding: 30px 30px;
     border-radius: 10px;
     right: 0px;
- 
+    align-items: center;
+    margin: auto;
+    margin-top: 60px;
+    opacity: 0.7 ;
 }
 .container .title{
     font-size: 25px;
