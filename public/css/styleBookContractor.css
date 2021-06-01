@@ -53,11 +53,11 @@
 }
 .container{
     opacity: 0.7 ;
-    max-width: 600px;
+    max-width: 70%;
     width: 80%;
     background: #fff;
     padding: 30px 30px;
-    border-radius: 10px;
+    border-radius: 20px;
     right: 0px;
     align-items: center;
     align-self: center;
@@ -65,7 +65,7 @@
     margin-top: 40px;
 }
 .container .title{
-    font-size: 25px;
+    font-size: 30px;
     font-weight: 500;
     position: relative;
 }
@@ -86,8 +86,8 @@
 }
 form .user-details .input-box{
     margin-bottom: 15px;
-    width: 45%;  
-    margin: 0 5px;
+    width: 20%;  
+    margin: 0 10px;
 }
 .user-details .button1{
     margin-bottom: 15px;
@@ -101,7 +101,7 @@ form .user-details .input-box{
     outline: none;
     color: #fff;
     border: none;
-    font-size: 13px;
+    font-size: 17px;
     font-weight: 500;
     border-radius: 5px;
     text-align: center;
@@ -123,7 +123,7 @@ form .user-details .input-box{
     border-radius: 5px;
     border: 1px solid #ccc;
     padding-left: 10px;
-    font-size: 12px;
+    font-size: 17px;
     border-bottom-width: 2px;
     transition: all 0.3s ease;
 }
@@ -158,7 +158,7 @@ form .button input{
     outline: none;
     color: #fff;
     border: none;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 500;
     border-radius: 5px;
     letter-spacing: 1px;
