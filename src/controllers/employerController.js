@@ -249,13 +249,14 @@ const bookContractor = async (req, res) => {
         let employement = new Employement({employerEmail: req.params.emailEmployer, constructorEmail: contractor.mail, date: req.params.date, jobScope: req.body.numBusinessHours, status: 'waiting for approval',hourlyWage: contractor.hourlyWage, rating: 0, feedback:'',occupationArea: contractor.occupationArea});
         await employement.save();
         // console.log({id: contractor.unavailability,date:req.params.date})
-        // ContractorWorkeController.addDateToUnavailabilityarray(contractor.unavailability, req.params.date,req.params.date);
+        ContractorWorkeController.addDateToUnavailabilityarray(contractor.unavailability, req.params.date,req.params.date);
         res.redirect(`/employer/homePage/${req.params.emailEmployer}`);
     }
 }
 const confirmEmploymentsDisplay = async (req, res) => {
     try {
-        let cEmployment = await Employement.find({employerEmail: req.params.email, status:'verified‏'});
+        let cEmployment = await Employement.find({employerEmail: req.params.email, status:'verified'});
+        cEmployment.sort((a, b) => a.date - b.date);
         res.render('../views/employerConfirmEmployments', {cEmployment:cEmployment, emailEmployer: req.params.email});
     }
     catch(err) {
@@ -266,7 +267,6 @@ const confirmEmployments = async (req, res) => {
     try {
         
         let cEmployment = await Employement.findOneAndUpdate({_id: ObjectId(req.params.id)}, {status:'close',rating: req.body.myRate,feedback:req.body.description }, {new: true });
-        cEmployment.sort((a, b) => a.date - b.date);
         res.redirect(`/employer/confirmEmployments/${req.body.employerEmail}`);
     }
     catch(err) {
@@ -321,6 +321,87 @@ const addFavoriteConToArray = async (req, res) => {
     // res.redirect(`/employer/homePage/${req.params.email}`);
 }
 
-module.exports = {addEmployer,getEmployerByEmail,editProfileDisplay,editProfile,searchContractorByFields,ContractorAvialableDate,availableCons,resetPassword,resetPasswordDisplay,bookContractorDisplay,bookContractor,confirmEmploymentsDisplay,historyEmployments,confirmEmployments,terminationOfEmploymentDisplay,addFavoriteConToArray,futureEmployement};
 
 
+const infoEmployment = async (req, res) => {
+    try {
+        let closedEmp = await Employement.find({employerEmail: req.params.email, status:'close'});
+        let cancelEmp = await Employement.find({employerEmail: req.params.email, status:'canceled'});
+        let waitConEmp = await Employement.find({employerEmail: req.params.email, status:'waiting for approval'});
+        let waitEmpEmp = await Employement.find({employerEmail: req.params.email, status:'verified'});
+        let rateNum = await Employement.find({employerEmail: req.params.email, rating: { $nin:[0] }}); 
+        console.log(rateNum);
+        var lastDate = 0;
+        var count = 0;
+        var avgRate = 0;
+        var countRate = 0;
+        var countClosed = 0;
+        var countCanceled = 0;
+        var waitCon = 0;
+        var waitEmp = 0;
+        var yearAmount = 0;
+        var rateYearAmount = 0;
+        var year = 0;
+        var kindAmount = [];
+        var index = 0;
+        var kind = [];
+        var kCount = 0;
+        for (let i = 0; i < rateNum.length; i++) {
+            count += rateNum[i].rating;
+        }
+        if (rateNum.length != 0) {
+            avgRate = count / rateNum.length;
+            countRate = rateNum.length;
+        }
+        console.log(avgRate);
+        console.log(countRate);
+        if (closedEmp != 0) {
+            countClosed = closedEmp.length;
+            lastDate = closedEmp[0].date;
+        }
+        if (cancelEmp != 0) {
+            countCanceled = cancelEmp.length;
+        }
+        if (waitConEmp != 0) {
+            waitCon = waitConEmp.length;
+        }
+        if (waitEmpEmp != 0) {
+            waitEmp = waitEmpEmp.length;
+        }
+        let empCount = countClosed + waitCon + waitEmp;
+        for (var j=1; j < closedEmp.length; j++) {
+            if (closedEmp[j].date > lastDate) {
+                lastDate = closedEmp[j].date;
+            }
+        }
+        if (closedEmp.length != 0) {
+            year = lastDate.getUTCFullYear();
+        }
+        for (var j=0; j < closedEmp.length; j++) {
+            if (closedEmp[j].date.getUTCFullYear() == year) {
+                if (closedEmp[j].rating > 0) {
+                    rateYearAmount++;
+                }
+                yearAmount++;
+            } 
+            if (kind.indexOf(closedEmp[j].occupationArea) > -1) {
+                index = kind.findIndex(kind => kind === closedEmp[j].occupationArea)
+                kindAmount[index]++;
+            }
+            else {
+                kind[kCount] = closedEmp[j].occupationArea;
+                kindAmount[kCount] = 1;
+                kCount++;
+            }
+        }
+        
+        console.log({kindAmount:kindAmount, kind:kind});
+        res.render('../views/employerInfo', {email: req.params.email,empCount: empCount, countRate: countRate, avgRate: avgRate, countClosed: countClosed, countCanceled: countCanceled, waitCon: waitCon, waitEmp: waitEmp, yearAmount:yearAmount, rateYearAmount:rateYearAmount, year:year, kind:kind, kindAmount:kindAmount });
+    }
+    catch(err) {
+        console.log(err);
+    }
+    
+}
+    
+module.exports = {addEmployer, getEmployerByEmail, editProfileDisplay, editProfile, searchContractorByFields, ContractorAvialableDate, availableCons, resetPassword, resetPasswordDisplay, bookContractorDisplay, bookContractor, confirmEmploymentsDisplay, historyEmployments, confirmEmployments, terminationOfEmploymentDisplay, addFavoriteConToArray, infoEmployment,futureEmployement};

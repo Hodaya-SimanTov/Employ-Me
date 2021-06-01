@@ -5,22 +5,29 @@
     box-sizing: border-box;
     font-family: 'Poppins',sans-serif;  
 }
+
 body{
+    background: url('images/back4.jpg') no-repeat;
+	background-size: cover;
+	height: 100vh;
+    opacity: 0.7 ;
     display:flex;
     height: 100vh;
     justify-content: left;
     align-items: left;
     padding: 10px;
+    
       
 }
 .container{
-    max-width: 600px;
+    max-width: 70%;
     width: 100%;
     background: #fff;
     padding: 30px 30px;
     border-radius: 10px;
     right: 0px;
-    
+    align-items: center;
+    margin: auto;
 }
 .container .title{
     font-size: 25px;

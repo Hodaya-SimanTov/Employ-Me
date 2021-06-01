@@ -5,24 +5,66 @@
     box-sizing: border-box;
     font-family: 'Poppins',sans-serif;  
 }
-body{
+.body{
     display: flex;
     height: 100vh;
     justify-content: left;
     align-items: left;
     padding: 10px;
 }
+.navbar{
+	height: 80px;
+	width: 100%;
+	background: rgb(255, 255, 255);
+}
+.logo{
+	float: left;
+	margin-left: 20px;
+	width: 220px;
+	height: 73px;
+	/* padding: 5px 50px; */
+}
+.navbar ul{
+	float: right;
+	margin-right: 20px;
+}
+.navbar ul li{
+	list-style: none;
+	margin: 0 8px;
+	display: inline-block;
+	line-height: 80px;
+}
+.navbar ul li a{
+	text-decoration: none;
+	color: rgb(40, 21, 94);
+	font-size: 17px;
+	font-family: 'Roboto', sans-serif;
+	transition: .4s;
+}
+.navbar ul li a.active, .navbar ul li a:hover{
+	background: rgb(241, 230, 67);
+	border-radius: 2px;
+} 
+
+.back{
+    background: url('images/back4.jpg') no-repeat;
+	background-size: cover;
+	height: 120vh;
+}
 .container{
-    max-width: 600px;
+    max-width: 70%;
     width: 100%;
     background: #fff;
     padding: 30px 30px;
     border-radius: 10px;
     right: 0px;
- 
+    align-items: center;
+    margin: auto;
+    margin-top: 60px;
+    opacity: 0.7 ;
 }
 .container .title{
-    font-size: 25px;
+    font-size: 30px;
     font-weight: 500;
     position: relative;
 }
@@ -33,7 +75,7 @@ body{
     bottom: 0;
     height: 3px;
     width: 30px;
-    background: linear-gradient(135deg, #71b7e6,#e6d171);
+    background: linear-gradient(135deg, #71b7e6,#85067e);
 }
 .container form .user-details{
     display: flex;
@@ -48,9 +90,10 @@ form .user-details .input-box{
 }
 .user-details .button1{
     margin-bottom: 15px;
-    width: 45%;  
+    width: 100%;  
+    height: 45px;
     margin: 0 5px;
-    padding-top: 27px;
+    padding-top: 10px;
 }
 .user-details .button1 input{
     height: 100%;
@@ -58,15 +101,15 @@ form .user-details .input-box{
     outline: none;
     color: #fff;
     border: none;
-    font-size: 13px;
+    font-size: 18px;
     font-weight: 500;
     border-radius: 5px;
     text-align: center;
     letter-spacing: 1px;
-    background-color: #989a9b;   
+    background-color: #71b7e6;   
 }
 .user-details .button1 input:hover{
-    background-color: #ebd264
+    background-color: #813c7e;
 }
 .user-details .input-box .details{
     display: block;
@@ -102,7 +145,7 @@ form .user-details .input-box{
 }
 
 .user-details .input-box input:focus{
-    border-color: #e6d171
+    border-color: #813c7e
 }
 
 form .button{
@@ -120,10 +163,10 @@ form .button input{
     border-radius: 5px;
     letter-spacing: 1px;
     text-align: center;
-    background: linear-gradient(135deg, #71b7e6, #e6d171)
+    background: linear-gradient(135deg, #71b7e6, #85067e)
 }
 form .button input:hover{
-    background: linear-gradient(-135deg, #71b7e6, #e6d171)
+    background: linear-gradient(-135deg, #71b7e6, #85067e)
 }
 /* .input{
     transition: background 0.2s, border 0.2s;
