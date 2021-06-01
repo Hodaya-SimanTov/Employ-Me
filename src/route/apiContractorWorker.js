@@ -48,7 +48,6 @@ router.post('/login',contractorWorker.loginUser);
 router.get('/findContractorInSpecDate',contractorWorker.findContractorInSpecDate);
 
 router.get('/contractorFuture/:mail',contractorWorker.contractorFuture);
-
 router.get('/contractorHistory/:mail',contractorWorker.contractorHistory);
 router.get('/contractorWaitApproval/:mail',contractorWorker.contractorWaitApproval);
 
@@ -57,6 +56,11 @@ router.get('/startEmployement/:id',contractorWorker.startEmployement);
 
 router.get('/approveShift/:id',contractorWorker.approveShift);
 router.get('/cancelShift/:id',contractorWorker.cancelShift);
+
+router.get('/contractorPaycheckList/:mail',contractorWorker.payChecksList);
+router.get('/contractorPayChecks/:mail/:month',contractorWorker.payCheck);
+
+router.get('/totalShifts',contractorWorker.totalShifts);
 
 module.exports=router
 

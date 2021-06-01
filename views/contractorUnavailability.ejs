@@ -62,11 +62,11 @@
             const endD=new Date(endValue);
 
             var flag=0;
-            if(startD.valueOf != Date.valueOf){
+            if(startD.valueOf == null){
                 start.parentElement.setAttribute('data-error','Start date cannot be empty');
                 flag=1;
             }
-            if(endD.valueOf != Date.valueOf){
+            if(endD.valueOf == null){
                 end.parentElement.setAttribute('data-error','End date cannot be empty');
                 flag=1;
             }

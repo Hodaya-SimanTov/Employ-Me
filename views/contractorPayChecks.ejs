@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+<head>  
+    <title>Pay Check</title>
+    <link rel="stylesheet" type="text/css" href="/css/styleContractorPayChecks.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        
+</head>
+<body>
+  <div>
+   <%var m=["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]%> 
+  <div class="title">Pay Check - <%=m[(payCheck.month-1)%12]%> <%=payCheck.year%></div>
+  <br /> 
+  <div class="container">   
+    <br />       
+  <div class="user-details"> 
+    <div class="row offset-md-1">
+      <div  class="input-box2 col-5"  >
+        <span class="details">Company Name :  </span>
+        <label>Employe Me</label>
+        <br/>
+        <span class="details">City :  </span>
+        <label>Ashdod</label>
+        <br/>
+        <span class="details">Address :  </span>
+        <label>Jabotinsky 84</label>
+      </div>
+      <div class="col-1" > </div>
+      <div  class="input-box1 col-5"  >
+        <span class="details">Pay slip for month :   </span>
+        <label><%=m[(payCheck.month-1)%12]%>  <%=payCheck.year%></label>
+        <br/>
+        <span class="details">Payment day :   </span>
+        <label>10  <%=m[(payCheck.month)%12]%> <%=payCheck.year%></label>
+      </div>   
+    </div>   
+    <div  class="input-box3 row offset-md-1"  >
+      <span class="name">In honor of :   </span>
+      <label class="name"><%=payCheck.contractorName%></label>
+    </div >
+   
+    <div  class="input-box4 row offset-md-1"  >
+      <div class="col-6">
+         <span >Personal Information :   </span> 
+          <hr>
+          <span class="details">Email :   </span>
+          <label><%=payCheck.contractorMail%></label>
+        <br/>             
+      </div >
+      <div class="col-6">
+        <br/> 
+        <br/> 
+        <span class="details">Job :   </span>
+        <label>Contracting</label>        
+        <br/>
+      </div>      
+    </div>
+    <br/>
+    
+    <div >
+      <div  class="row offset-md-1" >
+        <div class="input-box5 col-5 ">
+          <span >Monthly salary data :   </span>
+          <hr>
+          <span class="details">Total shifts :   </span>
+          <label><%=payCheck.totalShifts%></label>
+          <br/>
+          <span class="details">Total hours :   </span>
+          <label><%=payCheck.totalHours%></label>
+          <br/>
+          <span class="details">Hourly wage :   </span>
+          <label><%=payCheck.hourlyWage%>  NIS</label>
+          <br/>
+          <span class="details">Holiday :   </span>
+          <label><%=payCheck.totalVacation%></label>
+          <br/> 
+          <div  class="input-box7 "  >
+            <span class="details">Total payments (gross) :   </span>
+            <label><%=payCheck.totalHours * payCheck.hourlyWage%>  NIS</label>
+          </div >                   
+        </div >
+        <div class="col-1" > </div>
+        <div class=" input-box6 col-5">
+          <span >Deductions :   </span> 
+          <hr>
+          <%var t= (payCheck.totalHours * payCheck.hourlyWage * 0.004) + (payCheck.totalHours * payCheck.hourlyWage * 0.031) + (payCheck.totalHours * payCheck.hourlyWage * 0.125) %>
+          <span class="details">Social Security :   </span>
+          <label>0.4% - <%=payCheck.totalHours * payCheck.hourlyWage * 0.004%></label>
+          <br/> 
+          <span class="details">Health tax :   </span>
+          <label>3.1% - <%=payCheck.totalHours * payCheck.hourlyWage * 0.031%></label>
+          <br/>
+          <span class="details">Pension :   </span>
+          <label>12.5% - <%=payCheck.totalHours * payCheck.hourlyWage * 0.125%></label>
+          <br/>
+          <br/>     
+          <div  class="input-box7 "  >          
+            <span class="details">Total deductions :   </span>          
+            <label><%=t%>  NIS</label>
+          </div>        
+      </div>
+    </div> 
+    <br/>
+    <div  class="input-box7 offset-md-1"  >
+      <span class="details">Total payments (net) :   </span>
+      <label> <%= (payCheck.totalHours * payCheck.hourlyWage)- t %> NIS </label>
+    </div >
+    <br/>
+    
+    <div  class="input-box4 row offset-md-1"  >
+      <div class="col-6">
+        <span >Cumulative data :   </span> 
+        <hr>
+        <span class="details">Total shifts :   </span>
+        <label><%=payCheck.tHours%></label>
+        <br/>
+        <span class="details">Total working hours :   </span>
+        <label><%=payCheck.tShifts%></label>
+        <br/>        
+      </div >
+      <div class="col-6">
+        <br/> 
+        <br/> 
+        <span class="details">Total vacation days :   </span>
+        <label><%=payCheck.tVacation%></label>
+        <br/>
+      </div>      
+    </div>
+  </div>
+  <br/><br/>
+  <label class="offset-md-1">Eligibls Reserved for Employe-Me Ltd.</label>
+  </div>
+  
+  </div>
+  
+  
+  <br/><br/>
+</body>
+<script >
+  
+</script>
+
+</html>

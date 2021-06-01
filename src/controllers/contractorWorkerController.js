@@ -1,6 +1,7 @@
 //const ContractorWorker=require('../model/contractorWorker');
 const Unavailability = require('../model/unavailabilityContractor');
 const {ContractorWorker,validate1,validateEditContractor } = require('../model/contractorWorker');
+const {ContractorPaycheck } = require('../model/contractorPaycheck');
 const { Employer, validate2,validateEditEmployer } = require('../model/employer');
 const { CompanyWorker, validate3,validateEditCompanyWorker } = require('../model/companyWorker');
 const {Employement,validateEmployement}=require('../model/employement');
@@ -10,6 +11,8 @@ const jwt = require('jsonwebtoken');
 var mongo = require('mongodb');
 var assert = require('assert');
 const bcrypt = require('bcrypt');
+var cron = require('node-cron');
+var shell = require('shelljs');
 
 //חישוב שכר לפי גיל
 const salaryOfHour = function (contractor_id,birthday) {
@@ -21,8 +24,10 @@ const salaryOfHour = function (contractor_id,birthday) {
     else
         x=30;
     ContractorWorker.findByIdAndUpdate(contractor_id, {hourlyWage:x})
-        .then(()=> {
+        .then(contractor => {
+            var date = new Date();
             console.log('add salary');
+            addPaycheck(contractor.mail,date.getMonth()+1,date.getFullYear(),0,0,0);
         }).catch(err=>{
         console.log(err);
     });
@@ -59,6 +64,7 @@ function sendmail(email, name) {
 
 //הוספת עובד חדש
 const addContractorWorker = (req,res)=> {
+    var date=new Date();
     ContractorWorker.findOne({mail:req.body.mail}).then(con=> {
         if(con) {
             console.log('exists!!');
@@ -70,8 +76,8 @@ const addContractorWorker = (req,res)=> {
             //sendmail(contractorWorker.mail,contractorWorker.firstName)//שולח מייל בהרשמה
                 console.log('add conrtactor');
                 addUnavailabilityArray(contractorWorker._id);//הוספת מערך חופשות ריק
-                salaryOfHour(contractorWorker._id,contractorWorker.birthday);//עדכון השכר לשעה
-            res.redirect(`/companyWorker/homePage/${req.body.mail}`);
+                salaryOfHour(contractorWorker._id,contractorWorker.birthday)//עדכון השכר לשעה
+                res.redirect(`/companyWorker/homePage/${req.body.mail}`);
         }).catch(err=> {
             console.log(`can not add this worker! ${err}`);
         });  
@@ -138,6 +144,7 @@ const addUn = (req,res) => {
     }).catch(err => {
         console.log(err);
     });
+
 }
 
 
@@ -376,7 +383,7 @@ const contractorWaitApproval = (req,res) => {
 }
 
 const approveShift = (req,res) => {
-    Employement.findByIdAndUpdate(req.params.id,{status:`open`})
+    Employement.findByIdAndUpdate(req.params.id,{status:`approved‏`})
         .then(employement => {
             res.redirect(`/contractorWorker/contractorFuture/${employement.constructorEmail}`);
         }).catch(err => {
@@ -384,9 +391,31 @@ const approveShift = (req,res) => {
     });
 }
 const cancelShift = (req,res) => {
+    var i;
     Employement.findByIdAndUpdate(req.params.id,{status:`canceled`})
         .then(employement => {
-            res.redirect(`/contractorWorker/contractorWaitApproval/${employement.constructorEmail}`);
+            ContractorWorker.findOne({mail:employement.constructorEmail}).then(contractor=>{
+               Unavailability.findById(contractor.unavailability)
+               .then(unavailability=> {    
+                   var arr=unavailability.unavailabArray               
+                    for( i = 0 ; i < unavailability.unavailabArray.length ; i++) {
+                        if(arr[i].getDate()-1 == employement.date.getDate() && arr[i].getMonth() == employement.date.getMonth() && arr[i].getFullYear() == employement.date.getFullYear()){
+                            Unavailability.findByIdAndUpdate(unavailability._id,{$pull:{'unavailabArray':arr[i]}})
+                            .then(unavailability2=> {  
+                                console.log("delete date");                                                              
+                            }).catch(err => {
+                                console.log(err);
+                            })
+                            break;
+                        }
+                    }
+                    res.redirect(`/contractorWorker/contractorWaitApproval/${employement.constructorEmail}`);
+                }).catch(err => {
+                    console.log(err);
+                })     
+            }).catch(err => {
+                console.log(err);
+            })     
         }).catch(err => {
         console.log(`can not find this employement! ${err}`);
     });
@@ -413,10 +442,231 @@ const startEmployement = (req,res) => {
     });
 }
 
+const payChecksList = async (req,res) => {
+    let payChecks = await ContractorPaycheck.find({contractorMail:req.params.mail});
+    if (payChecks) {
+        payChecks.sort((a, b) => b.month - a.month)
+        res.render('../views/contractorPaycheckList',{result:payChecks});
+    }
+    else {
+        return res.status(400).send('That email is error!');
+    }
+}
+
+const payCheck = async (req,res) => {
+    let payCheck = await ContractorPaycheck.findOne({contractorMail:req.params.mail,month:req.params.month});
+    if (payCheck) {
+        res.render('../views/contractorPayChecks',{payCheck});
+    }
+    else {
+        return res.status(400).send('That email is error!');
+    }
+}
+
+
+
+
+const addPaycheck =  (mail,month,year,hours,shifts,vacation) => {
+    var m = month-1;    
+    ContractorWorker.findOne({mail:mail}).then(con => {
+        var fullName = con.firstName + " " + con.lastName;
+        ContractorPaycheck.findOne({contractorMail:mail,month:m}).then(pay => {
+            if(!pay){
+                const newPaycheck=new ContractorPaycheck({month:month,year:year,contractorMail:mail,totalHours:hours,totalShifts:shifts,totalVacation:vacation,totalSalary:0,contractorName:fullName,hourlyWage:con.hourlyWage,tHours:hours,tShifts:shifts,tVacation:vacation});
+                newPaycheck.save().then(paycheck => {
+                    console.log("add paycheck to: "+mail+" of month: "+month+" "+year);
+                }).catch(err=> {
+                    console.log(`can not add this paycheck! ${err}`);
+                });
+            }
+            else if(pay){
+                var h = pay.totalHours + hours;
+                var s = pay.totalShifts + shifts;
+                var v = pay.totalVacation + vacation;
+                const newPaycheck=new ContractorPaycheck({month:month,year:year,contractorMail:mail,totalHours:hours,totalShifts:shifts,totalVacation:vacation,totalSalary:0,contractorName:fullName,hourlyWage:con.hourlyWage,tHours:h,tShifts:s,tVacation:v});
+                newPaycheck.save().then(paycheck => {
+                    console.log("add paycheck to: "+mail+" of month: "+month+" "+year);
+                }).catch(err => {
+                    console.log(`can not add this paycheck! ${err}`);
+                });
+            }   
+        }).catch(err=> {
+            console.log(`can not find this pay! ${err}`);
+        });          
+    }).catch(err=> {
+        console.log(`can not find this contractor! ${err}`);
+    });     
+}      
+
+const totalHours=(mail,month,year)=>{
+    var i,totalHours=0;
+    Employement.find({constructorEmail:mail}).then(employements => {
+        for(i=0;i<employements.length;i++){
+            if(employements[i].date.getMonth()+1 == month && employements[i].date.getFullYear() == year && employements[i].status == 'close'){
+                totalHours+=employements[i].jobScope;
+                console.log("th"+totalHours);
+            }        
+        }
+        ContractorPaycheck.findOneAndUpdate({contractorMail:mail,month:month,year:year},{totalHours:totalHours}).then(pay=>{
+            console.log("totalHour: "+mail+" :  "+totalHours);
+        }).catch(err=>{console.log(err);})
+    }).catch(err => {
+        console.log(`can not find this employement! ${err}`);
+    });
+}
+
+
+const totalShifts=(mail,month,year)=>{
+    let i,totalShifts=0;
+    Employement.find({constructorEmail:mail}).then(employements => {
+        for(i=0;i<employements.length;i++){
+            if(employements[i].date.getMonth()+1 == month && employements[i].date.getFullYear() == year && employements[i].status == 'close'){
+                totalShifts+=1;
+                console.log("ts"+totalShifts);
+            }    
+        } 
+        ContractorPaycheck.findOneAndUpdate({contractorMail:mail,month:month,year:year},{totalShifts:totalShifts}).then(pay=>{
+            console.log("totalShifts: "+mail+" :  "+totalShifts);
+        }).catch(err=>{console.log(err);})
+    }).catch(err => {     
+        console.log(`can not find this employement! ${err}`);        
+    });
+}
+
+const totalVacation=(mail,month,year)=>{
+    let i,j,totalVacation=0;
+    ContractorWorker.findOne({mail:mail}).then(contractor =>{
+       Unavailability.find({contractorId:contractor._id}).then(un => {
+            for(i=0;i<un.length;i++){
+                for(j=0;j<un[i].unavailabArray.length;j++){
+                    if(un[i].unavailabArray[j].getMonth()+1 == month && un[i].unavailabArray[j].getFullYear() == year){
+                        totalVacation+=1;
+                        console.log("tv"+ "  "+i+"  "+totalVacation);
+                    }    
+                }
+
+            } 
+            ContractorPaycheck.findOneAndUpdate({contractorMail:mail,month:month,year:year},{totalVacation:totalVacation}).then(pay=>{
+                console.log("totalVacation: "+mail+" :  "+totalVacation);
+            }).catch(err=>{console.log(err);})
+        }).catch(err => {
+            console.log(`can not find this unavalability! ${err}`);
+        });
+    }).catch(err => {
+        console.log(`can not find this contractor! ${err}`);
+    });
+}
+
+
+
+const startPaycheck = () => {
+    let i;
+    var date=new Date();
+    ContractorWorker.find().then(contractors => {
+        for(i=0;i<contractors.length;i++){
+            addPaycheck(contractors[i].mail,date.getMonth()+1,date.getFullYear(),0,0,0);
+            console.log("start day - paycheck for : "+contractors[i].mail+"  "+date.getMonth()+1);
+        }
+    })
+}
+
+const updatePaycheckEnd =  () => {
+    let i;
+    var date=new Date();
+    ContractorPaycheck.find().then(pays => {
+        for(i=0;i<pays.length;i++){
+            if(pays[i].month == date.getMonth()){//חודש אחרון
+                totalHours(pays[i].contractorMail,pays[i].month,pays[i].year);
+                totalShifts(pays[i].contractorMail,pays[i].month,pays[i].year);
+                totalVacation(pays[i].contractorMail,pays[i].month,pays[i].year);
+                let t=(pays[i].totalHours * pays[i].hourlyWage)-((pays[i].totalHours * pays[i].hourlyWage * 0.004) + (pays[i].totalHours * pays[i].hourlyWage * 0.031) + (pays[i].totalHours * pays[i].hourlyWage * 0.125))
+                ContractorPaycheck.findByIdAndUpdate(pays[i]._id,{tHours:pays[i].tHours+pays[i].totalHours,tShifts:pays[i].tShifts+pays[i].totalShifts,tVacation:pays[i].tVacation+pays[i].totalVacation,totalSalary:t}).then(pay => {
+                    console.log(pay.totalSalary);
+                }).catch(err=>{
+                    console.log(err);
+                })
+            }
+            
+        }
+    }).catch(err=>{
+        console.log(err);
+    })
+}
+
+ const updatePaycheck = (mail,month,year) => {
+    totalHours(mail,month,year);
+    totalShifts(mail,month,year);
+    totalVacation(mail,month,year);  
+    let i;
+    var date=new Date();
+    ContractorPaycheck.findOne({contractorMail:mail,month:month,year:year}).then(pay => {
+        let t=(pay.totalHours * pay.hourlyWage)-((pay.totalHours * pay.hourlyWage * 0.004) + (pay.totalHours * pay.hourlyWage * 0.031) + (pay.totalHours * pay.hourlyWage * 0.125))
+        ContractorPaycheck.findByIdAndUpdate(pay._id,{tHours:pay.tHours+pay.totalHours,tShifts:pay.tShifts+pay.totalShifts,tVacation:pay.tVacation+pay.totalVacation,totalSalary:t}).then(pay => {
+            console.log(pay.totalSalary);
+        }).catch(err=>{console.log(err);});
+    }).catch(err=>{
+        console.log(err);
+    });   
+}
+
+const updatePaycheckEvery5Minutes = () => {
+    var i;
+    var date=new Date();
+    ContractorWorker.find().then(contractors => {
+        for(i=0;i<contractors.length;i++){
+            updatePaycheck(contractors[i].mail,date.getMonth()+1,date.getFullYear());
+            console.log("update: "+contractors[i].mail);
+        }
+    }).catch(err => {
+        console.log(err);
+    })
+}
+
+
+// תזמון כל תחילת חודש ליצור תלוש ריק לכל העובדים ומעדכנת סופית שכר לתלוש הקודם
+cron.schedule("0 0 1 * *", function() {
+    console.log("cron running");
+    updatePaycheckEnd();
+    startPaycheck();    
+});
+
+//תזמון כל 5 דקות לעדכן את נתוני התלוש הנוכחי
+cron.schedule("*/12 * * * *", function() {
+    console.log("cron running");
+    updatePaycheckEvery5Minutes();
+});
+    
+
+
+
+// cron.schedule("5 19 * * *", function() {
+//     console.log("cron running");
+//     startPaycheck();
+// });
+
+
+
+//מחיקת כל התלושים במונגו
+// cron.schedule("57 16 * * *", function() {
+//     var i;
+//     console.log("cron running");
+//     ContractorPaycheck.find().then(c=>{
+//         for(i=0;i<c.length;i++){
+//             ContractorPaycheck.findByIdAndDelete(c[i]._id).then(a=>{
+//                 console.log("delete: "+i);
+//             })
+            
+//         }
+//     })
+// });
+
+
+
+
 
 
 module.exports = { addContractorWorker , getContractorWorkerById , deleteContractorWorkerById
     , getAllContractorWorkers , getContractorWorkerByMail , loginUser , addDateToUnavailabilityarray
     , addUn , getContractorByEmail , editProfileDisplay , editProfile , updateContractorPass , unDisplay 
     , homepageDisplay , findContractorInSpecDate , contractorFuture , contractorHistory , endEmployement
-    , startEmployement ,contractorWaitApproval , approveShift , cancelShift};
+    , startEmployement ,contractorWaitApproval , approveShift , cancelShift , payChecksList , payCheck , totalShifts };
