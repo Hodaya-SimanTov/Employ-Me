@@ -698,8 +698,10 @@ const addMessage= (mail,date,type,text) => {
 const sendMessageDiplay = async (req,res) => {
     let contractors = await ContractorWorker.find();
     if (contractors) {
-        res.render('../views/companyMessage',{result:contractors});
+        res.render(`../views/companyMessage`,{result:contractors,mail:req.params.mail});
+
     }
+    
     else {
         return res.status(400).send('That email is error!');
     }
@@ -711,8 +713,7 @@ const sendMessage= (req,res) => {
     var mail=str = req.body.contractor.split("- ").pop();
     const newContractorMessage=new ContractorMessage({contractorMail:mail,date:date,type:req.body.type,text:req.body.text});
     newContractorMessage.save().then(message => {
-        res.send(message);
-        console.log(message);
+        res.redirect(`/companyWorker/homePage/${req.params.mail}`);
     }).catch(err => {
         console.log(`can not add this message! ${err}`);
     });

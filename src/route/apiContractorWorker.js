@@ -61,8 +61,8 @@ router.get('/contractorPaycheckList/:mail',contractorWorker.payChecksList);
 router.get('/contractorPayChecks/:mail/:month',contractorWorker.payCheck);
 
 router.get('/contractorMessageList/:mail',contractorWorker.messageList);
-router.post('/sendMessage',contractorWorker.sendMessage);
-router.get('/sendMessageDiplay',contractorWorker.sendMessageDiplay);
+router.post('/sendMessage/:mail',contractorWorker.sendMessage);
+router.get('/sendMessageDiplay/:mail',contractorWorker.sendMessageDiplay);
 
 module.exports=router
 
