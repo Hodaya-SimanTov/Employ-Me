@@ -39,10 +39,7 @@ const Employer = mongoose.model('Employer', new mongoose.Schema({
     role:{
         type:String,
         default:" "
-    },
-    favoritesArray:[{
-        type:ObjectId
-    }]
+    }
 }));
 function validateEmployer(employer) {
     const schema = Joi.object( {

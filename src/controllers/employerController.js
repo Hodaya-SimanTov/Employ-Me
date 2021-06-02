@@ -91,21 +91,7 @@ const ContractorAvialableDate = async(date) => {
     }
     return array;  
 }
-// const findContractorInSpecDate=(req,res)=>{
-//         var array=[];
-//         var i=0;
-//         Unavailability.find( {unavailabArray : { $in: [req.body.date] }}).then(unavailability=>{  
-//             res.send({contractors:unavailability});        
-//             for(i=0;i<unavailability.length;i++){
-//                 array[i]=unavailability[i].contractorId;
-//             }
-//             console.log(array);    
-//             return array;  
-//         }).catch(err=>{
-//             console.log(err);
-//         })
-//     }
- 
+
 
 //  פונקציה שמחזירה עובדים שעומדים בסינונים ופנויים בתאריך
 const searchContractorByFields = async(req, res) => {
@@ -208,15 +194,7 @@ const searchContractorByFields = async(req, res) => {
     
 }
 
-// const addEmployemnt=async (req, res) => {
-//     const { error } = validateEmployement(req.body);
-//     if (error) {
-//         return res.status(400).send(error.details[0].message);
-//     }
-//     employement = new Employement(_.pick(req.body, ['employerEmail','constructorEmail','date', 'jobScope','status','hourlyWage','rating','feedback']));
-//     await employement.save();
-//     res.redirect('/employer/homePage');
-// }
+
 //פונקציה שמקבלת 2 מערכים אחד של הקונטרקטורים שזמינים בתאריך מסויים ואחד של הקונטרקטורים שמתאימים לסינון ומחזירה מערך של קונטרקטורים שמתאימים 
 const availableCons = (avilableConsArr, filteredConsArr) => {
     var availableCons = [];
@@ -274,10 +252,14 @@ const confirmEmployments = async (req, res) => {
     }    
 }
 const terminationOfEmploymentDisplay=async(req,res)=>{
-    let cEmployment = await Employement.findById(req.params.id);
-    let contractor =  await ContractorWorker.findOne({mail: cEmployment.constructorEmail});
-
-    res.render('../views/employerTerminationOfEmployment',{employement: cEmployment,contractor:contractor});
+    try{
+        let cEmployment = await Employement.findById(req.params.id);
+        let contractor =  await ContractorWorker.findOne({mail: cEmployment.constructorEmail});
+        res.render('../views/employerTerminationOfEmployment',{employement: cEmployment,contractor:contractor});
+    }catch(err){
+        console.log(err);
+    }
+    
 }
 const historyEmployments = async (req, res) => {
     try {
@@ -299,28 +281,6 @@ const futureEmployement = async (req,res) => {
         console.log(err);
     }
 }
-// const rateAndFidback=async (req, res) => {
-//     let rEployment=await Employement.findOne({employerEmail: req.params.emailEmployer, idConstractor: req.params.idConstractor, date: req.params.date})
-//>וספות של כנרת למועדפים
-
-const addFavoriteConToArray = async (req, res) => {
-    try {
-        let employerFav = await Employer.findOneAndUpdate({email: req.params.email}, {$addToSet:{'favoritesArray': req.params.id}}, {new: true });
-        console.log(employerFav);
-        res.redirect(`/employer/homePage/${req.params.email}`);
-    }
-    catch(err) {
-        console.log(err);
-    }   
-    // Employer.findOneAndUpdate(req.params.email, {$addToSet:{'favoritesArray': req.params.id}})
-    //     .then(() => {
-    //         console.log("Add favorite contractor to employer");
-    //     }).catch(err => {
-    //     console.log(err);
-    // })
-    // res.redirect(`/employer/homePage/${req.params.email}`);
-}
-
 
 
 const infoEmployment = async (req, res) => {
@@ -400,8 +360,8 @@ const infoEmployment = async (req, res) => {
     }
     catch(err) {
         console.log(err);
-    }
-    
+    }    
 }
-    
-module.exports = {addEmployer, getEmployerByEmail, editProfileDisplay, editProfile, searchContractorByFields, ContractorAvialableDate, availableCons, resetPassword, resetPasswordDisplay, bookContractorDisplay, bookContractor, confirmEmploymentsDisplay, historyEmployments, confirmEmployments, terminationOfEmploymentDisplay, addFavoriteConToArray, infoEmployment,futureEmployement};
+ 
+
+module.exports = {addEmployer, getEmployerByEmail, editProfileDisplay, editProfile, searchContractorByFields, ContractorAvialableDate, availableCons, resetPassword, resetPasswordDisplay, bookContractorDisplay, bookContractor, confirmEmploymentsDisplay, historyEmployments, confirmEmployments, terminationOfEmploymentDisplay, infoEmployment,futureEmployement};
