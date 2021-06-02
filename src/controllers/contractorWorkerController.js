@@ -1,5 +1,6 @@
 //const ContractorWorker=require('../model/contractorWorker');
 const Unavailability = require('../model/unavailabilityContractor');
+const ContractorMessage = require('../model/contractorMessage');
 const {ContractorWorker,validate1,validateEditContractor } = require('../model/contractorWorker');
 const {ContractorPaycheck } = require('../model/contractorPaycheck');
 const { Employer, validate2,validateEditEmployer } = require('../model/employer');
@@ -13,6 +14,7 @@ var assert = require('assert');
 const bcrypt = require('bcrypt');
 var cron = require('node-cron');
 var shell = require('shelljs');
+const MailMessage = require('nodemailer/lib/mailer/mail-message');
 
 //חישוב שכר לפי גיל
 const salaryOfHour = function (contractor_id,birthday) {
@@ -73,10 +75,12 @@ const addContractorWorker = (req,res)=> {
         else {
            const newContractorWorker=new ContractorWorker(req.body);
             newContractorWorker.save().then(contractorWorker => {
+                var date=new Date();
             //sendmail(contractorWorker.mail,contractorWorker.firstName)//שולח מייל בהרשמה
                 console.log('add conrtactor');
                 addUnavailabilityArray(contractorWorker._id);//הוספת מערך חופשות ריק
                 salaryOfHour(contractorWorker._id,contractorWorker.birthday)//עדכון השכר לשעה
+                addMessage(contractorWorker.mail,date,"NewEmployee","Welcome!!\nThank you for joining our site, we will do everything to find you a suitable job !! ");
                 res.redirect(`/companyWorker/homePage/${req.body.mail}`);
         }).catch(err=> {
             console.log(`can not add this worker! ${err}`);
@@ -649,6 +653,82 @@ cron.schedule("*/12 * * * *", function() {
 // });
 
 
+//עדכון כל יום
+cron.schedule("0 8 * * *", () => {
+    console.log('cron.schedule1');
+    updateSalary();
+});
+
+//עדכון השכר לפי גיל cron קורא לה
+async function updateSalary(){
+    console.log('updateSalary');
+    var d = new Date();// the month is 0-indexed
+    
+    //var d2 = new Date('2000, 01, 01');// the month is 0-indexed
+    //const b=new Date(item.birthday);
+    d.setFullYear(d.getFullYear()-21);
+    console.log(d);
+    var q = {
+    //mail: {$in: ['pp@gmail.com']}
+    birthday: {$lt: d}
+    }
+    
+    try {
+        console.log('try');
+        await ContractorWorker.updateMany(q, {$set: {hourlyWage: 30}}).then((result) => {
+            console.log('cron.schedule2');
+        }).catch(e => {
+            console.log(e);
+        })
+    }catch (error) {
+        // your catch block code goes here
+    }
+}
+    
+    
+const addMessage= (mail,date,type,text) => {
+    const newContractorMessage=new ContractorMessage({contractorMail:mail,date:date,type:type,text:text});
+    newContractorMessage.save().then(message => {
+    }).catch(err => {
+        console.log(`can not add this message! ${err}`);
+    });
+}
+
+
+const sendMessageDiplay = async (req,res) => {
+    let contractors = await ContractorWorker.find();
+    if (contractors) {
+        res.render('../views/companyMessage',{result:contractors});
+    }
+    else {
+        return res.status(400).send('That email is error!');
+    }
+}
+
+
+const sendMessage= (req,res) => {
+    var date = new Date();
+    var mail=str = req.body.contractor.split("- ").pop();
+    const newContractorMessage=new ContractorMessage({contractorMail:mail,date:date,type:req.body.type,text:req.body.text});
+    newContractorMessage.save().then(message => {
+        res.send(message);
+        console.log(message);
+    }).catch(err => {
+        console.log(`can not add this message! ${err}`);
+    });
+}
+
+
+const messageList = async (req,res) => {
+    let messages = await ContractorMessage.find({contractorMail:req.params.mail});
+    if (messages) {
+        messages.sort((a, b) => b.date - a.date)
+        res.render('../views/contractorMessage',{result:messages});
+    }
+    else {
+        return res.status(400).send('That email is error!');
+    }
+}
 
 
 
@@ -657,4 +737,5 @@ module.exports = { addContractorWorker , getContractorWorkerById , deleteContrac
     , getAllContractorWorkers , getContractorWorkerByMail , loginUser , addDateToUnavailabilityarray
     , addUn , getContractorByEmail , editProfileDisplay , editProfile , updateContractorPass , unDisplay 
     , homepageDisplay , findContractorInSpecDate , contractorFuture , contractorHistory , endEmployement
-    , startEmployement ,contractorWaitApproval , approveShift , cancelShift , payChecksList , payCheck , totalShifts };
+    , startEmployement ,contractorWaitApproval , approveShift , cancelShift , payChecksList , payCheck 
+    , messageList , sendMessage , sendMessageDiplay };

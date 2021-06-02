@@ -60,7 +60,9 @@ router.get('/cancelShift/:id',contractorWorker.cancelShift);
 router.get('/contractorPaycheckList/:mail',contractorWorker.payChecksList);
 router.get('/contractorPayChecks/:mail/:month',contractorWorker.payCheck);
 
-router.get('/totalShifts',contractorWorker.totalShifts);
+router.get('/contractorMessageList/:mail',contractorWorker.messageList);
+router.post('/sendMessage',contractorWorker.sendMessage);
+router.get('/sendMessageDiplay',contractorWorker.sendMessageDiplay);
 
 module.exports=router
 
