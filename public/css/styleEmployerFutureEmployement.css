@@ -13,7 +13,7 @@
     padding: 10px;
 }
 .back{
-	background: url('images/back3.jpg') no-repeat;
+	background: url('images/back5.png') no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
     margin-top: 0px ;
@@ -93,7 +93,7 @@ content:"";
     bottom: 0;
     height: 3px;
     width: 30px;
-    background: linear-gradient(135deg, #71b7e6,#e6d171);
+    background: linear-gradient(135deg, #060747,#eff871);
 }
 .user-details .input-box input{
     height: 45px;
@@ -108,24 +108,25 @@ content:"";
 }
 .btn {
     margin-right: 0px;
-    background-color: rgb(131, 236, 136);
+    background-color: #9c9c9e;
     color: white;
-    padding: 0.5em 5em;
+    padding: 0.5em 8em;
     text-decoration: none;
     text-transform: uppercase;
+    border-radius: 10px;
     
   }
   
   .btn:hover {
-    background-color: #555;
+    background-color: #454546;
   }
   
   .btn:active {
-    background-color: black;
+    background-color: #9c9c9e;
   }
   
   .btn:visited {
-    background-color: rgb(131, 236, 136);
+    background-color: #9c9c9e;
   }
 
 /* .btn {
@@ -154,7 +155,7 @@ content:"";
 	align-self: center;
 	margin: auto;
 	margin-top: 50px;
-	opacity: 0.7 ;
+	opacity: 0.9 ;
 	background: #fff;
     border:groove rgb(255, 248, 248);
     border-radius: 7px;
