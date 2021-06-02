@@ -9,6 +9,7 @@
 </head>
 
 <body>
+  <div class="back">
   <nav class="navbar">
     <a href="/employer/homePage/<%=employement.employerEmail%>">
         <img class="logo" src="/css/images/logo.PNG">
@@ -50,7 +51,7 @@
             <p><%=contractor.phone%></p>
           </div>
         </div>
-        <br/>
+        <hr>
         <span class="title2">Employement Details</span>
           <div class="user-details">
             <div  >
@@ -67,8 +68,8 @@
             </div>
         
     </div>
-    </br>
     <span class="title2">Opinion On The Emploement</span>
+    <br>
     <textarea rows = "5" cols = "60" name = "description">
    </textarea>
    <br>
@@ -91,6 +92,8 @@
 <input type="hidden" name="employerEmail" id="employerEmail" value="<%=employement.employerEmail%>">
 <input type="hidden" name="myRate" id="myRate" value="0" >
 </form>
+
+</div>
 </body>
 <script> 
   const form=document.getElementById("form");

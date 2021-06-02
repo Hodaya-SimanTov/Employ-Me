@@ -130,18 +130,18 @@ form .user-details .input-box{
 
 form .button{
     height: 39px;
-    width:780px;
+    width:700px;
     margin: 39px 0;
     margin-top: 50px;
 }
 form .button input{
     height: 100%;
-    width: 100%;
+    width: 700px;
     outline: none;
     color: #fff;
     border: none;
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 600px;
     border-radius: 5px;
     letter-spacing: 1px;
     text-align: center;
@@ -154,7 +154,7 @@ form .button input:hover{
     transition: background 0.2s, border 0.2s;
 } */
 .select {
-    width:780px;
+    width:700px;
     height: 40px;
     border-radius: 5px;
 }

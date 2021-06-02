@@ -12,6 +12,13 @@
     align-items: left;
     padding: 10px;
 }
+.back{
+    background: url('images/back3.jpg') no-repeat;
+	background-size: cover;
+	height: 120vh;
+}
+    
+
 .navbar{
 	height: 80px;
 	width: 100%;
@@ -46,11 +53,6 @@
 	border-radius: 2px;
 } 
 
-.back{
-    background: url('images/back4.jpg') no-repeat;
-	background-size: cover;
-	height: 120vh;
-}
 .container{
     max-width: 70%;
     width: 100%;
@@ -60,7 +62,7 @@
     right: 0px;
     align-items: center;
     margin: auto;
-    margin-top: 60px;
+    margin-top: 100px;
     opacity: 0.7 ;
 }
 .container .title{
