@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>  
+    <title>Messages</title>
+    <link rel="stylesheet" type="text/css" href="/css/styleLogin.css"/>
+    
+</head>
+<body>
+  <div class="container">
+    <div class="title">Messages</div>
+    <br />
+    <form class="modal-content animate" id="form" name="form" action="/contractorWorker/sendMessage/<%=mail%>" method="POST">       
+        
+  <div class="user-details">
+    <span class="details">Write a message to the employee</span>
+    <div  class="input-box"  >
+    <span class="details">Select an employee</span>
+    <select id="contractor" name="contractor" class="select" >
+    <%
+    if(result.length!=0) {
+        var i=1;
+        var d=new Date();
+    result.forEach(function(contractor){
+    %>
+    <option ><%=contractor.firstName%> <%=contractor.lastName%> - <%=contractor.mail%></option>
+    <% i++;}) %>
+    <% } else{ %>
+        <div class="h3"><h3>No contractor found ..</h3> </div>
+    <% } %>
+     </select> 
+    </div>
+    <div  class="input-box"  >
+      <span class="details">Message type</span>
+      <select id="type" name="type" class="select" >
+        <option value="EmptyShift">No shift reported</option>
+        <option value="ErrorReported">Error reporting shift</option>
+        <option value="Outstanding">Outstanding this month</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+    <div  class="input-box"  >
+        <span class="details">Text</span>
+        <textarea id="text" rows = "5" cols = "60" name = "text"></textarea>       
+
+      </div>
+  <div>
+    
+    </div>
+  </div>
+  <br/>
+    <div class="button">
+      <input  value="Send" form="form" onclick="message()"  readonly>
+    </div>
+   
+  </div>
+ 
+  </form>
+
+</div>
+</body>
+<script >
+  
+    
+    function message(){  
+        document.getElementById("form").submit();     
+    }
+  </script>
+</html>

@@ -1,0 +1,142 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;  
+}
+body{
+    display: flex;
+    height: 1000px;
+    justify-content: left;
+    align-items: left;
+    padding-left: 100px;
+    padding-top: 20px;
+    padding-bottom: 150px;
+}
+.container{
+    max-width: 1000px;
+    width: 700px;
+    height: 1000px;
+    background: #fff;
+    padding: 4px 10px;
+    border-radius: 5px;
+    right: 0px;
+    border:groove rgb(26, 2, 112);    
+}
+.title{
+    font-size: 30px;
+    font-weight: bold;
+    padding-left: 160px;
+    position: relative;
+}
+.container .details{
+    font-size: 15px;
+    font-weight: bold;
+    padding-left: 5px;
+    position: relative;
+    text-align: center;
+}
+
+.title::before{
+    content: '';
+    position: absolute;
+    left: 30;
+    bottom: 0;
+    height: 3px;
+    width: 50px;
+    background: linear-gradient(135deg, #71b7e6,#e6d171);
+}
+
+
+.container .input-box1{
+    width: 300px;
+    height: 100px;
+    background: #fff;
+    padding: 10px 10px;
+    border-radius: 5px;
+    right: 0px;
+    border:groove rgb(26, 2, 112);
+    border-width: 1px;
+}
+
+.container .input-box2{
+    width: 300px;
+    height: 100px;
+    background: #fff;
+    padding: 10px 10px;
+    border-radius: 5px;
+    right: 0px;
+    border:groove rgb(26, 2, 112);
+    border-width: 1px;
+}
+
+.container .input-box3{
+    width: 400px;
+    height: 60px;
+    background: #fff;
+    padding: 10px 10px;
+    border-radius: 5px;
+    right: 0px;
+}
+
+.container .input-box3 .name{
+    font-size: 25px;
+    font-weight: 0px;
+    padding-left: 5px;
+    position: relative;
+    text-align: center;   
+}
+
+.container .input-box4{
+    width: 830px;
+    height: 150px;
+    background: #fff;
+    padding: 10px 10px;
+    border-radius: 5px;
+    right: 30px;
+    border:groove rgb(26, 2, 112);
+    border-width: 1px;
+}
+
+.container .input-box5{
+    width: 300px;
+    height: 300px;
+    background: #fff;
+    padding: 10px 10px;
+    border-radius: 5px;
+    border:groove rgb(26, 2, 112);
+    border-width: 1px;
+}
+
+.container .input-box6{
+    width: 300px;
+    height: 300px;
+    background: #fff;
+    padding: 10px 10px;
+    right: 30px;
+    border-radius: 5px;
+    border:groove rgb(26, 2, 112);
+    border-width: 1px;
+}
+
+.container .input-box7{
+    width: 350px;
+    height: 60px;
+    background: #fff;
+    padding: 10px 10px;
+    border-radius: 5px;
+    right: 0px;
+    border:groove rgb(26, 2, 112);
+    border-width: 1px;
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Paycheck</title>
+        <link rel="stylesheet" href="/css/styleContractorPayList.css">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    </head>
+    <style>
+        .text-center-e{
+            display: true;
+        }
+    </style>
+    <body>
+        <div class="container">  
+            <div class="row col-md-6 col-offset-2 custyle">
+                <div class="page-header">
+                    <div class="title"><h2><small class="pull-right"></small>Paychecks</h2></div>
+                </div>
+                <%
+                if(result.length!=0) {
+                    var i=1;
+                result.forEach(function(paycheck){
+                %>
+                <div class="container "> 
+                    <div  class="input-box4 row d"  >
+                        <div class="col-4">                          
+                          <label class="details">Month : </label>
+                            <span ><%=paycheck.month %> / <%=paycheck.year %></s>
+                          <hr>
+                          <label class="details">Net salary : </label>
+
+                            <span ><%= paycheck.totalSalary %> NIS </span>
+                          <br/>        
+                        </div >
+                        <div class="col-4">
+                            <a class='btn'  href="/contractorWorker/contractorPayChecks/<%=paycheck.contractorMail%>/<%=paycheck.month%>" ><p class="p">SHOW</p></a>
+                        </div>   
+                    </div>
+                </div> 
+                <% i++;}) %>
+                    <% } else{ %>
+                        <div class="h3"><h3>No paychecks found ..</h3> </div>
+                    <% } %>
+            </div>
+        </div>
+    </body>
+    <script >
+        
+    </script>
+</html>
