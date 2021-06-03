@@ -1,9 +1,14 @@
 const nodemailer=require('nodemailer')
 const jwt = require('jsonwebtoken');
-const ContractorWorker=require('../model/contractorWorker');
+//const ContractorWorker=require('../model/contractorWorker');
 const Unavailability=require('../model/unavailabilityContractor');
 //const bcrypt = require('bcrypt');
 const { CompanyWorker, validate,validateEditCompanyWorker } = require('../model/companyWorker');
+const {Employement, validateEmployement} = require('../model/employement');
+const { ContractorWorker, validateContractor,validateEditContractoWorker } = require('../model/contractorWorker');
+
+const { Employer, validate2,validateEditEmployer } = require('../model/employer');
+
 //const {Employement,validateEmployement}=require('../model/employement');
 const express = require('express');
 const router = express.Router();
@@ -109,7 +114,9 @@ const editProfileDisplay = async (req, res) => {
 const editProfile = async (req, res) => {
     let companyWorker = await CompanyWorker.findOneAndUpdate({mail: req.params.mail}, req.body, {new: true });
     res.redirect(`/companyWorker/homePage/${req.params.mail}`);
-
+    console.log('infoCompanyWorker1/1');
+    infoCompanyWorker();
+    console.log('infoCompanyWorker1/2');
 
 }
 
@@ -125,5 +132,186 @@ const updateCompanyWorkerPass = (req,res) => {
     })
 
 }
+//  פונקציה שמחזירה עובדים שעומדים בסינונים ופנויים בתאריך
+const searchContractorByFields = async(req, res) => {
+   // const avilableConsArr = await ContractorAvialableDate(req.body.employmentDate);
+    var result;
+    var filteredCons = [];
+    if(req.body.service == 'select') {
+        if(req.body.scope == 'select') {
+            if(req.body.experience == 'select') {
+                try {
+                    filteredCons = await ContractorWorker.find( {occupationArea: req.body.occupation})
+                    result = await availableCons(filteredCons);
+                    res.render('../views/companyWorkerSearchResult', {result:result});
+                }
+                catch(err) {
+                    console.log(err);
+                }
+            }
+            else {
+                try {
+                    filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation, experienceField:req.body.experience})
+                    result = await availableCons(filteredCons);
+                    res.render('../views/companyWorkerSearchResult', {result:result});
+                }
+                catch(err) {
+                    console.log(err);
+                }
+            }
+        }
+        else {
+            if(req.body.experience == 'select') {
+                try {
+                    filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation, scopeWork:req.body.scope})
+                    console.log(filteredCons);
+                    result = await availableCons(filteredCons);
+                    res.render('../views/companyWorkerSearchResult', {result:result});
+                }
+                catch(err) {
+                    console.log(err);
+                }
+            }
+            else {
+                try {
+                    filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation, scopeWork:req.body.scope, experienceField:req.body.experience})
+                    result = await availableCons(filteredCons);
+                    res.render('../views/companyWorkerSearchResult', {result:result});
+                }
+                catch(err) {
+                    console.log(err);
+                }
+            }
+        }
+    }
+    else {
+        if(req.body.scope == 'select') {
+            if(req.body.experience == 'select') {
+                try {
+                    filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation ,serviceArea:req.body.service})
+                    result = await availableCons(filteredCons);
+                    res.render('../views/companyWorkerSearchResult', {result:result});
+                }
+                catch(err) {
+                    console.log(err);
+                }
+            }
+            else {
+                try {
+                    filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation, serviceArea:req.body.service, experienceField:req.body.experience})
+                    result = await availableCons(filteredCons);
+                    res.render('../views/companyWorkerSearchResult', {result:result});
+                }
+                catch(err) {
+                    console.log(err);
+                }
+            }
+        }
+        else {
+            if(req.body.experience == 'select') {
+                try {
+                    filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation, serviceArea:req.body.service, scopeWork:req.body.scope})
+                    result = await availableCons(filteredCons);
+                    res.render('../views/companyWorkerSearchResult',{result:result});
+                }
+                catch(err) {
+                    console.log(err);
+                }
+            }
+            else {
+                try {
+                    filteredCons = await ContractorWorker.find( {occupationArea:req.body.occupation, serviceArea:req.body.service, scopeWork:req.body.scope, experienceField:req.body.experience})
+                    result = await availableCons(filteredCons);
+                    res.render('../views/companyWorkerHomePage', {result:result});
+                }
+                catch(err) {
+                    console.log(err);
+                }
+            }
+        }
+    }
+}
 
-module.exports={addCompanyWorker,companyExists,deleteCompanyWorkerById,getCompanyWorkerByEmail,resetPassword,editProfileDisplay,editProfile,updateCompanyWorkerPass}
+const bookContractorDisplay = async (req, res) => {
+    let contractor = await ContractorWorker.findById(req.params.idConstractor)
+    let employer = await Employer.find()
+    /*if (!contractor || !employer) {
+        return res.status(400).send('That error in system');
+    }*/
+
+    res.render('../views/bookContractor', {contractor: contractor, date: req.params.date, companyName: employer.companyName});
+
+}
+const bookContractor = async (req, res) => {
+    let contractor = await ContractorWorker.findById(req.params.idConstractor)
+    //let employer = await Employer.findOne({email: req.params.emailEmployer})
+    /*if (!contractor || !employer) {
+        return res.status(400).send('That error in system');
+    }*/
+
+        let employement = new Employement({ constructorEmail: contractor.mail, date: req.params.date, jobScope: req.body.numBusinessHours, status: 'waiting for approval',hourlyWage: contractor.hourlyWage, rating: 0, feedback:'',occupationArea: contractor.occupationArea});
+        await employement.save();
+        // console.log({id: contractor.unavailability,date:req.params.date})
+        ContractorWorkeController.addDateToUnavailabilityarray(contractor.unavailability, req.params.date,req.params.date);
+        res.redirect(`/companyWorker/homePage/${req.params.mail}`);
+
+}
+
+// פונקציה שמציבה במערך את המייל ומספר ההעסקות של כל מעסיק
+const infoCompanyWorker = async() => {
+    try {
+        console.log('infoCompanyWorker');
+        var arrMail = [];
+        var arrNum = [];
+        var i = 0;
+        var j = 0;
+        //const d = new Date(date)
+        //const myDate = new Date(d.getFullYear(), d.getMonth(), d.getUTCDate() + 1)
+        let employers = await Employer.find();
+        //console.log(employers[0].email);
+        //console.log(employers.length);
+        for (i = 0; i < employers.length; i++) {
+            arrMail[i] = employers[i].email;
+            let employements = await Employement.find();
+            arrNum[i]=0;
+            for (j = 0; j < employements.length; j++) {
+                //console.log(array[i]);
+                if (arrMail[i] == employements[j].employerEmail) {
+                    arrNum[i] = arrNum[i]+1;
+                    //console.log(array2[i]);
+                }
+            }
+        }
+        res.render('../views/companyWorkerMenuEmployers', {arrMail:arrMail,arrNum:arrNum});
+    }
+    catch(err) {
+        console.log(err);
+    }
+    console.log('infoCompanyWorker2');
+    //console.log(array[0]);
+}
+
+const allEmployer = async (req,res) => {
+    try {
+        console.log(req.params.mail);
+        let fEmployment = await Employer.find();
+        res.render('../views/companyWorkerMenuEmployers', {fEmployment:fEmployment,mailCompany:req.params.mail });
+    }
+    catch(err) {
+        console.log(err);
+    }
+}
+const allCompany = async (req,res) => {
+    try {
+        console.log(req.params.mail);
+        let fEmployment = await ContractorWorker.find();
+        res.render('../views/companyWorkerMenuContractor', {fEmployment:fEmployment,mailCompany:req.params.mail });
+    }
+    catch(err) {
+        console.log(err);
+    }
+}
+
+
+
+module.exports={addCompanyWorker,companyExists,deleteCompanyWorkerById,getCompanyWorkerByEmail,resetPassword,editProfileDisplay,editProfile,updateCompanyWorkerPass,searchContractorByFields,bookContractor,bookContractorDisplay,allEmployer,allCompany}

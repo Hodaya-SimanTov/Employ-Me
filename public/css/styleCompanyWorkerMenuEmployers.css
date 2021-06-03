@@ -137,6 +137,15 @@ font-family: 'Roboto', sans-serif;
     text-align: center;
     border: 2px solid #e6d171;
 }
+table {
+    border: 1px solid;
+}
+
+th,
+td {
+    border: 1px solid;
+    min-width: 100px;
+}
 form .button{
     margin-left: -800px;
     text-align: center;

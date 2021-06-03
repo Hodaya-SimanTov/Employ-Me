@@ -401,7 +401,6 @@ const infoEmployment = async (req, res) => {
     catch(err) {
         console.log(err);
     }
-    
 }
     
 module.exports = {addEmployer, getEmployerByEmail, editProfileDisplay, editProfile, searchContractorByFields, ContractorAvialableDate, availableCons, resetPassword, resetPasswordDisplay, bookContractorDisplay, bookContractor, confirmEmploymentsDisplay, historyEmployments, confirmEmployments, terminationOfEmploymentDisplay, addFavoriteConToArray, infoEmployment,futureEmployement};

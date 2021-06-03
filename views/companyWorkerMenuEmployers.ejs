@@ -1,44 +1,98 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <title>Menu Employers</title>
-    <link rel="stylesheet"  href="/css/styleCompanyWorkerMenuEmployers.css">
+    <title>All Employers</title>
+    <link rel="stylesheet" href="/css/styleEmployerFutureEmployement.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/10e7a38072.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<form id="homePageCompanyManager">
-    <div class="wrapper">
-        <nav class="navbar">
-            <img class="logo" src="/css/images/logo.PNG" >
-            <ul>
-                <li><a href="/companyWorker/editProfile/<%=mail%>" class="active">My Profile</a> </li>
-                <li><a href="/companyWorker/menuEmployers/<%=mail%>">Employers</a> </li>
-                <li><a href="/companyWorker/menuContractorWorker/<%=mail%>">Contractor Workers</a> </li>
-                <li><a href="#">Statistics</a> </li>
-                <li><a href="#">Messages</a> </li>
-                <li><a href="#">Log Out</a> </li>
-            </ul>
-        </nav>
-        <div class="serviceArea">
-            <lable>Menu for performing employer operations</lable>
+<div class="back">
+    <nav class="navbar">
+        <a href="/companyWorker/homePage/<%=mailCompany%>">
+            <img class="logo" src="/css/images/logo.PNG">
+        </a>
+        <ul>
+            <li><a href="/companyWorker/editProfile/<%=mailCompany%>" class="active">My Profile</a> </li>
+            <li><a class="active" href="/companyWorker/allEmployer/<%=mailCompany%>">Employers</a> </li>
+            <li><a class="active" href="/companyWorker/allCompany/<%=mailCompany%>">Contractor</a> </li>
+            <li><a href="#">Statistics</a> </li>
+            <li><a href="#">Messages</a> </li>
+            <li><a href="#">Log Out</a> </li>
+        </ul>
+    </nav>
+    <div class=box2>
+        <div class="title">All Employers
+            <small class="pull-right"><%= fEmployment.length %></small>
         </div>
-        <div class="serviceArea1">
-            <div class="button" >
-                <input type="submit" value="Add employer" onclick="addEmp()"  href="/companyWorker/styleCompanyWorkerMenuEmployers" readonly>
-            </div>
-        </div>
-        <div class="serviceArea2">
-             <div class="button">
-                <input type="submit" value="Delete employer" target="_blank"   href="/companyWorker/styleCompanyWorkerMenuEmployers" readonly>
-            </div>
-        </div>
-    </div>
-</form>
+        <%
+        if(fEmployment.length!=0) {
+            var i=1;
+        fEmployment.forEach(function(worker){
+        %>
+            <div class="container ">
+                <div class="user-details d">
+                    <div class="input-box">
+                        <label class="details">mail:</label>
+                        <span class="input" ><%= worker.email %></span>
+                    </div>
+                    <div class="input-box" >
+                        <label class="details">companyName: </label>
+                        <span class="input"><%= worker.companyName %></span>
+                    </div>
+                    <div class="input-box" >
+                        <a class="btn" href="/employer/editProfile/<%=worker.email%>">BOOK</a>
+                    </div>
+                </div>
 
+            </div>
+        <% i++;}) %>
+        <% } else{ %>
+            <br>
+            <br>
+            <div class="h3"><h3>Sorry, No Future Employement ..</h3> </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        <% } %>
+    </div>
+    <br>
+    <br>
+    <br>
+</div>
 </body>
+
+
 <script>
-    function addEmp() {
-        window.open("/employer/signUp", "_blank");
+
+    function  employerEditProfile(){
+        console.log('fEmployment.length')
+
+        var a=[];
+        for(var i=0;i<fEmployment.length;i++)
+        {
+            a[i]=fEmployment.email
+        }
+        window.open("/employer/editProfile/${worker.email}", "_blank");
+
     }
 </script>
 </html>
