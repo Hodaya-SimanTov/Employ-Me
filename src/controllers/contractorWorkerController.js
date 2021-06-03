@@ -15,6 +15,7 @@ const bcrypt = require('bcrypt');
 var cron = require('node-cron');
 var shell = require('shelljs');
 const MailMessage = require('nodemailer/lib/mailer/mail-message');
+const { func } = require('joi');
 
 //חישוב שכר לפי גיל
 const salaryOfHour = function (contractor_id,birthday) {
@@ -731,6 +732,89 @@ const messageList = async (req,res) => {
     }
 }
 
+const jobRateDisplay = async (req,res) => {
+    //חישוב ממוצע גלובלי
+    let i,j,ratGlobal=0, rat = 0, sum = 0 ,month = 0;   
+    const employements = await Employement.find({constructorEmail:req.params.mail, status:'close'});
+    if(employements) {
+        for(i=0;i<employements.length;i++){
+            if(employements[i].rating != 0){
+                rat+=1;
+                sum+=employements[i].rating;
+            }
+        }
+        if(rat != 0)
+            ratGlobal = sum/rat;
+    }
+    else{err => { console.log(err); }}  
+    
+
+    var date = new Date();
+    var arrMonth = [];
+    //נמצא את כמות החודשים שהעובד בחברה
+    const pays = await ContractorPaycheck.find({contractorMail:req.params.mail});
+    if(pays) {
+        month = pays.length;
+        for(j=0;j<month;j++){//לכל חודש נחשב ממוצע
+            const employements = await Employement.find({constructorEmail:req.params.mail, status:'close'});
+            if(employements) {
+                for(i=0;i<employements.length;i++){
+                    if(employements[i].rating != 0 && employements[i].date.getMonth() == month ){
+                        rat+=1;
+                        sum+=employements[i].rating;
+                    }            
+                }     
+            }else{err => { console.log(err); }}
+            arrMonth[j] = sum/rat;
+            // arrMonth[j]= jobRatePerMonth(req.params.mail,date.getMonth()+1-i);
+        }
+    }
+    else{err => { console.log(err); }}
+
+    console.log("g: "+ratGlobal);
+    console.log("arr: "+arrMonth);
+    res.render('../views/contractorJobRate',{mail:req.params.mail,ratGlobal:ratGlobal,arrMonth:arrMonth});
+}
+
+const jobRateGlobal = async (mail) => {
+    var i;
+    let rat = 0;
+    let sum = 0;
+    let rating = 0;
+    const employements = await Employement.find({constructorEmail:mail, status:'close'});
+    if(employements) {
+        for(i=0;i<employements.length;i++){
+            if(employements[i].rating != 0){
+                rat+=1;
+                sum+=employements[i].rating;
+            }
+        }
+        rating = sum/rat;   
+        console.log("ppp: "+rating);      
+    }else{err => { console.log(err); }}
+    return rating;   
+    
+}
+
+const jobRatePerMonth = async (mail,month) => {
+    var i;
+    let rat = 0;
+    let sum = 0;
+    let avgRating = 0;
+    const employements = await Employement.find({constructorEmail:mail, status:'close'});
+    if(employements) {
+        for(i=0;i<employements.length;i++){
+            if(employements[i].rating != 0 && employements[i].date.getMonth() == month ){
+                rat+=1;
+                sum+=employements[i].rating;
+            }            
+        }
+        avgRating = sum/rat;
+        console.log(avgRating);
+    return avgRating;     
+    }else{err => { console.log(err); }}
+}
+
 
 
 
@@ -739,4 +823,4 @@ module.exports = { addContractorWorker , getContractorWorkerById , deleteContrac
     , addUn , getContractorByEmail , editProfileDisplay , editProfile , updateContractorPass , unDisplay 
     , homepageDisplay , findContractorInSpecDate , contractorFuture , contractorHistory , endEmployement
     , startEmployement ,contractorWaitApproval , approveShift , cancelShift , payChecksList , payCheck 
-    , messageList , sendMessage , sendMessageDiplay };
+    , messageList , sendMessage , sendMessageDiplay , jobRateDisplay };
