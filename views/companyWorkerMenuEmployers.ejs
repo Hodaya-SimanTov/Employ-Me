@@ -18,10 +18,28 @@
             <li><a class="active" href="/companyWorker/allEmployer/<%=mailCompany%>">Employers</a> </li>
             <li><a class="active" href="/companyWorker/allCompany/<%=mailCompany%>">Contractor</a> </li>
             <li><a href="#">Statistics</a> </li>
-            <li><a href="#">Messages</a> </li>
+            <li><a href="/contractorWorker/sendMessageDiplay/<%=mailCompany%>">Messages</a> </li>
             <li><a href="#">Log Out</a> </li>
         </ul>
     </nav>
+    <div>
+        <div class="input-box">
+            <lable class="menu">Menu for performing contractor worker operations</lable>
+        </div>
+    </div>
+    <div class="input-box">
+        <lable>    </lable>
+        <div class="button" >
+            <input type="btn" value="Add contractor" onclick="addEmp()"  href="/companyWorker/styleCompanyWorkerMenuEmployers" readonly>
+        </div>
+    </div>
+    <div class="input-box">
+        <lable>   </lable>
+        <div class="button">
+            <input type="btn" value="Delete contractor" target="_blank"  href="/companyWorker/styleCompanyWorkerMenuEmployers" readonly>
+        </div>
+    </div>
+
     <div class=box2>
         <div class="title">All Employers
             <small class="pull-right"><%= fEmployment.length %></small>
@@ -42,7 +60,7 @@
                         <span class="input"><%= worker.companyName %></span>
                     </div>
                     <div class="input-box" >
-                        <a class="btn" href="/employer/editProfile/<%=worker.email%>">BOOK</a>
+                        <a class="btn" href="/employer/homePage/<%=worker.email%>">BOOK</a>
                     </div>
                 </div>
 
@@ -82,7 +100,9 @@
 
 
 <script>
-
+    function addEmp() {
+        window.open("/employer/signUp", "_blank");
+    }
     function  employerEditProfile(){
         console.log('fEmployment.length')
 
