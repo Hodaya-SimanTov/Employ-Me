@@ -6,7 +6,7 @@ router.get('/signUp', (req, res) => {
     res.render('../views/employerSignUp1')
 });
 router.get('/homePage/:email', (req, res) => {
-    res.render('../views/employerHomePage', {email:req.params.email})
+    res.render('../views/employerHomePage1', {email:req.params.email})
 });
 
 router.get('/resetPassword/:email', employer.resetPasswordDisplay);

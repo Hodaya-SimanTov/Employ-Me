@@ -33,7 +33,7 @@
 	transition: .4s;
 }
 .navbar ul li a.active, .navbar ul li a:hover{
-	background: rgb(241, 230, 67);
+	background: rgb(247, 250, 94);
 	border-radius: 2px;
 } 
 
