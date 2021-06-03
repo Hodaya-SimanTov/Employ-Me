@@ -13,7 +13,7 @@
     padding: 10px;
 }
 .back{
-    background: url('images/back3.jpg') no-repeat;
+    background: url('images/back5.png') no-repeat;
 	background-size: cover;
 	height: 120vh;
 }
@@ -63,7 +63,7 @@
     align-items: center;
     margin: auto;
     margin-top: 100px;
-    opacity: 0.7 ;
+    opacity: 0.8 ;
 }
 .container .title{
     font-size: 30px;
@@ -77,7 +77,7 @@
     bottom: 0;
     height: 3px;
     width: 30px;
-    background: linear-gradient(135deg, #71b7e6,#85067e);
+    background: linear-gradient(135deg, #060747,#eff871);
 }
 .container form .user-details{
     display: flex;
@@ -108,10 +108,10 @@ form .user-details .input-box{
     border-radius: 5px;
     text-align: center;
     letter-spacing: 1px;
-    background-color: #71b7e6;   
+    background-color: #9c9c9e;   
 }
 .user-details .button1 input:hover{
-    background-color: #813c7e;
+    background-color: #454546;
 }
 .user-details .input-box .details{
     display: block;
@@ -147,7 +147,7 @@ form .user-details .input-box{
 }
 
 .user-details .input-box input:focus{
-    border-color: #813c7e
+    border-color: #f5e506
 }
 
 form .button{
@@ -165,10 +165,10 @@ form .button input{
     border-radius: 5px;
     letter-spacing: 1px;
     text-align: center;
-    background: linear-gradient(135deg, #71b7e6, #85067e)
+    background: linear-gradient(135deg, #9c9c9e, #9c9c9e)
 }
 form .button input:hover{
-    background: linear-gradient(-135deg, #71b7e6, #85067e)
+    background: linear-gradient(-135deg, #454546, #454546)
 }
 /* .input{
     transition: background 0.2s, border 0.2s;
