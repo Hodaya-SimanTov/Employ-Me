@@ -33,6 +33,7 @@ router.post('/companyWorkerBookContractor/:idConstractor/:date', companyWorker.b
 
 router.get('/allEmployer/:mail',companyWorker.allEmployer);
 router.get('/allCompany/:mail',companyWorker.allCompany);
+router.get('/info/:mail', companyWorker.infoCompany);
 
 
 module.exports=router

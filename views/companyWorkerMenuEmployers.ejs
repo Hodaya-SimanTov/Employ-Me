@@ -42,56 +42,39 @@
 
     <div class=box2>
         <div class="title">All Employers
-            <small class="pull-right"><%= fEmployment.length %></small>
+            <small class="pull-right"><%= employers.length%></small>
         </div>
-        <%
-        if(fEmployment.length!=0) {
-            var i=1;
-        fEmployment.forEach(function(worker){
-        %>
-            <div class="container ">
-                <div class="user-details d">
-                    <div class="input-box">
-                        <label class="details">mail:</label>
-                        <span class="input" ><%= worker.email %></span>
-                    </div>
-                    <div class="input-box" >
-                        <label class="details">companyName: </label>
-                        <span class="input"><%= worker.companyName %></span>
-                    </div>
-                    <div class="input-box" >
-                        <a class="btn" href="/employer/homePage/<%=worker.email%>">BOOK</a>
-                    </div>
-                </div>
+        <div>
+        <div>
+        <div>  <label class="l">Sort by: </label></div>
+            <div>
+                <select id="category" class="icon-menu" onchange="sortByWage()">
+                    <option value="select" >Select</option>
+                    <option value="High to low" >High to low</option>
+                    <option value="low to High">low to High</option>
 
-            </div>
-        <% i++;}) %>
-        <% } else{ %>
-            <br>
-            <br>
-            <div class="h3"><h3>Sorry, No Future Employement ..</h3> </div>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-        <% } %>
+                </select>
+        </div>
     </div>
+            <table class="table table-striped custab" id="table">
+            <%
+        if(employers.length!=0 && arrNum.length!=0) {
+            var i=0;
+        employers.forEach(function(worker){
+        %>
+        <tr class="line">
+            <td><div class="input-box"><span class="input" ><%= worker.email %></span></div></td>
+            <td><div class="input-box"><span class="input"><%= worker.companyName %></span></div></td>
+            <td class="wage"><%= arrNum[i] %></td>
+            <td><div class="input-box"><a class="btn" href="/employer/homePage/<%=worker.email%>">Actions</a></div></td>
+        </tr>
+        <% i++;}) %>
+                <% } else{ %>
+                    <h3>No shifts found ..</h3>
+                <% } %>
+                <!-- <button class="sort" data-sort="status">sort by date</button> -->
+            </table>
+        </div>
     <br>
     <br>
     <br>
@@ -100,16 +83,50 @@
 
 
 <script>
+    function sortByWage() {
+        var x = document.getElementById("category").selectedIndex;
+        //alert(x);
+     if(x==1) {
+         var list, i, j, line, wage, temp1, temp2;
+         list = document.getElementById("table");
+         wage = list.getElementsByClassName("wage");
+         line = list.getElementsByClassName("line");
+         for (j = 0; j < (line.length - 1); j++) {
+             for (i = 0; i < (line.length - 1); i++) {
+                 temp1 = parseInt(wage[i].innerHTML, 10);
+                 temp2 = parseInt(wage[i + 1].innerHTML, 10);
+                 if (temp1 < temp2) {
+                     line[i].parentNode.insertBefore(line[i + 1], line[i]);//החלפת השורות
+                 }
+             }
+         }
+     }
+        if(x==2) {
+            var list, i, j, line, wage, temp1, temp2;
+            list = document.getElementById("table");
+            wage = list.getElementsByClassName("wage");
+            line = list.getElementsByClassName("line");
+            for (j = 0; j < (line.length - 1); j++) {
+                for (i = 0; i < (line.length - 1); i++) {
+                    temp1 = parseInt(wage[i].innerHTML, 10);
+                    temp2 = parseInt(wage[i + 1].innerHTML, 10);
+                    if (temp1 > temp2) {
+                        line[i].parentNode.insertBefore(line[i + 1], line[i]);//החלפת השורות
+                    }
+                }
+            }
+        }
+    }
     function addEmp() {
         window.open("/employer/signUp", "_blank");
     }
     function  employerEditProfile(){
-        console.log('fEmployment.length')
+        console.log('employers.length')
 
         var a=[];
-        for(var i=0;i<fEmployment.length;i++)
+        for(var i=0;i<employers.length;i++)
         {
-            a[i]=fEmployment.email
+            a[i]=employers.email
         }
         window.open("/employer/editProfile/${worker.email}", "_blank");
 
