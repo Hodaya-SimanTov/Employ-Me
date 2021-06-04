@@ -30,13 +30,13 @@
     <div class="input-box">
         <lable>    </lable>
         <div class="button" >
-            <input type="btn" value="Add contractor" onclick="addEmp()"  href="/companyWorker/styleCompanyWorkerMenuEmployers" readonly>
+            <input type="btn" value="Add Employer" onclick="addEmp()"  href="/companyWorker/styleCompanyWorkerMenuEmployers" readonly>
         </div>
     </div>
     <div class="input-box">
         <lable>   </lable>
         <div class="button">
-            <input type="btn" value="Delete contractor" target="_blank"  href="/companyWorker/styleCompanyWorkerMenuEmployers" readonly>
+            <input type="btn" value="Delete Employer" onclick="delEmp()" target="_blank"  href="/companyWorker/styleCompanyWorkerMenuEmployers" readonly>
         </div>
     </div>
 
@@ -46,7 +46,7 @@
         </div>
         <div>
         <div>
-        <div>  <label class="l">Sort by: </label></div>
+        <div>  <label class="l">Sort the number of employees at the employer: </label></div>
             <div>
                 <select id="category" class="icon-menu" onchange="sortByWage()">
                     <option value="select" >Select</option>
@@ -120,6 +120,16 @@
     function addEmp() {
         window.open("/employer/signUp", "_blank");
     }
+    function delEmp() {
+
+        const retVal = prompt("Enter the employee email you want to delete : ", "here");
+        const firstname1= document.getElementById("firstname1").submit();
+        const firstNameValue=firstname1.value.trim();
+
+        console.log("dsds");
+        console.log("dsds" +  formId);
+        }
+
     function  employerEditProfile(){
         console.log('employers.length')
 

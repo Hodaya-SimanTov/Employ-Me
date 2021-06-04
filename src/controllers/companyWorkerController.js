@@ -426,6 +426,14 @@ const infoCompany = async (req, res) => {
         console.log(err);
     }
 }
-
-
+/*
+//מחיקת עובד
+const deleteContractorWorkerById = (req,res) => {
+    ContractorWorker.findByIdAndDelete(req.params.id).then(contractorWorker => {
+        res.send('success to dalete');
+    }).catch(err => {
+        console.log(`can not delete this worker! ${err}`);
+    });
+}
+*/
 module.exports={addCompanyWorker,companyExists,deleteCompanyWorkerById,getCompanyWorkerByEmail,resetPassword,editProfileDisplay,editProfile,updateCompanyWorkerPass,searchContractorByFields,bookContractor,bookContractorDisplay,allEmployer,allCompany,infoCompany}
