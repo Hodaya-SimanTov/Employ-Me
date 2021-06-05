@@ -14,6 +14,7 @@
         <title>Job Rate</title>
     </head>
     <body>
+        <%var m=["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]%> 
         <div class="container-fluid">
             <div class="row page-header r20">                    
                 <div class="title"><h1><small class="pull-right"></small>My Job Rate</h1></div>                    
@@ -27,107 +28,87 @@
                             <div class="card__inner">
                                 <p class="text-primary-p">Global Ratings Average -</p>
                             </div>
-                            <%if(ratGlobal == 0){%>
+                            <%if(parseInt(ratGlobal, 10) == 0){%>
                                 <span class="font-bold text-title"> No ratings yet </span>
-                            <%}if(ratGlobal == 1){%>                            
+                            <%}if(parseInt(ratGlobal, 10) == 1){%>                            
                                 <%- include ('contractorStars/star1.ejs')%>
-                            <%}if(ratGlobal == 2){%>                            
+                            <%}if(parseInt(ratGlobal, 10) == 2){%>                            
                                 <%- include ('contractorStars/star2.ejs')%>
-                            <%}if(ratGlobal == 3){%>                            
+                            <%}if(parseInt(ratGlobal, 10) == 3){%>                            
                                 <%- include ('contractorStars/star3.ejs')%>
-                            <%}if(ratGlobal == 4){%>                            
+                            <%}if(parseInt(ratGlobal, 10) == 4){%>                            
                                 <%- include ('contractorStars/star4.ejs')%>
-                            <%}if(ratGlobal == 5){%>                            
-                                <%- include ('contractorStars/star5.ejs')%>        
+                            <%}if(parseInt(ratGlobal, 10) == 5){%>                            
+                                <%- include ('contractorStars/star5.ejs')%>
+                            <%}%>            
                         </div>
                     </div>
                     <div class="row r10 title2">Average ratings per month</div> 
-                    <div class="row r70">   
-                        <div class="row r">                              
+                    <div class="row r70">                        
+                        <div class="row r">
+                            <%if(arrMonth.length!=0) {
+                                var i=1;
+                                var d=new Date();
+                                arrMonth.forEach(function(ratMonth){
+                            %>                              
                             <div class="col">
-                                <div class="card2">
-                                    <i class="fa fa-calendar fa-2x text-blue"></i>
-                                    <div class="card__inner">
-                                        <p class="text-primary-p">January 2021 -  </p>
+                                <div class="card2">                                    
+                                    <div class="card__inner">                                        
+                                        <p class="text-primary-p"><i class="fa fa-calendar fa-2x text-blue"></i>  <%=m[(d.getMonth()+1-i)%12]%> 2021 -</p>
                                     </div>
-                                    <div class="star1">
-                                        <i class="fa fa-star fa-2x text-gray"></i>
-                                    </div>
+                                    <%if(parseInt(ratMonth, 10) == 0){%>
+                                        <span class="font-bold text-title"> There are no ratings this month </span>
+                                    <%}if(parseInt(ratMonth, 10)  == 1){%>                            
+                                        <%- include ('contractorStars/star1.ejs')%>
+                                    <%}if(parseInt(ratMonth, 10)  == 2){%>                            
+                                        <%- include ('contractorStars/star2.ejs')%>
+                                    <%}if(parseInt(ratMonth, 10)  == 3){%>                            
+                                        <%- include ('contractorStars/star3.ejs')%>
+                                    <%}if(parseInt(ratMonth, 10)  == 4){%>                            
+                                        <%- include ('contractorStars/star4.ejs')%>
+                                    <%}if(parseInt(ratMonth, 10)  == 5){%>                            
+                                        <%- include ('contractorStars/star5.ejs')%>
+                                    <%}%> 
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="card2">
-                                    <i class="fa fa-calendar fa-2x text-blue"></i>
-                                    <div class="card__inner">
-                                        <p class="text-primary-p">January 2021 -  </p>
-                                    </div>
-                                    <div class="star2">
-                                        <i class="fa fa-star fa-2x text-gray"></i>
-                                        <i class="fa fa-star fa-2x text-gray"></i>
-                                    </div>
-                                </div>
-                            </div>                            
-                            <div class="col">
-                                <div class="card2">
-                                    <i class="fa fa-calendar fa-2x text-blue"></i>
-                                    <div class="card__inner">
-                                        <p class="text-primary-p">January 2021 -  </p>
-                                    </div>
-                                    <div class="star3">
-                                        <i class="fa fa-star fa-2x text-blue"></i>
-                                        <i class="fa fa-star fa-2x text-blue"></i>
-                                        <i class="fa fa-star fa-2x text-blue"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="card2">
-                                    <i class="fa fa-calendar fa-2x text-blue"></i>
-                                    <div class="card__inner">
-                                        <p class="text-primary-p">January 2021 -  </p>
-                                    </div>
-                                    <div class="star4">
-                                        <i class="fa fa-star fa-2x text-yellow"></i>
-                                        <i class="fa fa-star fa-2x text-yellow"></i>
-                                        <i class="fa fa-star fa-2x text-yellow"></i>
-                                        <i class="fa fa-star fa-2x text-yellow"></i>
-                                    </div>
-                                </div>
-                            </div>
+                            <% i++;}) %>
+                            <% } else{ %>
+                                <div class="h3"><h3>There are no ratings for any month yet ..</h3> </div>
+                            <% } %>  
                         </div>
                     </div>
-
                 </div>
                 <div class="col-5">
                     <div class="row r10 title2">Feedback Per Shift</div> 
+                    <%if(feedback.length!=0) {
+                        var i=1;
+                        feedback.forEach(function(feed){
+                    %>
                     <div class="row">
-                        <div class="card3">
-                            <i class="fa fa-calendar fa-2x text-blue"></i>
+                        <div class="card3">                            
                             <div class="card__inner">
-                                <span class="font-bold text-title">20 / 5 / 2021</span>
-                                <p class="text-primary-p">Works great, professional and dedicated </p>                                    
+                                <span class="font-bold text-title"><i class="fa fa-calendar fa-2x text-blue"></i>  <%= feed.date.getDate() %>.<%= feed.date.getMonth()+1 %>.<%= feed.date.getFullYear() %></span>
+                                <p class="text-primary-p"><%=feed.feedback%></p>                                    
                             </div>
-                            <div class="star4">
-                                <i class="fa fa-star fa-2x text-blue"></i>
-                                <i class="fa fa-star fa-2x text-blue"></i>
-                                <i class="fa fa-star fa-2x text-blue"></i>
-                            </div>
+                            <%if(parseInt(feed.rating, 10)  == 0){%>
+                                <span class="font-bold text-title"> No rating in this feedback </span>
+                            <%}if(parseInt(feed.rating, 10)  == 1){%>                            
+                                <%- include ('contractorStars/star1.ejs')%>
+                            <%}if(parseInt(feed.rating, 10)  == 2){%>                            
+                                <%- include ('contractorStars/star2.ejs')%>
+                            <%}if(parseInt(feed.rating, 10)  == 3){%>                            
+                                <%- include ('contractorStars/star3.ejs')%>
+                            <%}if(parseInt(feed.rating, 10)  == 4){%>                            
+                                <%- include ('contractorStars/star4.ejs')%>
+                            <%}if(parseInt(feed.rating, 10)  == 5){%>                            
+                                <%- include ('contractorStars/star5.ejs')%>
+                            <%}%> 
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="card3">
-                            <i class="fa fa-calendar fa-2x text-blue"></i>
-                            <div class="card__inner">
-                                <p class="text-primary-p">January 2021 -  </p>
-                            </div>
-                            <div class="star4">
-                                <i class="fa fa-star fa-2x text-yellow"></i>
-                                <i class="fa fa-star fa-2x text-yellow"></i>
-                                <i class="fa fa-star fa-2x text-yellow"></i>
-                                <i class="fa fa-star fa-2x text-yellow"></i>
-                            </div>
-                        </div>
-                    </div>
+                    <% i++;}) %>
+                    <% } else{ %>
+                        <div class="h3"><h3>There are no ratings for any month yet ..</h3> </div>
+                    <% } %> 
                 </div>
             </div>
         </div>  
