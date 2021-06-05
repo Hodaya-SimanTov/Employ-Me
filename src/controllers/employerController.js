@@ -290,7 +290,7 @@ const infoEmployment = async (req, res) => {
         let waitConEmp = await Employement.find({employerEmail: req.params.email, status:'waiting for approval'});
         let waitEmpEmp = await Employement.find({employerEmail: req.params.email, status:'verified'});
         let rateNum = await Employement.find({employerEmail: req.params.email, rating: { $nin:[0] }}); 
-        console.log(rateNum);
+        // console.log(rateNum);
         var lastDate = 0;
         var count = 0;
         var avgRate = 0;
@@ -313,8 +313,8 @@ const infoEmployment = async (req, res) => {
             avgRate = count / rateNum.length;
             countRate = rateNum.length;
         }
-        console.log(avgRate);
-        console.log(countRate);
+        // console.log(avgRate);
+        // console.log(countRate);
         if (closedEmp != 0) {
             countClosed = closedEmp.length;
             lastDate = closedEmp[0].date;
@@ -355,7 +355,7 @@ const infoEmployment = async (req, res) => {
             }
         }
         
-        console.log({kindAmount:kindAmount, kind:kind});
+        // console.log({kindAmount:kindAmount, kind:kind});
         res.render('../views/employerInfo', {email: req.params.email,empCount: empCount, countRate: countRate, avgRate: avgRate, countClosed: countClosed, countCanceled: countCanceled, waitCon: waitCon, waitEmp: waitEmp, yearAmount:yearAmount, rateYearAmount:rateYearAmount, year:year, kind:kind, kindAmount:kindAmount });
     }
     catch(err) {

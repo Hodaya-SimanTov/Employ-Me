@@ -64,5 +64,7 @@ router.get('/contractorMessageList/:mail',contractorWorker.messageList);
 router.post('/sendMessage/:mail',contractorWorker.sendMessage);
 router.get('/sendMessageDiplay/:mail',contractorWorker.sendMessageDiplay);
 
+router.get('/jobRateDisplay/:mail',contractorWorker.jobRateDisplay);
+
 module.exports=router
 

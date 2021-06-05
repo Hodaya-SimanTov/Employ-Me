@@ -1,0 +1,129 @@
+.r20{
+    height: 20vh;
+    padding-left: 200px;
+    padding-top: 0px;
+}
+.r10{
+    height: 10vh;
+    padding-left: 100px;
+    padding-top: 0px;
+}
+.r70{
+    height: 70vh;
+    padding-left: 10px;
+    padding-top: 0px;
+}
+.r{
+    padding-left: 100px;
+}
+.col-7{
+    height: 1000px;
+}
+.col-5{
+    height: 1000px;
+}
+.container-fluid .title{
+    font-size: 50px;
+    font-weight: 600;
+    margin-left: 600px;
+    margin-top: 60px;
+}
+.container-fluid .title2{
+    font-size: 30px;
+    margin-left: 100px;
+    margin-top: 10px;
+}
+.title::before{
+    content: '';
+    position: absolute;
+    left: 30;
+    margin-top: 45px;
+    height: 4px;
+    width: 35px;
+    background: linear-gradient(135deg, #71b7e6,#e6d171);
+}
+.title2::before{
+    content: '';
+    position: absolute;
+    left: 30;
+    margin-top: 45px;
+    height: 4px;
+    width: 30px;
+    background: linear-gradient(135deg, #71b7e6,#e6d171);
+}
+*{
+    font-family: 'Poppins',sans-serif;  
+}
+body{
+    justify-content: center;
+    align-items: center;
+    background: url('images/back5.png') no-repeat;
+	background-size: cover;
+	height: 120vh;
+}
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 140px;
+    width: 400px;
+    padding: 25px;
+    border-radius: 5px;
+    background: #ffffff;;
+    box-shadow: 2px 2px 7px #ededed, -2px -2px 7px #ffffff;
+}
+.card2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 130px;
+    width: 300px;
+    padding: 25px;
+    border-radius: 5px;
+    background: #ffffff;;
+    box-shadow: 2px 2px 7px #ededed, -2px -2px 7px #ffffff;
+}
+.card3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 200px;
+    width: 300px;
+    padding: 25px;
+    border-radius: 5px;
+    background: #ffffff;;
+    box-shadow: 2px 2px 7px #ededed, -2px -2px 7px #ffffff;
+    margin-top: 15px;
+    margin-left: 200px;
+}
+.card_inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.card_inner > span {
+    font-size: 25px;
+}
+.text-yellow {
+    color: #f3dd6d;
+}
+.text-blue {
+    color: #060747;
+}
+.text-gray {
+    color: #727272;
+}
+.text-primary-p {
+    color: #060747;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.font-bold {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.text-title{
+    color: #060747;
+}

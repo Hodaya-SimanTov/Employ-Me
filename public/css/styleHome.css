@@ -1,0 +1,115 @@
+/* .container-fluid{
+    background: url('images/www.jpg') no-repeat;
+} */
+*{
+	padding: 0;
+	margin: 0;
+}
+
+.navbar{
+	height: 90px;
+	width: 100%;
+	background: #fff;
+}
+.logo{
+	width: 590px;
+	height: 270px;
+	margin-left: 5px;
+    margin-top: 60px;
+    
+	/* padding: 5px 50px; */
+}
+.p{
+    margin-left: 50px;
+    margin-top: 0;
+    color:rgb(3, 3, 99);
+    font-size: 300%;
+}
+
+.vh35{
+    height: 35vh;
+    padding-top: 10px;  
+}
+.vh20{
+    height: 10vh; 
+}
+.vh45{
+    height: 45vh;
+    background: rgb(3, 3, 99);
+}
+/* .carousel-inner  .item  img {
+    width:200px;
+    height:300px;
+} */ 
+
+
+.carousel-item,
+.carousel-inner,
+.carousel-inner img {
+  height: 100%;
+  width: auto;
+  border-radius: 10px;
+}
+
+.carousel-item {
+  text-align: right;
+}
+.carousel {
+    height: 200%;
+    width: 55%;
+    margin-left: 580px;
+}
+
+
+
+.button1{
+    height: 100px;
+    width:180px;
+    margin-top: 40px;
+    margin-left: 50px;
+    margin-right: 20px;
+}
+.button1 input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    color: #fff;
+    border: none;
+    font-size: 26px;
+    font-weight: 500;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    text-align: center;
+    background: rgb(224, 209, 70)
+
+}
+.button1 input:hover{
+    background: rgba(209, 209, 205, 0.603)
+}
+
+.button2{
+    height: 100px;
+    width:240px;
+    margin-top: 40px;
+    margin-left: 30px;
+}
+.button2 input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    color: #fff;
+    border: none;
+    font-size: 26px;
+    font-weight: 500;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    text-align: center;
+    background: rgb(224, 209, 70)
+}
+.button2 input:hover{
+    background: rgba(209, 209, 205, 0.603)
+}
+
+.black{
+    color: black;
+}
