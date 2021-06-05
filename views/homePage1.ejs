@@ -95,12 +95,21 @@
     
         <div class="row vh45">            
             <div class="button1">            
-                <input  value="Log-in" herf="/login" readonly>
+                <input   value="Log-in" onclick="logIn()" readonly>
             </div>
             <div class="button2">            
-                <input  value="Employer SignUp" herf="contractorWorker/login"  readonly>
+                <input  value="Employer SignUp" onclick="employerSignUp()"  readonly>
             </div>
         </div>
     </div>
 </body>
 </html>
+<script>
+    function logIn(){
+        window.location ="/contractorWorker/login";
+    }
+    function employerSignUp(){
+        window.location ="/employer/signUp";
+    }
+
+</script>
