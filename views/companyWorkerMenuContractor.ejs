@@ -41,53 +41,28 @@
     </div>
 
     <div class=box2>
-        <div class="title">All Contractor
+        <div class="title">All Contractor Workers
             <small class="pull-right"><%= fEmployment.length %></small>
         </div>
+    </div>
+    <div>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+        <table class="table table-striped custab" id="table">
         <%
         if(fEmployment.length!=0) {
             var i=1;
         fEmployment.forEach(function(worker){
         %>
-            <div class="container ">
-                <div class="user-details d">
-                    <div class="input-box">
-                        <label class="details">mail:</label>
-                        <span class="input" ><%= worker.mail %></span>
-                    </div>
-                    <div class="input-box" >
-                        <label class="details">companyName: </label>
-                        <span class="input"><%= worker.phone %></span>
-                    </div>
-                    <div class="input-box" >
-                        <a class="btn" href="/contractorWorker/contractorHomePage/<%=worker.mail%>">BOOK</a>
-                    </div>
-                </div>
-
-            </div>
+        <tr class="line">
+            <td><div class="input-box"><span class="input" ><%= worker.mail %></span></div></td>
+            <td><div class="input-box" ><span class="input"><%= worker.phone %></span></div></td>
+            <td><div class="input-box" ><a class="btn" href="/contractorWorker/contractorHomePage/<%=worker.mail%>">Actions</a></div></td>
+        </tr>
         <% i++;}) %>
         <% } else{ %>
             <br>
             <br>
             <div class="h3"><h3>Sorry, No Future Employement ..</h3> </div>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
             <br>
             <br>
         <% } %>
@@ -100,6 +75,25 @@
 
 
 <script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("table");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
     function addCon() {
         window.open("/contractorWorker/contractorSignUp", "_blank");
     }

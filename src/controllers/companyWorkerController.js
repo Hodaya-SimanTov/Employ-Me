@@ -5,7 +5,7 @@ const Unavailability=require('../model/unavailabilityContractor');
 //const bcrypt = require('bcrypt');
 const { CompanyWorker, validate,validateEditCompanyWorker } = require('../model/companyWorker');
 const {Employement, validateEmployement} = require('../model/employement');
-const { ContractorWorker, validateContractor,validateEditContractoWorker } = require('../model/contractorWorker');
+const { ContractorWorker, validateContractor,validateEditContractorWorker } = require('../model/contractorWorker');
 
 const { Employer, validate2,validateEditEmployer } = require('../model/employer');
 
@@ -290,17 +290,7 @@ const infoCompanyWorker = async() => {
     console.log('infoCompanyWorker2');
     //console.log(array[0]);
 }
-
-const allEmployer = async (req,res) => {
-    try {
-        console.log(req.params.mail);
-        let fEmployment = await Employer.find();
-        res.render('../views/companyWorkerMenuEmployers', {fEmployment:fEmployment,mailCompany:req.params.mail });
-    }
-    catch(err) {
-        console.log(err);
-    }
-}
+//הצגת כל העובדים
 const allCompany = async (req,res) => {
     try {
         console.log(req.params.mail);
@@ -311,7 +301,139 @@ const allCompany = async (req,res) => {
         console.log(err);
     }
 }
+//הצגת כל המעסיקים
+const allEmployer = async (req,res) => {
+    try {
+        console.log('infoCompanyWorker');
+        var arrMail = [];
+        var arrNum = [];
+        var i = 0;
+        var j = 0;
+        //const d = new Date(date)
+        //const myDate = new Date(d.getFullYear(), d.getMonth(), d.getUTCDate() + 1)
+        let employers = await Employer.find();
+        let employements = await Employement.find();
 
+        //console.log(employers[0].email);
+        //console.log(employers.length);
+        for (i = 0; i < employers.length; i++) {
+            arrMail[i] = employers[i].email;
+            arrNum[i]=0;
+            for (j = 0; j < employements.length; j++) {
+                //console.log(array[i]);
+                if (arrMail[i] == employements[j].employerEmail) {
+                    arrNum[i] = arrNum[i]+1;
+                }
+            }
+            console.log('i='+ i +'   '+arrNum[i]);
+        }
+      //res.render('../views/companyWorkerMenuEmployers', {arrMail:arrMail,arrNum:arrNum});
 
+        console.log(req.params.mail);
+        res.render('../views/companyWorkerMenuEmployers', {employers:employers,mailCompany:req.params.mail,arrMail:arrMail,arrNum:arrNum});
+    }
+    catch(err) {
+        console.log(err);
+    }
+}
+const infoCompany = async (req, res) => {
+    try {
+        //let closedEmp = await Employement.find({employerEmail: req.params.email, status:'close'});
+        //let cancelEmp = await Employement.find({employerEmail: req.params.email, status:'canceled'});
+        //let waitConEmp = await Employement.find({employerEmail: req.params.email, status:'waiting for approval'});
+        //let waitEmpEmp = await Employement.find({employerEmail: req.params.email, status:'verified'});
+        let conAreaNorth=await  ContractorWorker.find({serviceArea:"North"});
+        let conAreaSouth=await  ContractorWorker.find({serviceArea:"South"});
+        let conAreaLowlands=await  ContractorWorker.find({serviceArea:"Lowlands"});
+        let conAreaJerusalem=await  ContractorWorker.find({serviceArea:"Jerusalem Area"});
+        let conAreaDan=await  ContractorWorker.find({serviceArea:"Dan Area"});
+        let conAreaGalilee=await  ContractorWorker.find({serviceArea:"Galilee"});
+        let kind=await  ContractorWorker.find();
+        let rateNum = await Employement.find({rating: { $nin:[0] }});
+        let empNum = await Employer.find();
+        let conNum = await ContractorWorker.find();
 
-module.exports={addCompanyWorker,companyExists,deleteCompanyWorkerById,getCompanyWorkerByEmail,resetPassword,editProfileDisplay,editProfile,updateCompanyWorkerPass,searchContractorByFields,bookContractor,bookContractorDisplay,allEmployer,allCompany}
+        console.log(rateNum);
+        var lastDate = 0;
+        var count = 0;
+        var avgRate = 0;
+        var countRate = 0;
+        var countNorth = 0;
+        var countSouth = 0;
+        var countLowlands = 0;
+        var countJerusalem = 0;
+        var countDan = 0;
+        var countGalilee = 0;
+        var countEmp = 0;
+        var countCon = 0;
+        var arrKindNum=[];
+        var arrKind=['Biotech','Cleaning','Human resources','Customer service','Finance','Digital','High-tech',
+            'Insurance','Marketing','Offices','Operations and logistics','Production workers','Renovations','Sales','Technical','Waitresses'];
+        //כמה עובדים מכל תחום עיסוק
+
+        for (let j = 0; j < arrKind.length; j++) {
+            arrKindNum[j]=0;
+            for (let i = 0; i < kind.length; i++) {
+            if (kind[i].occupationArea == arrKind[j])
+                arrKindNum[j]+=1;
+        }
+    }
+        console.log('arrKind');
+        console.log(arrKind[2]);
+        console.log(arrKindNum[2]);
+        console.log('arrKind');
+
+        for (let i = 0; i < rateNum.length; i++) {
+            count += rateNum[i].rating;
+        }
+        //ממוצע דירוגים לכלל ההעסקות
+        if (rateNum.length != 0) {
+            avgRate = count / rateNum.length;
+            countRate = rateNum.length;
+        }
+        //מס עובדים ומעסיקים
+        console.log(empNum.length);
+        countEmp=empNum.length;
+        console.log(countEmp);
+        countCon=conNum.length;
+
+        //מספר העובדים מאזור בארץ מסויים
+        console.log(avgRate);
+        console.log(countRate);
+        if (conAreaNorth != 0) {
+            countNorth= conAreaNorth.length;
+        }
+        if (conAreaSouth != 0) {
+            countSouth= conAreaSouth.length;
+        }
+        if (conAreaLowlands != 0) {
+            countLowlands= conAreaLowlands.length;
+        }
+        if (conAreaJerusalem != 0) {
+            countJerusalem= conAreaJerusalem.length;
+        }
+        if (conAreaDan != 0) {
+            countDan= conAreaDan.length;
+        }
+        if (conAreaGalilee != 0) {
+            countGalilee = conAreaGalilee.length;
+        }
+        console.log(countEmp);
+       // console.log({kindAmount:kindAmount, kind:kind});
+        res.render('../views/companyWorkerInfo', {mail: req.params.mail,avgRate: avgRate, countNorth: countNorth, countSouth: countSouth, countLowlands: countLowlands, countJerusalem: countJerusalem, countDan: countDan, countGalilee: countGalilee,countCon:countCon,countEmp:countEmp,arrKind:arrKind,arrKindNum:arrKindNum});
+    }
+    catch(err) {
+        console.log(err);
+    }
+}
+/*
+//מחיקת עובד
+const deleteContractorWorkerById = (req,res) => {
+    ContractorWorker.findByIdAndDelete(req.params.id).then(contractorWorker => {
+        res.send('success to dalete');
+    }).catch(err => {
+        console.log(`can not delete this worker! ${err}`);
+    });
+}
+*/
+module.exports={addCompanyWorker,companyExists,deleteCompanyWorkerById,getCompanyWorkerByEmail,resetPassword,editProfileDisplay,editProfile,updateCompanyWorkerPass,searchContractorByFields,bookContractor,bookContractorDisplay,allEmployer,allCompany,infoCompany}

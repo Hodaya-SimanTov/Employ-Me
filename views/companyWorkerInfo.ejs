@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/css/styleEmployerInfo.css">
+    <script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-core.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-pie.min.js"></script>
+    <script src="https://kit.fontawesome.com/10e7a38072.js" crossorigin="anonymous"></script>
+    <title>Company - Info & Statistics</title>
+</head>
+<body>
+<nav class="navbar">
+    <a href="/companyWorker/homePage/<%=mail%>">
+        <img class="logo" src="/css/images/logo.PNG">
+    </a>
+    <ul>
+        <li><a href="/companyWorker/editProfile/<%=mail%>" class="active">My Profile</a> </li>
+        <li><a class="active" href="/companyWorker/allEmployer/<%=mail%>">Employers</a> </li>
+        <li><a class="active" href="/companyWorker/allCompany/<%=mail%>">ContractorWorker</a> </li>
+        <li><a class="active" href="/companyWorker/info/<%=mail%>"><i class="fa fa-fw fa-pie-chart"></i>Statistics</a> </li>
+        <li><a href="/contractorWorker/sendMessageDiplay/<%=mail%>">Messages</a> </li>
+        <li><a href="#">Log Out</a> </li>
+    </ul>
+</nav>
+<div class="container">
+
+    <main>
+        <div class="main__container">
+
+            <div class="main__title">
+                <div class="main__greeting">
+                    <h1>Hello Employer</h1>
+                    <p>Welcome to your information dashboard</p>
+                </div>
+            </div>
+            <div class="main__cards">
+            <div class="card">
+                    <i class="fa fa-pie-chart fa-2x text-yellow"></i>
+                    <div class="card__inner">
+                        <p class="text-primary-p">Average Wage</p>
+                        <span class="font-bold text-title"><%= avgRate %></span>
+                    </div>
+                </div>
+            <div class="card">
+                <i class="fa fa-user fa-2x text-lightblue"></i>
+                <div class="card__inner">
+                    <p class="text-primary-p">countEmp</p>
+                    <span class="font-bold text-title"><%= countEmp %></span>
+                </div>
+            </div>
+                <div class="card">
+                    <i class="fa fa-user fa-2x text-lightblue"></i>
+                    <div class="card__inner">
+                        <p class="text-primary-p">countEmp</p>
+                        <span class="font-bold text-title"><%= countCon %></span>
+                    </div>
+                </div>
+                <div class="card">
+                    <i class="fa fa-pie-chart fa-2x text-yellow"></i>
+                    <div class="card__inner">
+                        <p class="text-primary-p">Avg salary</p>
+                        <span class="font-bold text-title"><%= countCon %></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="charts">
+                <div class="charts__left">
+                    <div class="charts__left__title">
+                        <div>
+                            <h1>Employments Status Percentage</h1>
+                            <P>Percentage of  employments in each state:</P>
+                        </div>
+                    </div>
+                    <div id="chart"></div>
+                </div>
+
+                <div class="charts__right">
+                    <div class="charts__right__title">
+                        <div>
+                            <h1>Distribution of employments by occupation area</h1>
+                            <p>See the amount of employments according to occupation area</p>
+                        </div>
+                    </div>
+                    <div id="chart2"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <input type="hidden" id="countGalilee" value=<%=countGalilee%>>
+    <input type="hidden" id="countDan" value=<%=countDan%>>
+    <input type="hidden" id="countJerusalem" value=<%=countJerusalem%>>
+    <input type="hidden" id="countLowlands" value=<%=countLowlands%>>
+    <input type="hidden" id="countSouth" value=<%=countSouth%>>
+    <input type="hidden" id="countNorth" value=<%=countNorth%>>
+
+    <% arrKindNum.forEach((item) => {
+    %>
+    <input type="hidden" name="array[]" value=<%=item%>>
+    <%
+    }); %>
+    <% arrKind.forEach((item) => {
+    %>
+    <input type="hidden" name="array1[]" value=<%=item%>>
+    <%
+    }); %>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+    var a = document.getElementById("countGalilee").value;
+    var b = document.getElementById("countDan").value;
+    var c = document.getElementById("countJerusalem").value;
+    var d = document.getElementById("countLowlands").value;
+    var e = document.getElementById("countSouth").value;
+    var f = document.getElementById("countNorth").value;
+
+    var k = a+b+c+d+e+f;
+    // console.log(x);
+    // console.log(y);
+    // console.log(z);
+    var options = {
+        series: [a/k,b/k,c/k,d/k,e/k,f/k],
+        chart: {
+            width: 600,
+            type: 'pie',
+        },
+        labels: ['countGalilee  ' + '[' + a + ']', 'countDan  ' + '[' + b + ']','countJerusalem  ' + '[' + c + ']','countLowlands  ' + '[' + d + ']','countSouth  ' + '[' + e + ']','countNorth  ' + '[' + f + ']',],
+        responsive: [{
+            breakpoint: 680,
+            options: {
+                chart: {
+                    width: 250
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+</script>
+<script>
+    //arrKindNum=array[]
+    //b-name
+    //d-num
+    var dataA = document.getElementsByName('array[]');
+    var dataC = document.getElementsByName('array1[]');
+    var dataB = [];
+    var dataD = [];
+    for (var i = 0; i < dataA.length; i++) {
+        dataB[i] = dataA[i].value;
+    }
+
+    for (var j = 0; j < dataC.length; j++) {
+        dataD[j] = dataC[j].value;
+    }
+
+    console.log(dataB);
+    console.log(dataD);
+    var options = {
+        series: [{
+            name: 'Closed Employments',
+            data: dataB
+        }],
+
+        chart: {
+            type: 'bar',
+            height: 350,
+            width:450
+        },
+        plotOptions: {
+            bar: {
+                //horizontal: false,
+                columnWidth: '55%',
+                endingShape: 'rounded'
+            },
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        xaxis: {
+            categories: dataD,
+        },
+        yaxis: {
+            //categories: [dataD],
+            title: {
+                text: 'amount of employments'
+            }
+        },
+        fill: {
+            opacity: 1
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart2"), options);
+    chart.render();
+</script>
+
+</body>
+
+
+</html>
+
