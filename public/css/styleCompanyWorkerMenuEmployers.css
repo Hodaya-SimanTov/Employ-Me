@@ -1,39 +1,78 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:700&display=swap');
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color:white;
-    margin: auto;
-    background-image: url('images/empsignup.PNG');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 *{
-    padding: 0;
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
 }
+.body{
+    display: flex;
+    height: 100vh;
+    justify-content: left;
+    align-items: left;
+    padding: 10px;
+}
+.back{
+    background: url('images/back5.png') no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    margin-top: 0px ;
 
+}
+/* .back::before{
+content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  right:0;
+  left:0;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: cover;
+  background-image: url('images/back4.jpg') no-repeat;
+} */
+.button{
+    margin-top: 40px;
+    text-align: center;
+
+}
+.button input{
+    text-align: center;
+    width:13%;
+    min-height: 45px;
+    border-radius: 10px;
+    outline: none;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, #9c9c9e, #9c9c9e)
+}
+.button input:hover{
+    background: linear-gradient(-135deg, #454546, #454546)
+}
 .navbar{
     height: 80px;
     width: 100%;
     background: rgb(255, 255, 255);
 }
 .logo{
-    width: 230px;
+    float: left;
+    margin-left: 20px;
+    width: 220px;
     height: 73px;
-    padding: 5px 50px;
+    /* padding: 5px 50px; */
 }
 .navbar ul{
     float: right;
     margin-right: 20px;
-
 }
 .navbar ul li{
     list-style: none;
     margin: 0 8px;
     display: inline-block;
     line-height: 80px;
-
 }
 .navbar ul li a{
     text-decoration: none;
@@ -41,278 +80,183 @@ body {
     font-size: 17px;
     font-family: 'Roboto', sans-serif;
     transition: .4s;
-
 }
-.navbar ul li a.active,
-.navbar ul li a:hover{
+.navbar ul li a.active, .navbar ul li a:hover{
     background: rgb(247, 250, 94);
     border-radius: 2px;
+}
+.l
+{
 
 }
-.serviceArea{
-    margin-top: 30px;
-    margin-left: -130px;
-     margin-bottom: 60px;
-    font-size: 25px;
-    font-weight: bold;
-    color:#e6d171;
-    text-align: center;
-    font-family: 'Roboto', sans-serif;
-}
-.serviceArea1{
-margin-left: 40px;
-    margin-bottom: 40px;
-    font-size: 20px;
-font-weight: bold;
-color:rgb(12, 12, 12);
-text-align: center;
-font-family: 'Roboto', sans-serif;
-
-}
-.serviceArea2{
-    margin-left: 40px;
-    margin-bottom: 40px;
-
-    font-size: 20px;
-    font-weight: bold;
-    color:rgb(12, 12, 12);
-    text-align: center;
-    font-family: 'Roboto', sans-serif;
-}
-
-.serviceArea select{
-    width:10%;
-    min-height: 30px;
-    background:#fff;
-    color:rgb(51, 17, 105);
-    outline: none;
-    text-align: center;
-    border: 2px solid #e6d171;
-    font-family: 'Roboto', sans-serif;
-
-}
-.serviceArea select1{
-    width:10%;
-    min-height: 30px;
-    background:#fff;
-    color:rgb(51, 17, 105);
-    outline: none;
-    text-align: center;
-    border: 2px solid #e6d171;
-    font-family: 'Roboto', sans-serif;
-
-}
-.jobScope{
+.container.l.
+{
     margin-top: 10px;
     font-size: 20px;
     font-weight: bold;
     color:rgb(12, 12, 12);
-    text-align: center;
-    font-family: 'Roboto', sans-serif;
-
+    text-align: center
 }
-.jobScope select{
-    width:90%;
-    min-height: 30px;
-    background:#fff;
-    color:rgb(51, 17, 105);
-    outline: none;
-    text-align: center;
-    border: 2px solid #e6d171;
-}
-.experienceYears{
+.container{
     margin-top: 10px;
     font-size: 20px;
-    font-weight: bold;
     color:rgb(12, 12, 12);
     text-align: center;
 
 }
-.experienceYears select{
-    width:90%;
-    min-height: 30px;
-    background:#fff;
-    color:rgb(51, 17, 105);
-    outline: none;
-    text-align: center;
-    border: 2px solid #e6d171;
-}
-table {
-    border: 1px solid;
-}
-
-th,
-td {
-    border: 1px solid;
-    min-width: 100px;
-}
-form .button{
-    margin-left: -800px;
-    text-align: center;
-
-}
-form .button input{
-    width:10%;
+.container select{
+    width:30%;
     min-height: 45px;
+    border-radius: 10px;
+    background:#fff;
+    color:rgb(51, 17, 105);
+    outline: none;
+    text-align: center;
+    border: 2px solid #e6d171;
+}
+/* .box2{
+	align-items: center;
+	margin: auto;
+	align-self: center;
+} */
+
+.title{
+    /* margin-top: 100px; */
+    font-size: 30px;
+    margin: auto;
+    align-self: center;
+    align-items: center;
+    padding-left: 20%;
+    padding-right:20%;
+    padding-top: 100px;
+    position: relative;
+}
+.container .user-details{
+    flex-wrap: wrap;
+    margin: 20px 0 12px 0;
+}
+.title::before{
+    content: '';
+    position: absolute;
+    left: 30;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    background: linear-gradient(135deg, #060747,#eff871);
+}
+.user-details .input-box input{
+    height: 45px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-left: 10px;
+    font-size: 15px;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+.btn {
+    margin-right: 0px;
+    background-color: #9c9c9e;
+    color: white;
+    padding: 0.5em 8em;
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 10px;
+
+}
+
+.btn:hover {
+    background-color: #454546;
+}
+
+.btn:active {
+    background-color: #9c9c9e;
+}
+
+.btn:visited {
+    background-color: #9c9c9e;
+}
+
+/* .btn {
+    height: 35px;
+    width: 100%;
     outline: none;
     color: #fff;
     border: none;
     font-size: 18px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    background: linear-gradient(135deg, #71b7e6, #e6d171)
-}
-form .button input:hover{
-    background: linear-gradient(-135deg, #71b7e6, #e6d171)
-}
-
-
-
-
-
-
-/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins',sans-serif;
-}
-body{
-    display:flex;
-    height: 100vh;
-    justify-content: left;
-    align-items: left;
-    padding: 10px;
-}
-.body .navbar{
-	height: 80px;
-	width: 100%;
-	background: rgb(255, 255, 255);
-}
-.logo{
-	width: 230px;
-	height: 73px;
-	padding: 5px 50px;
-}
-.navbar ul{
-	float: right;
-	margin-right: 20px;
-}
-.navbar ul li{
-	list-style: none;
-	margin: 0 8px;
-	display: inline-block;
-	line-height: 80px;
-}
-.navbar ul li a{
-	text-decoration: none;
-	color: rgb(40, 21, 94);
-	font-size: 17px;
-	font-family: 'Roboto', sans-serif;
-	transition: .4s;
-}
-.navbar ul li a.active, .navbar ul li a:hover{
-	background: rgb(247, 250, 94);
-	border-radius: 2px;
-}
-.container{
-    max-width: 600px;
-    width: 100%;
-    background: #fff;
-    padding: 30px 30px;
-    right: 0px;
-}
-.container .title{
-    font-size: 25px;
     font-weight: 500;
-    position: relative;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    text-align: center;
+    background: linear-gradient(135deg, #71b7e6, #71b7e6)
 }
-.container .title::before{
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 3px;
-    width: 30px;
-    background: linear-gradient(135deg, #71b7e6,#e6d171);
+.btn:hover{
+    background: linear-gradient(-135deg, #71b7e6, #e6d171)
+} */
+.page-header{
+    align-items: center;
+    align-self: center;
+    margin: auto;
 }
-.container .form .search-details{
+.container .d{
+    align-items: center;
+    align-self: center;
+    margin: auto;
+    margin-top: 50px;
+    opacity: 0.9 ;
+    background: #fff;
+    border:groove rgb(255, 248, 248);
+    border-radius: 7px;
+    /* border-color:  rgb(15, 15, 15); */
+    /* padding-left: 20px; */
+    width: 1000px;
+    height: 100%;
+}
+.user-details .input-box{
+    margin-bottom: 15px;
+    width: 45%;
+    margin: 10 10px;
+}
+.user-details {
+
+    margin: 0 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 20px 0 12px 0;
+
 }
-form .search-details .date{
-    margin-bottom: 15px;
-    width: 45%;
-    margin:35px 0px 10px 0px;
+.l{
     font-size: 20px;
-    font-weight: bold;
-    color:rgb(51, 17, 105);
+    font-weight: 30;
+    padding-left: 10px;
+    position: relative;
 }
-.search-details .date{
-    display: block;
+/* h3{
+    font-size: 20px;
+    font-weight: 30;
+    padding-left: 105px;
+    padding-top: 40px;
+    position: relative;
+} */
+.h3{
+    font-size: 20px;
+    font-weight: 30;
+    padding-left: 20%;
+    position: relative;
+}
+.details{
+    color: rgb(0, 0, 0);
+    /* display: block; */
     font-weight: 500;
+    font-size: 20px;
     margin-bottom: 5px;
 }
-.search-details .date input{
-    height: 45px;
-    width: 100%;
-    outline: none;
-    border-radius: 5px;
-    padding-left: 5px;
-    font-size: 13px;
-    border: 2px solid #e6d171;
-    border-bottom-width: 2px;
-    transition: all 0.3s ease;
-    background:#fff;
-    color:rgb(51, 17, 105);
+.input{
+    font-size: 20px;
+    padding: 1px;
 }
-
-
-form .search-details .searchFields{
-    margin-bottom: 15px;
-    width: 45%;
-    margin: 0  5px;
-}
-.search-details .searchFields .select{
-    display: block;
-    font-weight: 500;
-    margin-bottom: 5px;
-}
-.search-details .searchFields select{
-    height: 45px;
-    width: 100%;
-    outline: none;
-    border-radius: 5px;
-    padding-left: 5px;
-    font-size: 13px;
-    border: 2px solid #e6d171;
-    border-bottom-width: 2px;
-    transition: all 0.3s ease;
-    background:#fff;
-    color:rgb(51, 17, 105);
-}
-form .button{
-    height: 39px;
-    margin: 39px 0;
-}
-form .button input{
-    height: 100%;
-    width: 100%;
-    outline: none;
-    color: #fff;
-    border: none;
-    font-size: 18px;
-    font-weight: 500;
-    border-radius: 5px;
-    letter-spacing: 1px;
-    background: linear-gradient(135deg, #71b7e6, #e6d171)
-}
-form .button input:hover{
-    background: linear-gradient(-135deg, #71b7e6, #e6d171)
-}
-
-
- */

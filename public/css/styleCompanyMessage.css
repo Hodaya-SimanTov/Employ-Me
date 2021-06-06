@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+}
+body{
+    background: url('images/back5.png') no-repeat;
+    background-size: cover;
+/*
+
+  height: 100vh;
+    opacity: 0.9 ;
+    display: flex;
+    height: 100vh;
+    justify-content: left;
+    align-items: left;
+    padding: 10px;
+ */
+    /* padding-left: 320px; */
+    /* padding-top: 80px; */
+    /* padding-bottom: 150px; */
+}
+.wrapper{
+    background: url('images/emlogo1.PNG') no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+.navbar{
+    height: 80px;
+    width: 100%;
+    background: rgb(255, 255, 255);
+}
+.logo{
+    width: 230px;
+    height: 73px;
+    padding: 5px 50px;
+}
+.navbar ul{
+    float: right;
+    margin-right: 20px;
+}
+.navbar ul li{
+    list-style: none;
+    margin: 0 8px;
+    display: inline-block;
+    line-height: 80px;
+}
+.navbar ul li a{
+    text-decoration: none;
+    color: rgb(40, 21, 94);
+    font-size: 17px;
+    font-family: 'Roboto', sans-serif;
+    transition: .4s;
+}
+.navbar ul li a.active,
+.navbar ul li a:hover{
+    background: rgb(247, 250, 94);
+    border-radius: 2px;
+}
+.wrapper .center{
+    position: absolute;
+    top: 35%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    font-family: sans-serif;
+    user-select: none;
+}
+.center h1{
+    color: rgb(38, 12, 85);
+    font-size: 35px;
+    font-weight: bold;
+    width: 900px;
+    text-align: center;
+}
+.center h2{
+    color: rgb(38, 12, 85);
+    font-size: 25px;
+    font-weight: bold;
+    width: 895px;
+    margin-top: 10px;
+    text-align: center;
+}
+.container{
+    max-width: 50%;
+    width: 100%;
+    background: #fff;
+    padding: 30px 30px;
+    border-radius: 40px;
+    right: 0px;
+    align-items: center;
+    margin: auto;
+}
+.container .title{
+    font-size: 50px;
+    font-weight: 550;
+    /* padding-left: 160px; */
+    position: relative;
+    text-align: left;
+}
+.span{
+    font-size: 30px;
+    font-weight: 60px;
+    padding-left: 5px;
+    position: relative;
+    text-align: center;
+}
+
+.container .title::before{
+    content: '';
+    position: absolute;
+    left: 30;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    background: linear-gradient(150deg, #060747,#eff871);
+}
+
+.container form .user-details{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
+}
+form .user-details .input-box{
+    margin-bottom: 15px;
+    width: 45%;
+    margin: 0 5px;
+}
+.user-details .button1{
+    margin-bottom: 15px;
+    width: 80%;
+    margin: 0 5px;
+    padding-top: 27px;
+}
+.user-details .button1 input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    color: #fff;
+    border: none;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 5px;
+    text-align: center;
+    letter-spacing: 1px;
+    background-color: #989a9b;
+}
+.user-details .button1 input:hover{
+    background-color: #ebd264
+}
+.user-details .input-box .details{
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.user-details .input-box input{
+    height: 45px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-left: 10px;
+    font-size: 13px;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+}
+.input-box.error input{
+    border-color: #c92432;
+}
+
+.user-details .input-box[data-error] .input{
+    border-color: #c92432;
+    color:#c92432;
+
+}
+.user-details .input-box[data-error]::after{
+    content: attr(data-error);
+    font-size: 0.80em;
+    color:#c92432;
+    display: block;
+    margin: 10px 0;
+}
+
+.user-details .input-box input:focus{
+    border-color: #e6d171
+}
+.user-details .input-box input:hover{
+    border-color: #e6d171
+}
+
+
+form .button{
+    height: 39px;
+    width: 100%;
+    margin: 39px 0;
+    margin-top: 50px;
+}
+form .button input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    font-weight: 100%;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    text-align: center;
+    background: linear-gradient(135deg, #9c9c9e, #9c9c9e)
+}
+form .button input:hover{
+    background: linear-gradient(-135deg, #454546, #454546)
+}
+/* .input{
+    transition: background 0.2s, border 0.2s;
+} */
+.select {
+    margin: auto;
+    width:220%;
+    height: 40px;
+    border-radius: 5px;
+
+}
+.select:focus{
+    border-color: #e6d171
+}
+.select:hover{
+    border-color: #e6d171;
+}
