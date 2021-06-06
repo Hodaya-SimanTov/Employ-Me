@@ -21,6 +21,9 @@ router.get('/notLogin',(req,res)=>{
 router.get('/contractorExists',(req,res)=>{
     res.render('contractorExists')        
 });
+router.get('/contractorContactUs/:mail',(req,res)=>{
+    res.render('../views/contractorContactUs',{mail:req.param.mail})        
+});
 
 
 

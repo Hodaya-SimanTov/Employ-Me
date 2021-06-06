@@ -1,0 +1,109 @@
+.r15{
+    height: 15vh;
+}
+.r30{
+    height: 50h;
+}
+.r20{
+    height: 15vh;
+}
+/* .vh35{
+    height: 35vh;
+    padding-top: 10px;  
+} */
+.logo{
+    margin-left: 250px;
+}
+.container-fluid .title{
+    font-size: 50px;
+    font-weight: 600;
+    margin-left: 400px;
+    margin-top: 60px;
+}
+.title::before{
+    content: '';
+    position: absolute;
+    left: 30;
+    margin-top: 45px;
+    height: 4px;
+    width: 35px;
+    background: linear-gradient(135deg, #71b7e6,#e6d171);
+}
+.p1{
+    margin-top: auto;
+    margin-left: 270px;
+    font-size: 30px;
+}
+.s1{
+    margin-left: 50px;
+    font-size: 23px;
+}
+.s11{
+    margin-left: 210px;
+    font-size: 23px;
+}
+.s12{
+    margin-left: 200px;
+    font-size: 23px;
+}
+/* h4{
+    margin:auto;
+    color:green;
+} */
+*{
+    font-family: 'Poppins',sans-serif;  
+}
+body{
+    justify-content: center;
+    align-items: center;
+    background: url('images/back5.png') no-repeat;
+	background-size: cover;
+	height: 120vh;
+}
+.container-fluid .r20 .col-5 h4{
+    color: rgb(172, 168, 182);
+}
+
+.t1{
+    margin-left: 350px;
+}
+.text-yellow {
+    color: #f3dd6d;
+}
+.navbar{
+	height: 80px;
+	width: 100%;
+	background: rgb(255, 255, 255);
+}
+.logo{
+	width: 230px;
+	height: 73px;
+	padding: 5px 50px;
+}
+.navbar ul{
+	float: right;
+	margin-right: 20px;
+}
+.navbar ul li{
+	list-style: none;
+	margin: 0 8px;
+	display: inline-block;
+	line-height: 80px;
+}
+.navbar ul li a{
+	text-decoration: none;
+	color: rgb(40, 21, 94);
+	font-size: 17px;
+	font-family: 'Roboto', sans-serif;
+	transition: .4s;
+}
+.navbar ul li a.active, .navbar ul li a:hover{
+	background: rgb(247, 250, 94);
+	border-radius: 2px;
+} 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;  
+}

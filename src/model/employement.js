@@ -42,6 +42,14 @@ const Employement=mongoose.model('Employement',new mongoose.Schema({
         type:String,
         default:"no"
     },
+    startTime:{
+        type:String,
+        default:"0"
+    },
+    endTime:{
+        type:String,
+        default:"0"
+    },
     occupationArea:{//תחום עיסוק
         type:String,
         require:false,

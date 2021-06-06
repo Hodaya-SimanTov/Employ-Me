@@ -356,7 +356,7 @@ const homepageDisplay = async (req, res) => {
 const contractorFuture = (req,res) => {
     // const today=new Date()
     // const d=new Date(today.getFullYear(),today.getMonth(),today.getUTCDate()+1)
-    Employement.find({constructorEmail: req.params.mail , status:'open' })
+    Employement.find({ constructorEmail: req.params.mail , status:'approved'})
         .then(currentEmployement => {
             currentEmployement.sort((a, b) => b.date - a.date);
             res.render('../views/contractorFuture',{result:currentEmployement});
@@ -368,7 +368,7 @@ const contractorFuture = (req,res) => {
 const contractorHistory = (req,res) => {
     const today = new Date();
     const d = new Date(today.getFullYear(),today.getMonth(),today.getUTCDate());
-    Employement.find( { $or:[{constructorEmail: req.params.mail , status:'close'},{constructorEmail: req.params.mail , status:'verified‏'}]})
+    Employement.find( { $or:[{constructorEmail: req.params.mail , status:'closed'},{constructorEmail: req.params.mail , status:'verified‏'}]})
         .then(currentEmployement => {
             currentEmployement.sort((a, b) => b.date - a.date)
             res.render('../views/contractorHistory',{result:currentEmployement});
@@ -378,7 +378,7 @@ const contractorHistory = (req,res) => {
 }
 
 const contractorWaitApproval = (req,res) => {
-    Employement.find( {constructorEmail: req.params.mail , status:'waiting for approval' })
+    Employement.find( {constructorEmail: req.params.mail , status:'waiting for approval'})
         .then(currentEmployement => {
             currentEmployement.sort((a, b) => b.date - a.date)
             res.render('../views/contractorWaitShift',{result:currentEmployement});
@@ -388,7 +388,7 @@ const contractorWaitApproval = (req,res) => {
 }
 
 const approveShift = (req,res) => {
-    Employement.findByIdAndUpdate(req.params.id,{status:`approved‏`})
+    Employement.findByIdAndUpdate(req.params.id,{status:'approved'})
         .then(employement => {
             res.redirect(`/contractorWorker/contractorFuture/${employement.constructorEmail}`);
         }).catch(err => {
@@ -428,7 +428,9 @@ const cancelShift = (req,res) => {
 
 
 const endEmployement = (req,res) => {
-    Employement.findByIdAndUpdate(req.params.id,{status:`verified‏`})
+    var time = new Date();
+    var now = time.getHours() + ":" + time.getMinutes()+":" + time.getSeconds();
+    Employement.findByIdAndUpdate(req.params.id,{status:`verified‏`,endTime:now})
         .then(employement => {
             //res.render('../views/contractorFuture',{result:employement});
             res.redirect(`/contractorWorker/contractorHistory/${employement.constructorEmail}`);
@@ -438,7 +440,9 @@ const endEmployement = (req,res) => {
 }
 
 const startEmployement = (req,res) => {
-    Employement.findByIdAndUpdate(req.params.id,{start:"yes"})
+    var time = new Date();
+    var now = time.getHours() + ":" + time.getMinutes()+":" + time.getSeconds();
+    Employement.findByIdAndUpdate(req.params.id,{start:"yes",startTime:now})
         .then(employement => {
             //res.render('../views/contractorFuture',{result:employement});
             res.redirect(`/contractorWorker/contractorFuture/${employement.constructorEmail}`);
@@ -734,13 +738,18 @@ const messageList = async (req,res) => {
 
 const jobRateDisplay = async (req,res) => {
     //חישוב ממוצע גלובלי
-    let i,j,ratGlobal=0, rat = 0, sum = 0 ,month = 0;   
+    let i,j,ratGlobal=0, rat = 0, sum = 0 ,month = 0;  
+    var feedback = []; let f = 0; 
     const employements = await Employement.find({constructorEmail:req.params.mail, status:'close'});
     if(employements) {
         for(i=0;i<employements.length;i++){
             if(employements[i].rating != 0){
                 rat+=1;
                 sum+=employements[i].rating;
+            }
+            if(employements[i].feedback != ""){
+                feedback[f] = employements[i];
+                f++;
             }
         }
         if(rat != 0)
@@ -755,65 +764,28 @@ const jobRateDisplay = async (req,res) => {
     const pays = await ContractorPaycheck.find({contractorMail:req.params.mail});
     if(pays) {
         month = pays.length;
+        const employements = await Employement.find({constructorEmail:req.params.mail, status:'close'});
         for(j=0;j<month;j++){//לכל חודש נחשב ממוצע
-            const employements = await Employement.find({constructorEmail:req.params.mail, status:'close'});
+            sum = 0; rat = 0;            
             if(employements) {
                 for(i=0;i<employements.length;i++){
-                    if(employements[i].rating != 0 && employements[i].date.getMonth() == month ){
+                    if((employements[i].rating != 0) && ((employements[i].date.getMonth()+1) == (date.getMonth()+1-j)) ){
                         rat+=1;
                         sum+=employements[i].rating;
                     }            
                 }     
             }else{err => { console.log(err); }}
-            arrMonth[j] = sum/rat;
-            // arrMonth[j]= jobRatePerMonth(req.params.mail,date.getMonth()+1-i);
+            if(rat != 0)
+                {arrMonth[j] = sum/rat;}
+            else    
+                {arrMonth[j] = 0;}            
         }
     }
     else{err => { console.log(err); }}
 
-    console.log("g: "+ratGlobal);
-    console.log("arr: "+arrMonth);
-    res.render('../views/contractorJobRate',{mail:req.params.mail,ratGlobal:ratGlobal,arrMonth:arrMonth});
+    res.render('../views/contractorJobRate',{mail:req.params.mail,ratGlobal:ratGlobal,arrMonth:arrMonth,feedback:feedback});
 }
 
-const jobRateGlobal = async (mail) => {
-    var i;
-    let rat = 0;
-    let sum = 0;
-    let rating = 0;
-    const employements = await Employement.find({constructorEmail:mail, status:'close'});
-    if(employements) {
-        for(i=0;i<employements.length;i++){
-            if(employements[i].rating != 0){
-                rat+=1;
-                sum+=employements[i].rating;
-            }
-        }
-        rating = sum/rat;   
-        console.log("ppp: "+rating);      
-    }else{err => { console.log(err); }}
-    return rating;   
-    
-}
-
-const jobRatePerMonth = async (mail,month) => {
-    var i;
-    let rat = 0;
-    let sum = 0;
-    let avgRating = 0;
-    const employements = await Employement.find({constructorEmail:mail, status:'close'});
-    if(employements) {
-        for(i=0;i<employements.length;i++){
-            if(employements[i].rating != 0 && employements[i].date.getMonth() == month ){
-                rat+=1;
-                sum+=employements[i].rating;
-            }            
-        }
-        avgRating = sum/rat;
-        console.log(avgRating);
-    return avgRating;     
-    }else{err => { console.log(err); }}
-}
 
 
 

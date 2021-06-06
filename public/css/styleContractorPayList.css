@@ -8,6 +8,9 @@
 body{
     justify-content: center;
     align-items: center;
+    background: url('images/back5.png') no-repeat;
+	background-size: cover;
+	height: 120vh;
 }
 .container .title{
     font-size: 35px;

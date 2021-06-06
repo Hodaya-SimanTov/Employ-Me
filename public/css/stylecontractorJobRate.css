@@ -25,7 +25,7 @@
 .container-fluid .title{
     font-size: 50px;
     font-weight: 600;
-    margin-left: 600px;
+    margin-left: 350px;
     margin-top: 60px;
 }
 .container-fluid .title2{
@@ -59,7 +59,7 @@ body{
     align-items: center;
     background: url('images/back5.png') no-repeat;
 	background-size: cover;
-	height: 120vh;
+	height: 140vh;
 }
 .card {
     display: flex;
