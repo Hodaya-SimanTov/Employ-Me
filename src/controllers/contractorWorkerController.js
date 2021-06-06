@@ -220,9 +220,10 @@ const loginUser = (req,res) => {
         });
     }
     if(req.body.select == 'Company Worker') {
+        let pass=req.body.password;
         CompanyWorker.findOne({mail: req.body.mail}).then(company => {
             console.log('in login company');
-            if (company.password == req.body.password) {
+            if (company.password == pass) {
                 if (company.firstLogin == 0) {
                     CompanyWorker.findOneAndUpdate({mail: req.body.mail}, {firstLogin: 1}).then(company => {
                         res.redirect(`/companyWorker/editProfile/${req.body.mail}`);
