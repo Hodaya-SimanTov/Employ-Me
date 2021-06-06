@@ -380,7 +380,7 @@ const contractorFuture = (req,res) => {
 const contractorHistory = (req,res) => {
     const today = new Date();
     const d = new Date(today.getFullYear(),today.getMonth(),today.getUTCDate());
-    Employement.find( { $or:[{constructorEmail: req.params.mail , status:'closed'},{constructorEmail: req.params.mail , status:'verified‏'}]})
+    Employement.find( { $or:[{constructorEmail: req.params.mail , status:'close'},{constructorEmail: req.params.mail , status:'verified‏'}]})
         .then(currentEmployement => {
             currentEmployement.sort((a, b) => b.date - a.date)
             res.render('../views/contractorHistory',{result:currentEmployement,mail:req.params.mail});
