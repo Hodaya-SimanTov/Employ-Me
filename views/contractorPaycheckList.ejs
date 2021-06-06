@@ -4,9 +4,14 @@
         <meta charset="UTF-8">
         <title>Paycheck</title>
         <link rel="stylesheet" href="/css/styleContractorPayList.css">
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        <script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-core.min.js"></script>
+        <script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-pie.min.js"></script>
+        <script src="https://kit.fontawesome.com/10e7a38072.js" crossorigin="anonymous"></script>  
     </head>
     <style>
         .text-center-e{
@@ -14,6 +19,8 @@
         }
     </style>
     <body>
+        <%- include ('contractorNav.ejs')%>   
+
         <div class="container">  
             <div class="row col-md-6 col-offset-2 custyle">
                 <div class="page-header">
@@ -25,19 +32,20 @@
                 result.forEach(function(paycheck){
                 %>
                 <div class="container "> 
-                   <div class="col-6">
+                   <div class="col-10">
                     <div  class="input-box4 row d"  >
                         <div class="col-4">                          
-                          <label class="details">Month : </label>
-                            <span ><%=paycheck.month %> / <%=paycheck.year %></s>
+                          <label class="details">Month : <span class="details" ><%=paycheck.month %> / <%=paycheck.year %></s></label>
+                            
                           <hr>
-                          <label class="details">Net salary : </label>
+                          <label class="details">Net salary : <span class="details" ><%= paycheck.totalSalary %> NIS </span></label>
 
-                            <span ><%= paycheck.totalSalary %> NIS </span>
+                            
                           <br/>        
+                          <a class='btn'  href="/contractorWorker/contractorPayChecks/<%=paycheck.contractorMail%>/<%=paycheck.month%>" ><p class="p">SHOW</p></a>
+
                         </div >
-                        <div class="col-4">
-                            <a class='btn'  href="/contractorWorker/contractorPayChecks/<%=paycheck.contractorMail%>/<%=paycheck.month%>" ><p class="p">SHOW</p></a>
+                        <div >
                         </div>  </div>  
                     </div>
                 </div> 

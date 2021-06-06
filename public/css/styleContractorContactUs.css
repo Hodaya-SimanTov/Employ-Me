@@ -1,3 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;  
+}
+.navbar{
+	height: 80px;
+	width: 100%;
+	background: rgb(255, 255, 255);
+}
+.logo{
+	float: left;
+	margin-left: 0px;
+	width: 170px;
+	height: 73px;
+	/* padding: 5px 50px; */
+
+}
+
+.aa{
+    padding-left: 10px;
+
+}
+.navbar ul{
+	float: right;
+	margin-right: 0px;
+}
+.navbar ul li{
+	list-style: none;
+	margin: 0 8px;
+	display: inline-block;
+	line-height: 80px;
+}
+.navbar ul li a{
+	text-decoration: none;
+	color: rgb(40, 21, 94);
+	font-size: 17px;
+	font-family: 'Roboto', sans-serif;
+	transition: .4s;
+
+}
+.navbar ul li a.active, .navbar ul li a:hover{
+	background: rgb(241, 230, 67);
+	border-radius: 2px;
+}
+
 .r15{
     height: 15vh;
 }
@@ -11,14 +60,12 @@
     height: 35vh;
     padding-top: 10px;  
 } */
-.logo{
-    margin-left: 250px;
-}
+
 .container-fluid .title{
     font-size: 50px;
     font-weight: 600;
     margin-left: 400px;
-    margin-top: 60px;
+    margin-top: 20px;
 }
 .title::before{
     content: '';
@@ -29,6 +76,14 @@
     width: 35px;
     background: linear-gradient(135deg, #060747,#eff871);
 }
+.vh35{
+    height: 15vh;
+    padding-top: 10px; 
+}
+/* .vh35{
+    height: 15vh;
+    padding-top: 10px; 
+} */
 .p1{
     margin-top: auto;
     margin-left: 270px;
@@ -50,18 +105,26 @@
     margin:auto;
     color:green;
 } */
-*{
-    font-family: 'Poppins',sans-serif;  
-}
+
 body{
     justify-content: center;
     align-items: center;
-    background: url('images/back5.png') no-repeat;
+    
 	background-size: cover;
 	height: 120vh;
+
+}
+.container-fluid{
+    background: url('images/back5.png') no-repeat;
+	background-size: cover;
+    margin-top: 0px ;
+    margin-bottom: 0px;
+    height: 120vh;
 }
 .container-fluid .r20 .col-5 h4{
     color: rgb(172, 168, 182);
+    background-size: cover;
+
 }
 
 .t1{
@@ -70,40 +133,4 @@ body{
 .text-yellow {
     color: #f3dd6d;
 }
-.navbar{
-	height: 80px;
-	width: 100%;
-	background: rgb(255, 255, 255);
-}
-.logo{
-	width: 230px;
-	height: 73px;
-	padding: 5px 50px;
-}
-.navbar ul{
-	float: right;
-	margin-right: 20px;
-}
-.navbar ul li{
-	list-style: none;
-	margin: 0 8px;
-	display: inline-block;
-	line-height: 80px;
-}
-.navbar ul li a{
-	text-decoration: none;
-	color: rgb(40, 21, 94);
-	font-size: 17px;
-	font-family: 'Roboto', sans-serif;
-	transition: .4s;
-}
-.navbar ul li a.active, .navbar ul li a:hover{
-	background: rgb(247, 250, 94);
-	border-radius: 2px;
-} 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins',sans-serif;  
-}
+

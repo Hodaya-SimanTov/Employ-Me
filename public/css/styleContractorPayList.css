@@ -1,9 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 *{
     margin: 0;
-    padding: 10;
+    padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins',sans-serif;  
-    margin: 10px 10px 10px 0;
+    font-family: 'Poppins',sans-serif; 
+}
+
+.navbar{
+	height: 80px;
+	width: 100%;
+	background: rgb(255, 255, 255);
+}
+.logo{
+	float: left;
+	margin-left: 50px;
+    padding-left: 0px;
+	width: 130px;
+	height: 73px;
+	/* padding: 5px 50px; */
+}
+.navbar ul{
+	float: right;
+	margin-right: 0px;
+}
+.navbar ul li{
+	list-style: none;
+	margin: 0 8px;
+	display: inline-block;
+	line-height: 80px;
+}
+.navbar ul li a{
+	text-decoration: none;
+	color: rgb(40, 21, 94);
+	font-size: 17px;
+	font-family: 'Roboto', sans-serif;
+	transition: .4s;
+
+}
+.navbar ul li a.active, .navbar ul li a:hover{
+	background: rgb(241, 230, 67);
+	border-radius: 2px;
 }
 body{
     justify-content: center;
@@ -17,6 +53,7 @@ body{
     font-weight: 550;
     padding-left: 160px;
     position: relative;
+    margin-top: 40px;
 }
 .container .user-details{    
     flex-wrap: wrap;    
@@ -54,7 +91,9 @@ body{
     border-radius: 5px;
     letter-spacing: 1px;
     text-align: center;
-    background:  #9c9c9e
+    background:  #9c9c9e;
+    margin-top: 20px;
+
 }
 .btn:hover {
     background-color: #6d6d6e;
@@ -79,9 +118,13 @@ body{
     border-radius: 7px;
     border-color:  rgb(197, 188, 188);
     padding-left: 40px;
-    width: 300px;
-    height: 200px;
+    width: 350px;
+    height: 180px;
     margin: auto;
+    margin-top: 20px;
+}
+.container .details{
+    width: 400px;
 }
 .user-details .input-box{
     margin-bottom: 15px;
@@ -91,9 +134,10 @@ body{
 }
 .user-details {
     margin-bottom: 15px;
-    width: 70%;  
+    width: 200px;  
     margin: auto;
     padding-top: 0px;
+    background: cyan;
 }
 .l{
     font-size: 20px;
@@ -115,7 +159,7 @@ h3{
     position: relative;
 }
 .container .user-details .pay{
-    width: 100px;
+    width: 300px;
 	height: 120px;
 	margin: auto;
 }
