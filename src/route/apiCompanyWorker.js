@@ -4,7 +4,7 @@ const companyWorker=require('../controllers/companyWorkerController')
 
 router.post('/addCompanyWorker',companyWorker.addCompanyWorker);
 router.delete('/deleteCompanyWorkerById/:id',companyWorker.deleteCompanyWorkerById);
-router.post('/resetPassword',companyWorker.resetPassword);
+//router.post('/resetPassword',companyWorker.resetPassword);
 router.get('/editProfile/:mail',companyWorker.editProfileDisplay);
 router.post('/editProfile/:mail',companyWorker.editProfile);
 
@@ -36,4 +36,6 @@ router.get('/allCompany/:mail',companyWorker.allCompany);
 router.get('/info/:mail', companyWorker.infoCompany);
 
 
+router.get('/resetPassword/:mail', companyWorker.resetPasswordDisplay);
+router.post('/resetPassword/:mail', companyWorker.resetPassword);
 module.exports=router

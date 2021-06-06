@@ -2,8 +2,12 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <title>All Employers</title>
-    <link rel="stylesheet" href="/css/styleEmployerFutureEmployement.css">
+    <title>History-Employments</title>
+    <link rel="stylesheet" href="/css/styleCompanyWorkerMenuEmployers.css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/10e7a38072.js" crossorigin="anonymous"></script>
 </head>
@@ -14,29 +18,18 @@
             <img class="logo" src="/css/images/logo.PNG">
         </a>
         <ul>
-            <li><a href="/companyWorker/editProfile/<%=mailCompany%>" class="active">My Profile</a> </li>
-            <li><a class="active" href="/companyWorker/allEmployer/<%=mailCompany%>">Employers</a> </li>
-            <li><a class="active" href="/companyWorker/allCompany/<%=mailCompany%>">Contractor</a> </li>
-            <li><a href="#">Statistics</a> </li>
-            <li><a href="/contractorWorker/sendMessageDiplay/<%=mailCompany%>">Messages</a> </li>
-            <li><a href="#">Log Out</a> </li>
+            <li><a href="/companyWorker/editProfile/<%=mailCompany%>"><i class="fa fa-fw fa-home"></i>My Profile</a> </li>
+            <li><a href="/companyWorker/allEmployer/<%=mailCompany%>"><i class="fa fa-fw fa-search"></i>Employers</a> </li>
+            <li><a href="/companyWorker/allCompany/<%=mailCompany%>"><i class="fa fa-fw fa-search"></i>Contractor Workers</a> </li>
+            <li><a href="/companyWorker/info/<%=mailCompany%>"><i class="fa fa-fw fa-pie-chart"></i>Statistics</a> </li>
+            <li><a href="/contractorWorker/sendMessageDiplay/<%=mailCompany%>"><i class="fa fa-fw fa-envelope"></i>Messages</a> </li>
+            <li><a href="/"><i class="fa fa-fw fa-sign-out"></i>Log Out</a> </li>
         </ul>
     </nav>
-    <div>
-        <div class="input-box">
-            <lable class="menu">Menu for performing contractor worker operations</lable>
-        </div>
-    </div>
     <div class="input-box">
         <lable>    </lable>
         <div class="button" >
             <input type="btn" value="Add Employer" onclick="addEmp()"  href="/companyWorker/styleCompanyWorkerMenuEmployers" readonly>
-        </div>
-    </div>
-    <div class="input-box">
-        <lable>   </lable>
-        <div class="button">
-            <input type="btn" value="Delete Employer" onclick="delEmp()" target="_blank"  href="/companyWorker/styleCompanyWorkerMenuEmployers" readonly>
         </div>
     </div>
 
@@ -44,18 +37,20 @@
         <div class="title">All Employers
             <small class="pull-right"><%= employers.length%></small>
         </div>
-        <div>
-        <div>
-        <div>  <label class="l">Sort the number of employees at the employer: </label></div>
-            <div>
-                <select id="category" class="icon-menu" onchange="sortByWage()">
-                    <option value="select" >Select</option>
-                    <option value="High to low" >High to low</option>
-                    <option value="low to High">low to High</option>
+            <div class="container">
+                <div>
+                    <div>
+                        <div>  <label class="l">Sort the number of employees at the employer: </label></div>
+                        <div>
+                            <select id="category" class="icon-menu" onchange="sortByWage()">
+                                <option value="select" >Select</option>
+                                <option value="High to low" >High to low</option>
+                                <option value="low to High">low to High</option>
 
-                </select>
-        </div>
-    </div>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
             <table class="table table-striped custab" id="table">
             <%
         if(employers.length!=0 && arrNum.length!=0) {
@@ -74,6 +69,7 @@
                 <% } %>
                 <!-- <button class="sort" data-sort="status">sort by date</button> -->
             </table>
+        </div>
         </div>
     <br>
     <br>
