@@ -65,6 +65,7 @@ const getCompanyWorkerByEmail = async(mail) => {
         return res.status(400).send('That mail is error!');
     }
 }
+/*
 //סיסמא
 const resetPassword = async (req, res) => {
     const { mail } = req.body.mail
@@ -100,8 +101,11 @@ const resetPassword = async (req, res) => {
         }
     })
 }
+*/
 //הצגת פרופיל
 const editProfileDisplay = async (req, res) => {
+    console.log('req.params.mail');
+    console.log(req.params.mail);
     let companyWorker = await CompanyWorker.findOne({mail:req.params.mail})
     if (companyWorker) {
         res.render('../views/companyWorkerEditProfile',{companyWorker:companyWorker});
@@ -115,7 +119,7 @@ const editProfile = async (req, res) => {
     let companyWorker = await CompanyWorker.findOneAndUpdate({mail: req.params.mail}, req.body, {new: true });
     res.redirect(`/companyWorker/homePage/${req.params.mail}`);
     console.log('infoCompanyWorker1/1');
-    infoCompanyWorker();
+    //infoCompanyWorker();
     console.log('infoCompanyWorker1/2');
 
 }
@@ -436,4 +440,22 @@ const deleteContractorWorkerById = (req,res) => {
     });
 }
 */
-module.exports={addCompanyWorker,companyExists,deleteCompanyWorkerById,getCompanyWorkerByEmail,resetPassword,editProfileDisplay,editProfile,updateCompanyWorkerPass,searchContractorByFields,bookContractor,bookContractorDisplay,allEmployer,allCompany,infoCompany}
+
+const resetPasswordDisplay = async (req, res) => {
+    let companyWorker = await CompanyWorker.findOne({mail:req.params.mail})
+    if (companyWorker) {
+        res.render('../views/resetPasswordCompanyWorker', companyWorker);
+    }
+    else {
+        return res.status(400).send('That email is error!');
+    }
+}
+const resetPassword = async (req, res) => {
+
+    const salt = await bcrypt.genSalt(10);
+    const password = await bcrypt.hash(req.body.password, salt);
+    let companyWorker = await CompanyWorker.findOneAndUpdate({mail: req.params.mail}, { password: password}, {new: true });
+    res.redirect(`/companyWorker/homePage/${req.params.mail}`);
+}
+
+module.exports={addCompanyWorker,companyExists,deleteCompanyWorkerById,getCompanyWorkerByEmail,editProfileDisplay,editProfile,updateCompanyWorkerPass,searchContractorByFields,bookContractor,bookContractorDisplay,allEmployer,allCompany,infoCompany,resetPasswordDisplay,resetPassword}
