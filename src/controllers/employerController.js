@@ -224,7 +224,7 @@ const bookContractor = async (req, res) => {
         return res.status(400).send('That error in system');
     } 
     else {
-        let employement = new Employement({employerEmail: req.params.emailEmployer, constructorEmail: contractor.mail, date: req.params.date, jobScope: req.body.numBusinessHours, status: 'waiting for approval',hourlyWage: contractor.hourlyWage, rating: 0, feedback:'',occupationArea: contractor.occupationArea});
+        let employement = new Employement({employerEmail: req.params.emailEmployer, constructorEmail: contractor.mail, date: req.params.date, jobScope: req.body.numBusinessHours, status: 'waiting for approval',hourlyWage: contractor.hourlyWage, rating: 0, feedback:'',occupationArea: contractor.occupationArea,companyName:employer.companyName});
         await employement.save();
         // console.log({id: contractor.unavailability,date:req.params.date})
         ContractorWorkeController.addDateToUnavailabilityarray(contractor.unavailability, req.params.date,req.params.date);

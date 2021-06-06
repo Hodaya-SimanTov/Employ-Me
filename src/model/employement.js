@@ -54,6 +54,9 @@ const Employement=mongoose.model('Employement',new mongoose.Schema({
         type:String,
         require:false,
         default:0
+    },
+    companyName:{
+        type:String
     }
 }));
 function validateEmployement(employement) {
