@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Future shifts</title>
-        <link rel="stylesheet" href="/css/styleContractorHistory.css">
+        <link rel="stylesheet" href="/css/styleContractorFuture.css">
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
          <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -26,28 +26,40 @@
                     var d=new Date();
                 result.forEach(function(employement){
                 %>
-                <div class="container row"> 
-                    <div class="d">  
-                        <div >
-                            <label class="details">Date: </label>
-                            <span ><%= employement.date.getDate() %>.<%= employement.date.getMonth()+1 %>.<%= employement.date.getFullYear() %></span>
-                           
+                <div class="container "> 
+                    <div class="user-details d">    
+                        <div class="input-box">
+                            <label class="details">Company Name: </label>
+                            <span class="input" ><%= employement.companyName %></span>
+                            
                         </div>
-                        <div >
-                            <label class="details">Job Scope: </label>
-                            <span ><%= employement.jobScope %>  hours</span>
-                        </div>
-                        <div >
+                        <div class="input-box" >
                             <label class="details">Employer Email: </label>
-                            <span ><%= employement.employerEmail %></span>                            
+                            <span class="input"><%= employement.employerEmail %></span>
                         </div>
-                    <%if(employement.date.getDate()==d.getDate() && employement.start == "no")  {%>
-                        <a class='btn1' id="start" href="/contractorWorker/startEmployement/<%=employement._id%>" >Enter </a>
-                    <%}%> 
-                    <%if(employement.date.getDate()==d.getDate() && employement.start == "yes")  {%>
-                        <a class='btn1' id="end"  href="/contractorWorker/endEmployement/<%=employement._id%>" > Exit </a>
-                    <%}%>                     
-                
+                        <div class="input-box">
+                            <label class="details">Date: </label>
+                            <span class="input" ><%= employement.date.toDateString() %></span>                            
+                        </div>
+                        <div class="input-box">
+                            <label class="details">Job Scope: </label>
+                            <span class="input"><%= employement.jobScope %> hours</span>                            
+                        </div>
+                        <div class="input-box">
+                            <label class="details">Hourly wage: </label>
+                            <span class="input"><%= employement.hourlyWage %></span>                            
+                        </div>
+                        <div class="input-box">                 
+                    </div>
+                    <div class="input-box">    
+                        <%if(employement.date.getDate()==d.getDate() && employement.start == "no")  {%>
+                            <a class='btn1' id="start" href="/contractorWorker/startEmployement/<%=employement._id%>" >Enter </a>
+                        <%}%> 
+                        <%if(employement.date.getDate()==d.getDate() && employement.start == "yes")  {%>
+                            <a class='btn1' id="end"  href="/contractorWorker/endEmployement/<%=employement._id%>" > Exit </a>
+                        </div>
+                        <%}%>                     
+                    
                     </div>
                 </div> 
                   

@@ -351,18 +351,10 @@ const homepageDisplay = async (req, res) => {
         var name = contractor.firstName+" "+contractor.lastName
         Employement.find({ constructorEmail: req.params.mail , status:'approved'})
         .then(emp => {
-            // console.log(emp);
-            // for(i=0;i<emp.length;i++){
-            //     if(emp[i].date.getDate()  == today.date.getDate() && emp[i].date.getMonth() == today.date.getMonth() && emp[i].date.getFullYear() == today.date.getFullYear()){
-            //         console.log(currentEmployement[i]);
-            //         res.render('../views/contractorhomepage',{mail:req.params.mail,today:currentEmployement[i]});
-            //     }
-            // }
-            // // res.render('../views/contractorhomepage',{mail:req.params.mail,today:currentEmployement[1]});
             res.render('../views/contractorhomepage',{mail:req.params.mail,result:emp,name:name});        
         }).catch(err => {
         console.log(`can not find this employement! ${err}`);
-        });        
+        });     
     }
     else {
         return res.status(400).send('That email is error!');
@@ -600,8 +592,8 @@ const updatePaycheckEnd =  () => {
                 }).catch(err=>{
                     console.log(err);
                 })
-            }
-            
+                addMessage(pays[i].contractorMail,date,"paycheckReady","A slip for the last month is ready to view");
+            }            
         }
     }).catch(err=>{
         console.log(err);
@@ -678,6 +670,7 @@ cron.schedule("*/12 * * * *", function() {
 cron.schedule("0 8 * * *", () => {
     console.log('cron.schedule1');
     updateSalary();
+    shiftToday();
 });
 
 //עדכון השכר לפי גיל cron קורא לה
@@ -801,6 +794,23 @@ const jobRateDisplay = async (req,res) => {
 
     res.render('../views/contractorJobRate',{mail:req.params.mail,ratGlobal:ratGlobal,arrMonth:arrMonth,feedback:feedback});
 }
+
+const shiftToday = () =>{
+    var i;
+    var d = new Date();
+    Employement.find().then(emp => {
+        for(i=0;i<emp.length;i++){
+            if(emp[i].date.getDate() == d.getDate() && emp[i].date.getMonth() == d.getMonth() && emp[i].date.getFullYear() == d.getFullYear()){
+                addMessage(emp.constructorEmail,d,"ShiftToday","Do not forget you have a shift for today");
+            }
+
+        }
+    }).catch(err => {
+        console.log(`can not add this message! ${err}`);
+    });
+
+}
+
 
 
 

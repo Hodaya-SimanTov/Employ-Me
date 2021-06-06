@@ -25,30 +25,38 @@
                     var d=new Date();
                 result.forEach(function(employement){
                 %>
-                <div class="container "> 
-                    <div class="user-details d">  
-                        <div >
-                            <label class="details">Date: </label>
-                            <span ><%= employement.date.getDate() %>.<%= employement.date.getMonth()+1 %>.<%= employement.date.getFullYear() %></span>                        
+                <div class="container row"> 
+                        <div class="user-details d">    
+                            <div class="input-box">
+                                <label class="details">Company Name: </label>
+                                <span class="input" ><%= employement.companyName %></span>                                
+                            </div>
+                            <div class="input-box" >
+                                <label class="details">Employer Email: </label>
+                                <span class="input"><%= employement.employerEmail %></span>
+                            </div>
+                            <div class="input-box">
+                                <label class="details">Date: </label>
+                                <span class="input" ><%= employement.date.toDateString() %></span>                            
+                            </div>
+                            <div class="input-box">
+                                <label class="details">Job Scope: </label>
+                                <span class="input"><%= employement.jobScope %> hours</span>                            
+                            </div>
+                            <div class="input-box">
+                                <label class="details">Hourly wage: </label>
+                                <span class="input"><%= employement.hourlyWage %></span>                            
+                            </div>
+                            <div class="input-box">    
+                             <a class='btn' href='/contractorWorker/approveShift/<%=employement._id%>'></span> Approve </a>                            
+                             <a class='btn' href='/contractorWorker/cancelShift/<%=employement._id%>'></span> Cancel </a>                            
+                            </div>
                         </div>
-                        <div >
-                            <label class="details">Job Scope: </label>
-                            <span ><%= employement.jobScope %>  hours</span>
-                        </div>
-                        <div >
-                            <label class="details">Employer Email: </label>
-                            <span ><%= employement.employerEmail %></span>                            
-                        </div>
-                        <div  >
-                             <a class='btn'  href="/contractorWorker/approveShift/<%=employement._id%>" >APPROVE</a>
-                             <a class='btn'  href="/contractorWorker/cancelShift/<%=employement._id%>" >CANCEL</a>
-                        </div>
-                    </div>
                 </div> 
                 <% i++;}) %>
-                    <% } else{ %>
-                        <div class="h3"><h3>No shifts found ..</h3> </div>
-                    <% } %>
+                <% } else{ %>
+                    <div class="h3"><h3>No shifts found ..</h3> </div>
+                <% } %>
             </div>
         </div>
     </body>

@@ -40,7 +40,7 @@
     margin-top: 45px;
     height: 4px;
     width: 35px;
-    background: linear-gradient(135deg, #71b7e6,#e6d171);
+    background: linear-gradient(135deg, #060747,#eff871);
 }
 .title2::before{
     content: '';
@@ -49,7 +49,7 @@
     margin-top: 45px;
     height: 4px;
     width: 30px;
-    background: linear-gradient(135deg, #71b7e6,#e6d171);
+    background: linear-gradient(135deg, #060747,#eff871);
 }
 *{
     font-family: 'Poppins',sans-serif;  

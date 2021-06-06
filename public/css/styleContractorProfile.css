@@ -19,12 +19,16 @@ body{
 }
 
 .container{
-    max-width: 600px;
+    max-width: 70%;
     width: 100%;
     background: #fff;
     padding: 30px 30px;
     border-radius: 10px;
     right: 0px;
+    align-items: center;
+    margin: auto;
+    margin-top: 100px;
+    opacity: 0.9 ;
 }
 .container .title{
     font-size: 25px;
@@ -38,7 +42,7 @@ body{
     bottom: 0;
     height: 3px;
     width: 30px;
-    background: linear-gradient(135deg, #71b7e6,#e6d171);
+    background: linear-gradient(135deg, #060747,#eff871);
 }
 .container form .user-details{
     display: flex;
@@ -109,10 +113,11 @@ form .button input{
     font-weight: 500;
     border-radius: 5px;
     letter-spacing: 1px;
-    background: linear-gradient(135deg, #71b7e6, #e6d171)
+    background-color: #9c9c9e;  
+    
 }
 form .button input:hover{
-    background: linear-gradient(-135deg, #71b7e6, #e6d171)
+    background-color: #454546;
 }
 .user-details .input-box[data-error] .input{
     border-color: #c92432;
