@@ -26,7 +26,7 @@
     </ul>
 </nav>
 
-<form id="form" name="form" action="/companyWorker/upDateTime/<%=mail%>" method="POST">
+<form id="form" name="form" method="POST">
 <div class="container">
     <div class="row col-md-6 col-offset-2 custyle">
         <div class="page-header">
@@ -73,20 +73,7 @@
                         <label class="details">End Time</label>
                         <span class="input" ><%= result.endTime %></span>
                     </div>
-                     <div class="input-box" data-error="Error message">
-                            <span class="details">Update Start</span>
-                            <input type="text" class="input" placeholder="start Time" name="startTime" id="startTime" required>
-                        </div>
-                        <div class="input-box" data-error="Error message">
-                            <span class="details">Update End</span>
-                            <input type="text" class="input" placeholder="end Time" name="endTime" id="endTime" required>
-                            <input type="hidden" class="input" value="<%=result.employmentId%>" name="id" id="id" required>
-
-                        </div>
-
-                     <div class="button">
-                        <input  value="update" onclick="update()"  readonly>
-                    </div>
+                     
                     </div>
         <% i++;}) %>
         <% }
@@ -109,7 +96,8 @@ function update()
     const form=document.getElementById("form");
     const startTime=document.getElementById("startTime");
     const endTime=document.getElementById("endTime");
-    document.getElementById("form").submit();
+
+    
 }
 </script>
 </html>

@@ -466,7 +466,7 @@ const resetPassword = async (req, res) => {
 
 //כל יום יבדוק אם יש שגיאת דיווח
 
-cron.schedule("*/60 * * * * *", function() {
+cron.schedule("0 8 * * *", ()=> {
     var d=new Date();
     console.log("cron reportCheck");
     //addMessage("ravit@gmail.com",d,"EmptyShift","sdds");
