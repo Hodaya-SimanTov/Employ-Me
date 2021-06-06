@@ -720,9 +720,7 @@ const sendMessageDiplay = async (req,res) => {
     let contractors = await ContractorWorker.find();
     if (contractors) {
         res.render(`../views/companyMessage`,{result:contractors,mail:req.params.mail});
-
     }
-    
     else {
         return res.status(400).send('That email is error!');
     }
