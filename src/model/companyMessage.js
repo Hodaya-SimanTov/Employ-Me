@@ -1,6 +1,7 @@
 const mongoose=require('mongoose')
 
-const CompanyMessageSchema=mongoose.Schema({
+
+var CompanyMessageSchema=mongoose.Schema({
     contractorMail:{
         type:String
     },
@@ -12,6 +13,24 @@ const CompanyMessageSchema=mongoose.Schema({
     },
     text:{
         type:String
+    },
+    jobScope:{
+        type:Number,
+        required:true,
+        min:1,
+        max: 12
+    },
+    startTime:{
+        type:String,
+        default:"0"
+    },
+    endTime:{
+        type:String,
+        default:"0"
+    },
+    employmentId:{
+        type:mongoose.Types.ObjectId,
+        ref:"Employement"
     }
 })
 

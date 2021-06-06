@@ -3,19 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Messages</title>
-    <link rel="stylesheet" href="/css/styleContractorMessage.css">
+    <link rel="stylesheet" href="/css/styleCompanyMessageFromSystem.css">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<style>
-    .text-center-e{
-        display: true;
-    }
-</style>
-
 <body>
 <nav class="navbar">
     <a href="/companyWorker/homePage/<%=mail%>">
@@ -27,25 +21,25 @@
         <li><a href="/companyWorker/allCompany/<%=mail%>"><i class="fa fa-fw fa-search"></i>Contractor Workers</a> </li>
         <li><a href="/companyWorker/info/<%=mail%>"><i class="fa fa-fw fa-pie-chart"></i>Statistics</a> </li>
         <li><a href="/contractorWorker/sendMessageDiplay/<%=mail%>"><i class="fa fa-fw fa-envelope"></i>Messages</a> </li>
+        <li><a href="/companyWorker/companyMessageList/<%=mail%>"><i class="fa fa-fw fa-envelope"></i>System Messages</a> </li>
         <li><a href="/"><i class="fa fa-fw fa-sign-out"></i>Log Out</a> </li>
     </ul>
 </nav>
+
+<form id="form" name="form" action="/companyWorker/upDateTime/<%=mail%>" method="POST">
 <div class="container">
     <div class="row col-md-6 col-offset-2 custyle">
         <div class="page-header">
-
             <div class="title"><h2><small class="pull-right"></small>Messages</h2></div>
-
         </div>
-
-        <div class="container row">
-            <div class="user-details d row">
                 <%
-                if(result.length!=0) {
+                if(message.length!=0) {
                     var i=1;
                     var d=new Date();
-                result.forEach(function(message){
+                message.forEach(function(result){
                 %>
+                <div class="container row">
+                    <div class="user-details d row">
                 <%if(result.type == "EmptyShift"){%>
                     <div class="col-4">
                         <svg xmlns="http://www.w3.org/2000/svg" width="35" height="80"  fill="currentColor" class="bi bi-calendar-x" viewBox="0 0 16 16">
@@ -54,9 +48,7 @@
                         </svg>
                     </div>
                     <div class="col-8">
-                        </br>
                         <span class="text" ><%= result.text %></span>
-                        </br>
                         </div>
                 <%}%>
                 <%if(result.type == "ErrorReported"){%>
@@ -66,27 +58,58 @@
                         </svg>
                     </div>
                     <div class="col-8">
-                        </br>
-                        <span class="text" ><%= result.text %></span>
-                        </br>
-                          </div>
+                         <span class="text" ><%= result.text %></span>
+                     </div>
                 <%}%>
+                    <div class="input-box">
+                        <label class="details">Job Scope </label>
+                        <span class="input" ><%= result.jobScope %></span>
+                    </div>
+                    <div class="input-box" >
+                        <label class="details">Start Time </label>
+                        <span class="input"><%= result.startTime %></span>
+                    </div>
+                    <div class="input-box">
+                        <label class="details">End Time</label>
+                        <span class="input" ><%= result.endTime %></span>
+                    </div>
+                     <div class="input-box" data-error="Error message">
+                            <span class="details">Update Start</span>
+                            <input type="text" class="input" placeholder="start Time" name="startTime" id="startTime" required>
+                        </div>
+                        <div class="input-box" data-error="Error message">
+                            <span class="details">Update Start</span>
+                            <input type="text" class="input" placeholder="end Time" name="endTime" id="endTime" required>
+                            <input type="hidden" class="input" value="<%=result.employmentId%>" name="id" id="id" required>
 
-                <div >
-                    <hr >
-                    <span ><%= result.date.getDate() %>.<%= result.date.getMonth()+1 %>.<%= result.date.getFullYear() %></span>
-                </div>
-            </div>
-        </div>
+                        </div>
 
+                     <div class="button">
+                        <input  value="update" onclick="update()"  readonly>
+                    </div>
+                    </div>
         <% i++;}) %>
-        <% } else{ %>
+        <% }
+
+    else{ %>
             <div class="h3"><h3>No message found ..</h3> </div>
         <% } %>
     </div>
 </div>
+</div>
+</form>
 </body>
 <script >
 
+
+
+function update()
+{
+    //עדכון בדטה בייס
+    const form=document.getElementById("form");
+    const startTime=document.getElementById("startTime");
+    const endTime=document.getElementById("endTime");
+    document.getElementById("form").submit();
+}
 </script>
 </html>

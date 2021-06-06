@@ -6,7 +6,8 @@ const Unavailability=require('../model/unavailabilityContractor');
 const { CompanyWorker, validate,validateEditCompanyWorker } = require('../model/companyWorker');
 const {Employement, validateEmployement} = require('../model/employement');
 const { ContractorWorker, validateContractor,validateEditContractorWorker } = require('../model/contractorWorker');
-const{CompanyMessage}=require('../model/companyMessage');
+const CompanyMessage=require('../model/companyMessage');
+
 const { Employer, validate2,validateEditEmployer } = require('../model/employer');
 
 //const {Employement,validateEmployement}=require('../model/employement');
@@ -122,6 +123,7 @@ const editProfile = async (req, res) => {
     console.log('infoCompanyWorker1/1');
     //infoCompanyWorker();
     console.log('infoCompanyWorker1/2');
+
 
 }
 
@@ -305,6 +307,9 @@ const allCompany = async (req,res) => {
     catch(err) {
         console.log(err);
     }
+    var d=new Date();
+    console.log("cron reportCheck");
+
 }
 //הצגת כל המעסיקים
 const allEmployer = async (req,res) => {
@@ -461,74 +466,123 @@ const resetPassword = async (req, res) => {
 
 //כל יום יבדוק אם יש שגיאת דיווח
 
-// cron.schedule("*/5 * * * * *", function() {
-//     console.log("cron reportCheck");
-//     var d=new Date();
-//     console.log("cron reportCheck");
-//     addMessage("ravitlevi999@gmail.com",d,"EmptyShift","sdds");
-//     //reportCheck();
-// });
+cron.schedule("*/15 * * * * *", function() {
+    var d=new Date();
+    console.log("cron reportCheck");
+    //addMessage("ravit@gmail.com",d,"EmptyShift","sdds");
+
+   reportCheck();
+    //reportCheck2();
+
+});
 
 //מייל ובעיה
-const reportCheck = async (req, res) => {
-
+const reportCheck = async () => {
+try {
     console.log('employements');
-    var i=0;
-    var jobScope=0;
-    var startTime=0;
-    var endTime=0;
-    var startHour=0;
-    var startMin=0;
-    var endHour=0;
-    var endMin=0;
-    var sum=0;
+    var i ;
+    var startHour ;
+    var startMin ;
+    var endHour ;
+    var endMin ;
+    var sum = 0;
     let employements = await Employement.find();
     for (i = 0; i < employements.length; i++) {
-        startHour = parseInt((employements.startTime).substr(0, 2), 10);
-        startMin = parseInt((employements.startTime).substr(4, 6), 10);
-        endHour = parseInt((employements.endTime).substr(0, 2), 10);
-        endMin = parseInt((employements.endTime).substr(4, 6), 10);
-        sum = (endHour - startHour) + math.abs(endMin - startMin);
-        console.log(sum);
 
-        if(employements.startTime=="0" && employements.endTime=="0" ) {
-        }
-        else{
-            addMessage(employements.constructorEmail,employements.date,"EmptyShift","Welcome!!\nReported incorrectly / did not report at all !!\nPlease fix ");
-        }
-        if (employements.jobScope == sum + 0.10 ||employements.startTime=="0" || employements.endTime=="0" ) {
+        if (employements[i].startTime == "0" || employements[i].endTime == "0")
+        {
+            addMessage(employements[i].constructorEmail, employements[i].date, "EmptyShift", "Welcome!!\nReported incorrectly / did not report at all !!\nPlease fix ",employements[i].jobScope,employements[i].startTime,employements[i].endTime,employements[i]._id);
         }
         else {
-            //שלח הודעה
-            addMessage(employements.constructorEmail,employements.date,"ErrorReported","Hello!!\nThe hours you reported do not match the hours your employer approved for you !!\nPlease fix ");
-        }
+            const [h, m, s] = employements[i].startTime.split(':');
+            console.log('split :' + h + m + 's');
+            startHour = parseInt(h, 10);
+            startMin = parseInt(m, 10);
+            const [h2, m2, s2] = employements[i].endTime.split(':');
+            console.log('split :' + h2 + m2 + 's');
+            endHour = parseInt(h2, 10);
+            endMin = parseInt(m2, 10);
 
+            sum = (endHour * 60 - startHour * 60) + Math.abs(endMin - startMin);
+            sum = sum / 60;
+            console.log(sum);
+            if (employements[i].jobScope != sum) {
+                addMessage(employements[i].constructorEmail, employements[i].date, "ErrorReported", "Hello!!\nThe hours you reported do not match the hours your employer approved for you !!\n Error is: "+ sum + ".", employements[i].jobScope, employements[i].startTime, employements[i].endTime,employements[i]._id);
+            }
+        }
+        console.log(employements[i].constructorEmail);
     }
 }
+catch(err) {
+    console.log(err);
+}
+}
 
-const addMessage= (mail,date,type,text) => {
-    const newCompanyMessage=new CompanyMessage({contractorMail:mail,date:date,type:type,text:text});
-    newCompanyMessage.save().then(message => {
-        console.log(message);
-    }).catch(err => {
-        console.log(`can not add this message! ${err}`);
-    });
+// const reportCheck2 = async () => {
+//     var str = '2:12:46';
+//     var str2 = '4:00:46';
+//
+//     const [h, m, s] = str.split(':');
+//     console.log('split :' +h +m +'s');
+//     var startHour = parseInt(h, 10);
+//     var startMin = parseInt(m, 10);
+//     const [h2, m2, s2] = str2.split(':');
+//     console.log('split :' +h2 +m2 +'s');
+//     var endHour = parseInt(h2, 10);
+//     var endMin = parseInt(m2, 10);
+//
+//     var sum = (endHour*60 - startHour*60) + Math.abs(endMin - startMin);
+//     console.log('sum ' +sum);
+//
+// }
 
+
+const addMessage= (mail,date,type,text,js,s,e,id) => {
+    try {
+
+       // var d=new Date('2021-06-06T12:28:49.684Z');
+        const newCompanyMessage = new CompanyMessage({employmentId:id,contractorMail: mail, date: date, type: type, text: text,jobScope:js,startTime:s,endTime:e});
+        newCompanyMessage.save().then(messages => {
+            console.log(messages);
+        }).catch(err => {
+            console.log(`can not add this message! ${err}`);
+        });
+    }
+    catch(err) {
+        console.log(err);
+    }
 }
 
 /*########*/
-const messageList = async (req,res) => {
-    let messages = await CompanyMessage.find();
-    if (messages) {
-        messages.sort((a, b) => b.date - a.date)
-        res.render('../views/companyMessageFromSystem',{result:messages});
+const messageList =  async (req,res) => {
+    console.log('messageList1');
+    try {
+        console.log('messageList2');
+        let messages = await CompanyMessage.find();
+        if (messages) {
+            // {contractorMail:req.params.mail}
+            //עובד שזה המייל שלו
+            let employment = await Employement.find();
+            messages.sort((a, b) => b.date - a.date)
+            console.log('messageList3');
+
+            res.render('../views/companyMessageFromSystem', {message: messages,mail:req.params.mail});
+        } else {
+            return res.status(400).send('That email is error!');
+        }
     }
-    else {
-        return res.status(400).send('That email is error!');
+    catch(err) {
+        console.log(err);
     }
 }
 
+//עדכון שדות בהודעה
+const upDateTime = async (req,res) => {
 
-
-
-module.exports={addCompanyWorker,companyExists,deleteCompanyWorkerById,getCompanyWorkerByEmail,editProfileDisplay,editProfile,updateCompanyWorkerPass,searchContractorByFields,bookContractor,bookContractorDisplay,allEmployer,allCompany,infoCompany,resetPasswordDisplay,resetPassword,messageList }
+    let employment = await Employement.findByIdAndUpdate({_id: req.body.id},{startTime: req.body.startTime,endTime: req.body.endTime});
+    res.redirect(`/companyWorker/homePage/${req.params.mail}`);
+    //console.log('infoCompanyWorker1/1');
+    //infoCompanyWorker();
+    //console.log('infoCompanyWorker1/2');
+}
+module.exports = { addCompanyWorker,companyExists,deleteCompanyWorkerById,getCompanyWorkerByEmail,editProfileDisplay,editProfile,updateCompanyWorkerPass,searchContractorByFields,bookContractor,bookContractorDisplay,allEmployer,allCompany,infoCompany,infoCompanyWorker,resetPasswordDisplay,resetPassword,messageList,addMessage,upDateTime};

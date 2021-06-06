@@ -40,5 +40,8 @@ router.get('/resetPassword/:mail', companyWorker.resetPasswordDisplay);
 router.post('/resetPassword/:mail', companyWorker.resetPassword);
 
 router.get('/companyMessageList/:mail',companyWorker.messageList);
+//router.get('/upDateTime/:mail',companyWorker.upDateTime);
+router.get('/upDateTime/:id/:start/:end/:mail',companyWorker.upDateTime);
+
 
 module.exports=router
