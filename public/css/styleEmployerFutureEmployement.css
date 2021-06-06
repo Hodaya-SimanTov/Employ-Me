@@ -11,6 +11,7 @@
     justify-content: left;
     align-items: left;
     padding: 10px;
+    width: 100%;
 }
 .back{
 	background: url('images/back5.png') no-repeat;
@@ -161,7 +162,7 @@ content:"";
     border-radius: 7px;
     /* border-color:  rgb(15, 15, 15); */
     /* padding-left: 20px; */
-    width: 100%;
+    width: 50%;
     height: 100%;
 }
 .user-details .input-box{
