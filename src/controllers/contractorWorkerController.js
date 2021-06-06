@@ -346,7 +346,7 @@ const updateContractorPass = (req,res) => {
 const homepageDisplay = async (req, res) => {
     let contractor = await ContractorWorker.findOne({mail:req.params.mail});
     if (contractor) {
-        res.render('../views/contractorhomepage',{mail:req.params.mail});
+        res.render('../views/contractorHomepage',{mail:req.params.mail});
     }
     else {
         return res.status(400).send('That email is error!');
