@@ -81,7 +81,7 @@ const addContractorWorker = (req,res)=> {
                 console.log('add conrtactor');
                 addUnavailabilityArray(contractorWorker._id);//הוספת מערך חופשות ריק
                 salaryOfHour(contractorWorker._id,contractorWorker.birthday)//עדכון השכר לשעה
-                addMessage(contractorWorker.mail,date,"NewEmployee","Welcome!!\nThank you for joining our site, we will do everything to find you a suitable job !! ");
+                addMessage(contractorWorker.mail,date,"NewEmployee","Welcome!! Thank you for joining our site, we will do everything to find you a suitable job !! ");
                 res.redirect(`/companyWorker/homePage/${req.body.mail}`);
         }).catch(err=> {
             console.log(`can not add this worker! ${err}`);
@@ -371,7 +371,7 @@ const contractorFuture = (req,res) => {
     Employement.find({ constructorEmail: req.params.mail , status:'approved'})
         .then(currentEmployement => {
             currentEmployement.sort((a, b) => a.date - b.date);
-            res.render('../views/contractorFuture',{result:currentEmployement});
+            res.render('../views/contractorFuture',{result:currentEmployement,mail:req.params.mail});
         }).catch(err => {
         console.log(`can not find this employement! ${err}`);
     });
@@ -383,7 +383,7 @@ const contractorHistory = (req,res) => {
     Employement.find( { $or:[{constructorEmail: req.params.mail , status:'closed'},{constructorEmail: req.params.mail , status:'verified‏'}]})
         .then(currentEmployement => {
             currentEmployement.sort((a, b) => b.date - a.date)
-            res.render('../views/contractorHistory',{result:currentEmployement});
+            res.render('../views/contractorHistory',{result:currentEmployement,mail:req.params.mail});
         }).catch(err => {
         console.log(`can not find this employement! ${err}`);
     });
@@ -393,7 +393,7 @@ const contractorWaitApproval = (req,res) => {
     Employement.find( {constructorEmail: req.params.mail , status:'waiting for approval'})
         .then(currentEmployement => {
             currentEmployement.sort((a, b) => b.date - a.date)
-            res.render('../views/contractorWaitShift',{result:currentEmployement});
+            res.render('../views/contractorWaitShift',{result:currentEmployement,mail:req.params.mail});
         }).catch(err => {
         console.log(`can not find this employement! ${err}`);
     });
@@ -467,7 +467,7 @@ const payChecksList = async (req,res) => {
     let payChecks = await ContractorPaycheck.find({contractorMail:req.params.mail});
     if (payChecks) {
         payChecks.sort((a, b) => b.month - a.month)
-        res.render('../views/contractorPaycheckList',{result:payChecks});
+        res.render('../views/contractorPaycheckList',{result:payChecks,mail:req.params.mail});
     }
     else {
         return res.status(400).send('That email is error!');
@@ -740,7 +740,7 @@ const messageList = async (req,res) => {
     let messages = await ContractorMessage.find({contractorMail:req.params.mail});
     if (messages) {
         messages.sort((a, b) => b.date - a.date)
-        res.render('../views/contractorMessage',{result:messages});
+        res.render('../views/contractorMessage',{result:messages,mail:req.params.mail});
     }
     else {
         return res.status(400).send('That email is error!');
@@ -814,7 +814,19 @@ const shiftToday = () =>{
 }
 
 
+const contactUsDisplay = async (req,res) =>{
+    console.log(req.params.mail);
+    let con = await ContractorWorker.find({mail:req.params.mail});
+    if(con) {
+        res.render('../views/contractorContactUs', { mail : req.params.mail });  
+        //res.redirect(`/contractorWorker/contractorContactUs/${req.params.mail}`);
 
+    }
+    else {(err => { 
+        console.log(err); 
+        return res.status(400).send('That email is error!');
+    })}
+}
 
 
 
@@ -823,4 +835,4 @@ module.exports = { addContractorWorker , getContractorWorkerById , deleteContrac
     , addUn , getContractorByEmail , editProfileDisplay , editProfile , updateContractorPass , unDisplay 
     , homepageDisplay , findContractorInSpecDate , contractorFuture , contractorHistory , endEmployement
     , startEmployement ,contractorWaitApproval , approveShift , cancelShift , payChecksList , payCheck 
-    , messageList , sendMessage , sendMessageDiplay , jobRateDisplay };
+    , messageList , sendMessage , sendMessageDiplay , jobRateDisplay , contactUsDisplay };

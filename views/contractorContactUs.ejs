@@ -17,12 +17,31 @@
 </head>
 
 <body>
-    <!-- <div><%- include ('contractorNav.ejs')%> </div> -->
-    <!-- <div class="row vh35">
-        <%- include ('contractorNav.ejs')%>            
-    </div> -->
-    <div class="container-fluid">
-        
+    <div>
+       
+        <div class="row vh35">
+            <!-- <%- include ('contractorNav.ejs')%>             -->
+            <nav class="navbar" dir="ltr">
+            
+                <ul><a class="aa" href="/contractorWorker/contractorHomepage/<%=mail%>">
+                    <img class="logo" src="/css/images/logo.PNG">
+                </a>
+                    <li><a href="/contractorWorker/contractorProfile/<%=mail%>"><i class="fa fa-pencil" aria-hidden="true"></i>Profile</a></li>
+                    <li><a href="/contractorWorker/contractorWaitApproval/<%=mail%>"><i class="fa fa-check-circle" aria-hidden="true"></i>Shifts await approval</a></li>
+                    <li><a href="/contractorWorker/contractorFuture/<%=mail%>"><i class="fas fa-clock"></i>Future shifts</a></li>
+                    <li><a href="/contractorWorker/contractorHistory/<%=mail%>"><i class="fa fa-fw fa-history"></i>Shifts history</a></li>
+                    <li><a href="/contractorWorker/contractorUnavailability/<%=mail%>"><i class="fas fa-plane"></i>Vacation report</a></li>
+                    <li><a href="/contractorWorker/contractorPaycheckList/<%=mail%>"><i class="fa fa-usd" aria-hidden="true"></i>Pay checks</a></li>
+                    <li><a href="/contractorWorker/contractorMessageList/<%=mail%>"><i class="fa fa-fw fa-envelope"></i>Messages</a></li>
+                    <li><a href="/contractorWorker/jobRateDisplay/<%=mail%>"><i class="fa fa-fw fa-pie-chart"></i> My job rate</a></li>
+                    <li><a href="/contractorWorker/contractorContactUs/<%=mail%>"><i class="fa fa-fw fa-phone"></i>Contact Us</a></li>                   
+                    <li><a href="/"><i class="fa fa-fw fa-sign-out"></i>Log Out</a></li>
+                </ul>        
+            </nav>
+        </div> 
+    </div>
+     <div class="container-fluid">
+          
         <div class="row page-header r15">                    
             <div class="title"><h1><small class="pull-right"></small>Contact Us</h1></div>       
         </div>
@@ -35,14 +54,16 @@
                 <span class="s12">Employ-Me is the solution for everyone in one place!</span>
                 <br>  
                 <br>  
-                <span class="s1">Employ-Me is a large and leading company in the field of human resources, offering employers</span><br>                
-                <span class="s1">diverse and advanced options for finding and matching 100% employees for each company </span><br> 
-                <span class="s1">by advanced and extensive searches.</span>
+                <span class="s1">Employ-Me is a large company in the field of human resources, offering employers</span><br>                
+                <span class="s1"> diverse and advanced options for finding and matching 100%  employees for</span><br> 
+                <span class="s1">  each company by advanced and extensive searches.</span>
                 <br>
                 <br>
-                <span class="s1">Employ-Me offers the employee employment services in a professional and quality </span>  <br>              
-                <span class="s1">service, so that as soon as you connect, the jobs begin to reach the employee</span> <br>
-                <span class="s1">from all the various companies and employers that work with Employ-Me.</span>
+                <span class="s1">Employ-Me offers the employee employment services in a professional and  </span>  <br>              
+                <span class="s1">quality service, so that as soon as you connect, the jobs begin to reach </span> <br>
+                <span class="s1">the employee from all the various companies and employers that </span><br>
+                <span class="s1">work with Employ-Me.</span>
+
                 <br>
                 <br>
             </div>  
@@ -50,14 +71,17 @@
         </div>
         <div class="row r20">
             <div class="col-7">
-                <span class="s1">The company manages the relationship between the employee and the </span><br>  
-                <span class="s1">employer so that the employee works with Hot from the opening </span><br>  
-                <span class="s1">of the employment until its closing, including the payment.</span>
+                <span class="s1">The company manages the relationship between the employee</span><br>  
+                <span class="s1"> and the employer so that the employee works with Hot from </span><br>  
+                <span class="s1">the opening of the employment until its closing, including</span><br> 
+                <span class="s1"> the payment.</span>
                 <br>
                 <br>
-                <span class="s1">The company offers the employee the most advanced and </span><br>  
-                <span class="s1">convenient services for tracking all his employment,</span><br> 
-                <span class="s1">vacations and paychecks.</span>
+                <span class="s1">The company offers the employee the most  </span><br>  
+                <span class="s1">advanced and convenient services for</span><br> 
+                <span class="s1"> tracking all his employment, </span><br> 
+                <span class="s1"> vacations and paychecks.</span>
+
             </div>
             <div class="col-5">
                     <h4 > <i class="fa fa-phone fa-2x text-yellow"></i>   Contact Us:</h4>                                           
@@ -72,6 +96,6 @@
         </div>
         <br>  
         <br> 
-    </div>
+    </div> 
 </body>
 </html>

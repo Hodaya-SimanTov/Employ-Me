@@ -2,11 +2,18 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     background-color:white;
     margin: auto;
-    background-image: url('images/team.jpg');
+    background-image: url('images/back5.png') no-repeat;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
 }
+/* body{
+    justify-content: center;
+    align-items: center;
+    background: url('images/back5.png') no-repeat;
+	background-size: cover;
+	height: 120vh;
+} */
 *{
     box-sizing: border-box;
 } 

@@ -4,9 +4,14 @@
         <meta charset="UTF-8">
         <title>Shifts await approval</title>
         <link rel="stylesheet" href="/css/styleContractorWaitShift.css">
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        <script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-core.min.js"></script>
+        <script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-pie.min.js"></script>
+        <script src="https://kit.fontawesome.com/10e7a38072.js" crossorigin="anonymous"></script>    
     </head>
     <style>
         .text-center-e{
@@ -14,10 +19,27 @@
         }
     </style>
     <body>
+        <nav class="navbar" dir="ltr">            
+            <ul><a class="aa" href="/contractorWorker/contractorHomepage/<%=mail%>">
+                <img class="logo" src="/css/images/logo.PNG">
+            </a>
+                <li><a href="/contractorWorker/contractorProfile/<%=mail%>"><i class="fa fa-pencil" aria-hidden="true"></i>Profile</a></li>
+                <li><a href="/contractorWorker/contractorWaitApproval/<%=mail%>"><i class="fa fa-check-circle" aria-hidden="true"></i>Shifts await approval</a></li>
+                <li><a href="/contractorWorker/contractorFuture/<%=mail%>"><i class="fas fa-clock"></i>Future shifts</a></li>
+                <li><a href="/contractorWorker/contractorHistory/<%=mail%>"><i class="fa fa-fw fa-history"></i>Shifts history</a></li>
+                <li><a href="/contractorWorker/contractorUnavailability/<%=mail%>"><i class="fas fa-plane"></i>Vacation report</a></li>
+                <li><a href="/contractorWorker/contractorPaycheckList/<%=mail%>"><i class="fa fa-usd" aria-hidden="true"></i>Pay checks</a></li>
+                <li><a href="/contractorWorker/contractorMessageList/<%=mail%>"><i class="fa fa-fw fa-envelope"></i>Messages</a></li>
+                <li><a href="/contractorWorker/jobRateDisplay/<%=mail%>"><i class="fa fa-fw fa-pie-chart"></i> My job rate</a></li>
+                <li><a href="/contractorWorker/contractorContactUs/<%=mail%>"><i class="fa fa-fw fa-phone"></i>Contact Us</a></li>                   
+                <li><a href="/"><i class="fa fa-fw fa-sign-out"></i>Log Out</a></li>
+            </ul>        
+        </nav> 
         <div class="container">  
             <div class="row col-md-6 col-offset-2 custyle">
                 <div class="page-header">
                     <div class="title"><h2><small class="pull-right"></small>Shifts await approval</h2></div>
+                    </hr>
                 </div>
                 <%
                 if(result.length!=0) {

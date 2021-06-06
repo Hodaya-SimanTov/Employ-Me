@@ -4,18 +4,37 @@
         <meta charset="UTF-8">
         <title>Contractor-Profile</title>
         <link rel="stylesheet" href="/css/styleContractorProfile.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-        
+        <script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-core.min.js"></script>
+        <script src="https://cdn.anychart.com/releases/8.0.1/js/anychart-pie.min.js"></script>
+        <script src="https://kit.fontawesome.com/10e7a38072.js" crossorigin="anonymous"></script>    
     </head>
     <body>
-        <!-- <form class="homeLogo" action='/contractorWorker/contractorHomepage/<%=contractor.mail%>'  method="GET" >
-            <button type="submit" style="font-size:24px"><img class="logo" type="submit" src="/css/images/logo.PNG"></button>            
-        </form> -->
+        <div class="row">
+          <nav class="navbar" dir="ltr">            
+                <ul>
+                    <a class="aa" href="/contractorWorker/contractorHomepage/<%=contractor.mail%>">
+                    <img class="logo" src="/css/images/logo.PNG">
+                     </a>
+                    <li><a href="/contractorWorker/contractorProfile/<%=contractor.mail%>"><i class="fa fa-pencil" aria-hidden="true"></i>Profile</a></li>
+                    <li><a href="/contractorWorker/contractorWaitApproval/<%=contractor.mail%>"><i class="fa fa-check-circle" aria-hidden="true"></i>Shifts await approval</a></li>
+                    <li><a href="/contractorWorker/contractorFuture/<%=contractor.mail%>"><i class="fas fa-clock"></i>Future shifts</a></li>
+                    <li><a href="/contractorWorker/contractorHistory/<%=contractor.mail%>"><i class="fa fa-fw fa-history"></i>Shifts history</a></li>
+                    <li><a href="/contractorWorker/contractorUnavailability/<%=contractor.mail%>"><i class="fas fa-plane"></i>Vacation report</a></li>
+                    <li><a href="/contractorWorker/contractorPaycheckList/<%=contractor.mail%>"><i class="fa fa-usd" aria-hidden="true"></i>Pay checks</a></li>
+                    <li><a href="/contractorWorker/contractorMessageList/<%=contractor.mail%>"><i class="fa fa-fw fa-envelope"></i>Messages</a></li>
+                    <li><a href="/contractorWorker/jobRateDisplay/<%=contractor.mail%>"><i class="fa fa-fw fa-pie-chart"></i> My job rate</a></li>
+                    <li><a href="/contractorWorker/contractorContactUs/<%=contractor.mail%>"><i class="fa fa-fw fa-phone"></i>Contact Us</a></li>                   
+                    <li><a href="/"><i class="fa fa-fw fa-sign-out"></i>Log Out</a></li>
+                </ul>        
+            </nav> 
+        </div>  
         <div class="container">
+             
             <div class="title">Edit Your Profile</div>
             <br />
             <form class="model-content animate " id="form-pass" action='/contractorWorker/updateContractorPass/<%=contractor.mail%>'  method="POST" >
@@ -53,121 +72,120 @@
                 <div>
                 <div class="user-details row-12" >
                     <div class="col-5">
-                    <div class="input-box" data-error="Error message">
-                        <span class="details">First Name</span>
-                        <input type="text" class="input" id="firstName" name="firstName" form="form"  value=<%=contractor.firstName%>>
-                        
+                        <div class="input-box" data-error="Error message">
+                            <span class="details">First Name</span>
+                            <input type="text" class="input" id="firstName" name="firstName" form="form"  value=<%=contractor.firstName%>>
+                            
+                        </div>
+                        <div class="input-box" data-error="Error message">
+                            <br>
+                            <span class="details">Last Name</span>
+                            <input type="text" class="input" id="lastName" name="lastName" form="form"  value=<%=contractor.lastName%>>
+                        </div>
+                        <div class="input-box" data-error="Error message">
+                            <br>
+                            <span class="details">Phone</span>
+                            <input type="phone" class="input" id="phone" name="phone" form="form"  value=<%=contractor.phone%>>
+                        </div>
                     </div>
-                    <div class="input-box" data-error="Error message">
-                        <br>
-                        <span class="details">Last Name</span>
-                        <input type="text" class="input" id="lastName" name="lastName" form="form"  value=<%=contractor.lastName%>>
-                    </div>
-                    <div class="input-box" data-error="Error message">
-                        <br>
-                        <span class="details">Phone</span>
-                        <input type="phone" class="input" id="phone" name="phone" form="form"  value=<%=contractor.phone%>>
-                    </div>
-                </div>
                 
-                <div class="col-7">
+                    <div class="col-7">
                         <br>
                         <br>
-                    <div class="input-box row" >
-                        <br>   
-                        <br>            
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
-                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-                          </svg>
-                        <span class="details col-4">Birthday:      </span>
-                        <label type="text" class="input col-6" id="birthday" name="birthday" form="form" readonly ><%=date%></label>                       
+                        <div class="input-box row" >
+                            <br>   
+                            <br>            
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-calendar" viewBox="0 0 16 16">
+                                <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                            </svg>
+                            <span class="details col-4">Birthday:      </span>
+                            <label type="text" class="input col-6" id="birthday" name="birthday" form="form" readonly ><%=date%></label>                       
+                        </div>
+                            <br>
+                        <div class="input-box row" data-error="Error message">                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-envelope " viewBox="0 0 16 16">
+                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+                            </svg>
+                            <span class="details col-4">Email:    </span>
+                            <label type="email" class="input col-6" id="mail" name="mail" form="form" readonly  ><%=contractor.mail%></label>
+                        </div>
+                            <br>
+                            <br>
+                        <div class="input-box row">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 16 16">
+                                <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
+                            </svg>
+                            <span class="details col-6">Hourly wage:</span>
+                            <label type="text" class="input col-4" id="hourlyWage" name="hourlyWage" readonly  ><%=contractor.hourlyWage%></label>
+                        </div>
                     </div>
-                        <br>
-                    <div class="input-box row" data-error="Error message">                        
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-envelope " viewBox="0 0 16 16">
-                            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
-                          </svg>
-                        <span class="details col-4">Email:    </span>
-                        <label type="email" class="input col-6" id="mail" name="mail" form="form" readonly  ><%=contractor.mail%></label>
-                    </div>
-                        <br>
-                        <br>
-                    <div class="input-box row">
-                        
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 16 16">
-                            <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
-                          </svg>
-                        <span class="details col-6">Hourly wage:</span>
-                        <label type="text" class="input col-4" id="hourlyWage" name="hourlyWage" readonly  ><%=contractor.hourlyWage%></label>
-                    </div>
+                    <div class="col-4"></div>
                 </div>
-                <div class="col-4"></div>
                 </div>
                 <hr> 
                 <div class="col my-2 d-flex justify-content-between align-items-end p-0">
                 <div class="user-details row-12">  
                    <div class="col-2">
-                    <label>Occupation Area</label>
-                    <select class="select" id="occupationArea" name="occupationArea" form="form" >
-                        <option ><%=contractor.occupationArea%></option>
-                        <option value="Biotech">Biotech</option>
-                        <option value="Cleaning">Cleaning</option>
-                        <option value="Customer service">Customer service</option>
-                        <option value="Digital">Digital</option>
-                        <option value="Finance">Finance</option>
-                        <option value="High-tech">High-tech</option>
-                        <option value="Human resources">Human resources</option>
-                        <option value="Insurance">Insurance</option>
-                        <option value="Marketing">Marketing</option>
-                        <option value="Offices">Offices</option>
-                        <option value="Operations and logistics">Operations and logistics</option>
-                        <option value="Production workers">Production workers</option>
-                        <option value="Renovations">Renovations</option>
-                        <option value="Sales">Sales</option>
-                        <option value="Technical">Technical</option>
-                        <option value="Waitresses">Waitresses</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
+                        <label>Occupation Area</label>
+                        <select class="select" id="occupationArea" name="occupationArea" form="form" >
+                            <option ><%=contractor.occupationArea%></option>
+                            <option value="Biotech">Biotech</option>
+                            <option value="Cleaning">Cleaning</option>
+                            <option value="Customer service">Customer service</option>
+                            <option value="Digital">Digital</option>
+                            <option value="Finance">Finance</option>
+                            <option value="High-tech">High-tech</option>
+                            <option value="Human resources">Human resources</option>
+                            <option value="Insurance">Insurance</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Offices">Offices</option>
+                            <option value="Operations and logistics">Operations and logistics</option>
+                            <option value="Production workers">Production workers</option>
+                            <option value="Renovations">Renovations</option>
+                            <option value="Sales">Sales</option>
+                            <option value="Technical">Technical</option>
+                            <option value="Waitresses">Waitresses</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
                     <div class="col-2">
-                    <label>Experience Field</label>
-                    <select class="select" id="experienceField" name="experienceField" form="form" placeholder="<%=contractor.experienceField%>" selected=<%=contractor.experienceField%>>
-                        <option ><%=contractor.experienceField%></option>
-                        <option >1-5 years</option>
-                        <option >5-10 years</option>
-                        <option >10-15 years</option>
-                        <option >Over 15 years</option>
-                    </select>
-                </div>
+                        <label>Experience Field</label>
+                        <select class="select" id="experienceField" name="experienceField" form="form" placeholder="<%=contractor.experienceField%>" selected=<%=contractor.experienceField%>>
+                            <option ><%=contractor.experienceField%></option>
+                            <option >1-5 years</option>
+                            <option >5-10 years</option>
+                            <option >10-15 years</option>
+                            <option >Over 15 years</option>
+                        </select>
+                    </div>
                     <div class="col-2">
-                    <label>Service Area</label>
-                    <select class="select" class="input" id="serviceArea" name="serviceArea" form="form" value=<%=contractor.serviceArea%>>
-                        <option ><%=contractor.serviceArea%></option>
-                        <option >North</option>
-                        <option >South</option>
-                        <option>Lowlands</option>
-                        <option >Jerusalem Area</option>
-                        <option >Dan Area</option>
-                        <option >Galilee</option>   
-                    </select>
-                </div>
+                        <label>Service Area</label>
+                        <select class="select" class="input" id="serviceArea" name="serviceArea" form="form" value=<%=contractor.serviceArea%>>
+                            <option ><%=contractor.serviceArea%></option>
+                            <option >North</option>
+                            <option >South</option>
+                            <option>Lowlands</option>
+                            <option >Jerusalem Area</option>
+                            <option >Dan Area</option>
+                            <option >Galilee</option>   
+                        </select>
+                    </div>
                     <div class="col-2">
-                    <label>Scope Work</label>
-                    <select class="select" id="scopeWork" name="scopeWork" form="form" value=<%=contractor.scopeWork%>>
-                        <option ><%=contractor.scopeWork%></option>
-                        <option >3-6</option>
-                        <option >6-8</option>
-                        <option >8-10</option>
-                        <option >10-12</option>
-                    </select>
-                </div>
+                        <label>Scope Work</label>
+                        <select class="select" id="scopeWork" name="scopeWork" form="form" value=<%=contractor.scopeWork%>>
+                            <option ><%=contractor.scopeWork%></option>
+                            <option >3-6</option>
+                            <option >6-8</option>
+                            <option >8-10</option>
+                            <option >10-12</option>
+                        </select>
+                    </div>
                 </div> 
                 </div>
                 <div class="button">
-                    <input  value="Save" form="form" onclick="checkInputs()"  readonly>
-                </div>
-            </div>          
-        </form>    
+                    <input  value="Save"  onclick="checkInputs()"  readonly>
+                </div>       
+            </form>    
         </div>
     </body>
     <script>
@@ -194,8 +212,8 @@
         function checkInputs(){
             const firstNameValue=firstName.value.trim();
             const lastNameValue=lastName.value.trim();
-            const phoneValue=phone.value.trim();
-            const mailValue=mail.value.trim();
+            const phoneValue=phone.value;
+            const mailValue=mail.value;
          
             var flag=0;
             if(firstNameValue==""){
@@ -229,11 +247,9 @@
                 phone.parentElement.setAttribute('data-error','Phone must contain 10 digits');
                 flag=1;
             } 
-            if(!mailValue.includes('@')){
-                mail.parentElement.setAttribute('data-error','mail must be example@example.com');
-                flag=1;
-            }   
+             
             if(flag==0){
+                console.log("log");
                 document.getElementById("form").submit();
             }
               
@@ -247,6 +263,7 @@
             }       
             else{
                 if(flag==0){
+                    
                     document.getElementById("form-pass").submit();
                 }
             }
