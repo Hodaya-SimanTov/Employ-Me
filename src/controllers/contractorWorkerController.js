@@ -355,7 +355,7 @@ const homepageDisplay = async (req, res) => {
         var name = contractor.firstName+" "+contractor.lastName
         Employement.find({ constructorEmail: req.params.mail , status:'approved'})
         .then(emp => {
-            res.render('../views/contractorhomepage',{mail:req.params.mail,result:emp,name:name});        
+            res.render('../views/contractorHomepage',{mail:req.params.mail,result:emp,name:name});        
         }).catch(err => {
         console.log(`can not find this employement! ${err}`);
         });     
