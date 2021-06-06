@@ -344,9 +344,25 @@ const updateContractorPass = (req,res) => {
 }
 
 const homepageDisplay = async (req, res) => {
+    var i;
+    var today = new Date();
     let contractor = await ContractorWorker.findOne({mail:req.params.mail});
     if (contractor) {
-        res.render('../views/contractorhomepage',{mail:req.params.mail});
+        var name = contractor.firstName+" "+contractor.lastName
+        Employement.find({ constructorEmail: req.params.mail , status:'approved'})
+        .then(emp => {
+            // console.log(emp);
+            // for(i=0;i<emp.length;i++){
+            //     if(emp[i].date.getDate()  == today.date.getDate() && emp[i].date.getMonth() == today.date.getMonth() && emp[i].date.getFullYear() == today.date.getFullYear()){
+            //         console.log(currentEmployement[i]);
+            //         res.render('../views/contractorhomepage',{mail:req.params.mail,today:currentEmployement[i]});
+            //     }
+            // }
+            // // res.render('../views/contractorhomepage',{mail:req.params.mail,today:currentEmployement[1]});
+            res.render('../views/contractorhomepage',{mail:req.params.mail,result:emp,name:name});        
+        }).catch(err => {
+        console.log(`can not find this employement! ${err}`);
+        });        
     }
     else {
         return res.status(400).send('That email is error!');
@@ -358,7 +374,7 @@ const contractorFuture = (req,res) => {
     // const d=new Date(today.getFullYear(),today.getMonth(),today.getUTCDate()+1)
     Employement.find({ constructorEmail: req.params.mail , status:'approved'})
         .then(currentEmployement => {
-            currentEmployement.sort((a, b) => b.date - a.date);
+            currentEmployement.sort((a, b) => a.date - b.date);
             res.render('../views/contractorFuture',{result:currentEmployement});
         }).catch(err => {
         console.log(`can not find this employement! ${err}`);

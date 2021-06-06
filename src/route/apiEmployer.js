@@ -30,6 +30,10 @@ router.get('/confirmEmployments/:email', employer.confirmEmploymentsDisplay);
 router.get('/employerHistory/:email', employer.historyEmployments);
 router.get('/futureEmployement/:email', employer.futureEmployement);
 router.get('/info/:email', employer.infoEmployment);
+
+router.get('/policy', (req,res) => {
+    res.render('../views/websitePolicy'); 
+});
 module.exports = router;
 
 
