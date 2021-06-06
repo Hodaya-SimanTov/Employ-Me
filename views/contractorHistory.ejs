@@ -16,7 +16,7 @@
                 </div>
                 <div>
                 <div>
-                <div>  <label class="l">Sort by: </label></div>  
+                <div>  <label class="l">Sort by: </label>
                     <button class="btn" onclick="sortByDate()">Sort by date</button>
                     <button class="btn" onclick="sortByEmployer()">Sort by employer</button>
                     <button class="btn" onclick="sortByWage()">Sort by wage</button>
@@ -29,7 +29,12 @@
                 </div>
                 </div>
                 <table class="table table-striped custab" id="table">
-                      
+                    <tr>
+                        <th>Date</th>
+                        <th>Company Name</th>
+                        <th>Job Scop</th>
+                        <th>Wage</th>     
+                   </tr>
                 <%
                 if(result.length!=0 ) {
                     var i=1;
@@ -37,34 +42,21 @@
                 %>     
                 <tr class="line">                     
                     <td class="date"><%= employement.date.getDate() %>.<%= employement.date.getMonth()+1 %>.<%= employement.date.getFullYear() %></td>
-                    <td class="employer"><%= employement.employerEmail %></td>
-                    <td class="wage"><%= employement.jobScope * employement.hourlyWage %>   NIS</td>  
-                </tr>                     
-                    <!-- <dt><b><%= employement.date.getDate() %>
-                        <dd class="date"><%= employement.date.getDate() %>.<%= employement.date.getMonth()+1 %>.<%= employement.date.getFullYear() %></dd>
-                        <dd class="email"><%= employement.employerEmail %></dd>
-                        <dd class="status"><%= employement.status %></dd>                
-                    
-                    </b></dt>                        -->
-                    <!-- <div class="column" style="background-color:rgb(228, 224, 224);">
-                        <dd class="date"><%= employement.date.getDate() %>.<%= employement.date.getMonth()+1 %>.<%= employement.date.getFullYear() %></dd>
-                        <dd class="email"><%= employement.employerEmail %></dd>
-                        <dd class="status"><%= employement.status %></dd> 
-                    </div> -->
-               
-                
+                    <td class="employer"><%= employement.companyName %>  </td>  
+                    <td class="js"><%= employement.jobScope %> hours  </td>
+                    <td class="wage"><%= employement.jobScope * employement.hourlyWage %>   NIS</td>
+                     
+                </tr>         
                
                 <% i++;}) %>
                     <% } else{ %>
                         <h3>No shifts found ..</h3> 
                     <% } %>
-            <!-- <button class="sort" data-sort="status">sort by date</button> -->
             </table>
         </div>
         </div>
         </div>
         <script>
-            // select=document.getElementById("sort");
             function sortByWage() {
                 var list, i,j, line ,wage,temp1,temp2;
                 list = document.getElementById("table");
@@ -151,8 +143,10 @@
                 var list, i,j, line ,employer,temp;
                 list = document.getElementById("table");
                 d = list.getElementsByClassName("date");
-                e =  list.getElementsByClassName("em");
+                e =  list.getElementsByClassName("employer");
                 w = list.getElementsByClassName("wage");
+                js = list.getElementsByClassName("js");
+
                 line = list.getElementsByClassName("line");
                 const date=document.getElementById("date");
                 const dateValue=date.value.trim();
@@ -163,9 +157,11 @@
 
                 for (i = 0; i < (line.length ); i++) {
                     if(choose == d[i].innerHTML){                        
-                        d[i].setAttribute("style", "background: linear-gradient(135deg, #71b7e6, #e6d171)");
-                        e[i].setAttribute("style", "background: linear-gradient(135deg, #71b7e6, #e6d171)");
-                        w[i].setAttribute("style", "background: linear-gradient(135deg, #71b7e6, #e6d171)");
+                        d[i].setAttribute("style", "background:  #e6d171");
+                        e[i].setAttribute("style", "background:  #e6d171");
+                        w[i].setAttribute("style", "background:  #e6d171");
+                        js[i].setAttribute("style", "background:  #e6d171");
+
                     }
                     
                 }

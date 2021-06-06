@@ -7,18 +7,6 @@
     </head>
     <body>     
         <div class="container">
-            <!-- <form class="model-content animate" id="form" action='/contractorWorker/addUn/<%=mail%>'  method="POST" >
-                <div class="user-details">
-                    <div><span>Vacation dates:</span></div>
-                    <div><span class="details">Start Vacation</span></div>
-                    <div><input type="date" class="input" id="start" name="start" form="form" ></div>
-                    <div><span class="details">End Vacation</span></div>
-                    <div><input type="date" class="input" id="end" name="end" form="form" ></div>
-                     <!-- <input type="save" value="Save Unavailability" onclick="saveUnavailability()" readonly> 
-                    <div><button type="submit" class="btn btn-outline-info" form="form" >Save Unavailability</button></div>
-                   
-                </div> 
-            </form> -->
             <div class="title">Vacation Report</div>
                 <form class="model-content animate" id="form" action='/contractorWorker/addUn/<%=mail%>'  method="POST" >
                     <div class="user-details">
@@ -33,7 +21,7 @@
                         
                     </div>
                     <div class="button">
-                        <input value="Save Unavailability" onclick="checkInputs()"  readonly>
+                        <input class="btn" value="Save Unavailability" onclick="checkInputs()"  readonly>
                     </div> 
                 </form>                
             </div>

@@ -29,7 +29,7 @@ body{
     bottom: 0;
     height: 3px;
     width: 30px;
-    background: linear-gradient(135deg, #71b7e6,#e6d171);
+    background: linear-gradient(135deg, #060747,#eff871);
 }
 svg{
     position:absolute;
@@ -42,6 +42,10 @@ svg{
     padding-left: 20px;
     width: 1000px;
     height: 200px;
+    opacity: 0.9 ;
+    background: #fff;
+    align-items: center;
+    margin: auto;
 }
 .user-details {
     margin-bottom: 15px;
@@ -70,5 +74,17 @@ svg{
     border-radius: 5px;
     letter-spacing: 1px;
     text-align: center;
-    background: linear-gradient(135deg, #71b7e6, #e6d171)
+    background:#9c9c9e
 }
+ 
+.btn:hover {
+    background-color: #454546;
+  }
+  
+  .btn:active {
+    background-color: #9c9c9e;
+  }
+  
+  .btn:visited {
+    background-color: #9c9c9e;
+  }

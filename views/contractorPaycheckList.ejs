@@ -25,6 +25,7 @@
                 result.forEach(function(paycheck){
                 %>
                 <div class="container "> 
+                   <div class="col-6">
                     <div  class="input-box4 row d"  >
                         <div class="col-4">                          
                           <label class="details">Month : </label>
@@ -37,7 +38,7 @@
                         </div >
                         <div class="col-4">
                             <a class='btn'  href="/contractorWorker/contractorPayChecks/<%=paycheck.contractorMail%>/<%=paycheck.month%>" ><p class="p">SHOW</p></a>
-                        </div>   
+                        </div>  </div>  
                     </div>
                 </div> 
                 <% i++;}) %>

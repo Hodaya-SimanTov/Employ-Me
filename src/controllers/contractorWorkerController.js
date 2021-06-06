@@ -220,9 +220,10 @@ const loginUser = (req,res) => {
         });
     }
     if(req.body.select == 'Company Worker') {
+        let pass=req.body.password;
         CompanyWorker.findOne({mail: req.body.mail}).then(company => {
             console.log('in login company');
-            if (company.password == req.body.password) {
+            if (company.password == pass) {
                 if (company.firstLogin == 0) {
                     CompanyWorker.findOneAndUpdate({mail: req.body.mail}, {firstLogin: 1}).then(company => {
                         res.redirect(`/companyWorker/editProfile/${req.body.mail}`);
@@ -242,10 +243,12 @@ const loginUser = (req,res) => {
             res.redirect(`/contractorWorker/notLogin`);
         });
     }
-    if(req.body.select == 'Contractor Worker') {        
+    if(req.body.select == 'Contractor Worker') {  
+        let pass1=req.body.password      
       ContractorWorker.findOne({ mail: req.body.mail }).then(contractor => {
         console.log('in login contractor');
-        if(contractor.password == req.body.password) {
+        
+        if(contractor.password == pass1) {
             res.redirect(`/contractorWorker/contractorHomepage/${req.body.mail}`);
         }
         else {
@@ -351,18 +354,10 @@ const homepageDisplay = async (req, res) => {
         var name = contractor.firstName+" "+contractor.lastName
         Employement.find({ constructorEmail: req.params.mail , status:'approved'})
         .then(emp => {
-            // console.log(emp);
-            // for(i=0;i<emp.length;i++){
-            //     if(emp[i].date.getDate()  == today.date.getDate() && emp[i].date.getMonth() == today.date.getMonth() && emp[i].date.getFullYear() == today.date.getFullYear()){
-            //         console.log(currentEmployement[i]);
-            //         res.render('../views/contractorhomepage',{mail:req.params.mail,today:currentEmployement[i]});
-            //     }
-            // }
-            // // res.render('../views/contractorhomepage',{mail:req.params.mail,today:currentEmployement[1]});
             res.render('../views/contractorhomepage',{mail:req.params.mail,result:emp,name:name});        
         }).catch(err => {
         console.log(`can not find this employement! ${err}`);
-        });        
+        });     
     }
     else {
         return res.status(400).send('That email is error!');
@@ -600,8 +595,8 @@ const updatePaycheckEnd =  () => {
                 }).catch(err=>{
                     console.log(err);
                 })
-            }
-            
+                addMessage(pays[i].contractorMail,date,"paycheckReady","A slip for the last month is ready to view");
+            }            
         }
     }).catch(err=>{
         console.log(err);
@@ -678,6 +673,7 @@ cron.schedule("*/12 * * * *", function() {
 cron.schedule("0 8 * * *", () => {
     console.log('cron.schedule1');
     updateSalary();
+    shiftToday();
 });
 
 //עדכון השכר לפי גיל cron קורא לה
@@ -799,6 +795,23 @@ const jobRateDisplay = async (req,res) => {
 
     res.render('../views/contractorJobRate',{mail:req.params.mail,ratGlobal:ratGlobal,arrMonth:arrMonth,feedback:feedback});
 }
+
+const shiftToday = () =>{
+    var i;
+    var d = new Date();
+    Employement.find().then(emp => {
+        for(i=0;i<emp.length;i++){
+            if(emp[i].date.getDate() == d.getDate() && emp[i].date.getMonth() == d.getMonth() && emp[i].date.getFullYear() == d.getFullYear()){
+                addMessage(emp.constructorEmail,d,"ShiftToday","Do not forget you have a shift for today");
+            }
+
+        }
+    }).catch(err => {
+        console.log(`can not add this message! ${err}`);
+    });
+
+}
+
 
 
 

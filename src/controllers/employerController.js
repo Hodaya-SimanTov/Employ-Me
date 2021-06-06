@@ -242,9 +242,10 @@ const confirmEmploymentsDisplay = async (req, res) => {
     }    
 }
 const confirmEmployments = async (req, res) => {
-    try {
-        
+    try {        
+        var d = new Date()
         let cEmployment = await Employement.findOneAndUpdate({_id: ObjectId(req.params.id)}, {status:'close',rating: req.body.myRate,feedback:req.body.description }, {new: true });
+        addMessage(cEmployment.constructorEmail,d,"ShiftApproved","The transaction from the date "+cEmployment.date.toDateString()+" was approved");
         res.redirect(`/employer/confirmEmployments/${req.body.employerEmail}`);
     }
     catch(err) {
