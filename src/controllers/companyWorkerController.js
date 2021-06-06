@@ -6,7 +6,7 @@ const Unavailability=require('../model/unavailabilityContractor');
 const { CompanyWorker, validate,validateEditCompanyWorker } = require('../model/companyWorker');
 const {Employement, validateEmployement} = require('../model/employement');
 const { ContractorWorker, validateContractor,validateEditContractorWorker } = require('../model/contractorWorker');
-
+const{CompanyMessage}=require('../model/companyMessage');
 const { Employer, validate2,validateEditEmployer } = require('../model/employer');
 
 //const {Employement,validateEmployement}=require('../model/employement');
@@ -460,14 +460,18 @@ const resetPassword = async (req, res) => {
 }
 
 //כל יום יבדוק אם יש שגיאת דיווח
-/*
-cron.schedule("/4  * * *", function() {
-    console.log("cron reportCheck");
-    reportCheck();
-});
-*/
+
+// cron.schedule("*/5 * * * * *", function() {
+//     console.log("cron reportCheck");
+//     var d=new Date();
+//     console.log("cron reportCheck");
+//     addMessage("ravitlevi999@gmail.com",d,"EmptyShift","sdds");
+//     //reportCheck();
+// });
+
 //מייל ובעיה
 const reportCheck = async (req, res) => {
+
     console.log('employements');
     var i=0;
     var jobScope=0;
@@ -487,55 +491,34 @@ const reportCheck = async (req, res) => {
         sum = (endHour - startHour) + math.abs(endMin - startMin);
         console.log(sum);
 
-        if (employements.jobScope == sum + 0.10) {
+        if(employements.startTime=="0" && employements.endTime=="0" ) {
+        }
+        else{
+            addMessage(employements.constructorEmail,employements.date,"EmptyShift","Welcome!!\nReported incorrectly / did not report at all !!\nPlease fix ");
+        }
+        if (employements.jobScope == sum + 0.10 ||employements.startTime=="0" || employements.endTime=="0" ) {
         }
         else {
             //שלח הודעה
-            addMessage(employements.contractorMail,employements.date,"ErrorReported","Hello!!\nThe hours you reported do not match the hours your employer approved for you !!\nPlease fix ");
+            addMessage(employements.constructorEmail,employements.date,"ErrorReported","Hello!!\nThe hours you reported do not match the hours your employer approved for you !!\nPlease fix ");
         }
-        if(employements.startTime=="0" || employements.endTime=="0") {
-        }
-            else{
-            addMessage(employements.contractorMail,employements.date,"EmptyShift","Welcome!!\nReported incorrectly / did not report at all !!\nPlease fix ");
-        }
+
     }
 }
 
 const addMessage= (mail,date,type,text) => {
-    const newContractorMessage=new ContractorMessage({contractorMail:mail,date:date,type:type,text:text});
-    newContractorMessage.save().then(message => {
-    }).catch(err => {
-        console.log(`can not add this message! ${err}`);
-    });
-
-}
-
-
-const sendMessageDiplay = async (req,res) => {
-    let company = await CompanyWorker.find();
-    if (company) {
-        res.render(`../views/companyMessage`,{result:company,mail:"Tal@gmail.com"});
-    }
-
-    else {
-        return res.status(400).send('That email is error!');
-    }
-}
-
-
-const sendMessage= (req,res) => {
-   // var date = new Date();
-   // var mail=str = req.body.contractor.split("- ").pop();
     const newCompanyMessage=new CompanyMessage({contractorMail:mail,date:date,type:type,text:text});
     newCompanyMessage.save().then(message => {
-        var mail="Tal@gmail.com";
-        res.redirect(`/companyWorker/homePage/${mail}`);
+        console.log(message);
     }).catch(err => {
         console.log(`can not add this message! ${err}`);
     });
+
 }
+
+/*########*/
 const messageList = async (req,res) => {
-    let messages = await CompanyMessage.find({contractorMail:req.params.mail});
+    let messages = await CompanyMessage.find();
     if (messages) {
         messages.sort((a, b) => b.date - a.date)
         res.render('../views/companyMessageFromSystem',{result:messages});
@@ -548,4 +531,4 @@ const messageList = async (req,res) => {
 
 
 
-module.exports={addCompanyWorker,companyExists,deleteCompanyWorkerById,getCompanyWorkerByEmail,editProfileDisplay,editProfile,updateCompanyWorkerPass,searchContractorByFields,bookContractor,bookContractorDisplay,allEmployer,allCompany,infoCompany,resetPasswordDisplay,resetPassword,messageList , sendMessage , sendMessageDiplay}
+module.exports={addCompanyWorker,companyExists,deleteCompanyWorkerById,getCompanyWorkerByEmail,editProfileDisplay,editProfile,updateCompanyWorkerPass,searchContractorByFields,bookContractor,bookContractorDisplay,allEmployer,allCompany,infoCompany,resetPasswordDisplay,resetPassword,messageList }

@@ -40,6 +40,5 @@ router.get('/resetPassword/:mail', companyWorker.resetPasswordDisplay);
 router.post('/resetPassword/:mail', companyWorker.resetPassword);
 
 router.get('/companyMessageList/:mail',companyWorker.messageList);
-router.post('/sendMessage/:mail',companyWorker.sendMessage);
-router.get('/sendMessageDiplay/:mail',companyWorker.sendMessageDiplay);
+
 module.exports=router
