@@ -22,6 +22,19 @@ body{
     /* padding-top: 80px; */
     /* padding-bottom: 150px; */
 }
+.select {
+    margin: auto;
+    width:100%;
+    height: 40px;
+    border-radius: 5px;
+
+}
+.select:focus{
+    border-color: #e6d171
+}
+.select:hover{
+    border-color: #e6d171;
+}
 .wrapper{
     background: url('images/emlogo1.PNG') no-repeat;
     background-size: cover;
@@ -84,13 +97,15 @@ body{
 }
 .container{
     max-width: 50%;
-    width: 100%;
+    width: 80%;
     background: #fff;
     padding: 30px 30px;
     border-radius: 40px;
     right: 0px;
     align-items: center;
     margin: auto;
+    opacity: 0.9;
+    margin-top: 20px;
 }
 .container .title{
     font-size: 50px;
@@ -100,11 +115,10 @@ body{
     text-align: left;
 }
 .span{
-    font-size: 30px;
-    font-weight: 60px;
-    padding-left: 5px;
-    position: relative;
-    text-align: center;
+    margin: auto;
+    width:20%;
+    height: 40px;
+    border-radius: 5px;
 }
 
 .container .title::before{
@@ -216,16 +230,3 @@ form .button input:hover{
 /* .input{
     transition: background 0.2s, border 0.2s;
 } */
-.select {
-    margin: auto;
-    width:220%;
-    height: 40px;
-    border-radius: 5px;
-
-}
-.select:focus{
-    border-color: #e6d171
-}
-.select:hover{
-    border-color: #e6d171;
-}

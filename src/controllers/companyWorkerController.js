@@ -13,6 +13,7 @@ const { Employer, validate2,validateEditEmployer } = require('../model/employer'
 const express = require('express');
 const router = express.Router();
 const _ = require('lodash');
+var cron = require('node-cron');
 
 //הוספת עובדי משאבי אנוש
 const addCompanyWorker = (req,res) => {
@@ -458,4 +459,93 @@ const resetPassword = async (req, res) => {
     res.redirect(`/companyWorker/homePage/${req.params.mail}`);
 }
 
-module.exports={addCompanyWorker,companyExists,deleteCompanyWorkerById,getCompanyWorkerByEmail,editProfileDisplay,editProfile,updateCompanyWorkerPass,searchContractorByFields,bookContractor,bookContractorDisplay,allEmployer,allCompany,infoCompany,resetPasswordDisplay,resetPassword}
+//כל יום יבדוק אם יש שגיאת דיווח
+/*
+cron.schedule("/4  * * *", function() {
+    console.log("cron reportCheck");
+    reportCheck();
+});
+*/
+//מייל ובעיה
+const reportCheck = async (req, res) => {
+    console.log('employements');
+    var i=0;
+    var jobScope=0;
+    var startTime=0;
+    var endTime=0;
+    var startHour=0;
+    var startMin=0;
+    var endHour=0;
+    var endMin=0;
+    var sum=0;
+    let employements = await Employement.find();
+    for (i = 0; i < employements.length; i++) {
+        startHour = parseInt((employements.startTime).substr(0, 2), 10);
+        startMin = parseInt((employements.startTime).substr(4, 6), 10);
+        endHour = parseInt((employements.endTime).substr(0, 2), 10);
+        endMin = parseInt((employements.endTime).substr(4, 6), 10);
+        sum = (endHour - startHour) + math.abs(endMin - startMin);
+        console.log(sum);
+
+        if (employements.jobScope == sum + 0.10) {
+        }
+        else {
+            //שלח הודעה
+            addMessage(employements.contractorMail,employements.date,"ErrorReported","Hello!!\nThe hours you reported do not match the hours your employer approved for you !!\nPlease fix ");
+        }
+        if(employements.startTime=="0" || employements.endTime=="0") {
+        }
+            else{
+            addMessage(employements.contractorMail,employements.date,"EmptyShift","Welcome!!\nReported incorrectly / did not report at all !!\nPlease fix ");
+        }
+    }
+}
+
+const addMessage= (mail,date,type,text) => {
+    const newContractorMessage=new ContractorMessage({contractorMail:mail,date:date,type:type,text:text});
+    newContractorMessage.save().then(message => {
+    }).catch(err => {
+        console.log(`can not add this message! ${err}`);
+    });
+
+}
+
+
+const sendMessageDiplay = async (req,res) => {
+    let company = await CompanyWorker.find();
+    if (company) {
+        res.render(`../views/companyMessage`,{result:company,mail:"Tal@gmail.com"});
+    }
+
+    else {
+        return res.status(400).send('That email is error!');
+    }
+}
+
+
+const sendMessage= (req,res) => {
+   // var date = new Date();
+   // var mail=str = req.body.contractor.split("- ").pop();
+    const newCompanyMessage=new CompanyMessage({contractorMail:mail,date:date,type:type,text:text});
+    newCompanyMessage.save().then(message => {
+        var mail="Tal@gmail.com";
+        res.redirect(`/companyWorker/homePage/${mail}`);
+    }).catch(err => {
+        console.log(`can not add this message! ${err}`);
+    });
+}
+const messageList = async (req,res) => {
+    let messages = await CompanyMessage.find({contractorMail:req.params.mail});
+    if (messages) {
+        messages.sort((a, b) => b.date - a.date)
+        res.render('../views/companyMessageFromSystem',{result:messages});
+    }
+    else {
+        return res.status(400).send('That email is error!');
+    }
+}
+
+
+
+
+module.exports={addCompanyWorker,companyExists,deleteCompanyWorkerById,getCompanyWorkerByEmail,editProfileDisplay,editProfile,updateCompanyWorkerPass,searchContractorByFields,bookContractor,bookContractorDisplay,allEmployer,allCompany,infoCompany,resetPasswordDisplay,resetPassword,messageList , sendMessage , sendMessageDiplay}
