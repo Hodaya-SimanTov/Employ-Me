@@ -835,4 +835,4 @@ module.exports = { addContractorWorker , getContractorWorkerById , deleteContrac
     , addUn , getContractorByEmail , editProfileDisplay , editProfile , updateContractorPass , unDisplay 
     , homepageDisplay , findContractorInSpecDate , contractorFuture , contractorHistory , endEmployement
     , startEmployement ,contractorWaitApproval , approveShift , cancelShift , payChecksList , payCheck 
-    , messageList , sendMessage , sendMessageDiplay , jobRateDisplay , contactUsDisplay };
+    , messageList , sendMessage , sendMessageDiplay , jobRateDisplay , contactUsDisplay ,addMessage};
