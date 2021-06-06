@@ -243,10 +243,12 @@ const loginUser = (req,res) => {
             res.redirect(`/contractorWorker/notLogin`);
         });
     }
-    if(req.body.select == 'Contractor Worker') {        
+    if(req.body.select == 'Contractor Worker') {  
+        let pass1=req.body.password      
       ContractorWorker.findOne({ mail: req.body.mail }).then(contractor => {
         console.log('in login contractor');
-        if(contractor.password == req.body.password) {
+        
+        if(contractor.password == pass1) {
             res.redirect(`/contractorWorker/contractorHomepage/${req.body.mail}`);
         }
         else {
